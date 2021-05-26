@@ -7,10 +7,27 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3 side-nav-col">
+            <%= render "system/shared/sidebar" %>
+          </div>
+        <div class="col-md-9">
+          <div class="row">
+            <%= render "system/shared/navbar" %>
+            <p class="notice"><%= notice %></p>
+            <p class="alert"><%= alert %></p>
+          <%= yield %>
+        </div>
+        <footer class="footer" id="footer_id">
+          <p> Green Copyright © 2021 </p>
+        </footer>
+      </div>
+    </div>
   </body>
 </html>
