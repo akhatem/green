@@ -1,2 +1,38 @@
-<h1>System::Customers#index</h1>
-<p>Find me in app/views/system/customers/index.html.erb</p>
+    <% content_for :customers_index do %>
+
+    <table class="table mt-2">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Phone number</th>
+                <th scope="col">Email</th>
+                <th scope="col">Points</th>
+                <th scope="col">Actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+          <% Customer.all.each do |customer| %>
+            <tr>
+                <th scope="row">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                    </label>
+                      <%= link_to customer.id, system_customer_path(customer), style: "color: green" %>
+                  </div>
+                </th>
+                <td><%= link_to customer.name, system_customer_path(customer), style: "color: green" %></td>
+                <td><%= customer.mobile %></td>
+                <td><%= customer.email %></td>
+                <td><%= customer.points %></td>
+                <td class="table-action">
+                    <%= link_to '', system_customer_path(customer), class: "fa fa-eye" %>
+                </td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+<% end %>
+    

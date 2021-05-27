@@ -1,0 +1,107 @@
+main {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+    height: -webkit-fill-available;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+main>* {
+    flex-shrink: 0;
+    min-height: -webkit-fill-available;
+}
+
+* {
+    font-family: poppins;
+    box-sizing: border-box;
+}
+
+/* data table */
+
+th {
+    font-weight: 500;
+    font-size: 17px;
+    color: #8A8888;
+}
+
+.form-check-label {
+    font-weight: 400;
+}
+
+/* icons in table */
+
+.table-action a {
+    color: grey;
+    text-decoration: none;
+    padding: 0 5px;
+}
+
+.table-action a:hover {
+    color: #1ab359;
+}
+
+/*end of data table */
+
+/*tabs */
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    background-color: #1ab359;
+    color: #fff;
+    width: 125px;
+    margin: 0 10px;
+    height: 40px;
+}
+
+.nav-pills .nav-link {
+    color: #2b2b2b;
+}
+
+h2 {
+    font-size: 18px;
+    padding: 10px 0;
+    color: #006B2D;
+}
+
+/* input feilds */
+
+.form-select {
+    width: 30%
+}
+
+.form-control {
+    width: 30%;
+}
+
+/* end of input feilds */
+
+.save-btn {
+    background-color: #00AB47;
+    width: 100px;
+    height: 36px;
+    border: none;
+}
+
+.save {
+    padding-top: 20px;
+    padding-left: 5px;
+}
+
+.btn-primary {
+    background-color: #00AB47;
+    border: none;
+    width: 100px;
+    height: 36px;
+}
+
+div.form-group.row {
+    text-align: center;
+    margin-left: 150px;
+    margin-top: 15px;
+}
+
+.edit-btn {
+    float: right;
+    margin-bottom: 30px;
+}

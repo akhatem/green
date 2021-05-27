@@ -2,18 +2,15 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   
-  # get 'static_pages/index'
-  # get '/', to: 'home#index'
+  # get '/', to: 'system/static_pages#index'
 
   # namespace system
-  namespace :system do
+  namespace :system, path: '' do
     
     root to: 'static_pages#index'
+    get '/', to: 'static_pages#index'
 
-    resources :customers do
-      get '/', to: 'customers#index'
-      get '/show', to: 'customers#show'
-    end
+    resources :customers, only: [:index, :show] 
   end # namespace system
 
   # namespace Api::V1

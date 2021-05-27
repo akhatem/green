@@ -1,0 +1,27 @@
+/*search bar and filter */
+
+.table-filter {
+    display: flex;
+    flex-flow: row;
+}
+
+.search-bar {
+    border-left: none;
+}
+
+.input-search {
+    background: none;
+    padding-right: 0;
+    // border-radius: 0;
+}
+
+.filter-dropdown {
+    border: 1px solid #ced4da;
+}
+
+.fa-search {
+    color: #818181;
+}
+
+
+/* end of search */

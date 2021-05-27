@@ -1,6 +1,10 @@
-<nav
-    class="navbar navbar-expand-md navbar-light bg-light justify-content-end align-items-lg-start nav-bg">
-    <div>
+<nav class="navbar navbar-expand-md navbar-light bg-light justify-content-end align-items-lg-start nav-bg">
+    <div class="col-lg-2">
+        <a href="<%= system_root_path %>" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+            <img src="<%= '/assets/main_logo.png' %>" alt="" class="logo-img">
+        </a>
+    </div>
+    <div class="col-lg-10">
         <ul class="nav justify-content-end px-4">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle user-link" data-bs-toggle="dropdown" href="#"
@@ -16,6 +20,6 @@
                     <li><a class="dropdown-item" href="#">Separated link</a></li>
                 </ul>
             </li>
-
         </ul>
+    </div>
 </nav>
