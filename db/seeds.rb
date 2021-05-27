@@ -10,3 +10,10 @@ if Customer.count.zero?
     password: "password", mobile: "01100851591")
 end
 puts "Create Test Customers Finished at #{DateTime.now.strftime("%H:%M:%S")}"
+
+if City.count.zero?
+  puts "Create Cities started #{DateTime.now.strftime("%H:%M:%S")}"
+  City.create!(name: "Alexandria")
+  City.create!(name: "Cairo")
+end
+puts "Create Cities finished #{DateTime.now.strftime("%H:%M:%S")}"
