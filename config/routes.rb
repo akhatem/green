@@ -10,22 +10,14 @@ Rails.application.routes.draw do
     root to: 'static_pages#index'
     get '/', to: 'static_pages#index'
 
+    # Customers
     resources :customers, only: [:index, :show] 
 
     # Cities
     resources :cities
-
-    # resources :contacts, only: [:new, :create]
-    # get "city/new" =>'cities#new'
-    # post "city/create" =>'cities#create'
     
-    # do
-      # Branches
-      # get '/branches', to: 'branches#index'
-      # get '/:city_id/branches/:branch_id', to: 'branches#show'
-      # Branches
-    # end
-    # Cities
+    # Branches
+    resources :branches
   end # namespace system
 
   # namespace Api::V1

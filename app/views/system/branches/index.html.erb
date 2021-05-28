@@ -4,6 +4,9 @@
             <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="#">Name</a>
+                <a class="dropdown-item" href="#">Address</a>
+                <a class="dropdown-item" href="#">Longitude</a>
+                <a class="dropdown-item" href="#">Latitude</a>
                 <div role="separator" class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Created at</a>
                 <a class="dropdown-item" href="#">Updated at</a>
@@ -14,35 +17,39 @@
     </div>
 </div>
 <div class="col-lg-5 main-btns">
-    <%= link_to "Add new City", new_system_city_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;", type: "button" %>
+    <%= link_to "Add new Branch", new_system_branch_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
     <button class="btn btn-outline-success btn-sm" type="button">Export as PDF</button>
     <button class="btn btn-outline-success btn-sm" type="button">Export as Excel</button>
 </div>
-<% content_for :cities_index do %>
+<% content_for :branches_index do %>
 
     <table class="table mt-2">
         <thead>
             <tr>
-                <th scope="col">ID</th>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">address</th>
                 <th scope="col">City</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
-          <% @cities.each do |city| %>
+          <% @branches.each do |branch| %>
             <tr>
                 <th scope="row">
-                    <%= link_to city.id, system_city_path(city), style: "color: green" %>
+                    <%= link_to branch.id, system_branch_path(branch), style: "color: green" %>
                 </th>
-                <td><%= link_to city.name, system_city_path(city), style: "color: green" %></td>
+                <td><%= link_to branch.name, system_branch_path(branch), style: "color: green" %></td>
+                <td><%= branch.address %></td>
+                <td><%= branch.cityName %></td>
                 <td class="table-action">
-                    <%#= link_to '', system_city_path(city), class: "fa fa-eye" %>
-                    <%= link_to '', edit_system_city_path(city), class: "fa fa-edit" %>
-                    <%= link_to '', system_city_path(city), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>
+                    <%= link_to '', system_branch_path(branch), class: "fa fa-eye" %>
+                    <%= link_to '', edit_system_branch_path(branch), class: "fa fa-edit" %>
+                    <%= link_to '', system_branch_path(branch), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>
                 </td>
             </tr>
         <% end %>
         </tbody>
     </table>
-    <%= will_paginate @cities, renderer: BootstrapPagination::Rails %>
+    <%= will_paginate @branches, renderer: BootstrapPagination::Rails %>
 <% end %>

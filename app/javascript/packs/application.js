@@ -8,14 +8,14 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
-import 'bootstrap/dist/js/bootstrap'
-import 'bootstrap/dist/css/bootstrap'
+import "@fortawesome/fontawesome-free/css/all"
+import "../stylesheets/application"
 
 require("bootstrap")
 require('jquery')
 
-import "@fortawesome/fontawesome-free/css/all"
-import "../stylesheets/application"
+import 'bootstrap/dist/js/bootstrap'
+import 'bootstrap/dist/css/bootstrap'
 
 import "../js/footer"
 

@@ -1,5 +1,5 @@
 class System::CitiesController < ApplicationController
-    before_action :set_city, only: [:edit, :update, :destroy]
+    before_action :set_city, only: [:show, :edit, :update, :destroy]
     
     def index
         @cities = City.paginate(page: params[:page], per_page: 10).order(id: :asc)
