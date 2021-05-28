@@ -12,7 +12,12 @@
         </li>
         <li>
             <a href="<%#= system_users_path%>" class="nav-link link-dark <%#= is_active?(system_users_path) %>">
-                <i class="fas fa-user-tie"></i>Users</a>
+                <i class="fas fa-user-tie"></i> Users</a>
+        </li>
+
+        <li>
+            <a href="<%= system_cities_path%>" class="nav-link link-dark <%= is_active?(system_cities_path) %>">
+                <i class="fas fa-city"></i> Cities</a>
         </li>
 
         <li>

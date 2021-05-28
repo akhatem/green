@@ -28,26 +28,28 @@
 
   <body>
     <div class="container-fluid">
-        <div class="row">
-          <%= render "system/shared/navbar" %>
-          <div class="col-md-3 side-nav-col">
-            <%= render "system/shared/sidebar" %>
+      <div class="row">
+        <%= render "system/shared/navbar" %>
+        <div class="col-md-3 side-nav-col">
+          <%= render "system/shared/sidebar" %>
+        </div>
+        <div class="col-md-9">
+          <div class="row">
+            <!-- <p class="notice"><%= notice %></p>
+            <p class="alert"><%= alert %></p> -->
           </div>
-          <div class="col-md-9">
-              <div class="row mt-4">
-                <%= render 'system/shared/filter_search' if (controller_name != 'static_pages' and action_name == 'index') %>
-                <%= render 'system/shared/buttons' if (controller_name != 'static_pages' and action_name == 'index') %>
-            </div>
-            <div class="row">
-              <%= yield %>
-            </div>
-            <%= render 'system/shared/pagination' if (controller_name != 'static_pages' and action_name == 'index') %>
-
-            <%= yield :customers_index %>
+          <div class="row mt-4">
+            <%= render 'system/shared/filter_search' if (controller_name != 'static_pages' and action_name == 'index') %>
+            <%#= render 'system/shared/buttons' if (controller_name != 'static_pages' and action_name == 'index') %>
           </div>
-          <footer class="footer" id="footer_id">
-            <p> Green Copyright © 2021 </p>
-          </footer>
+          <div class="row">
+            <%= yield %>
+          </div>
+          <%= render 'system/shared/pagination' if (controller_name != 'static_pages' and action_name == 'index') %>
+          <%= yield :customers_index %>
+          <%= yield :city_index %>
+          <%= render 'system/shared/footer' %>
+        </div>
       </div>
     </div>
 

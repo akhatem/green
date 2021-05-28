@@ -4,8 +4,6 @@
             <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="#">Name</a>
-                <a class="dropdown-item" href="#">Mobile</a>
-                <a class="dropdown-item" href="#">Email</a>
                 <div role="separator" class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Created at</a>
                 <a class="dropdown-item" href="#">Updated at</a>
@@ -16,42 +14,36 @@
     </div>
 </div>
 <div class="col-lg-5 main-btns">
-        <button class="btn btn-outline-success btn-sm" type="button">Add</button>
-        <button class="btn btn-outline-success btn-sm" type="button">Export as PDF</button>
-        <button class="btn btn-outline-success btn-sm" type="button">Export as Excel</button>
-</div>    
-<% content_for :customers_index do %>
+    <%= link_to "Add new City", new_system_city_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
+    <button class="btn btn-outline-success btn-sm" type="button">Export as PDF</button>
+    <button class="btn btn-outline-success btn-sm" type="button">Export as Excel</button>
+</div>
+<% content_for :city_index do %>
 
     <table class="table mt-2">
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Phone number</th>
-                <th scope="col">Email</th>
-                <th scope="col">Points</th>
+                <th scope="col">City</th>
                 <th scope="col">Actions</th>
-
             </tr>
         </thead>
         <tbody>
-          <% @customers.each do |customer| %>
+          <% @cities.each do |city| %>
             <tr>
                 <th scope="row">
-                    <%= link_to customer.id, system_customer_path(customer), style: "color: green" %>
+                    <%= link_to city.id, system_city_path(city), style: "color: green" %>
                 </th>
-                <td><%= link_to customer.name, system_customer_path(customer), style: "color: green" %></td>
-                <td><%= customer.mobile %></td>
-                <td><%= customer.email %></td>
-                <td><%= customer.points %></td>
+                <td><%= link_to city.name, system_city_path(city), style: "color: green" %></td>
                 <td class="table-action">
-                    <%= link_to '', system_customer_path(customer), class: "fa fa-eye" %>
+                    <%#= link_to '', system_city_path(city), class: "fa fa-eye" %>
+                    <%= link_to '', edit_system_city_path(city), class: "fa fa-edit" %>
+                    <%= link_to '', system_city_path(city), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>
                 </td>
             </tr>
-            <%= will_paginate @customers, renderer: BootstrapPagination::Rails %>
         <% end %>
         </tbody>
     </table>
-    
+    <%= will_paginate @cities, renderer: BootstrapPagination::Rails %>
 <% end %>
     

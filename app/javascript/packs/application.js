@@ -11,7 +11,9 @@ import "channels"
 import 'bootstrap/dist/js/bootstrap'
 import 'bootstrap/dist/css/bootstrap'
 
-import "bootstrap"
+require("bootstrap")
+require('jquery')
+
 import "@fortawesome/fontawesome-free/css/all"
 import "../stylesheets/application"
 

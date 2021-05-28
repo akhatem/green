@@ -1,16 +1,31 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  
-  # get '/', to: 'system/static_pages#index'
 
+  
   # namespace system
-  namespace :system, path: '' do
-    
+  namespace :system do
+  
+  
     root to: 'static_pages#index'
     get '/', to: 'static_pages#index'
 
     resources :customers, only: [:index, :show] 
+
+    # Cities
+    resources :cities
+
+    # resources :contacts, only: [:new, :create]
+    # get "city/new" =>'cities#new'
+    # post "city/create" =>'cities#create'
+    
+    # do
+      # Branches
+      # get '/branches', to: 'branches#index'
+      # get '/:city_id/branches/:branch_id', to: 'branches#show'
+      # Branches
+    # end
+    # Cities
   end # namespace system
 
   # namespace Api::V1
@@ -36,6 +51,16 @@ Rails.application.routes.draw do
 #         end
 #         # Points movement
       end # customers
+
+      # Cities
+      resource :cities do
+        get '/', to: "cities#index"
+        # Branches
+        # get '/branches', to: 'branches#index'
+        # get '/:city_id/branches/:branch_id', to: 'branches#show'
+        # Branches
+      end
+      # Cities
     end # v1
   end # api
 
