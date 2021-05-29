@@ -68,7 +68,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
 # Additional gems
-gem 'api-pagination'
 gem 'barby'
 gem 'carrierwave', '~> 2.0'
 gem 'chunky_png'
@@ -77,8 +76,6 @@ gem 'cancancan'
 gem 'grape'
 gem 'jwt'
 gem 'mini_magick'
-gem 'will_paginate'
-gem 'will_paginate-bootstrap'
 gem 'geocoder'
 gem 'awesome_print'
 gem 'ffaker'
@@ -88,3 +85,11 @@ gem 'sidekiq-scheduler'
 
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+
+
+# For the API
+gem 'will_paginate'
+gem 'api-pagination'
+
+# For the backend
+gem 'pagy'

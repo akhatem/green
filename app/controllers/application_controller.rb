@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+    include Pagy::Backend
+    include Rails::Pagination
+
     def auth_header
         # { Authorization: 'Bearer <token>' }
         request.headers['Authorization']

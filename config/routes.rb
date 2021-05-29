@@ -3,6 +3,12 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
 
   
+  namespace :api do
+    namespace :v1 do
+      get 'items/index'
+      get 'items/show'
+    end
+  end
   # namespace system
   namespace :system do
   
@@ -18,6 +24,15 @@ Rails.application.routes.draw do
     
     # Branches
     resources :branches
+
+    # Brands
+    resources :brands
+
+    # Categories
+    resources :categories
+
+    resources :items
+    
   end # namespace system
 
   # namespace Api::V1
@@ -48,11 +63,23 @@ Rails.application.routes.draw do
       resource :cities do
         get '/', to: "cities#index"
         # Branches
-        # get '/branches', to: 'branches#index'
-        # get '/:city_id/branches/:branch_id', to: 'branches#show'
+        get '/branches', to: 'branches#index'
+        get '/:city_id/branches/:branch_id', to: 'branches#show'
         # Branches
-      end
-      # Cities
+      end # Cities
+
+      # Brands      
+      resource :brands, only: [:index, :show, :latest] do
+        get '/', to: 'brands#index'
+
+        # Categories
+        get '/:brand_id/categories', to: 'categories#index'
+
+        # Items
+        get '/:brand_id/categories/:category_id/items', to: 'items#index'
+        get '/:brand_id/categories/items/latest', to: 'items#latest'
+        get '/:brand_id/categories/:category_id/items/:item_id', to: 'items#show'
+      end # Brands
     end # v1
   end # api
 

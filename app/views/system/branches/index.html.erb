@@ -21,35 +21,33 @@
     <button class="btn btn-outline-success btn-sm" type="button">Export as PDF</button>
     <button class="btn btn-outline-success btn-sm" type="button">Export as Excel</button>
 </div>
-<% content_for :branches_index do %>
 
-    <table class="table mt-2">
-        <thead>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Name</th>
-                <th scope="col">address</th>
-                <th scope="col">City</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-          <% @branches.each do |branch| %>
-            <tr>
-                <th scope="row">
-                    <%= link_to branch.id, system_branch_path(branch), style: "color: green" %>
-                </th>
-                <td><%= link_to branch.name, system_branch_path(branch), style: "color: green" %></td>
-                <td><%= branch.address %></td>
-                <td><%= branch.cityName %></td>
-                <td class="table-action">
-                    <%= link_to '', system_branch_path(branch), class: "fa fa-eye" %>
-                    <%= link_to '', edit_system_branch_path(branch), class: "fa fa-edit" %>
-                    <%= link_to '', system_branch_path(branch), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>
-                </td>
-            </tr>
-        <% end %>
-        </tbody>
-    </table>
-    <%= will_paginate @branches, renderer: BootstrapPagination::Rails %>
-<% end %>
+<table class="table mt-2">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">address</th>
+            <th scope="col">City</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @branches.each do |branch| %>
+        <tr>
+            <th scope="row">
+                <%= link_to branch.id, system_branch_path(branch), style: "color: green" %>
+            </th>
+            <td><%= link_to branch.name, system_branch_path(branch), style: "color: green" %></td>
+            <td><%= branch.address %></td>
+            <td><%= branch.cityName %></td>
+            <td class="table-action">
+                <%= link_to '', system_branch_path(branch), class: "fa fa-eye" %>
+                <%= link_to '', edit_system_branch_path(branch), class: "fa fa-edit" %>
+                <%= link_to '', system_branch_path(branch), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>
+            </td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
+

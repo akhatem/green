@@ -30,3 +30,77 @@ if Branch.count.zero?
     long: 30.02233223689489, lat: 31.44672603423963, address: "Platz, New Cairo City, Cairo Governorate", city_id: 2)
 end
 puts "Create Branches finished #{DateTime.now.strftime("%H:%M:%S")}"
+
+
+
+if Brand.count.zero?
+  puts "Create Brands started at #{DateTime.now.strftime("%H:%M:%S")}"
+  Brand.create!(id: 1, name: "Green", 
+    image: File.open(File.join(Rails.root, 'app/assets/images/brands/green_logo.png')))
+  
+  Brand.create!(id: 2, name: "Starbucks", 
+    image: File.open(File.join(Rails.root, 'app/assets/images/brands/starbucks_logo.png')))
+end
+puts "Create Brands finished at #{DateTime.now.strftime("%H:%M:%S")}"
+
+
+Brand.all.each do |brand|
+  unless Category.exists?(brand_id: brand.id)
+    puts "Create Categories started at #{DateTime.now.strftime("%H:%M:%S")}"
+    for  i in 1..5 do
+      category = Category.create!(name: FFaker::Food::unique.fruit, brand_id: brand.id)
+      # puts "category_id: #{category.id}\nname: #{category.name}"
+      
+      puts "Create Items started at #{DateTime.now.strftime("%H:%M:%S")}"
+      for j in (1..30).to_a.shuffle do
+        item = Item.create!(name: FFaker::Food::meat, 
+          description: FFaker::Food::ingredient, brand_id: brand.id, 
+          category_id: category.id, item_type: 0,
+          image: File.open(File.join(Rails.root, 'app/assets/images/items/placeholder.png')))
+          
+        puts "item_id: #{item.id}"
+      end
+
+      for j in (31..60).to_a.shuffle do
+        item = Item.create!(name: FFaker::Food::meat, 
+          description: FFaker::Food::ingredient, brand_id: brand.id, 
+          category_id: category.id, item_type: 1,
+          image: File.open(File.join(Rails.root, 'app/assets/images/items/placeholder.png')))
+
+        puts "item_id: #{item.id}"
+
+      end
+      puts "Create Items finished #{DateTime.now.strftime("%H:%M:%S")}"
+    end
+    puts "Create Categories finished #{DateTime.now.strftime("%H:%M:%S")}"
+  end
+end
+
+if Size.count.zero?
+  puts "Create Sizes started #{DateTime.now.strftime("%H:%M:%S")}"
+  Size.create!(id: 1, name: "Regular", price: 50)
+  Size.create!(id: 2, name: "Grande", price: 45)
+  Size.create!(id: 3, name: "Tall", price: 35)
+end
+puts "Create Sizes finished #{DateTime.now.strftime("%H:%M:%S")}"
+
+
+if ItemSizes.count.zero?
+  puts "Create ItemSizes started #{DateTime.now.strftime("%H:%M:%S")}"
+
+  puts "Create Items started #{DateTime.now.strftime("%H:%M:%S")}"
+  Item.all.each do |item|
+    # puts "item_id: #{item.id}"
+    if item.item_type == "food"
+      ItemSizes.find_or_create_by(item_id: item.id, size_id: 1)
+    else
+      Size.all.where.not(id: 1).each do |size|
+        # puts "size_id: #{size.id}" 
+        ItemSizes.find_or_create_by(item_id: item.id, size_id: size.id)
+      end
+    end
+  # puts "Item Sizes: #{item_sizes.id}"
+  end
+  puts "Create Items finished #{DateTime.now.strftime("%H:%M:%S")}"
+end
+puts "Create ItemSizes finished #{DateTime.now.strftime("%H:%M:%S")}"

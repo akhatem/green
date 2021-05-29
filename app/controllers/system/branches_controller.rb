@@ -2,7 +2,7 @@ class System::BranchesController < ApplicationController
     before_action :set_branch, only: [:show, :edit, :update, :destroy]
     
     def index
-        @branches = Branch.paginate(page: params[:page], per_page: 10).order(id: :asc)
+        @pagy, @branches = pagy(Branch.all.order(id: :asc))
     end
 
     def show
@@ -32,7 +32,7 @@ class System::BranchesController < ApplicationController
 
     def edit
         respond_to do |format|
-            if @branch.write_attribute(:name, branch_params[:name])
+            if @branch.update(branch_params)
               format.html { redirect_to system_branches_path, notice: "Branch #{@branch.name} was successfully edited." }
               format.json { render :show, status: :ok, location: @branch }
             else
@@ -44,8 +44,7 @@ class System::BranchesController < ApplicationController
 
     def update
         respond_to do |format|
-            byebug
-          if @branch.update(name: branch_params[:name])
+          if @branch.update(branch_params)
             format.html { redirect_to system_branches_path, notice: "Branch was successfully updated." }
             format.json { render :show, status: :ok, location: @branch }
           else

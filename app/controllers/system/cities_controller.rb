@@ -2,7 +2,7 @@ class System::CitiesController < ApplicationController
     before_action :set_city, only: [:show, :edit, :update, :destroy]
     
     def index
-        @cities = City.paginate(page: params[:page], per_page: 10).order(id: :asc)
+        @pagy, @cities = pagy(City.all.order(id: :asc))
     end
 
     def show
@@ -32,7 +32,7 @@ class System::CitiesController < ApplicationController
 
     def edit
         respond_to do |format|
-            if @city.write_attribute(:name, city_params[:name])
+            if @city.update(city_params)
               format.html { redirect_to system_cities_path, notice: "#{@city.name} was successfully edited." }
               format.json { render :show, status: :ok, location: @city }
             else
@@ -44,8 +44,7 @@ class System::CitiesController < ApplicationController
 
     def update
         respond_to do |format|
-            byebug
-          if @city.update(name: city_params[:name])
+          if @city.update(city_params)
             format.html { redirect_to system_cities_path, notice: "City was successfully updated." }
             format.json { render :show, status: :ok, location: @city }
           else

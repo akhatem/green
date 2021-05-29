@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_28_021043) do
+ActiveRecord::Schema.define(version: 2021_05_28_210655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,21 @@ ActiveRecord::Schema.define(version: 2021_05_28_021043) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["city_id"], name: "index_branches_on_city_id"
+  end
+
+  create_table "brands", force: :cascade do |t|
+    t.string "name"
+    t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "brand_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["brand_id"], name: "index_categories_on_brand_id"
   end
 
   create_table "cities", force: :cascade do |t|
@@ -48,4 +63,38 @@ ActiveRecord::Schema.define(version: 2021_05_28_021043) do
     t.index ["mobile"], name: "index_customers_on_mobile", unique: true
   end
 
+  create_table "item_sizes", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "size_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_item_sizes_on_item_id"
+    t.index ["size_id"], name: "index_item_sizes_on_size_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "name", null: false, comment: "Name of the item"
+    t.string "description", comment: "Item details"
+    t.string "image", null: false, comment: "Item Image"
+    t.integer "item_type", comment: "Item type"
+    t.bigint "brand_id", null: false, comment: "Each item belongs to a brand"
+    t.bigint "category_id", null: false, comment: "Each item belongs to a category"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["brand_id"], name: "index_items_on_brand_id"
+    t.index ["category_id"], name: "index_items_on_category_id"
+  end
+
+  create_table "sizes", force: :cascade do |t|
+    t.string "name", null: false
+    t.decimal "price", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "categories", "brands"
+  add_foreign_key "item_sizes", "items"
+  add_foreign_key "item_sizes", "sizes"
+  add_foreign_key "items", "brands"
+  add_foreign_key "items", "categories"
 end

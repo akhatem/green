@@ -17,8 +17,8 @@ require('jquery')
 import 'bootstrap/dist/js/bootstrap'
 import 'bootstrap/dist/css/bootstrap'
 
+import "../js/custom"
 import "../js/footer"
-
 
 
 

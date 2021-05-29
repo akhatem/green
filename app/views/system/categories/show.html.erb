@@ -1,0 +1,209 @@
+<style>
+    main {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+    height: -webkit-fill-available;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+main>* {
+    flex-shrink: 0;
+    min-height: -webkit-fill-available;
+}
+
+* {
+    font-family: poppins;
+    box-sizing: border-box;
+}
+
+/* side navigation */
+
+.side-nav-col {
+    padding-right: 2px;
+}
+
+.user-link a:hover,
+.user-link a:focus,
+.user-link:hover {
+    background-color: none !important;
+}
+
+.link-dark {
+    color: #2b2b2b;
+    font-weight: 400;
+    font-size: 18px;
+    padding-left: 50px;
+}
+
+.d-flex {
+    padding-left: 0;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    background-color: #1ab359;
+    color: #fff;
+    width: 125px;
+    margin: 0 10px;
+    height: 40px;
+}
+
+.nav-pills .nav-link {
+    color: #2b2b2b;
+}
+
+.link-dark {
+    color: #2b2b2b;
+    font-weight: 400;
+    font-size: 18px;
+    padding-left: 50px;
+}
+
+.nav-flush .nav-link {
+    border-radius: 0;
+}
+
+.nav-pills .nav-link.ac {
+    background-color: #00AB47;
+    color: #ffffff;
+}
+
+/* end of side nav */
+
+.nav-link.ac .fas {
+    color: #ffffff;
+}
+
+/* side nav icons */
+
+.fas {
+    color: #9F9F9F;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 18px;
+}
+
+/* end side nav icons */
+
+/* end of side nav */
+
+/*tabs */
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    background-color: #1ab359;
+    color: #fff;
+    width: 125px;
+    margin: 0 10px;
+    height: 40px;
+}
+
+.nav-pills .nav-link {
+    color: #2b2b2b;
+}
+
+h2 {
+    font-size: 18px;
+    padding: 10px 0;
+    color: #006B2D;
+}
+
+
+/* input feilds */
+
+.form-select {
+    width: 50%
+}
+
+.form-control {
+    width: 50%;
+}
+
+.btn-primary {
+    background-color: #00AB47;
+    border: none;
+    width: 40%;
+    height: 36px;
+}
+
+.btn-primary:hover {
+    background-color: #006B2D;
+    color: #fff;
+}
+
+div.form-group.row {
+    text-align: center;
+    margin-left: 1px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.back-btn{
+    float: left;
+    margin-top: 100px;
+    background-color: #00AB47;
+    color: white;
+    width: 18%;
+    height: 36px;
+    border: none;
+}
+
+.edit-btn {
+    float: right;
+    margin-bottom: 30px;
+}
+
+.btn-outline-secondary {
+    padding-top: 1px;
+    text-align: center;
+    white-space: normal;
+    border: 1px solid #ced4da;
+    width: 50%;
+    height: 36px;
+    font-size: 12px;
+}
+</style>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2 style="text-align: center;">Basic Info</h2>
+    </div>
+    <div class="col-md-6">
+        <%= link_to "Edit", edit_system_category_path(@category), class: "btn btn-primary edit-btn" %>
+    </div>
+</div>
+<form>
+    <div class="form-group row" style="text-align:center;">
+        <label for="category_id" class="col-md-2 col-form-label">Id</label>
+        <input type="number" class="form-control" id="category_id" value="<%= @category.id %>" disabled>
+    </div>
+
+    <div class="form-group row">
+        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Name</label>
+        <input class="form-control" id="form-label" type="text" value="<%= @category.name %>" disabled>
+    </div>
+
+    <div class="form-group row">
+        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Brand</label>
+        <%= link_to @category.brandName, system_brand_path(@category.brand), style: "color: green;", class: "form-control" %>
+        </a>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label">Created at</label>
+        <input class="form-control" type="text" value="<%= @category.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %>" disabled>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label">Updated at</label>
+        <input class="form-control" type="text" value="<%= @category.updated_at.strftime("%A, %d %b %Y @ %H:%M:%S") %>" disabled>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <%= link_to "Back to Categories", system_categories_path, class: "btn btn-outline-success back-btn" %>
+        </div>
+    </div>
+</form>
