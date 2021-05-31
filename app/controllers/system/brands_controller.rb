@@ -31,15 +31,6 @@ class System::BrandsController < ApplicationController
   end
 
   def edit
-      respond_to do |format|
-          if @brand.update(brand_params)
-            format.html { redirect_to system_brands_path, notice: "Brand #{@brand.name} was successfully edited." }
-            format.json { render :show, status: :ok, location: @brand }
-          else
-            format.html { render :edit, status: :unprocessable_entity }
-            format.json { render json: @brand.errors, status: :unprocessable_entity }
-          end
-      end
   end
 
   def update
@@ -71,7 +62,7 @@ class System::BrandsController < ApplicationController
   end
 
   def brand_params
-      # params.fetch(:brand, {})
+    # params.fetch(:brands, {}).permit(:name, :image, :image_cache)
       params.require(:brand).permit(:name, :image, :image_cache)
   end
 end

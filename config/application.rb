@@ -17,5 +17,17 @@ module Greensapi
 
     config.autoload_paths += %W[#{config.root}/lib]
 
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource(
+          '*',
+          headers: :any,
+          expose: ["Authorization"],
+          methods: [:get, :patch, :put, :delete, :post, :options, :show]
+        )
+      end
+    end
+
   end
 end

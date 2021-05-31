@@ -1,0 +1,6 @@
+<%= link_to "Add new size", new_system_size_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
+
+<% @sizes.each do |size| %>
+    <%= size.name %> : <%= size.price %>
+    <hr>
+<% end %>

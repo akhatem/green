@@ -1,0 +1,4 @@
+<% @item_sizes.each do |item_size| %>
+    <%= item_size.item.name %> /  <%= item_size.size.name %> : <%= item_size.size.price %>
+    <hr>
+<% end %>

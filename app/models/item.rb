@@ -5,9 +5,7 @@
 #  id                                           :bigint           not null, primary key
 #  description(Item details)                    :string
 #  image(Item Image)                            :string           not null
-#  item_type(Item type)                         :integer
 #  name(Name of the item)                       :string           not null
-#  price(Item price)                            :decimal(, )      not null
 #  created_at                                   :datetime         not null
 #  updated_at                                   :datetime         not null
 #  brand_id(Each item belongs to a brand)       :bigint           not null
@@ -28,20 +26,16 @@ class Item < ApplicationRecord
     belongs_to :brand
     belongs_to :category
     
-    has_many :item_sizes
-    has_many :sizes, through: :item_sizes
+    has_many :item_size, dependent: :destroy
+    has_many :sizes, through: :item_size, dependent: :destroy
     
-    enum item_type: [ :food, :beverage ], _prefix: :item_type
-
     mount_uploader :image, ItemImageUploader, mount_on: :image
 
     validates_presence_of :name, blank: false, null: false, if: -> { !name.present? }
     validates :image, presence: false, if: -> { !image.exists? }
-    validates :item_type, presence: false, if: -> { !item_type.present? }
     validates :brand, presence: false, if: -> { !brand.exists? }
     validates :category, presence: false, if: -> { !category.exists? }
     validates :description, presence: false, if: -> { !description.present? }
-    validates :price, presence: false, if: -> { !price.exists? }
 
     def brandName
         Brand.find(self.brand_id).name

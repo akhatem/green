@@ -11,7 +11,7 @@
 class Brand < ApplicationRecord
     
     has_many :categories, dependent: :destroy
-    # has_many :items, dependent: :destroy
+    has_many :items, dependent: :destroy
 
     validates_presence_of :name, blank: false, null: false, if: -> { !name.present? }
     validates :image, presence: false, if: -> { !image.exists? }

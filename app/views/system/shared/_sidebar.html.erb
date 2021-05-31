@@ -58,9 +58,15 @@
                 <i class="fas fa-list-ul"></i> Items</a>
         </li>
         <li>
-            <a href="<%#= system_sizes_path %>" class="nav-link link-dark <%#= is_active?(system_sizes_path) %>">
+            <a href="<%= system_sizes_path %>" class="nav-link link-dark <%= is_active?(system_sizes_path) %>">
                 <i class="fas fa-list-ol"></i> Sizes</a>
         </li>
+
+        <li>
+            <a href="<%= system_item_sizes_index_path %>" class="nav-link link-dark <%= is_active?(system_item_sizes_index_path) %>">
+                <i class="fas fa-list-ol"></i> Items Sizes</a>
+        </li>
+
         <li>
             <a href="Offers Index.html" class="nav-link link-dark">
                 <i class="fas fa-percent"></i> Offers</a>

@@ -1,7 +1,6 @@
-require 'json'
-
 class Api::V1::CustomersController < ApplicationController
-  before_action :authorized, only: [:auto_login]
+  # before_action :authorized, only: [:auto_login]
+  protect_from_forgery
 
   # REGISTER
   def create

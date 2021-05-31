@@ -14,5 +14,5 @@ class Size < ApplicationRecord
     has_many :items, through: :item_sizes
   
   
-    # validates :name, uniqueness: { case_sensitive: false }
+    validates :price, uniqueness: { scope:  :name }
 end

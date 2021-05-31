@@ -9,7 +9,6 @@ class Api::V1::ItemsController < ApplicationController
            {
            id: item.id,
            name: item.name,
-           type: item.item_type,
            image: item.image.url,
            sizes: item.sizes.map{ |size| 
               { 
@@ -43,7 +42,6 @@ class Api::V1::ItemsController < ApplicationController
            {
            id: item.id,
            name: item.name,
-           type: item.item_type.capitalize,
            brand: item.brandName,
            category: item.categoryName,
            image: item.image.url,
@@ -60,9 +58,9 @@ class Api::V1::ItemsController < ApplicationController
 
   def latest
      items = Item.select(:id, :image, :name).order(created_at: :desc).limit(5).where(brand_id: params[:brand_id])
-     if items
+     if items.any?
      render json: {
-        message: "List of latest item(s) in for brand: #{Brand.find(params[:brand_id]).name}",
+        message: "List of latest item(s) for brand: #{Brand.find(params[:brand_id]).name}",
         data: items.map{ |item|
            {
            id: item.id,

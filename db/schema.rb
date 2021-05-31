@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_28_210655) do
+ActiveRecord::Schema.define(version: 2021_05_31_084102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,13 +76,53 @@ ActiveRecord::Schema.define(version: 2021_05_28_210655) do
     t.string "name", null: false, comment: "Name of the item"
     t.string "description", comment: "Item details"
     t.string "image", null: false, comment: "Item Image"
-    t.integer "item_type", comment: "Item type"
     t.bigint "brand_id", null: false, comment: "Each item belongs to a brand"
     t.bigint "category_id", null: false, comment: "Each item belongs to a category"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["brand_id"], name: "index_items_on_brand_id"
     t.index ["category_id"], name: "index_items_on_category_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.date "create_date"
+    t.integer "offer_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "offers", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "state", default: 1, null: false
+    t.date "start_at", null: false
+    t.date "end_at", null: false
+    t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "points_movements", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.bigint "branch_id", null: false
+    t.integer "redeemed", default: 0
+    t.integer "earned", default: 0
+    t.datetime "date_time", null: false
+    t.integer "total", default: 0
+    t.integer "current_points", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["branch_id"], name: "index_points_movements_on_branch_id"
+    t.index ["customer_id"], name: "index_points_movements_on_customer_id"
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "sizes", force: :cascade do |t|
@@ -97,4 +137,6 @@ ActiveRecord::Schema.define(version: 2021_05_28_210655) do
   add_foreign_key "item_sizes", "sizes"
   add_foreign_key "items", "brands"
   add_foreign_key "items", "categories"
+  add_foreign_key "points_movements", "branches"
+  add_foreign_key "points_movements", "customers"
 end
