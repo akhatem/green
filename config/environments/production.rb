@@ -22,8 +22,9 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  # config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
+  config.public_file_server.enabled = true
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
 
@@ -31,7 +32,9 @@ Rails.application.configure do
   config.assets.compile = false
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  # config.asset_host = 'http://assets.example.com'
+  config.asset_host = '165.232.141.176'
+
+  config.action_mailer.default_url_options = { host: '165.232.141.176', port: 3000 }
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
@@ -60,7 +63,7 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "green_production"
+  # config.active_job.queue_name_prefix = "greensapi_production"
 
   config.action_mailer.perform_caching = false
 
