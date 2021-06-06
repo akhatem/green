@@ -49,8 +49,10 @@ Rails.application.routes.draw do
         # Customers signup and login
         post '/signup', to: 'customers#create'
         post '/login', to: 'customers#login'
-        post '/forgot_password', to: 'customers#forgot'
-        post '/reset_password', to: 'customers#reset'
+        post '/forgot_password_mobile', to: 'customers#forgot_password_mobile'
+        post '/forgot_password_verification_code', to: 'customers#forgot_password_verification_code'
+        post '/password_reset', to: 'customers#password_reset'
+        
         post '/verify_account', to: 'customers#verify_account'
         # get '/auto_login', to: 'customers#auto_login'
 

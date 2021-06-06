@@ -1,6 +1,7 @@
 class Api::V1::CustomersController < ApplicationController
   protect_from_forgery
-  before_action :set_customer, only: [:verify_account, :show, :forgot_password, :reset_password]
+  before_action :set_customer, only: [:verify_account, :show, :forgot_password, :reset_password, 
+    :forgot_password_mobile, :forgot_password_verification_code, :password_reset]
 
   # REGISTER
   def create
@@ -84,20 +85,52 @@ class Api::V1::CustomersController < ApplicationController
     end
   end
 
-  # def forgot_password
-  #   @customer = Customer.find_by(verification_code: params[:_json])
-  #   if @customer
-  #     render json: {
-  #       alert: 'If this customer exists, we have sent you a password reset email.'
-  #     }
-  #     @customer.send_password_reset
-  #   else
-  #     # this sends regardless of whether there's an email in database for security reasons
-  #     render json: {
-  #       alert: 'If this customer exists, we have sent you a password reset email.'
-  #     }
-  #   end
-  # end
+  def password_reset
+    @customer.update(password: params[:password])
+    render json: {
+      message: JSON.parse(['Password reset Successful.'].to_json),
+    }, status: :ok
+  end
+
+  def forgot_password_verification_code
+    byebug
+    if @customer.verification_code.eql?(params[:verification_code])
+      render json: {
+        message: JSON.parse(['Verification Successful.'].to_json),
+      }, status: :ok
+    else
+      render json: {
+        error: JSON.parse(['Incorrect verification code!'].to_json)
+      }, status: :not_acceptable
+    end
+  end
+
+  def forgot_password_mobile
+    begin
+      # byebug
+      @customer = Customer.find_by(mobile: params[:mobile])
+      puts "hina 1"
+    rescue
+      puts "hina 2"
+      render json: {
+        error: JSON.parse(['Account not found!'].to_json)
+      }, status: :not_acceptable
+    else
+      if @customer &.token.eql?(header_token)
+        puts "hina 3"
+        generated_code = generate_verification_code
+        SmsmisrOtpClient.new(@customer.mobile, generated_code)
+        @customer.update(verification_code: generated_code)
+        render json: {
+          message: JSON.parse(["Verification code sent to mobile #{@customer.mobile}."].to_json), 
+        }, status: :ok 
+      else
+        render json: { 
+          error: JSON.parse(['Unauthorized request!'].to_json),
+        }, status: :unauthorized
+      end
+    end
+  end
 
   # def reset_password
   #   @customer = Customer.find_by(password_reset_token: params[:token], email: params[:email])
