@@ -1,7 +1,7 @@
 require 'uri'
 
 class SmsmisrSmsClient
-    def initialize
+    def initialize(message, *mobile)
         
         client = HTTPClient.new
     
@@ -24,16 +24,8 @@ class SmsmisrSmsClient
         end
         puts '.'
         res = connection.pop
-        # puts res.status
-        # puts res.content.read
-    end
-
-    def mobile
-        "01009051431"        
-    end
-    
-    def message
-        "Welcome to my Green App"
+        puts res.status
+        puts res.content.read
     end
 
 private
