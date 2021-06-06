@@ -15,4 +15,8 @@ class Size < ApplicationRecord
   
   
     validates :price, uniqueness: { scope:  :name }
+
+    def size_with_price
+        "#{self.name} : #{self.price}"
+    end
 end

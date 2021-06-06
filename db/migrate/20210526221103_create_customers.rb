@@ -10,8 +10,10 @@ class CreateCustomers < ActiveRecord::Migration[6.1]
       t.string :password_digest,    null: false, default: ""
       t.string :email,              null: true
       t.string :token,              unique: true
-      t.string :barcode,            unique: true
+      t.text :barcode,            unique: true
       t.integer :points,            null: false, default: 0
+      t.boolean :is_activated?,   null: false, default: false
+      t.string :verification_code,  null: false
       
       ## Rememberable
       t.datetime :remember_created_at

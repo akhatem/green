@@ -24,7 +24,7 @@
 #  fk_rails_...  (customer_id => customers.id)
 #
 class PointsMovement < ApplicationRecord
-  belongs_to :customer
+  belongs_to :customer, dependent: :destroy
   belongs_to :branch
 
   validates :total, numericality: { greater_than_or_equal: 0 }
@@ -32,7 +32,7 @@ class PointsMovement < ApplicationRecord
   # validate :redeemed_points
   
   before_create :calculate_current_points
-  after_create :update_customer_points, :update_total
+  after_create :update_total, :update_customer_points
 
 
   private
@@ -59,4 +59,3 @@ class PointsMovement < ApplicationRecord
     customer.update(points: total)
   end
 end
-  

@@ -14,7 +14,7 @@
 #
 class Offer < ApplicationRecord
 
-    mount_uploader :image, OfferImageUploader
+    include OfferImageUploader[:image]
 
     validates :title, presence: true
     validates :description, presence: true

@@ -36,4 +36,9 @@ class ApplicationController < ActionController::Base
     def authorized
         render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
     end
+
+    def generate_verification_code 
+        charset = Array('A'..'Z') + Array('a'..'z') + Array(0..9)
+        Array.new(4) { charset.sample }.uniq.join
+    end
 end  

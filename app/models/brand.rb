@@ -9,14 +9,13 @@
 #  updated_at :datetime         not null
 #
 class Brand < ApplicationRecord
+    include BrandImageUploader[:image] 
     
     has_many :categories, dependent: :destroy
     has_many :items, dependent: :destroy
 
     validates_presence_of :name, blank: false, null: false, if: -> { !name.present? }
     validates :image, presence: false, if: -> { !image.exists? }
-    
-    mount_uploader :image, BrandImageUploader, mount_on: :image
 
     
 end

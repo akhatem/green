@@ -23,7 +23,7 @@ gem 'redis', '~> 4.0'
 gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -71,7 +71,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'barby'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
-gem 'carrierwave', '~> 2.0'
+# gem 'carrierwave', '~> 2.0'
 gem 'chunky_png'
 gem 'devise'
 gem 'cancancan'
@@ -95,3 +95,14 @@ gem 'api-pagination'
 
 # For the backend
 gem 'pagy'
+
+# Connect to SQL Server
+# gem 'tiny_tds'
+# gem 'activerecord-sqlserver-adapter'
+gem 'ckeditor'
+
+
+gem 'shrine'
+gem 'aws-sdk-s3'
+
+gem 'httpclient'

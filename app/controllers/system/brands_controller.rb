@@ -46,14 +46,13 @@ class System::BrandsController < ApplicationController
   end
 
   def destroy
-      def destroy
-          @brand.destroy
-          respond_to do |format|
-              format.html { redirect_to system_brands_path, notice: "Brand was successfully destroyed." }
-              format.json { head :no_content }
-            end
-      end
+    @brand.destroy
+    respond_to do |format|
+        format.html { redirect_to system_brands_path, notice: "Brand was successfully destroyed." }
+        format.json { head :no_content }
+    end
   end
+
 
   private
 
@@ -63,6 +62,6 @@ class System::BrandsController < ApplicationController
 
   def brand_params
     # params.fetch(:brands, {}).permit(:name, :image, :image_cache)
-      params.require(:brand).permit(:name, :image, :image_cache)
+      params.require(:brand).permit(:name, :image)
   end
 end

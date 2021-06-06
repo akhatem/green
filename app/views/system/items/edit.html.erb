@@ -75,7 +75,7 @@ div.form-group.row {
 
             </div>                
                 <%= form_with(model: @item, url: system_item_path) do |f| %>
-                    <%= f.hidden_field :id %>
+                    <%#= f.hidden_field :id %>
                     <% if @item.errors.any? %>
                         <div id="error_explanation" class="row">
                             <div class="col-md-4">
@@ -96,26 +96,20 @@ div.form-group.row {
 
                     <div class="form-group row">
                         <%= f.label :image, class: "col-md-3 col-form-label" %>
+                        <%= image_tag @item.image_url, style: "max-width: 280px;max-height: 257px;" if @item.image %>
+                        <%= f.hidden_field :image, value: @item.cached_image_data %>
                         <%= f.file_field :image, class: "form-control" %>
-                        <%= f.hidden_field :image_cache %>
-                        <%#= image_tag @item.image_was, style: "max-width: 280px;" %>
-                        <%#= image_tag("public/uploads/item/image/#{@item.name}/placeholder.png", :alt => "placeholder") %>
                     </div>
 
-                    <% @item.sizes.all.each do %>
-                        <div class="form-group row">
-                            <%= f.label :size, class: "col-md-3 col-form-label" %>
-                            <%#= f.collection_select :size, Size.order(:name), :id, :name, class: "btn btn-outline-secondary dropdown-toggle", style: "font-size: 18px"%>
-                            <%#= select_tag :size, options_for_select(Size.order(:name), :id, :name), class: "btn btn-outline-secondary dropdown-toggle" %>
-                             <%= select_tag :size, options_from_collection_for_select(Size.order(:name), :id, :name), class: "btn btn-outline-secondary dropdown-toggle" %>
-                        </div>
+                    <div class="form-group row">
+                        <%= f.label :brand, class: "col-md-3 col-form-label" %>
+                        <%= f.collection_select :brand_id, Brand.order(:name), :id, :name, { inlcude_blank: true }, { class: "btn btn-outline-secondary dropdown-toggle" } %>
+                    </div>
 
-                        <div class="form-group row">
-                            <%= f.label :price, class: "col-md-3 col-form-label" %>
-                            <%= f.text_field :price, class: "form-control"  %>
-                        </div>
-                    <% end %>
-
+                    <div class="form-group row">
+                        <%= f.label :category, class: "col-md-3 col-form-label" %>
+                        <%= f.grouped_collection_select :category_id, Brand.order(:name), :categories, :name, :id, :name, { inlcude_blank: true }, { class: "btn btn-outline-secondary dropdown-toggle" } %>
+                    </div>
 
                     <div class="form-group row">
                         <%= f.label :descrption, class: "col-md-3 col-form-label" %>

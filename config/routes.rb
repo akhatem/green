@@ -32,6 +32,11 @@ Rails.application.routes.draw do
 
     # Item sizes
     resources :item_sizes, except: [:show]
+
+    # Notifications
+    resources :notifications, except: [:destroy]
+
+    # mount Ckeditor::Engine => '/ckeditor'
     
   end # namespace system
 
@@ -46,6 +51,7 @@ Rails.application.routes.draw do
         post '/login', to: 'customers#login'
         post '/forgot_password', to: 'customers#forgot'
         post '/reset_password', to: 'customers#reset'
+        post '/verify_account', to: 'customers#verify_account'
         # get '/auto_login', to: 'customers#auto_login'
 
         # Customers show and edit

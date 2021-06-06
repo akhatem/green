@@ -11,7 +11,6 @@ class System::SizesController < ApplicationController
     end
   
     def create
-    byebug
       @size = Size.new(size_params)
       respond_to do |format|
           if @size.save
@@ -23,6 +22,29 @@ class System::SizesController < ApplicationController
               
           end
       end
+    end
+
+    def edit
+    end
+  
+    def update
+      respond_to do |format|
+        if @size.update(size_params)
+          format.html { redirect_to system_items_path, notice: "Size was successfully updated." }
+          format.json { render :show, status: :ok, location: @size }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @size.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+  
+    def destroy
+        @size.destroy
+        respond_to do |format|
+        format.html { redirect_to system_sizes_path, notice: "Size was successfully destroyed." }
+        format.json { head :no_content }
+        end
     end
 
 

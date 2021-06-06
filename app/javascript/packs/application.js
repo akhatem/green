@@ -20,7 +20,7 @@ import 'bootstrap/dist/css/bootstrap'
 import "../js/custom"
 import "../js/footer"
 
-
+// import "../ckeditor/config"
 
 document.addEventListener("turbolinks:load", () => {
     $('[data-toggle="tooltip"]').tooltip()

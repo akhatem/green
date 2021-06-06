@@ -2,7 +2,7 @@ class System::CategoriesController < ApplicationController
     before_action :set_category, only: [:show, :edit, :update, :destroy]
     
     def index
-        @pagy, @categories = pagy(Category.all.order(id: :asc))
+        @pagy, @categories = pagy(Category.all.order(updated_at: :desc))
     end
 
     def show
@@ -31,15 +31,6 @@ class System::CategoriesController < ApplicationController
     end
 
     def edit
-        respond_to do |format|
-            if @category.update(category_params)
-              format.html { redirect_to system_categories_path, notice: "Category #{@category.name} was successfully edited." }
-              format.json { render :show, status: :ok, location: @category }
-            else
-              format.html { render :edit, status: :unprocessable_entity }
-              format.json { render json: @category.errors, status: :unprocessable_entity }
-            end
-        end
     end
 
     def update
@@ -55,13 +46,11 @@ class System::CategoriesController < ApplicationController
     end
 
     def destroy
-        def destroy
-            @category.destroy
-            respond_to do |format|
-                format.html { redirect_to system_categories_path, notice: "Category was successfully destroyed." }
-                format.json { head :no_content }
-              end
-        end
+        @category.destroy
+        respond_to do |format|
+            format.html { redirect_to system_categories_path, notice: "Category was successfully destroyed." }
+            format.json { head :no_content }
+            end
     end
 
     private
@@ -71,7 +60,6 @@ class System::CategoriesController < ApplicationController
     end
 
     def category_params
-        params.fetch(:category, {})
-        # params.require(:category).permit(:name, :brand_id)
+        params.require(:category).permit(:name, :brand_id)
     end
 end

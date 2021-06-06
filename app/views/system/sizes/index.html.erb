@@ -1,6 +1,51 @@
-<%= link_to "Add new size", new_system_size_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
+    <div class="col-lg-7">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
+            <div class="dropdown-menu">
+                <a class="dropdown-size" href="#">Name</a>
+                <a class="dropdown-size" href="#">Price</a>
+                <div role="separator" class="dropdown-divider"></div>
+                <a class="dropdown-size" href="#">Created at</a>
+                <a class="dropdown-size" href="#">Updated at</a>
+            </div>
+        </div>
+        <span class="input-group-text input-search" id="addon-wrapping"><i class="fa fa-search"></i> </span>
+        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+    </div>
+</div>
+<div class="col-lg-5 main-btns">
+    <%= link_to "Add new Size", new_system_size_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
+    <button class="btn btn-outline-success btn-sm" type="button">Export as PDF</button>
+    <button class="btn btn-outline-success btn-sm" type="button">Export as Excel</button>
+</div>
 
-<% @sizes.each do |size| %>
-    <%= size.name %> : <%= size.price %>
-    <hr>
-<% end %>
+<table class="table mt-2">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Updated At</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @sizes.each do |size| %>
+        <tr>
+            <th scope="row">
+                <%= size.id %>
+            </th>
+            <td><%= size.name %></td>
+            <td><%= size.price %></td>
+            <td><%= size.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td>
+            <td><%= size.updated_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td>
+            <td class="table-action">
+                <%= link_to '', edit_system_size_path(size), class: "fa fa-edit" %>
+                <%= link_to '', system_size_path(size), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>
+            </td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>

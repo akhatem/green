@@ -2,17 +2,17 @@ class System::ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   
   def index
-    @pagy, @items = pagy(Item.all.order(id: :asc))
+    @pagy, @items = pagy(Item.all.order(updated_at: :desc))
       
   end
 
   def show
+      puts "ANA HINA LEH !!!!"
       @item = Item.find(params[:id])
   end
 
   def new
       @item = Item.new
-      puts "Item: #{@item}"
   end
 
   def create
@@ -20,7 +20,7 @@ class System::ItemsController < ApplicationController
 
     respond_to do |format|
         if @item.save
-            format.html { redirect_to system_items_path, notice: "Item #{@item.name} was successfully created." }
+            format.html { redirect_to system_item_path(@item), notice: "Item #{@item.name} was successfully created." }
             format.json { render :show, status: :created, location: @item }
         else
             format.html { render :new, status: :unprocessable_entity }
@@ -34,10 +34,9 @@ class System::ItemsController < ApplicationController
   end
 
   def update
-  # byebug
     respond_to do |format|
       if @item.update(item_params)
-        format.html { redirect_to system_items_path, notice: "Item was successfully updated." }
+        format.html { redirect_to system_item_path(@item), notice: "Item was successfully updated." }
         format.json { render :show, status: :ok, location: @item }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -47,14 +46,14 @@ class System::ItemsController < ApplicationController
   end
 
   def destroy
-      def destroy
-          @item.destroy
-          respond_to do |format|
-              format.html { redirect_to system_items_path, notice: "Item was successfully destroyed." }
-              format.json { head :no_content }
-            end
+    respond_to do |format|
+      if @item.destroy
+        format.html { redirect_to system_items_path, notice: "Item was successfully destroyed." }
+        format.json { head :no_content }
       end
+    end
   end
+
 
   private
 
@@ -63,7 +62,6 @@ class System::ItemsController < ApplicationController
   end
 
   def item_params
-      params.require(:item).permit!
-      # (:name, :image, :image_cache, :description, :brand_id, :category_id, :sizes => [])
+      params.require(:item).permit(:name, :image, :category_id, :brand_id, :description)
   end
 end

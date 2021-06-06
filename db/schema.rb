@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2021_05_31_084102) do
 
   create_table "brands", force: :cascade do |t|
     t.string "name"
-    t.string "image"
+    t.text "image_data"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -55,8 +55,10 @@ ActiveRecord::Schema.define(version: 2021_05_31_084102) do
     t.string "password_digest", default: "", null: false
     t.string "email"
     t.string "token"
-    t.string "barcode"
+    t.text "barcode"
     t.integer "points", default: 0, null: false
+    t.boolean "is_activated?", default: false, null: false
+    t.string "verification_code", null: false
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -75,7 +77,7 @@ ActiveRecord::Schema.define(version: 2021_05_31_084102) do
   create_table "items", force: :cascade do |t|
     t.string "name", null: false, comment: "Name of the item"
     t.string "description", comment: "Item details"
-    t.string "image", null: false, comment: "Item Image"
+    t.text "image_data", null: false, comment: "Item Image"
     t.bigint "brand_id", null: false, comment: "Each item belongs to a brand"
     t.bigint "category_id", null: false, comment: "Each item belongs to a category"
     t.datetime "created_at", precision: 6, null: false
@@ -99,7 +101,7 @@ ActiveRecord::Schema.define(version: 2021_05_31_084102) do
     t.integer "state", default: 1, null: false
     t.date "start_at", null: false
     t.date "end_at", null: false
-    t.string "image"
+    t.text "image_data"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

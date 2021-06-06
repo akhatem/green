@@ -31,11 +31,10 @@
         <% @cities.each do |city| %>
         <tr>
             <th scope="row">
-                <%= link_to city.id, system_city_path(city), style: "color: green" %>
+                <%= city.id %>
             </th>
-            <td><%= link_to city.name, system_city_path(city), style: "color: green" %></td>
+            <td><%= city.name %></td>
             <td class="table-action">
-                <%#= link_to '', system_city_path(city), class: "fa fa-eye" %>
                 <%= link_to '', edit_system_city_path(city), class: "fa fa-edit" %>
                 <%= link_to '', system_city_path(city), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>
             </td>

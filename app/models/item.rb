@@ -29,10 +29,10 @@ class Item < ApplicationRecord
     has_many :item_size, dependent: :destroy
     has_many :sizes, through: :item_size, dependent: :destroy
     
-    mount_uploader :image, ItemImageUploader, mount_on: :image
+    include ItemImageUploader[:image]
 
-    validates_presence_of :name, blank: false, null: false, if: -> { !name.present? }
-    validates :image, presence: false, if: -> { !image.exists? }
+    
+    validates_presence_of :name,  uniqueness: true, blank: false, null: false, if: -> { !name.present? }
     validates :brand, presence: false, if: -> { !brand.exists? }
     validates :category, presence: false, if: -> { !category.exists? }
     validates :description, presence: false, if: -> { !description.present? }

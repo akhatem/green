@@ -6,8 +6,8 @@ class CreateOffers < ActiveRecord::Migration[6.1]
       t.integer :state, null: false, default: 1
       t.date :start_at, null: false
       t.date :end_at, null: false
-      t.string :image
-
+      t.text :image_data
+      
       t.timestamps
     end
   end

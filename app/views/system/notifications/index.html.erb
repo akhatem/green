@@ -1,0 +1,47 @@
+    <div class="col-lg-7">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
+            <div class="dropdown-menu">
+                <a class="dropdown-notification" href="#">Name</a>
+                <div role="separator" class="dropdown-divider"></div>
+                <a class="dropdown-notification" href="#">Created at</a>
+                <a class="dropdown-notification" href="#">Updated at</a>
+            </div>
+        </div>
+        <span class="input-group-text input-search" id="addon-wrapping"><i class="fa fa-search"></i> </span>
+        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+    </div>
+</div>
+<div class="col-lg-5 main-btns">
+    <%= link_to "Add new Notifications", new_system_notification_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
+    <button class="btn btn-outline-success btn-sm" type="button">Export as PDF</button>
+    <button class="btn btn-outline-success btn-sm" type="button">Export as Excel</button>
+</div>
+
+<table class="table mt-2">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @notifications.each do |notification| %>
+        <tr>
+            <th scope="row">
+                <%= link_to notification.id, system_notification_path(notification), style: "color: green" %>
+            </th>
+            <td><%= link_to notification.title, system_notification_path(notification), style: "color: green" %></td>
+            <td><%= notification.created_at %></td>
+            <td class="table-action">
+                <%= link_to '', system_notification_path(notification), class: "fa fa-eye" %>
+                <%= link_to '', edit_system_notification_path(notification), class: "fa fa-edit" %>
+                <%#= link_to '', system_notification_path(notification), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>
+            </td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>

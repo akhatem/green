@@ -1,6 +1,6 @@
 class Api::V1::CustomersController < ApplicationController
-  # before_action :authorized, only: [:auto_login]
   protect_from_forgery
+  before_action :set_customer, only: [:verify_account, :show, :forgot_password, :reset_password]
 
   # REGISTER
   def create
@@ -9,10 +9,14 @@ class Api::V1::CustomersController < ApplicationController
         error: JSON.parse(['Mobile number already taken!'].to_json)
         }, status: :not_acceptable
     else
-      @customer = Customer.create(create_params)
+      generated_code = generate_verification_code
+      @customer = Customer.new(create_params)
+      @customer.write_attribute(:verification_code, generated_code)
       if @customer.valid?
+        @customer.save
+        SmsmisrOtpClient.new(@customer.mobile, generated_code)
         render json: {
-          message: JSON.parse(['Customer Created Successfully.'].to_json),
+          message: JSON.parse(['Account Created Successfully.'].to_json),
           data: {
             id: @customer.id,
             name: @customer.name,
@@ -28,25 +32,50 @@ class Api::V1::CustomersController < ApplicationController
     end
   end
 
+  def verify_account
+    if @customer
+      if @customer.verification_code.eql?(params[:verification_code])  
+        @customer.update(is_activated?: true)
+        render json: {
+          error: JSON.parse(['Account verified successfully.'].to_json),
+          }, status: :not_acceptable
+      else
+        render json: {
+          error: JSON.parse(['Incorrect verification code!'].to_json)
+          }, status: :not_acceptable
+      end
+    else
+      render json: {
+        error: JSON.parse(['Account not found!'].to_json)
+        }, status: :not_acceptable
+    end
+  end
+
   # LOGGING IN
   def login
     if params[:mobile] && params[:password]
       @customer = Customer.find_by(mobile: params[:mobile])
-      if @customer &.authenticate(params[:password])
-        render json: {
-          message: JSON.parse(['Logged in successfully.'].to_json),
-          data: {
-            id: @customer.id,
-            name: @customer.name,
-            mobile: @customer.mobile,
-            email: @customer.email,
-            token: @customer.token
-          }
-        }, status: :ok
+      if@customer.is_activated?
+        if @customer &.authenticate(params[:password])
+          render json: {
+            message: JSON.parse(['Logged in successfully.'].to_json),
+            data: {
+              id: @customer.id,
+              name: @customer.name,
+              mobile: @customer.mobile,
+              email: @customer.email,
+              token: @customer.token
+            }
+          }, status: :ok
+        else
+          render json: {
+            error: JSON.parse(['Incorrect mobile number or password!'].to_json)
+          }, status: :bad_request
+        end
       else
         render json: {
-          error: JSON.parse(['Invalid mobile number or password!'].to_json)
-        }, status: :bad_request
+          error: JSON.parse(['Account not verified!'].to_json),
+          }, status: :not_acceptable
       end
     else
       render json: {
@@ -55,44 +84,44 @@ class Api::V1::CustomersController < ApplicationController
     end
   end
 
-  def forgot
-    @customer = Customer.find_by(email: params[:_json])
-    if @customer
-      render json: {
-        alert: 'If this customer exists, we have sent you a password reset email.'
-      }
-      @customer.send_password_reset
-    else
-      # this sends regardless of whether there's an email in database for security reasons
-      render json: {
-        alert: 'If this customer exists, we have sent you a password reset email.'
-      }
-    end
-  end
+  # def forgot_password
+  #   @customer = Customer.find_by(verification_code: params[:_json])
+  #   if @customer
+  #     render json: {
+  #       alert: 'If this customer exists, we have sent you a password reset email.'
+  #     }
+  #     @customer.send_password_reset
+  #   else
+  #     # this sends regardless of whether there's an email in database for security reasons
+  #     render json: {
+  #       alert: 'If this customer exists, we have sent you a password reset email.'
+  #     }
+  #   end
+  # end
 
-  def reset
-    @customer = Customer.find_by(password_reset_token: params[:token], email: params[:email])
-    if @customer&.password_token_valid?
-      if @customer.reset_password(params[:password])
-        render json: {
-          alert: 'Your password has been successfuly reset!'
-        }
-        session[:customer_id] = @customer.id
-      else
-        render json: {
-          error: @customer.errors.full_messages
-        }, status: :unprocessable_entity
-      end
-    else
-      render json: {
-        error: JSON.parse(['Link not valid or expired. Try generating a new link.'].to_json)
-      }, status: :not_found
-    end
-  end
+  # def reset_password
+  #   @customer = Customer.find_by(password_reset_token: params[:token], email: params[:email])
+  #   if @customer&.password_token_valid?
+  #     if @customer.reset_password(params[:password])
+  #       render json: {
+  #         alert: 'Your password has been successfuly reset!'
+  #       }
+  #       session[:customer_id] = @customer.id
+  #     else
+  #       render json: {
+  #         error: @customer.errors.full_messages
+  #       }, status: :unprocessable_entity
+  #     end
+  #   else
+  #     render json: {
+  #       error: JSON.parse(['Link not valid or expired. Try generating a new link.'].to_json)
+  #     }, status: :not_found
+  #   end
+  # end
 
-  def auto_login
-    render json: @customer
-  end
+  # def auto_login
+  #   render json: @customer
+  # end
 
   # SHOW
   def show
@@ -152,9 +181,7 @@ class Api::V1::CustomersController < ApplicationController
           @customer.write_attribute(:password, update_params[:password])
         end
 
-        if @customer.valid?
-          @customer.save
-
+        if @customer.save
           render json: {
             message: JSON.parse(['Profile updated successfully.'].to_json),
             data: {
@@ -181,5 +208,13 @@ class Api::V1::CustomersController < ApplicationController
 
   def update_params
     params.require(:customer).permit(:name, :email, :password, :mobile)
+  end
+
+  # def verification_params
+  #   params.require(:customer).permit(:token, :verification_code)
+  # end
+
+  def set_customer
+    @customer = Customer.find_by(token: header_token)
   end
 end
