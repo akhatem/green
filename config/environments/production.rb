@@ -1,8 +1,10 @@
 Rails.application.configure do
 
 
-  # config.asset_host = '165.232.141.176'
+  config.asset_host = '143.198.136.99'
   # config.action_mailer.default_url_options = { host: '165.232.141.176', port: 3000 }
+
+  config.require_master_key = true
 
 
   # Settings specified here will take precedence over those in config/application.rb.
