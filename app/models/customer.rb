@@ -35,8 +35,7 @@ require 'barby/outputter/png_outputter'
 class Customer < ApplicationRecord
   has_secure_password
 
-
-  mount_uploader :barcode, CustomerImageUploader
+  include CustomerImageUploader[:barcode] 
   
   
   has_many :points_movements, dependent: :destroy

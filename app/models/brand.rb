@@ -9,8 +9,7 @@
 #  updated_at :datetime         not null
 #
 class Brand < ApplicationRecord
-    # include BrandImageUploader[:image] 
-    mount_uploader :image, BrandImageUploader
+    include BrandImageUploader[:image]
     
     has_many :categories, dependent: :destroy
     has_many :items, dependent: :destroy
