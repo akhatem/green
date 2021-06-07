@@ -3,6 +3,7 @@ lock "~> 3.16.0"
 
 set :application, "green"
 set :repo_url, "git@github.com:akhatem/green.git"
+
 set :branch, 'master'
 
 set :deploy_to, "/home/deploy/#{fetch :application}"
