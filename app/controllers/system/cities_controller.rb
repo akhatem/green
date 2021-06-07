@@ -12,20 +12,20 @@ class System::CitiesController < ApplicationController
     def new
         @city = City.new
     end
-
+  
     def create
-        @city = City.new(city_params)
-
-        respond_to do |format|
-            if @city.save
-                format.html { redirect_to system_cities_path, notice: 'City was successfully created.' }
-                format.json { render :show, status: :created, location: @city }
-            else
-                format.html { render :new, status: :unprocessable_entity }
-                format.json { render json: @city.errors, status: :unprocessable_entity }
-                
-            end
-        end
+      @city = City.new(city_params)
+  
+      respond_to do |format|
+          if @city.save
+              format.html { redirect_to system_cities_path, notice: "City #{@city.name} was successfully created." }
+              format.json { render :index, status: :created }
+          else
+              format.html { render :new, status: :unprocessable_entity }
+              format.json { render json: @city.errors, status: :unprocessable_entity }
+              
+          end
+      end
     end
 
     def edit
@@ -69,7 +69,6 @@ class System::CitiesController < ApplicationController
     end
 
     def city_params
-        params.fetch(:city, {})
-        # params.require(:city).permit(:name)
+        params.require(:city).permit(:name)
     end
 end

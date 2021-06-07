@@ -12,7 +12,6 @@ class System::BrandsController < ApplicationController
 
   def new
       @brand = Brand.new
-      puts "Brand: #{@brand}"
   end
 
   def create
