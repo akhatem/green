@@ -102,7 +102,9 @@ gem 'pagy'
 gem 'ckeditor'
 
 
-gem 'shrine'
+# gem 'shrine'
+gem 'carrierwave', '~> 2.0'
+gem "fog-aws"
 gem 'aws-sdk-s3'
 
 gem 'httpclient'

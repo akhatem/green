@@ -35,6 +35,10 @@ require 'barby/outputter/png_outputter'
 class Customer < ApplicationRecord
   has_secure_password
 
+
+  mount_uploader :barcode, CustomerImageUploader
+  
+  
   has_many :points_movements, dependent: :destroy
 
   validates :mobile, presence: true, allow_blank: false, format: { with: /(01)[0-9]{9}/ }
