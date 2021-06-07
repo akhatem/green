@@ -10,9 +10,7 @@ class System::CitiesController < ApplicationController
     end
 
     def new
-        # byebug
         @city = City.new
-        puts "City: #{@city}"
     end
 
     def create

@@ -11,7 +11,6 @@ class System::CategoriesController < ApplicationController
 
     def new
         @category = Category.new
-        puts "Category: #{@category}"
     end
 
     def create
