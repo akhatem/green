@@ -1,3 +1,4 @@
+require 'json'
 class Api::V1::BrandsController < ApplicationController
   
   def index
