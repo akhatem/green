@@ -8,10 +8,24 @@ CarrierWave.configure do |config|
       host:                  'fra1.digitaloceanspaces.com',             # optional, defaults to nil
       endpoint: Rails.application.credentials.digitalocean_spaces[:endpoint],
     }
-    config.fog_directory  = Rails.application.credentials.digitalocean_spaces[:bucket]                                      # required
-    config.fog_public     = true                                                 # optional, defaults to true
-    config.fog_attributes = {} # optional, defaults to {}
-    # For an application which utilizes multiple servers but does not need caches persisted across requests,
-    # uncomment the line :file instead of the default :storage.  Otherwise, it will use AWS as the temp cache store.
-    # config.cache_storage = :file
+    # config.fog_directory  = Rails.application.credentials.digitalocean_spaces[:bucket]                                      # required
+    # config.fog_public     = true                                                 # optional, defaults to true
+    # config.fog_attributes = {} # optional, defaults to {}
+    config.asset_host = ActionController::Base.asset_host
+    config.storage = :aws
+    config.aws_bucket = Rails.application.credentials.digitalocean_spaces[:bucket]
+    config.aws_acl    = 'public'
+    config.aws_authenticated_url_expiration = 60 * 60 * 24 * 7
+    config.aws_attributes = -> { {
+      expires: 1.week.from_now.httpdate,
+      cache_control: 'max-age=604800'
+    } }
+    
+    config.aws_credentials = {
+      access_key_id:     Rails.application.credentials.digitalocean_spaces[:access_key_id],
+      secret_access_key: Rails.application.credentials.digitalocean_spaces[:secret_access_key],
+      region: 'fra1',
+      endpoint: Rails.application.credentials.digitalocean_spaces[:endpoint],
+      stub_responses:    Rails.env.test? 
+    }
   end
