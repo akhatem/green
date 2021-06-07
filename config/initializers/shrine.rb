@@ -3,7 +3,7 @@ require 'shrine/storage/file_system'
 require 'shrine/storage/memory'
 require 'shrine/storage/s3'
 
-if Rails.env.development? or Rails.env.test?
+if Rails.env.development?
     Shrine.storages = {
         cache: Shrine::Storage::FileSystem.new("public", prefix: "uploads/cache"), # temporary
         store: Shrine::Storage::FileSystem.new("public", prefix: "uploads/store"), # permenant
@@ -12,9 +12,9 @@ else
     s3_options = {
         access_key_id: Rails.application.credentials.digitalocean_spaces[:access_key_id],
         secret_access_key: Rails.application.credentials.digitalocean_spaces[:secret_access_key],
-        bucket: Rails.application.credentials.digitalocean[:bucket],
-        endpoint: Rails.application.credentials.digitalocean[:endpoint],
-        region: Rails.application.credentials.digitalocean[:region]
+        bucket: Rails.application.credentials.digitalocean_spaces[:bucket],
+        endpoint: Rails.application.credentials.digitalocean_spaces[:endpoint],
+        region: Rails.application.credentials.digitalocean_spaces[:region]
     }
     
     Shrine.storages = {
