@@ -12,7 +12,6 @@ class System::BranchesController < ApplicationController
     def new
         # byebug
         @branch = Branch.new
-        puts "Branch: #{@branch}"
     end
 
     def create
@@ -71,7 +70,6 @@ class System::BranchesController < ApplicationController
     end
 
     def branch_params
-        params.fetch(:branch, {})
-        # params.require(:branch).permit(:name)
+        params.require(:branch).permit(:name, :long, :lat, :link,, :city_id, :address)
     end
 end

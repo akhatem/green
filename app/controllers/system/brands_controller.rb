@@ -60,7 +60,6 @@ class System::BrandsController < ApplicationController
   end
 
   def brand_params
-    # params.fetch(:brands, {}).permit(:name, :image, :image_cache)
       params.require(:brand).permit(:name, :image)
   end
 end
