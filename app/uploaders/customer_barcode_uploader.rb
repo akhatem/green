@@ -13,5 +13,5 @@
 #   end
 # end
   
-class CustomerImageUploader < Shrine
+class CustomerBarcodeUploader < Shrine
 end

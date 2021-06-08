@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_31_084102) do
+ActiveRecord::Schema.define(version: 2021_06_08_094331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2021_05_31_084102) do
     t.string "password_digest", default: "", null: false
     t.string "email"
     t.string "token"
-    t.text "barcode"
+    t.text "barcode_data"
     t.integer "points", default: 0, null: false
     t.boolean "is_activated?", default: false, null: false
     t.string "verification_code", null: false
@@ -130,6 +130,13 @@ ActiveRecord::Schema.define(version: 2021_05_31_084102) do
   create_table "sizes", force: :cascade do |t|
     t.string "name", null: false
     t.decimal "price", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "smss", force: :cascade do |t|
+    t.text "message"
+    t.string "mobile"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

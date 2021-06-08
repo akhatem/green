@@ -14,9 +14,9 @@ class SmsmisrOtpClient
         "&Code=#{code}"
 
 
-        # puts "params: #{params}" 
+        puts "params: #{params}" 
         connection = client.post_async(uri, query: params, body: {})
-        # puts "connection: #{connection}"
+        # # puts "connection: #{connection}"
         print 'posting.'
         while true
             break if connection.finished?

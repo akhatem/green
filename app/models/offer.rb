@@ -3,12 +3,12 @@
 # Table name: offers
 #
 #  id          :bigint           not null, primary key
-#  description :text
-#  end_at      :date             not null
-#  image       :string
-#  start_at    :date             not null
-#  state       :integer          default("valid"), not null
 #  title       :string
+#  description :text
+#  state       :integer          default("valid"), not null
+#  start_at    :date             not null
+#  end_at      :date             not null
+#  image_data  :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #

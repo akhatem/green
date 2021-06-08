@@ -1,0 +1,19 @@
+<div class="col-lg-5 main-btns">
+    <%= link_to "Send new SMS", system_send_sms_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
+</div>
+
+<table class="table mt-2">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Message</th>
+            <th scope="col">Mobile(s)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><%#= link_to sms.title, system_notification_path(notification), style: "color: green" %></td>
+            <td><%= notification.created_at %></td>
+        </tr>
+    </tbody>
+</table>

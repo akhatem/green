@@ -2,24 +2,14 @@
 #
 # Table name: items
 #
-#  id                                           :bigint           not null, primary key
-#  description(Item details)                    :string
-#  image(Item Image)                            :string           not null
-#  name(Name of the item)                       :string           not null
-#  created_at                                   :datetime         not null
-#  updated_at                                   :datetime         not null
-#  brand_id(Each item belongs to a brand)       :bigint           not null
-#  category_id(Each item belongs to a category) :bigint           not null
-#
-# Indexes
-#
-#  index_items_on_brand_id     (brand_id)
-#  index_items_on_category_id  (category_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (brand_id => brands.id)
-#  fk_rails_...  (category_id => categories.id)
+#  id          :bigint           not null, primary key
+#  name        :string           not null
+#  description :string
+#  image_data  :text             not null
+#  brand_id    :bigint           not null
+#  category_id :bigint           not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 class Item < ApplicationRecord
     

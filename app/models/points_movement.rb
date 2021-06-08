@@ -3,25 +3,15 @@
 # Table name: points_movements
 #
 #  id             :bigint           not null, primary key
-#  current_points :integer          default(0)
-#  date_time      :datetime         not null
-#  earned         :integer          default(0)
+#  customer_id    :bigint           not null
+#  branch_id      :bigint           not null
 #  redeemed       :integer          default(0)
+#  earned         :integer          default(0)
+#  date_time      :datetime         not null
 #  total          :integer          default(0)
+#  current_points :integer          default(0)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  branch_id      :bigint           not null
-#  customer_id    :bigint           not null
-#
-# Indexes
-#
-#  index_points_movements_on_branch_id    (branch_id)
-#  index_points_movements_on_customer_id  (customer_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (branch_id => branches.id)
-#  fk_rails_...  (customer_id => customers.id)
 #
 class PointsMovement < ApplicationRecord
   belongs_to :customer, dependent: :destroy

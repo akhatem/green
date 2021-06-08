@@ -2,31 +2,20 @@
 #
 # Table name: customers
 #
-#  id                     :bigint           not null, primary key
-#  barcode                :string
-#  confirmation_sent_at   :datetime
-#  confirmation_token     :string
-#  confirmed_at           :datetime
-#  email                  :string
-#  mobile                 :string           not null
-#  name                   :string           not null
-#  password               :string           default(""), not null
-#  password_digest        :string           default(""), not null
-#  points                 :integer          default(0), not null
-#  remember_created_at    :datetime
-#  reset_password_sent_at :datetime
-#  reset_password_token   :string
-#  token                  :string
-#  unlock_token           :string
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#
-# Indexes
-#
-#  index_customers_on_confirmation_token    (confirmation_token) UNIQUE
-#  index_customers_on_mobile                (mobile) UNIQUE
-#  index_customers_on_reset_password_token  (reset_password_token) UNIQUE
-#  index_customers_on_unlock_token          (unlock_token) UNIQUE
+#  id                  :bigint           not null, primary key
+#  name                :string           not null
+#  mobile              :string           not null
+#  password            :string           default(""), not null
+#  password_digest     :string           default(""), not null
+#  email               :string
+#  token               :string
+#  barcode             :text
+#  points              :integer          default(0), not null
+#  is_activated?       :boolean          default(FALSE), not null
+#  verification_code   :string           not null
+#  remember_created_at :datetime
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
 #
 require 'barby'
 require 'barby/barcode/ean_13'
@@ -35,8 +24,10 @@ require 'barby/outputter/png_outputter'
 class Customer < ApplicationRecord
   has_secure_password
 
-  include CustomerImageUploader[:barcode] 
+  include CustomerBarcodeUploader[:barcode] 
   
+
+  belongs_to :smses
   
   has_many :points_movements, dependent: :destroy
 
@@ -51,10 +42,9 @@ class Customer < ApplicationRecord
   end
 
   def generate_barcode
-    # byebug
     barcode = Barby::UPCA.new(self.mobile).to_image.to_data_url
     barcode.split(',')[1]
-    
+    puts "barcode: #{barcode}"
   end
 
   def encode_token(payload)
@@ -67,7 +57,7 @@ class Customer < ApplicationRecord
 
   private
   def update_customer_data
-    self.write_attribute(:barcode, self.generate_barcode) 
+    self.write_attribute(:barcode_data, self.generate_barcode) 
     self.write_attribute(:token, self.generate_token) 
   end
 end

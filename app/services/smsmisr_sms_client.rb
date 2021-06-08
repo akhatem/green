@@ -13,7 +13,7 @@ class SmsmisrSmsClient
         "&mobile=#{mobile}" +
         "&message=#{message}"
 
-        # puts "params: #{params}"
+        puts "params: #{params}"
         connection = client.post_async(uri, params)
         # puts "connection: #{connection}"
         print 'posting.'

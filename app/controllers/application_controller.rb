@@ -39,6 +39,11 @@ class ApplicationController < ActionController::Base
 
     def generate_verification_code 
         charset = Array('A'..'Z') + Array('a'..'z') + Array(0..9)
-        Array.new(4) { charset.sample }.uniq.join
+        code = Array.new(4) { charset.sample }.uniq.join
+        if code.length < 4
+            generate_verification_code
+        else
+            return code
+        end
     end
 end  

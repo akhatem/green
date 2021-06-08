@@ -3,18 +3,14 @@
 # Table name: branches
 #
 #  id         :bigint           not null, primary key
-#  address    :string
-#  lat        :decimal(, )
+#  name       :string
 #  link       :string
 #  long       :decimal(, )
-#  name       :string
+#  lat        :decimal(, )
+#  address    :string
+#  city_id    :bigint
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  city_id    :bigint
-#
-# Indexes
-#
-#  index_branches_on_city_id  (city_id)
 #
 class Branch < ApplicationRecord
 

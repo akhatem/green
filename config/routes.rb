@@ -37,6 +37,8 @@ Rails.application.routes.draw do
     resources :notifications, except: [:destroy]
 
     # mount Ckeditor::Engine => '/ckeditor'
+    resources :smss
+    # get '/send_sms', to: 'smss#send_sms'
     
   end # namespace system
 
