@@ -70,6 +70,6 @@ class System::BranchesController < ApplicationController
     end
 
     def branch_params
-        params.require(:branch).permit(:name, :long, :lat, :link,, :city_id, :address)
+        params.require(:branch).permit(:name, :long, :lat, :link, :city_id, :address)
     end
 end
