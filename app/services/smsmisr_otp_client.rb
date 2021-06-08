@@ -31,9 +31,9 @@ class SmsmisrOtpClient
 
 private
 
-def uri
-    "https://smsmisr.com/api/vSMS/?"
-end
+    def uri
+        "https://smsmisr.com/api/vSMS/?"
+    end
 
     def username
         Rails.application.credentials.smsmisr[:username]

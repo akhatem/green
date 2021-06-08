@@ -372,7 +372,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   jwt
-  listen (~> 3.3)
+  listen
   mini_magick
   pagy
   pg (~> 1.1)
