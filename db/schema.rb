@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_08_094331) do
+ActiveRecord::Schema.define(version: 2021_06_09_201347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,6 +134,16 @@ ActiveRecord::Schema.define(version: 2021_06_08_094331) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+<<<<<<< HEAD
+=======
+  create_table "sms_messages", force: :cascade do |t|
+    t.string "mobile"
+    t.text "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+>>>>>>> it10
   add_foreign_key "categories", "brands"
   add_foreign_key "item_sizes", "items"
   add_foreign_key "item_sizes", "sizes"
