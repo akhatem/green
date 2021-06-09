@@ -1,4 +1,4 @@
-# class System::SmssController < ApplicationController
+class System::SmssController < ApplicationController
 
 #   def index
 #     @pagy, @smss = pagy(Sms.all.order(id: :desc))
@@ -24,4 +24,4 @@
 #         mobiles = mobiles.gsub("[\"", '').gsub("\"]", '')
 #         return mobiles
 #       end
-# end
+end
