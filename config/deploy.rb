@@ -9,7 +9,7 @@ set :branch, 'master'
 set :deploy_to, "/home/deploy/#{fetch :application}"
 
 
-set :passenger_in_gemfile, true
+# set :passenger_in_gemfile, true
 
 
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads', 'public/packs', 'node_modules'
