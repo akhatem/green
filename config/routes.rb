@@ -2,12 +2,12 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
 
+  get "/", to: redirect("/system")
+
   # namespace system
   namespace :system do
   
-  
     root to: 'static_pages#index'
-    get '/', to: 'static_pages#index'
 
     # Customers
     resources :customers, only: [:index, :show] 
