@@ -12,7 +12,7 @@ set :deploy_to, "/home/deploy/#{fetch :application}"
 # set :passenger_in_gemfile, true
 
 
-# set :rails_env, "production"
+set :rails_env, "production"
 
 
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads', 'public/packs', 'node_modules'

@@ -134,8 +134,6 @@ ActiveRecord::Schema.define(version: 2021_06_09_201347) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-<<<<<<< HEAD
-=======
   create_table "sms_messages", force: :cascade do |t|
     t.string "mobile"
     t.text "message"
@@ -143,7 +141,6 @@ ActiveRecord::Schema.define(version: 2021_06_09_201347) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
->>>>>>> it10
   add_foreign_key "categories", "brands"
   add_foreign_key "item_sizes", "items"
   add_foreign_key "item_sizes", "sizes"
