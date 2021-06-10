@@ -27,7 +27,7 @@ class Customer < ApplicationRecord
   include CustomerBarcodeUploader[:barcode] 
   
 
-  belongs_to :smses
+  belongs_to :sms_message
   
   has_many :points_movements, dependent: :destroy
 

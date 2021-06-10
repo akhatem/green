@@ -16,7 +16,7 @@ class Api::V1::BrandsController < ApplicationController
           {
             id: brand.id,
             name: brand.name,
-            image: brand.image.url
+            image: brand.image_url
           }
         }
       }, status: :ok

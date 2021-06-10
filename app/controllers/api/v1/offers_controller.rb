@@ -11,7 +11,7 @@ class Api::V1::OffersController < ApplicationController
               state: offer.state,
               start_at: offer.start_at,
               end_at: offer.end_at,
-              image: offer.image.url
+              image: offer.image_url
             }
           }
         }, status: :ok
@@ -28,7 +28,7 @@ class Api::V1::OffersController < ApplicationController
             start_at: offer.start_at,
             end_at: offer.end_at,
             state: offer.state,
-            image: offer.image.url
+            image: offer.image_url
           }
         }, status: :ok
       else
@@ -39,13 +39,13 @@ class Api::V1::OffersController < ApplicationController
     end
   
     def offers_carosel
-      offers = Offer.select(:id, :title, :image).order(created_at: :desc).where(state: 1).limit(4)
+      offers = Offer.select(:id, :title, :image_data).order(created_at: :desc).where(state: 1).limit(4)
       render json:{
         data: offers.map{ |offer|
           {
             id: offer.id,
             title: offer.title,
-            image: offer.image.url
+            image: offer.image_url
             
           }
         }
