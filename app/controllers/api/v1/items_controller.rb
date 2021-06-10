@@ -9,15 +9,15 @@ class Api::V1::ItemsController < ApplicationController
            {
            id: item.id,
            name: item.name,
-         #   image: item.image.url,
+           image: item.image_url,
            sizes: item.sizes.map{ |size| 
               { 
                  name: size.name, 
                  price: size.price 
               } 
            }
-           }
-        }
+         }
+        } 
      }, status: :ok
      else
         render json:{
@@ -44,7 +44,7 @@ class Api::V1::ItemsController < ApplicationController
            name: item.name,
            brand: item.brandName,
            category: item.categoryName,
-         #   image: item.image.url,
+           image: item.image_url,
            sizes: item.sizes.map{ |size| 
               { 
                  name: size.name, 
@@ -58,15 +58,15 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def latest
-     items = Item.select(:id, :image, :name).order(created_at: :desc).limit(5).where(brand_id: params[:brand_id])
+     items = Item.select(:id, :image_data, :name).order(created_at: :desc).limit(5).where(brand_id: params[:brand_id])
      if items.any?
      render json: {
-        message: "List of latest item(s) for brand: #{Brand.find(params[:brand_id]).name}",
+        message: JSON.parse("List of latest item(s) for brand: #{Brand.find(params[:brand_id]).name}".to_json),
         data: items.map{ |item|
            {
            id: item.id,
            name: item.name,
-         #   image: item.image.url
+           image: item.image_url
            }
         }
      }, status: :ok
@@ -79,8 +79,8 @@ class Api::V1::ItemsController < ApplicationController
   end
 
 
-private
-  def item_params
-     params.require(:item).permit(size_ids: [])
-  end
+# private
+#   def item_params
+#      params.require(:item).permit(size_ids: [])
+#   end
 end
