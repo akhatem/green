@@ -1,0 +1,117 @@
+<style>
+
+/* tabs */
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    background-color: #1ab359;
+    color: #fff;
+    width: 125px;
+    margin: 0 10px;
+    height: 40px;
+}
+
+.nav-pills .nav-link {
+    color: #2b2b2b;
+}
+
+h2 {
+    font-size: 18px;
+    padding: 10px 0;
+    color: #006B2D;
+}
+
+
+/* input feilds */
+
+.form-select {
+    width: 50%
+}
+
+.form-control {
+    width: 50%;
+}
+
+
+/* end of input feilds */
+
+div.form-group.row {
+    text-align: center;
+    margin-left: 150px;
+    margin-top: 15px;
+}
+
+.btn-outline-success {
+    padding-top: 1px;
+    text-align: center;
+    white-space: normal;
+    border-color: #00AB47;
+    width: 50%;
+    height: 36px;
+    font-size: 12px;
+}
+
+.btn-outline-secondary {
+    padding-top: 1px;
+    text-align: center;
+    white-space: normal;
+    border: 1px solid #ced4da;
+    width: 50%;
+    height: 36px;
+    font-size: 12px;
+}
+
+
+</style>
+
+<div>
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
+            <!--form-->
+            <div class="row">
+                <div class="col-md-3">
+                    <h2 style="text-align: center;">Send new SMS</h2>
+                </div>
+
+            </div>                
+            <%= form_with(model: @sms_message, url: system_sms_messages_path) do |f| %>
+                <% if @sms_message.errors.any? %>
+                    <div id="error_explanation">
+                        <h2><%= pluralize(@sms_message.errors.count, "error") %> found:</h2>
+                        <ul>
+                            <% @sms_message.errors.each do |error| %>
+                            <li><%= error.full_message %></li>
+                            <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+
+                <div class="form-group row">
+                    <%= f.label :title, class: "col-md-3 col-form-label" %>
+                    <%= f.text_field :title, class: "form-control"  %>
+                </div>
+
+                <div class="form-group row">
+                    <%= f.label :create_date, class: "col-md-3 col-form-label" %>
+                    <%= f.date_field :create_date, class: "form-control" %>
+                </div>
+
+                <div class="form-group row">
+                    <%= f.label :description, class: "col-md-3 col-form-label" %>
+                    <%= f.text_area :description, class: "form-control"  %>
+                </div>
+                
+                <div class="row mt-5 actions">
+                    <!--btns-->
+                    <div class="btn col-lg-6">
+                        <%= link_to 'Cancel', system_sms_messages_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px; font-size: 18px;" %>
+                    </div>
+
+                    <div class="btn col-lg-6">
+                        <%= f.submit "Save", class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;font-size: 18px;" %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

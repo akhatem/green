@@ -8,10 +8,7 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
-import "@fortawesome/fontawesome-free/css/all"
-import "../stylesheets/application"
 
-require("bootstrap")
 require('jquery')
 
 import 'bootstrap/dist/js/bootstrap'
@@ -30,3 +27,17 @@ document.addEventListener("turbolinks:load", () => {
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+
+// require("bootstrap")
+import "jquery";
+import "popper.js";
+import "bootstrap";
+
+import "@fortawesome/fontawesome-free/css/all"
+import "../stylesheets/application";
+
+
+// const { JSDOM } = require( "jsdom" );
+// const { window } = new JSDOM( "" );
+// const $ = require( "jquery" )( window );

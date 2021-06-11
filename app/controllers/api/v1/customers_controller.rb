@@ -93,7 +93,6 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def forgot_password_verification_code
-    byebug
     if @customer.verification_code.eql?(params[:verification_code])
       render json: {
         message: JSON.parse(['Verification Successful.'].to_json),
@@ -107,7 +106,6 @@ class Api::V1::CustomersController < ApplicationController
 
   def forgot_password_mobile
     begin
-      # byebug
       @customer = Customer.find_by(mobile: params[:mobile])
       puts "hina 1"
     rescue

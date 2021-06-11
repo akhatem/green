@@ -1,7 +1,7 @@
 <div class="col-lg-7">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter</button>
+            <button class="btn btn-outline-secondary dropdown-toggle" id="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter</button>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="#">Name</a>
                 <a class="dropdown-item" href="#">Address</a>
@@ -51,3 +51,15 @@
     </tbody>
 </table>
 
+<script>  
+   var select = document.getElementById('dropdown-toggle'),
+    input = document.querySelector('input[type="button"]');
+    select.addEventListener('change',function(){
+        alert('changed');
+    });
+// input.addEventListener('click',function(){
+//     select.value = 2;
+//     select.dispatchEvent(new Event('change'));
+// });
+
+</script>
