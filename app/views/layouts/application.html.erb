@@ -13,29 +13,34 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%#= javascript_include_tag Ckeditor.cdn_url %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="<%= controller_name %> <%= action_name %>">
     <div class="container-fluid">
       <div class="row">
         <%= render "system/shared/navbar" %>
         <div class="row">
           <div class="col-md-3 side-nav-col">
-          <%= render "system/shared/sidebar" %>
-        </div>
-        <div class="col-md-9">
-          <%# byebug %>
-          <% if action_name.eql?('index') %>
-            <div class="row">
+            <% if system_user_signed_in? %>
+              <%= render "system/shared/sidebar" %>
+            <% end %>
+          </div>
+          <div class="col-md-9">
+            <p class="notice" style="color:#00AB47;"><%= notice %></p>
+            <p class="alert" style="color: red;"><%= alert %></p>
+            <% if action_name.eql?('index') %>
+              <div class="row">
+                <%= yield %>
+              </div>
+            <% else %>
               <%= yield %>
-            </div>
-          <% else %>
-            <%= yield %>
-          <% end %>
-          <%= render 'system/shared/pagination' %>
-          <%= render 'system/shared/footer' %>
-        </div>
+            <% end %>
+            <% if !controller_name.eql?('static_pages') and action_name.eql?('index') %>
+              <%= render 'system/shared/pagination' %>
+            <% end %>
+            <%= render 'system/shared/footer' %>
+          </div>
         </div>
       </div>
     </div>

@@ -64,6 +64,17 @@ div.form-group.row {
 
 </style>
 
+<% if @branch.errors.any? %>
+    <div id="error_explanation">
+        <h2 style= "color:red;"><%= pluralize(@branch.errors.count, "error") %> found:</h2>
+        <ul>
+            <% @branch.errors.each do |error| %>
+            <li style= "color:red;"><%= error.full_message %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+
 <div>
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
@@ -75,16 +86,6 @@ div.form-group.row {
 
             </div>                
                 <%= form_with(model: @branch, url: system_branches_path) do |f| %>
-                    <% if @branch.errors.any? %>
-                        <div id="error_explanation">
-                            <h2><%= pluralize(@branch.errors.count, "error") %> found:</h2>
-                            <ul>
-                                <% @branch.errors.each do |error| %>
-                                <li><%= error.full_message %></li>
-                                <% end %>
-                            </ul>
-                        </div>
-                    <% end %>
 
                     <div class="form-group row">
                         <%= f.label :branch_name, class: "col-md-3 col-form-label" %>

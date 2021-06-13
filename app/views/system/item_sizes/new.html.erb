@@ -64,6 +64,16 @@ div.form-group.row {
 
 </style>
 
+<% if @item_size.errors.any? %>
+    <div id="error_explanation">
+        <h2 style= "color:red;"><%= pluralize(@item_size.errors.count, "error") %> found:</h2>
+        <ul>
+            <% @item_size.errors.each do |error| %>
+            <li style= "color:red;"><%= error.full_message %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
 <div>
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
@@ -75,17 +85,6 @@ div.form-group.row {
 
             </div>                
                 <%= form_with(model: @item_size, url: system_item_sizes_path) do |f| %>
-                    <% if @item_size.errors.any? %>
-                        <div id="error_explanation">
-                            <h2><%= pluralize(@item_size.errors.count, "error") %> found:</h2>
-                            <ul>
-                                <% @item_size.errors.each do |error| %>
-                                <li><%= error.full_message %></li>
-                                <% end %>
-                            </ul>
-                        </div>
-                    <% end %>
-
                     <div class="form-group row">
                         <%= f.label :item, class: "col-md-3 col-form-label" %>
                         <%= f.collection_select :item_id, Item.order(:name), :id, :name,{ include_blank: true }, { class: "btn btn-outline-secondary dropdown-toggle", style: "font-size: 18px" } %>

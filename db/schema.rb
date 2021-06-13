@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_201347) do
+ActiveRecord::Schema.define(version: 2021_06_12_193808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,14 +55,15 @@ ActiveRecord::Schema.define(version: 2021_06_09_201347) do
     t.string "password_digest", default: "", null: false
     t.string "email"
     t.string "token"
-    t.text "barcode_data"
+    t.string "barcode_data"
     t.integer "points", default: 0, null: false
-    t.boolean "is_activated?", default: false, null: false
-    t.string "verification_code", null: false
-    t.datetime "remember_created_at"
+    t.boolean "is_active", default: false, null: false
+    t.string "verification_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["barcode_data"], name: "index_customers_on_barcode_data", unique: true
     t.index ["mobile"], name: "index_customers_on_mobile", unique: true
+    t.index ["token"], name: "index_customers_on_token", unique: true
   end
 
   create_table "item_sizes", force: :cascade do |t|
@@ -120,6 +121,15 @@ ActiveRecord::Schema.define(version: 2021_06_09_201347) do
     t.index ["customer_id"], name: "index_points_movements_on_customer_id"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.string "key"
+    t.text "description"
+    t.boolean "is_super", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "settings", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
@@ -141,6 +151,20 @@ ActiveRecord::Schema.define(version: 2021_06_09_201347) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.bigint "role_id", null: false
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["role_id"], name: "index_users_on_role_id"
+  end
+
   add_foreign_key "categories", "brands"
   add_foreign_key "item_sizes", "items"
   add_foreign_key "item_sizes", "sizes"
@@ -148,4 +172,5 @@ ActiveRecord::Schema.define(version: 2021_06_09_201347) do
   add_foreign_key "items", "categories"
   add_foreign_key "points_movements", "branches"
   add_foreign_key "points_movements", "customers"
+  add_foreign_key "users", "roles"
 end

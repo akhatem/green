@@ -63,6 +63,16 @@ div.form-group.row {
 
 
 </style>
+<% if @notification.errors.any? %>
+    <div id="error_explanation">
+        <h2 style= "color:red;"><%= pluralize(@notification.errors.count, "error") %> found:</h2>
+        <ul>
+            <% @notification.errors.each do |error| %>
+            <li style= "color:red;"><%= error.full_message %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
 
 <div>
     <div class="tab-content" id="pills-tabContent">
@@ -75,17 +85,7 @@ div.form-group.row {
 
             </div>                
             <%= form_with(model: @notification, url: system_notifications_path) do |f| %>
-                <% if @notification.errors.any? %>
-                    <div id="error_explanation">
-                        <h2><%= pluralize(@notification.errors.count, "error") %> found:</h2>
-                        <ul>
-                            <% @notification.errors.each do |error| %>
-                            <li><%= error.full_message %></li>
-                            <% end %>
-                        </ul>
-                    </div>
-                <% end %>
-
+                
                 <div class="form-group row">
                     <%= f.label :title, class: "col-md-3 col-form-label" %>
                     <%= f.text_field :title, class: "form-control"  %>

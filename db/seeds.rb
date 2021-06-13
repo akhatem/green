@@ -1,13 +1,13 @@
-# puts "Create Test Customers started at #{DateTime.now.strftime("%H:%M:%S")}"
 # if Customer.count.zero?
+#   puts "Create Test Customers started at #{DateTime.now.strftime("%H:%M:%S")}"
   # Customer.find_or_create_by(name: "Ahmed Karim", email: "ahmed.karim@gmail.com", 
-  #   password: "password", mobile: "01009051431", is_activated: true)
+  #   password: "password", mobile: "01009051431")
 
-  # Customer.find_or_create_by(name: "Omar Badreldin", email: "omar.badreldin@gmail.com", 
-  #   password: "password", mobile: "01271307341", is_activated: true)
+#   Customer.find_or_create_by(name: "Omar Badreldin", email: "omar.badreldin@gmail.com", 
+#     password: "password", mobile: "01271307341")
 
-  # Customer.find_or_create_by(name: "Yasser AboIbrahim", email: "yasser.aboibrahim@gmail.com", 
-  #   password: "password", mobile: "01100851591", is_activated: true)
+#   Customer.find_or_create_by(name: "Yasser AboIbrahim", email: "yasser.aboibrahim@gmail.com", 
+#     password: "password", mobile: "01100851591")
 # end
 # puts "Create Test Customers Finished at #{DateTime.now.strftime("%H:%M:%S")}"
 
@@ -85,17 +85,17 @@ if ItemSize.count.zero?
 end
 puts "Create ItemSizes finished #{DateTime.now.strftime("%H:%M:%S")}"
 
-if PointsMovement.count.zero?
-  puts "Create PointsMovements started #{DateTime.now.strftime("%H:%M:%S")}"
-    PointsMovement.create(customer_id: 1, branch_id: 1, earned: 100, date_time: DateTime.now)
-    PointsMovement.create(customer_id: 1, branch_id: 2, redeemed: 50, date_time: DateTime.now)
+# if PointsMovement.count.zero?
+#   puts "Create PointsMovements started #{DateTime.now.strftime("%H:%M:%S")}"
+#     PointsMovement.create(customer_id: 1, branch_id: 1, earned: 100, date_time: DateTime.now)
+#     PointsMovement.create(customer_id: 1, branch_id: 2, redeemed: 50, date_time: DateTime.now)
     
-    PointsMovement.create(customer_id: 2, branch_id: 2, earned: 500, date_time: DateTime.now)
-    PointsMovement.create(customer_id: 2, branch_id: 2, redeemed: 200, date_time: DateTime.now)
+#     PointsMovement.create(customer_id: 2, branch_id: 2, earned: 500, date_time: DateTime.now)
+#     PointsMovement.create(customer_id: 2, branch_id: 2, redeemed: 200, date_time: DateTime.now)
 
-    PointsMovement.create(customer_id: 3, branch_id: 2, earned: 200, redeemed: 100, date_time: DateTime.now)
-  puts "Create PointsMovements finished #{DateTime.now.strftime("%H:%M:%S")}"
-end
+#     PointsMovement.create(customer_id: 3, branch_id: 2, earned: 200, redeemed: 100, date_time: DateTime.now)
+#   puts "Create PointsMovements finished #{DateTime.now.strftime("%H:%M:%S")}"
+# end
 
 if Setting.count.zero?
   puts "Create Settings started #{DateTime.now.strftime("%H:%M:%S")}"

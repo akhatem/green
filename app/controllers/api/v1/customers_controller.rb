@@ -1,7 +1,9 @@
 class Api::V1::CustomersController < ApplicationController
-  protect_from_forgery
+  protect_from_forgery with: :null_session
+  
   before_action :set_customer, only: [:verify_account, :show, :forgot_password, :reset_password, 
     :forgot_password_mobile, :forgot_password_verification_code, :password_reset]
+  
 
   # REGISTER
   def create
@@ -15,7 +17,7 @@ class Api::V1::CustomersController < ApplicationController
       @customer.write_attribute(:verification_code, generated_code)
       if @customer.valid?
         @customer.save
-        SmsmisrOtpClient.new(@customer.mobile, generated_code)
+        # SmsmisrOtpClient.new(@customer.mobile, generated_code)
         render json: {
           message: JSON.parse(['Account Created Successfully.'].to_json),
           data: {
@@ -34,18 +36,26 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def verify_account
+    puts "============================================================================"
+    puts "PARAMS: #{params}"
+    puts "============================================================================"
     if @customer
-      if @customer.verification_code.eql?(params[:verification_code])  
-        @customer.update(is_activated?: true)
+      puts "@customer from verify_account: #{@customer.id}"
+      puts "verify_account_params: #{verify_account_params}"
+      if @customer.verification_code.eql?(verify_account_params[:verification_code])
+        @customer.update(is_active: true)
+        puts "==============> Hina 1"
         render json: {
-          error: JSON.parse(['Account verified successfully.'].to_json),
-          }, status: :not_acceptable
+          message: JSON.parse(['Account verified successfully.'].to_json),
+        }, status: :ok
       else
+        puts "==============> Hina 2"
         render json: {
           error: JSON.parse(['Incorrect verification code!'].to_json)
           }, status: :not_acceptable
       end
     else
+      puts "==============> Hina 3"
       render json: {
         error: JSON.parse(['Account not found!'].to_json)
         }, status: :not_acceptable
@@ -56,7 +66,7 @@ class Api::V1::CustomersController < ApplicationController
   def login
     if params[:mobile] && params[:password]
       @customer = Customer.find_by(mobile: params[:mobile])
-      if@customer.is_activated?
+      if@customer.is_active
         if @customer &.authenticate(params[:password])
           render json: {
             message: JSON.parse(['Logged in successfully.'].to_json),
@@ -107,15 +117,12 @@ class Api::V1::CustomersController < ApplicationController
   def forgot_password_mobile
     begin
       @customer = Customer.find_by(mobile: params[:mobile])
-      puts "hina 1"
     rescue
-      puts "hina 2"
       render json: {
         error: JSON.parse(['Account not found!'].to_json)
       }, status: :not_acceptable
     else
       if @customer &.token.eql?(header_token)
-        puts "hina 3"
         generated_code = generate_verification_code
         SmsmisrOtpClient.new(@customer.mobile, generated_code)
         @customer.update(verification_code: generated_code)
@@ -172,7 +179,7 @@ class Api::V1::CustomersController < ApplicationController
           mobile: @customer.mobile,
           email: @customer.email,
           points: @customer.points,
-          barcode: @customer.barcode
+          barcode: @customer.barcode_data
         }
       }, status: :ok
     end
@@ -241,11 +248,14 @@ class Api::V1::CustomersController < ApplicationController
     params.require(:customer).permit(:name, :email, :password, :mobile)
   end
 
-  # def verification_params
-  #   params.require(:customer).permit(:token, :verification_code)
-  # end
+  def verify_account_params
+    params.require(:customer).permit(:token, :verification_code)
+  end
 
   def set_customer
+    puts "PARAMS: #{params}"
     @customer = Customer.find_by(token: header_token)
+    puts "set customer @customer: #{@customer.id}"
+    puts "header_token: #{header_token}"
   end
 end

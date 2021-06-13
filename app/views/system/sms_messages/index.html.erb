@@ -1,0 +1,45 @@
+    <div class="col-lg-7">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter</button>
+            <div class="dropdown-menu">
+                <a class="dropdown-sms_message" href="#">Name</a>
+                <div role="separator" class="dropdown-divider"></div>
+                <a class="dropdown-sms_message" href="#">Created at</a>
+                <a class="dropdown-sms_message" href="#">Updated at</a>
+            </div>
+        </div>
+        <span class="input-group-text input-search" id="addon-wrapping"><i class="fa fa-search"></i> </span>
+        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+    </div>
+</div>
+<div class="col-lg-5 main-btns">
+    <%= link_to "Send new SMS", new_system_sms_message_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
+    <button class="btn btn-outline-success btn-sm" type="button">Export as PDF</button>
+    <button class="btn btn-outline-success btn-sm" type="button">Export as Excel</button>
+</div>
+
+<table class="table mt-2">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">SMS</th>
+            <th scope="col">Mobiles</th>
+            <th scope="col">Created At</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @sms_messages.each do |sms_message| %>
+        <tr>
+            <th scope="row">
+                <%= sms_message.id %>
+            </th>
+            <td><%= sms_message.message %></td>
+            <%# sms_message.mobile.each do |mobile| %>
+                <td><%#= mobile %></td>
+            <%# end %>
+            <td><%= sms_message.created_at %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>

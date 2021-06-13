@@ -1,0 +1,41 @@
+<div class="logo-container">
+    <img src="<%= '/assets/main_logo.png' %>" alt="logo" class="logo">
+</div>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password, autocomplete: "current-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Log in" %>
+  </div>
+<% end %>
+
+<div class="logo-container">
+    <img src="assets/Green logo.jpeg" alt="logo" class="logo">
+</div>
+<div class="login-form">
+    <h2>Login</h2>
+    <div class="login-form-row">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" placeholder="">
+    </div>
+    <div class="login-form-row">
+        <label for="password">Password</label>
+        <input type="text" id="password" name="password" placeholder="">
+    </div>
+    <div class="login-form-row">
+
+        <label>
+    <input type="checkbox" checked="checked" name="remember"> Remember me</label>
+    </div>
+    <button type="submit">Login</button>
+
+</div>

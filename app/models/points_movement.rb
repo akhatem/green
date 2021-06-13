@@ -45,7 +45,9 @@ class PointsMovement < ApplicationRecord
   end
 
   def update_customer_points
-    customer = Customer.find(customer_id)
-    customer.update(points: total)
+    puts "Customer id in PM: #{self.customer_id}"
+    customer = Customer.find(self.customer_id)
+    customer.update(points: self.total)
+    puts customer.update(points: self.total)
   end
 end

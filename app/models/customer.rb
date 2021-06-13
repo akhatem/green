@@ -9,10 +9,10 @@
 #  password_digest     :string           default(""), not null
 #  email               :string
 #  token               :string
-#  barcode             :text
+#  barcode_data        :text
 #  points              :integer          default(0), not null
 #  is_activated?       :boolean          default(FALSE), not null
-#  verification_code   :string           not null
+#  verification_code   :string
 #  remember_created_at :datetime
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
@@ -23,28 +23,26 @@ require 'barby/outputter/png_outputter'
 
 class Customer < ApplicationRecord
   has_secure_password
-
-  include CustomerBarcodeUploader[:barcode] 
-  
-
-  belongs_to :sms_message
   
   has_many :points_movements, dependent: :destroy
 
   validates :mobile, presence: true, allow_blank: false, format: { with: /(01)[0-9]{9}/ }
   validates_format_of :email, :multiline => true, :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
   
+  include CustomerBarcodeUploader[:barcode]
   
-  before_save :update_customer_data
+  before_create :update_customer_data
+  # after_create :generate_customer_barcode
+
+  private
 
   def generate_jwt
     JWT.encode({ mobile: mobile, exp: 180.days.from_now.to_i }, Rails.application.secrets.secret_key_base)
   end
 
   def generate_barcode
-    barcode = Barby::UPCA.new(self.mobile).to_image.to_data_url
-    barcode.split(',')[1]
-    puts "barcode: #{barcode}"
+    generated_barcode = Barby::UPCA.new(self.mobile).to_image.to_data_url
+    generated_barcode.split(',')[1]
   end
 
   def encode_token(payload)
@@ -54,10 +52,13 @@ class Customer < ApplicationRecord
   def generate_token
     encode_token(self.mobile)
   end
-
-  private
+  
   def update_customer_data
-    self.write_attribute(:barcode_data, self.generate_barcode) 
-    self.write_attribute(:token, self.generate_token) 
+    self.write_attribute(:token, generate_token)
+  end
+
+  def generate_customer_barcode
+    self.update(barcode_data: self.generate_barcode)
   end
 end
+
