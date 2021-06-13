@@ -1,5 +1,5 @@
 class Devise::Users::SessionsController < Devise::SessionsController
-    # before_action :authenticate_system_user!
+    before_action :authenticate_system_user!
   
     # GET /resource/sign_in
     # def login
