@@ -11,7 +11,7 @@
 #  token               :string
 #  barcode_data        :text
 #  points              :integer          default(0), not null
-#  is_activated?       :boolean          default(FALSE), not null
+#  is_active       :boolean          default(FALSE), not null
 #  verification_code   :string
 #  remember_created_at :datetime
 #  created_at          :datetime         not null
@@ -40,15 +40,10 @@ class Customer < ApplicationRecord
     JWT.encode({ mobile: mobile, exp: 180.days.from_now.to_i }, Rails.application.secrets.secret_key_base)
   end
 
-  def generate_barcode
-    generated_barcode = Barby::UPCA.new(self.mobile).to_image.to_data_url
-    generated_barcode.split(',')[1]
-  end
-
   def encode_token(payload)
     JWT.encode(payload, nil)
   end
-
+  
   def generate_token
     encode_token(self.mobile)
   end
@@ -56,7 +51,15 @@ class Customer < ApplicationRecord
   def update_customer_data
     self.write_attribute(:token, generate_token)
   end
-
+  
+  def generate_barcode
+    brcode = Barby::UPCA.new(self.mobile).to_image
+    # blob = Barby::PngOutputter.new(brcode).to_png
+    # File.open("#{self.mobile}-barcode.png", 'wb'){ |f| f.write blob }
+    File.open("#{self.mobile}-barcode.png", 'wb'){|f| f.write brcode.to_png }
+    # generated_barcode.split(',')[1]
+  end
+  
   def generate_customer_barcode
     self.update(barcode_data: self.generate_barcode)
   end

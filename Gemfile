@@ -73,7 +73,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'barby'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
-# gem 'carrierwave', '~> 2.0'
 gem 'chunky_png'
 gem 'devise'
 gem 'cancancan'

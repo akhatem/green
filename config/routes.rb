@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       get "logout", to: "users#destroy"
     end
   
-    root to: 'users#login'
+    root to: 'static_pages#index'
 
     
     # Customers
