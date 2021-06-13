@@ -61,7 +61,7 @@ class Customer < ApplicationRecord
   end
   
   def generate_customer_barcode
-    self.update(barcode_data: self.generate_barcode)
+    self.update(barcode: self.generate_barcode)
   end
 end
 
