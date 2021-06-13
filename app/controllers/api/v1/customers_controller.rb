@@ -17,7 +17,7 @@ class Api::V1::CustomersController < ApplicationController
       @customer.write_attribute(:verification_code, generated_code)
       if @customer.valid?
         @customer.save
-        # SmsmisrOtpClient.new(@customer.mobile, generated_code)
+        SmsmisrOtpClient.new(@customer.mobile, generated_code)
         render json: {
           message: JSON.parse(['Account Created Successfully.'].to_json),
           data: {
@@ -36,26 +36,18 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def verify_account
-    puts "============================================================================"
-    puts "PARAMS: #{params}"
-    puts "============================================================================"
     if @customer
-      puts "@customer from verify_account: #{@customer.id}"
-      puts "verify_account_params: #{verify_account_params}"
       if @customer.verification_code.eql?(verify_account_params[:verification_code])
         @customer.update(is_active: true)
-        puts "==============> Hina 1"
         render json: {
           message: JSON.parse(['Account verified successfully.'].to_json),
         }, status: :ok
       else
-        puts "==============> Hina 2"
         render json: {
           error: JSON.parse(['Incorrect verification code!'].to_json)
           }, status: :not_acceptable
       end
     else
-      puts "==============> Hina 3"
       render json: {
         error: JSON.parse(['Account not found!'].to_json)
         }, status: :not_acceptable
@@ -253,9 +245,6 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def set_customer
-    puts "PARAMS: #{params}"
     @customer = Customer.find_by(token: header_token)
-    puts "set customer @customer: #{@customer.id}"
-    puts "header_token: #{header_token}"
   end
 end
