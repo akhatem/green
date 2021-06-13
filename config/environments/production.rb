@@ -1,9 +1,10 @@
 Rails.application.configure do
 
 
-  config.asset_host = 'http://green.mmgunited.com'
+  # config.asset_host = 'http://green.mmgunited.com'
+  config.asset_host = 'http://localhost'
   
-  config.action_mailer.default_url_options = { host: 'http://green.mmgunited.com', port: 3000 }
+  # config.action_mailer.default_url_options = { host: 'http://green.mmgunited.com', port: 3000 }
 
   # Settings specified here will take precedence over those in config/application.rb.
 

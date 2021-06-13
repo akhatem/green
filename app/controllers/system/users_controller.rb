@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 class System::UsersController < Devise::SessionsController
-    before_action :authenticate_system_user!
+    # before_action :authenticate_system_user!
   
     # GET /resource/sign_in
-    def login
-      after_sign_in_path_for('static_pages#index')
-      super
-    end
+    # def login
+      # after_sign_in_path_for('static_pages#index')
+      # super
+    # end
   
     # POST /resource/sign_in
     # def create
@@ -14,9 +14,9 @@ class System::UsersController < Devise::SessionsController
     # end
   
     # DELETE /resource/sign_out
-    def logout
-      super
-    end
+    # def logout
+      # super
+    # end
   
     # protected
   

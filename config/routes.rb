@@ -8,10 +8,10 @@ Rails.application.routes.draw do
   namespace :system do  
     
     
-    devise_scope :user do
-      get "login", to: "users#new"
-      get "logout", to: "users#destroy"
-    end
+    # devise_scope :user do
+    #   get "login", to: "users#new"
+    #   get "logout", to: "users#destroy"
+    # end
   
     root to: 'static_pages#index'
 
