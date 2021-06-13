@@ -10,14 +10,14 @@ import 'bootstrap/dist/css/bootstrap'
 import "../js/custom"
 import "../js/footer"
 
-// import "jquery";
-require('jquery')
-require("bootstrap")
-import "popper.js";
-
-import "@fortawesome/fontawesome-free/css/all"
-import "../stylesheets/application";
-
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+
+require("bootstrap")
+import "popper.js";
+import "jquery";
+
+import "@fortawesome/fontawesome-free/css/all"
+import "../stylesheets/application";

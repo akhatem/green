@@ -1,8 +1,8 @@
 Rails.application.configure do
 
 
-  # config.asset_host = 'http://green.mmgunited.com'
-  config.asset_host = 'http://localhost'
+  config.asset_host = 'http://green.mmgunited.com'
+  # config.asset_host = 'http://localhost'
   
   # config.action_mailer.default_url_options = { host: 'http://green.mmgunited.com', port: 3000 }
 

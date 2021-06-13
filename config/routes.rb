@@ -5,9 +5,10 @@ Rails.application.routes.draw do
   get "/", to: redirect("/system")
   
   # namespace system
-  namespace :system do  
-    
-    devise_for :user, path: '/users', path_names: {sign_in: 'login', sign_out: 'logout'}, controllers: {sessions: 'system/users'} do
+  namespace :system do
+
+    devise_for :users, path: '/users', path_names: {sign_in: 'login', sign_out: 'logout'}, controllers: {sessions: 'system/users'}
+    devise_scope :user do
       get "/login", to: "users#new"
       get "/logout", to: "users#destroy"
     end
