@@ -7,9 +7,9 @@ if Rails.env.production?
         config.storage = :fog
         config.fog_credentials = {
             provider: Rails.application.credentials.digitalocean_spaces[:provider],
-            access_key_id: Rails.application.credentials.digitalocean_spaces[:access_key_id],
-            secret_access_key: Rails.application.credentials.digitalocean_spaces[:secret_access_key],
-            use_iam_profile: true, 
+            aws_access_key_id: Rails.application.credentials.digitalocean_spaces[:access_key_id],
+            aws_secret_access_key: Rails.application.credentials.digitalocean_spaces[:secret_access_key],
+            use_iam_profile: false, 
             region: Rails.application.credentials.digitalocean_spaces[:region],
             # bucket: Rails.application.credentials.digitalocean_spaces[:bucket],
             endpoint: Rails.application.credentials.digitalocean_spaces[:endpoint]
