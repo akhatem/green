@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class System::UsersController < Devise::Users::SessionsController
+class System::UsersController < System::SessionsController
     before_action :authenticate_system_user!
   
     # GET /resource/sign_in
