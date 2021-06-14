@@ -74,8 +74,6 @@ gem 'barby'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 gem 'chunky_png'
-gem "cairo", github: "rcairo/rcairo"
-gem 'rmagick'
 gem 'devise'
 gem 'cancancan'
 gem 'grape'
