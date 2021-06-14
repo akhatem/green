@@ -8,7 +8,7 @@
 #  state       :integer          default("valid"), not null
 #  start_at    :date             not null
 #  end_at      :date             not null
-#  image       :text
+#  image       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
