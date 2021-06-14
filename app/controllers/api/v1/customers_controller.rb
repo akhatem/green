@@ -14,9 +14,9 @@ class Api::V1::CustomersController < ApplicationController
     else
       generated_code = generate_verification_code
       @customer = Customer.new(create_params)
-      @customer.write_attribute(:verification_code, generated_code)
+      # @customer.write_attribute(:verification_code, generated_code)
       if @customer.valid?
-        @customer.save
+        # @customer.save
         # SmsmisrOtpClient.new(@customer.mobile, generated_code)
         render json: {
           message: JSON.parse(['Account Created Successfully.'].to_json),
