@@ -33,7 +33,7 @@ class Customer < ApplicationRecord
    
   mount_uploader :barcode, CustomerBarcodeUploader
   
-  before_create :update_customer_data
+  before_create :add_customer_data
 
   private
 
@@ -55,9 +55,9 @@ class Customer < ApplicationRecord
     puts "barcode: #{brcode}"
   end
   
-  def update_customer_data
-    self.write_attribute(:token, self.generate_token)
-    self.write_attribute(:barcode, self.generate_barcode)
+  def add_customer_data
+    self.write_attribute(:token, generate_token)
+    self.write_attribute(:barcode, generate_barcode)
   end
 end
 
