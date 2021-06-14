@@ -1,16 +1,16 @@
-class Devise::Users::SessionsController < Devise::SessionsController
+class System::SessionsController < Devise::SessionsController
     before_action :authenticate_system_user!
   
     # GET /resource/sign_in
-    # def login
+    def login
       # after_sign_in_path_for('static_pages#index')
-      # super
-    # end
+      super
+    end
   
     # POST /resource/sign_in
-    # def create
-    #   super
-    # end
+    def create
+      super
+    end
   
     # DELETE /resource/sign_out
     # def logout

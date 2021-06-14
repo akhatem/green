@@ -2,22 +2,23 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   
-  get "/", to: redirect("/system")
-  get "/system", to: redirect("/system/users/login")
+  # get "/", to: redirect("/system")
+  # get "/system", to: redirect("/system/users/login")
   
-  # root to: 'system/users#login'
+  root to: 'system/users#login'
   
   # namespace system
   namespace :system do
 
     
-    devise_for :users, path: '/users', path_names: {sign_in: 'login', sign_out: 'logout'}, controllers: {sessions: 'system/users'}
-    devise_scope :user do
-      get "/login", to: "users#new"
-      get "/logout", to: "users#destroy"
-    end
+    devise_for :users
+    # , path: '/users', path_names: {sign_in: 'login', sign_out: 'logout'}, controllers: {sessions: 'system/users'}
+    # devise_scope :user do
+    #   get "/login", to: "users#new"
+    #   get "/logout", to: "users#destroy"
+    # end
     
-    # root to: 'static_pages#index'
+    root to: 'static_pages#index'
 
     
     # Customers

@@ -28,6 +28,7 @@
         <%= yield :login %>
       <% end %>
       <div class="row">
+        <%= debug system_user_signed_in? %>
         <% if system_user_signed_in? %>
           <%= render "system/shared/navbar" %>
         <% end %>
