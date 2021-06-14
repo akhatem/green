@@ -19,7 +19,7 @@
 #
 require 'barby'
 require 'barby/barcode/ean_13'
-require 'barby/outputter/png_outputter'
+require 'barby/outputter/rmagick_outputter'
 
 class Customer < ApplicationRecord
   has_secure_password
@@ -32,7 +32,6 @@ class Customer < ApplicationRecord
   include CustomerBarcodeUploader[:barcode]
   
   before_create :update_customer_data
-  # after_create :generate_customer_barcode
 
   private
 
@@ -47,21 +46,15 @@ class Customer < ApplicationRecord
   def generate_token
     encode_token(self.mobile)
   end
+
+  def generate_barcode
+    brcode = Barby::UPCA.new(self.mobile)
+    Barby::RmagickOutputter.new(brcode)
+  end
   
   def update_customer_data
     self.write_attribute(:token, generate_token)
-  end
-  
-  def generate_barcode
-    brcode = Barby::UPCA.new(self.mobile).to_image
-    # blob = Barby::PngOutputter.new(brcode).to_png
-    # File.open("#{self.mobile}-barcode.png", 'wb'){ |f| f.write blob }
-    File.open("#{self.mobile}-barcode.png", 'wb'){|f| f.write brcode.to_png }
-    # generated_barcode.split(',')[1]
-  end
-  
-  def generate_customer_barcode
-    self.update(barcode: self.generate_barcode)
+    self.write_attribute(barcode_data: generate_barcode)
   end
 end
 

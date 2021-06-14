@@ -3,7 +3,7 @@ require 'shrine/storage/file_system'
 require 'shrine/storage/memory'
 require 'shrine/storage/s3'
 
-if Rails.env.development?
+if Rails.env.development? or Rails.env.test?
     Shrine.storages = {
         cache: Shrine::Storage::FileSystem.new("public", prefix: "uploads/cache"), # temporary
         store: Shrine::Storage::FileSystem.new("public", prefix: "uploads/store"), # permenant
@@ -29,3 +29,4 @@ Shrine.plugin :cached_attachment_data # enables retaining cached file across for
 Shrine.plugin :restore_cached_data    # extracts metadata for assigned cached files
 Shrine.plugin :validation
 Shrine.plugin :validation_helpers
+Shrine.plugin :pretty_location
