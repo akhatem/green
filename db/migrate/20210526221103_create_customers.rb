@@ -21,6 +21,5 @@ class CreateCustomers < ActiveRecord::Migration[6.1]
 
     add_index :customers, :mobile,               unique: true
     add_index :customers, :token,                unique: true
-    add_index :customers, :barcode,         unique: true
   end
 end
