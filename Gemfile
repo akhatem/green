@@ -74,6 +74,7 @@ gem 'barby'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 gem 'chunky_png'
+gem "cairo", github: "rcairo/rcairo"
 gem 'rmagick'
 gem 'devise'
 gem 'cancancan'
@@ -101,15 +102,14 @@ gem 'pagy'
 # Connect to SQL Server
 # gem 'tiny_tds'
 # gem 'activerecord-sqlserver-adapter'
+
 gem 'ckeditor'
 
 
-gem 'shrine'
+gem 'carrierwave', '~> 2.0'
+gem "fog-aws"
+gem 'carrierwave-aws'
 gem 'aws-sdk-s3'
-
-# gem 'carrierwave', '~> 2.0'
-# gem "fog-aws"
-# gem 'carrierwave-aws'
 
 gem 'httpclient'
 

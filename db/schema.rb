@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2021_06_12_193808) do
 
   create_table "brands", force: :cascade do |t|
     t.string "name"
-    t.text "image_data"
+    t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -55,13 +55,13 @@ ActiveRecord::Schema.define(version: 2021_06_12_193808) do
     t.string "password_digest", default: "", null: false
     t.string "email"
     t.string "token"
-    t.string "barcode_data"
+    t.string "barcode"
     t.integer "points", default: 0, null: false
     t.boolean "is_active", default: false, null: false
     t.string "verification_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["barcode_data"], name: "index_customers_on_barcode_data", unique: true
+    t.index ["barcode"], name: "index_customers_on_barcode", unique: true
     t.index ["mobile"], name: "index_customers_on_mobile", unique: true
     t.index ["token"], name: "index_customers_on_token", unique: true
   end
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 2021_06_12_193808) do
   create_table "items", force: :cascade do |t|
     t.string "name", null: false, comment: "Name of the item"
     t.string "description", comment: "Item details"
-    t.text "image_data", null: false, comment: "Item Image"
+    t.string "image", null: false, comment: "Item Image"
     t.bigint "brand_id", null: false, comment: "Each item belongs to a brand"
     t.bigint "category_id", null: false, comment: "Each item belongs to a category"
     t.datetime "created_at", precision: 6, null: false
@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 2021_06_12_193808) do
     t.integer "state", default: 1, null: false
     t.date "start_at", null: false
     t.date "end_at", null: false
-    t.text "image_data"
+    t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

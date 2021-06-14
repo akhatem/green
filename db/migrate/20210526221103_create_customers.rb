@@ -10,7 +10,7 @@ class CreateCustomers < ActiveRecord::Migration[6.1]
       t.string :password_digest,    null: false, default: ""
       t.string :email,              null: true
       t.string :token,              unique: true
-      t.string :barcode_data,            unique: true
+      t.string :barcode,            unique: true
       t.integer :points,            null: false, default: 0
       t.boolean :is_active,   null: false, default: false
       t.string :verification_code
@@ -21,6 +21,6 @@ class CreateCustomers < ActiveRecord::Migration[6.1]
 
     add_index :customers, :mobile,               unique: true
     add_index :customers, :token,                unique: true
-    add_index :customers, :barcode_data,         unique: true
+    add_index :customers, :barcode,         unique: true
   end
 end

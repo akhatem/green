@@ -31,13 +31,13 @@ if Branch.count.zero?
 end
 puts "Create Branches finished #{DateTime.now.strftime("%H:%M:%S")}"
 
-if Brand.count.zero?
-  puts "Create Brands started at #{DateTime.now.strftime("%H:%M:%S")}"
-  Brand.create(id: 1, name: "Green", image: File.open(File.join(Rails.root, 'app/assets/images/brands/green_logo.png')))
+# if Brand.count.zero?
+#   puts "Create Brands started at #{DateTime.now.strftime("%H:%M:%S")}"
+#   Brand.create(id: 1, name: "Green", image: File.open(File.join(Rails.root, 'app/assets/images/brands/green_logo.png')))
   
-  Brand.create(id: 2, name: "Starbucks", image: File.open(File.join(Rails.root, 'app/assets/images/brands/starbucks_logo.png')))
-end
-puts "Create Brands finished at #{DateTime.now.strftime("%H:%M:%S")}"
+#   Brand.create(id: 2, name: "Starbucks", image: File.open(File.join(Rails.root, 'app/assets/images/brands/starbucks_logo.png')))
+# end
+# puts "Create Brands finished at #{DateTime.now.strftime("%H:%M:%S")}"
 
 Brand.all.each do |brand|
   unless Category.exists?(brand_id: brand.id)

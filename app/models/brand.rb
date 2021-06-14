@@ -4,12 +4,12 @@
 #
 #  id         :bigint           not null, primary key
 #  name       :string
-#  image_data :text
+#  image       :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 class Brand < ApplicationRecord
-    include BrandImageUploader[:image]
+    mount_uploader :image, BrandImageUploader
     
     has_many :categories, dependent: :destroy
     has_many :items, dependent: :destroy

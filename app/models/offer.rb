@@ -8,20 +8,19 @@
 #  state       :integer          default("valid"), not null
 #  start_at    :date             not null
 #  end_at      :date             not null
-#  image_data  :text
+#  image       :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
 class Offer < ApplicationRecord
-
-    include OfferImageUploader[:image]
-    
 
     validates :title, presence: true
     validates :description, presence: true
     validates :state, presence: true
     validates :start_at, presence: true
     validates :end_at, presence: true
+
+    mount_uploader :image, OfferImageUploader
     
     validate :dates
     

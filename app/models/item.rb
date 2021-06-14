@@ -5,7 +5,7 @@
 #  id          :bigint           not null, primary key
 #  name        :string           not null
 #  description :string
-#  image_data  :text             not null
+#  image  :text             not null
 #  brand_id    :bigint           not null
 #  category_id :bigint           not null
 #  created_at  :datetime         not null
@@ -19,7 +19,7 @@ class Item < ApplicationRecord
     has_many :item_size, dependent: :destroy
     has_many :sizes, through: :item_size, dependent: :destroy
     
-    include ItemImageUploader[:image]
+    mount_uploader :image, ItemImageUploader
     
     validates_presence_of :name,  uniqueness: true, blank: false, null: false, if: -> { !name.present? }
     validates :brand, presence: false, if: -> { !brand.exists? }
