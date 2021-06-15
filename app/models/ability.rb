@@ -1,4 +1,4 @@
-class AdminAbility
+class Ability
   include CanCan::Ability
 
   def initialize(user)
@@ -12,7 +12,7 @@ class AdminAbility
           end
         end
       end
-
+    end
       cannot [:destroy], User, id: user.id
       cannot [:destroy], Role, id: user.role.id
   end

@@ -6,7 +6,7 @@ class Api::V1::BrandsController < ApplicationController
       @brands = Brand.all
     rescue
       render json: {
-        message: JSON.parse("No brands found!".to_json)
+        message: JSON.parse("No brands found!".to_json),
         status: :not_found,
       } and return
     else

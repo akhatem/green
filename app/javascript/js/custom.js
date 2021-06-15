@@ -21,17 +21,17 @@ $(document).ready(function (){
 // ###### Handle message disapearance ######
 
 $(document).on('turbolinks:load', function(){
-  if (document.body.classList[0] === "static_pages"){
-    $(".notice").hide();
-    $(".alert").hide();
-  }
+  // if (document.body.classList[0] === "static_pages"){
+  //   $(".notice").hide();
+  //   $(".alert").hide();
+  // }
   
-  if (document.body.classList[0] != "static_pages" && document.body.classList[1] === "index"){
-    $(".notice").delay(250).slideUp(250);
-  }
+  // if (document.body.classList[0] != "static_pages" && document.body.classList[1] === "index"){
+    $(".notice").delay(2000).slideUp(250);
+  // }
 
-  if (document.body.classList[0] != "static_pages" && document.body.classList[1] === "index"){
-    $(".alert").delay(250).slideUp(250);
-  }
+  // if (document.body.classList[0] != "static_pages" && document.body.classList[1] === "index"){
+    $(".alert").delay(2000).slideUp(250);
+  // }
 });
 // ###### Handle message disapearance ######

@@ -11,11 +11,10 @@ Rails.application.routes.draw do
   namespace :system do
     
     
-    devise_for :users
-    # , path: '/users', path_names: {sign_in: 'login', sign_out: 'logout'}, controllers: {sessions: 'system/users'}
-    devise_scope :user do
-      get '/users', to: "users#index"
-    end
+    devise_for :users, path: '/users', path_names: {sign_in: 'login', sign_out: 'logout'}
+    devise_scope :system_user do
+      get '/users/index', to: "users#index"
+   end
     
     root to: 'static_pages#index'
 

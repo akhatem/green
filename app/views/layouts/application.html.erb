@@ -24,11 +24,9 @@
 
   <body class="<%= controller_name %> <%= action_name %>">
     <div class="container-fluid">
-      <%# unless system_user_signed_in? %>
-        <%= yield :login %>
-      <%# end %>
+      <%= yield :login %>
       <div class="row">
-        system_user_signed_in? : <%= debug system_user_signed_in? %>
+        <!-- system_user_signed_in? : <%#= debug system_user_signed_in? %> -->
         <% if system_user_signed_in? %>
           <%= render "system/shared/navbar" %>
         <% end %>
@@ -39,8 +37,11 @@
             <% end %>
           </div>
           <div class="col-md-9">
-            <p class="notice" style="color:#00AB47;"><%= notice %></p>
-            <p class="alert" style="color: red;"><%= alert %></p>
+            <%# if !action_name.eql?('sign_in') and !action_name.eql?('logout') %>
+              <!-- <p class="notice" style="color:#00AB47;"><%#= notice %></p>
+              <p class="alert" style="color: red;"><%#= alert %></p> -->
+            <%# end %>
+            
             <% if action_name.eql?('index') %>
               <div class="row">
                 <%= yield %>

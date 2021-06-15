@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class System::UsersController < System::SessionsController
+class System::UsersController < Devise::SessionsController
     before_action :authenticate_system_user!
 
     def index
@@ -20,12 +20,17 @@ class System::UsersController < System::SessionsController
     # def after_sign_in_path_for
     #   redirect_to system_root_path
     # end
+
+    def after_sign_out_path_for
+      redirect_to new_system_user_session_path
+    end
   
     # DELETE /resource/sign_out
-    # def logout
-      # super
-    # end
-  
+    def logout
+      after_sign_out_path_for
+      super
+    end
+
     # protected
   
     # If you have extra params to permit, append them to the sanitizer.

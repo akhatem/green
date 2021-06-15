@@ -12,7 +12,9 @@
                     href="#" role="button" aria-expanded="false"><%= current_system_user.email %></a>
                 <div class="user-type"><%= current_system_user.role.name %></div>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                    <li>
+                        <%= link_to "Logout", destroy_system_user_session_path, method: :delete, class: "dropdown-item" %>
+                    </li>
                 </ul>
             </li>
         </ul>
