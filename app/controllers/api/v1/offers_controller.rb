@@ -33,7 +33,7 @@ class Api::V1::OffersController < ApplicationController
         }, status: :ok
       else
         render json:{
-          error: "No offer found with id: #{Offer.find(params[:id])}"
+          error: JSON.parse("No offer found with id: #{Offer.find(params[:id])}".to_json)
         }, status: :not_found
       end
     end

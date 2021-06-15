@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 class System::UsersController < System::SessionsController
     before_action :authenticate_system_user!
+
+    def index
+      @pagy, @users = pagy(User.all.order(id: :asc))  
+    end
   
     # GET /resource/sign_in
     def login
@@ -9,13 +13,13 @@ class System::UsersController < System::SessionsController
   
     # POST /resource/sign_in
     def create
-      redirect_to root_path
-      # super
+      super
+      # after_sign_in_path_for
     end
 
-    def after_sign_in_path_for
-      root_path
-    end
+    # def after_sign_in_path_for
+    #   redirect_to system_root_path
+    # end
   
     # DELETE /resource/sign_out
     # def logout

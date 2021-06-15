@@ -11,7 +11,7 @@
                 <i class="fas fa-user"></i> Customers</a>
         </li>
         <li>
-            <a href="<%#= system_users_path%>" class="nav-link link-dark <%#= is_active?(system_users_path) %>">
+            <a href="<%= system_users_path%>" class="nav-link link-dark <%= is_active?(system_users_path) %>">
                 <i class="fas fa-user-tie"></i> Users</a>
         </li>
 
@@ -72,12 +72,8 @@
                 <i class="fas fa-percent"></i> Offers</a>
         </li>
         <li>
-            <a href="About Us.html" class="nav-link link-dark">
-                <i class="fas fa-info-circle"></i> About Us</a>
-        </li>
-        <li>
-            <a href="Contact Us.html" class="nav-link link-dark">
-                <i class="fas fa-at"></i>Contact Us</a>
+            <a href="<%= system_settings_path %>" class="nav-link link-dark <%= is_active?(system_settings_path) %>">
+                <i class="fas fa-info-circle"></i> Settings</a>
         </li>
         
         <li>

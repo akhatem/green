@@ -4,7 +4,7 @@ class Api::V1::ItemsController < ApplicationController
      items = paginate Item.all.where(brand_id: params[:brand_id], category_id: params[:category_id])
      if items.any?
      render json: {
-        message: "List of item(s) in category: #{Category.find(params[:category_id]).name}",
+        message: JSON.parse("List of item(s) in category: #{Category.find(params[:category_id]).name}".to_json),
         data: items.map{ |item|
            {
            id: item.id,
@@ -21,8 +21,8 @@ class Api::V1::ItemsController < ApplicationController
      }, status: :ok
      else
         render json:{
-           message: "No items found!",
-           error: "No items found in category: #{Category.find(params[:category_id]).name}"
+           message: JSON.parse("No items found!".to_json),
+           error: JSON.parse("No items found in category: #{Category.find(params[:category_id]).name}".to_json)
         }, status: :not_found
      end
   end
@@ -32,12 +32,12 @@ class Api::V1::ItemsController < ApplicationController
         item = Item.find_by(brand_id: params[:brand_id], category_id: params[:category_id], id: params[:item_id])  
      rescue
         render json: {
-           message: "Item not found!",
+           message: JSON.parse("Item not found!".to_json),
            error: JSON.parse("Item with id: #{params[:item_id]} not found!".to_json)
         }, status: :not_found
      else
         render json: {
-           message: "Item details",
+           message: JSON.parse("Item details".to_json),
            data:
            {
            id: item.id,
@@ -72,7 +72,7 @@ class Api::V1::ItemsController < ApplicationController
      }, status: :ok
      else
         render json: {
-           message: "Items not found!",
+           message: JSON.parse("Items not found!".to_json),
            error: JSON.parse("No new items in brand #{Brand.find(params[:brand_id]).name}!".to_json)
         }, status: :not_found
      end

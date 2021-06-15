@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_12_193808) do
+ActiveRecord::Schema.define(version: 2021_06_15_013853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,15 @@ ActiveRecord::Schema.define(version: 2021_06_12_193808) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "permissions", force: :cascade do |t|
+    t.string "action"
+    t.string "class_name"
+    t.text "description"
+    t.boolean "is_super", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "points_movements", force: :cascade do |t|
     t.bigint "customer_id", null: false
     t.bigint "branch_id", null: false
@@ -127,6 +136,15 @@ ActiveRecord::Schema.define(version: 2021_06_12_193808) do
     t.boolean "is_super", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "roles_permissions", force: :cascade do |t|
+    t.bigint "role_id", null: false
+    t.bigint "permission_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["permission_id"], name: "index_roles_permissions_on_permission_id"
+    t.index ["role_id"], name: "index_roles_permissions_on_role_id"
   end
 
   create_table "settings", force: :cascade do |t|
@@ -171,5 +189,7 @@ ActiveRecord::Schema.define(version: 2021_06_12_193808) do
   add_foreign_key "items", "categories"
   add_foreign_key "points_movements", "branches"
   add_foreign_key "points_movements", "customers"
+  add_foreign_key "roles_permissions", "permissions"
+  add_foreign_key "roles_permissions", "roles"
   add_foreign_key "users", "roles"
 end

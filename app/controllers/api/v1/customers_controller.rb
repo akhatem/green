@@ -9,7 +9,7 @@ class Api::V1::CustomersController < ApplicationController
   def create
     if Customer.find_by(mobile: create_params[:mobile])
       render json: {
-        error: JSON.parse(['Mobile number already taken!'].to_json)
+        error: JSON.parse("Mobile number already taken!".to_json)
         }, status: :not_acceptable
     else
       generated_code = generate_verification_code
@@ -18,7 +18,7 @@ class Api::V1::CustomersController < ApplicationController
       if @customer.valid?
         SmsmisrOtpClient.new(@customer.mobile, generated_code)
         render json: {
-          message: JSON.parse(['Account Created Successfully.'].to_json),
+          message: JSON.parse("Account Created Successfully.".to_json),
           data: {
             id: @customer.id,
             name: @customer.name,
@@ -39,16 +39,16 @@ class Api::V1::CustomersController < ApplicationController
       if @customer.verification_code.eql?(verify_account_params[:verification_code])
         @customer.update(is_active: true)
         render json: {
-          message: JSON.parse(['Account verified successfully.'].to_json),
+          message: JSON.parse("Account verified successfully.".to_json),
         }, status: :ok
       else
         render json: {
-          error: JSON.parse(['Incorrect verification code!'].to_json)
+          error: JSON.parse("Incorrect verification code!".to_json)
           }, status: :not_acceptable
       end
     else
       render json: {
-        error: JSON.parse(['Account not found!'].to_json)
+        error: JSON.parse("Account not found!".to_json)
         }, status: :not_acceptable
     end
   end
@@ -60,7 +60,7 @@ class Api::V1::CustomersController < ApplicationController
       if@customer.is_active
         if @customer &.authenticate(params[:password])
           render json: {
-            message: JSON.parse(['Logged in successfully.'].to_json),
+            message: JSON.parse("Logged in successfully.".to_json),
             data: {
               id: @customer.id,
               name: @customer.name,
@@ -71,17 +71,17 @@ class Api::V1::CustomersController < ApplicationController
           }, status: :ok
         else
           render json: {
-            error: JSON.parse(['Incorrect mobile number or password!'].to_json)
+            error: JSON.parse("Incorrect mobile number or password!".to_json)
           }, status: :bad_request
         end
       else
         render json: {
-          error: JSON.parse(['Account not verified!'].to_json),
+          error: JSON.parse("Account not verified!".to_json),
           }, status: :not_acceptable
       end
     else
       render json: {
-        error: JSON.parse(['Invalid mobile number or password!'].to_json)
+        error: JSON.parse("Invalid mobile number or password!".to_json)
       }, status: :bad_request
     end
   end
@@ -89,18 +89,18 @@ class Api::V1::CustomersController < ApplicationController
   def password_reset
     @customer.update(password: params[:password])
     render json: {
-      message: JSON.parse(['Password reset Successful.'].to_json),
+      message: JSON.parse("Password reset Successful.".to_json),
     }, status: :ok
   end
 
   def forgot_password_verification_code
     if @customer.verification_code.eql?(params[:verification_code])
       render json: {
-        message: JSON.parse(['Verification Successful.'].to_json),
+        message: JSON.parse("Verification Successful.".to_json),
       }, status: :ok
     else
       render json: {
-        error: JSON.parse(['Incorrect verification code!'].to_json)
+        error: JSON.parse("Incorrect verification code!".to_json)
       }, status: :not_acceptable
     end
   end
@@ -110,7 +110,7 @@ class Api::V1::CustomersController < ApplicationController
       @customer = Customer.find_by(mobile: params[:mobile])
     rescue
       render json: {
-        error: JSON.parse(['Account not found!'].to_json)
+        error: JSON.parse("Account not found!".to_json)
       }, status: :not_acceptable
     else
       if @customer &.token.eql?(header_token)
@@ -118,11 +118,11 @@ class Api::V1::CustomersController < ApplicationController
         SmsmisrOtpClient.new(@customer.mobile, generated_code)
         @customer.update(verification_code: generated_code)
         render json: {
-          message: JSON.parse(["Verification code sent to mobile #{@customer.mobile}."].to_json), 
+          message: JSON.parse("Verification code sent to mobile #{@customer.mobile}.".to_json), 
         }, status: :ok 
       else
         render json: { 
-          error: JSON.parse(['Unauthorized request!'].to_json),
+          error: JSON.parse("Unauthorized request!".to_json),
         }, status: :unauthorized
       end
     end
@@ -143,7 +143,7 @@ class Api::V1::CustomersController < ApplicationController
   #     end
   #   else
   #     render json: {
-  #       error: JSON.parse(['Link not valid or expired. Try generating a new link.'].to_json)
+  #       error: JSON.parse("Link not valid or expired. Try generating a new link.".to_json)
   #     }, status: :not_found
   #   end
   # end
@@ -160,11 +160,11 @@ class Api::V1::CustomersController < ApplicationController
       end
     rescue
       render json: { 
-        error: JSON.parse(['Unauthorized request!'].to_json)
+        error: JSON.parse("Unauthorized request!".to_json)
         }, status: :unauthorized
     else
       render json: {
-        message: JSON.parse(['Customer details.'].to_json),
+        message: JSON.parse("Customer details.".to_json),
         data: {
           name: @customer.name,
           mobile: @customer.mobile,
@@ -182,12 +182,12 @@ class Api::V1::CustomersController < ApplicationController
       update_params.empty?
     rescue
       render json: {
-        error: JSON.parse(['No content!'].to_json)
+        error: JSON.parse("No content!".to_json)
       }, status: :no_content
     else
       if !header_token || Customer.find_by(token: header_token).nil?
         render json: { 
-          error: JSON.parse(['Unauthorized request!'].to_json),
+          error: JSON.parse("Unauthorized request!".to_json),
         }, status: :unauthorized   
       else
         @customer = Customer.find_by(token: header_token)
@@ -212,7 +212,7 @@ class Api::V1::CustomersController < ApplicationController
 
         if @customer.save
           render json: {
-            message: JSON.parse(['Profile updated successfully.'].to_json),
+            message: JSON.parse("Profile updated successfully.".to_json),
             data: {
               name: @customer.name,
               mobile: @customer.mobile,

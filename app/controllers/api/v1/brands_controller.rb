@@ -6,12 +6,12 @@ class Api::V1::BrandsController < ApplicationController
       @brands = Brand.all
     rescue
       render json: {
-        status: :not_found,
         message: JSON.parse("No brands found!".to_json)
+        status: :not_found,
       } and return
     else
       render json: {
-        message: "List of brand(s)",
+        message: JSON.parse("List of brand(s)".to_json),
         data: @brands.map{ |brand|
           {
             id: brand.id,
