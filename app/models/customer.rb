@@ -48,15 +48,39 @@ class Customer < ApplicationRecord
     encode_token(self.mobile)
   end
 
+  # def decode_base64_image(encoded_file)
+  #   decoded_file = Base64.decode64(encoded_file)
+  #   file = Tempfile.new(["#{self.mobile}-barcode",'.png']) 
+  #   file.binmode
+  #   file.write decoded_file
+
+  #   return file
+  # end
+
   def generate_barcode
     brcode = Barby::UPCA.new(self.mobile).to_image.to_data_url
-    brcode.split(',')[1]
-    puts "barcode: #{brcode.split(',')[1]}"
+    # data = brcode.split(',')[1]
+    # Base64.decode64(brcode)
+
   end
   
   def add_customer_data
     self.write_attribute(:token, generate_token)
-    self.write_attribute(:barcode, generate_barcode)
+
+
+
+    generated_barcode = generate_barcode
+    puts "========> generated_barcode: #{generated_barcode}"
+    self.write_attribute(:barcode, generated_barcode)
+    puts self.write_attribute(:barcode, generated_barcode)
+  end
+  
+  def add_customer_barcode
+    generated_barcode = generate_barcode
+    puts "========> generated_barcode: #{generated_barcode}"
+    self.update(barcode: generated_barcode)
+    puts self.update(barcode: generated_barcode) 
+    puts "========> barcode added: #{self.barcode}"
   end
 end
 
