@@ -244,7 +244,7 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def set_customer
-    if head_token
+    if header_token
       @customer = Customer.find_by(token: header_token)
     elsif params[:mobile]
       @customer = Customer.find_by(mobile: params[:mobile])
