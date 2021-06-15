@@ -113,7 +113,7 @@ class Api::V1::CustomersController < ApplicationController
         error: JSON.parse("Account not found!".to_json)
       }, status: :not_acceptable
     else
-      if @customer &.token.eql?(header_token)
+      if @customer
         generated_code = generate_verification_code
         SmsmisrOtpClient.new(@customer.mobile, generated_code)
         @customer.update(verification_code: generated_code)
@@ -244,6 +244,9 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def set_customer
-    @customer = Customer.find_by(token: header_token)
+    if head_token
+      @customer = Customer.find_by(token: header_token)
+    else
+      @customer = Customer.find_by(mobile: params[:mobile])
   end
 end

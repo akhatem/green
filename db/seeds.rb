@@ -127,3 +127,8 @@ if Rails.env.development?
   puts "Create Offers finished #{DateTime.now.strftime("%H:%M:%S")}"
 
 end
+
+if Rails.env.production?
+  Role.find_or_create_by(id: 1, name: "Super", key: "super", description: "Full access", is_super: true)
+  User.find_or_create_by(email: "ahmed.kareem.elshawadfy@gmail.com", password: "Root123", password_confirmation: "Root123", role_id: 1)
+end
