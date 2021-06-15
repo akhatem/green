@@ -1,4 +1,4 @@
-class System::BrandsController < ApplicationController
+class System::BrandsController < System::SystemApplicationController
   before_action :set_brand, only: [:show, :edit, :update, :destroy]
   
   def index

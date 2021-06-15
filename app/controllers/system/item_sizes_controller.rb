@@ -1,4 +1,4 @@
-class System::ItemSizesController < ApplicationController
+class System::ItemSizesController < System::SystemApplicationController
     before_action :set_item_size, only: [:show, :edit, :update, :destroy]
     
     def index

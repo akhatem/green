@@ -1,4 +1,4 @@
-class System::StaticPagesController < ApplicationController
+class System::StaticPagesController < System::SystemApplicationController
   def index
     
   end

@@ -1,4 +1,4 @@
-class System::CustomersController < ApplicationController
+class System::CustomersController < System::SystemApplicationController
   
   def index
     @pagy, @customers = pagy(Customer.all.order(id: :asc))

@@ -1,4 +1,4 @@
-class System::ItemsController < ApplicationController
+class System::ItemsController < System::SystemApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   
   def index

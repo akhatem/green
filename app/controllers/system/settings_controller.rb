@@ -1,4 +1,4 @@
-class System::SettingsController < ApplicationController
+class System::SettingsController < System::SystemApplicationController
     def index
        @settings = Setting.all.order(updated_at: :desc)
     end

@@ -1,4 +1,4 @@
-class System::CitiesController < ApplicationController
+class System::CitiesController < System::SystemApplicationController
     before_action :set_city, only: [:show, :edit, :update, :destroy]
     
     def index

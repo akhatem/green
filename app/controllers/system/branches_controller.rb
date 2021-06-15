@@ -1,4 +1,4 @@
-class System::BranchesController < ApplicationController
+class System::BranchesController < System::SystemApplicationController
     before_action :set_branch, only: [:show, :edit, :update, :destroy]
     
     def index

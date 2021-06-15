@@ -1,4 +1,4 @@
-class System::CategoriesController < ApplicationController
+class System::CategoriesController < System::SystemApplicationController
     before_action :set_category, only: [:show, :edit, :update, :destroy]
     
     def index
