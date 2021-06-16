@@ -49,8 +49,29 @@ class Api::V1::CustomersController < ApplicationController
     else
       render json: {
         error: JSON.parse("Account not found!".to_json)
-        }, status: :not_acceptable
+      }, status: :not_acceptable
     end
+  end
+
+  def resend_verification_code
+    if @customer
+      generated_code = generate_verification_code
+      if SmsmisrOtpClient.new(@customer.mobile, generated_code)
+        @customer.update(verification_code: generated_code)
+        render json: {
+          message: JSON.parse("Verification code resent.".to_json),
+        }, status: :ok
+      else
+        render json: {
+          error: JSON.parse("Unable to resend verification code!".to_json)
+        }, status: :bad_request
+      end
+    else
+      render json: {
+        error: JSON.parse("Account not found!".to_json)
+      }, status: :not_acceptable
+    end
+    
   end
 
   # LOGGING IN
