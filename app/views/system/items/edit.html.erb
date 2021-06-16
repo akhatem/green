@@ -96,7 +96,7 @@ div.form-group.row {
 
                     <div class="form-group row">
                         <%= f.label :image, class: "col-md-3 col-form-label" %>
-                        <%= image_tag @item.image_url, style: "max-width: 280px;max-height: 257px;" if @item.image %>
+                        <%= image_tag @item.image_url, style: "max-width: 280px;max-height: 257px;" if @item.image_url %>
                         <%= f.hidden_field :image, value: f.object.image_was %>
                         <%= f.file_field :image, class: "form-control" %>
                     </div>
