@@ -40,6 +40,6 @@ test:
 
 production:
   <<: *default
-  username: postgres
-  password: asdasd123
+  username: deploy
+  password: root123
   database: green_production

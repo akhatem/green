@@ -131,19 +131,30 @@ end
 if Rails.env.production?
   Role.find_or_create_by(id: 1, name: "Super", key: "super", description: "Full access", is_super: true)
   User.find_or_create_by(email: "ahmed.kareem.elshawadfy@gmail.com", password: "Root123", password_confirmation: "Root123", role_id: 1)
+
+  ExternalBrand.all.each do |eb|
+    ActiveRecord::Base.establish_connection(:production)
+    Brand.create(eb.attributes)
+  end
+
+  ExternalCategory.all.each do |ec|
+    ActiveRecord::Base.establish_connection(:production)
+    Category.create(ec.attributes)
+  end 
+
+  ExternalItem.all.each do |ei|
+    ActiveRecord::Base.establish_connection(:production)
+    Item.create(ei.attributes)
+  end
+
+  ExternalSize.all.each do |ez|
+    ActiveRecord::Base.establish_connection(:production)
+    Size.create(ez.attributes)
+  end
+
+  ExternalItemSize.all.each do |eis|
+    ActiveRecord::Base.establish_connection(:production)
+    ItemSize.create(eis.attributes)
+  end  
+
 end
-
-
-# green = ActiveRecord::Base.establish_connection(:production)
-# greencopy = ActiveRecord::Base.establish_connection(adapter: "postgresql", database: "greencopy", username: "postgres", password: "asdasd123")
-# items = greencopy.connection.execute("select * from items")
-
-# class Item < ActiveRecord
-#   Item.update_all()
-
-#   end
-# end
-
-# items.each do |i|
-#   Item.create(:name => p.name.downcase) #NewPost should add Post in A. (mynewapp_psql)
-# end
