@@ -69,7 +69,7 @@ Rails.application.routes.draw do
         post '/forgot_password_mobile', to: 'customers#forgot_password_mobile'
         post '/forgot_password_verification_code', to: 'customers#forgot_password_verification_code'
         post '/password_reset', to: 'customers#password_reset'
-        get '/resend_verification_code', to 'customers#resend_verification_code'
+        get '/resend_verification_code', to: 'customers#resend_verification_code'
         
         # get '/auto_login', to: 'customers#auto_login'
 
