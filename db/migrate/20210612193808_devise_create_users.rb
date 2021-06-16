@@ -8,7 +8,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
       t.references :role, foreign_key: true, null: false
-      t.references :branch, foreign_key: true, null: false
+      t.references :branch
 
 
       ## Rememberable
