@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2021_06_15_013853) do
   create_table "items", force: :cascade do |t|
     t.string "name", null: false, comment: "Name of the item"
     t.string "description", comment: "Item details"
-    t.string "image", null: false, comment: "Item Image"
+    t.string "image", comment: "Item Image"
     t.bigint "brand_id", null: false, comment: "Each item belongs to a brand"
     t.bigint "category_id", null: false, comment: "Each item belongs to a category"
     t.datetime "created_at", precision: 6, null: false
@@ -169,15 +169,18 @@ ActiveRecord::Schema.define(version: 2021_06_15_013853) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.bigint "role_id", null: false
+    t.bigint "branch_id"
     t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["branch_id"], name: "index_users_on_branch_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["role_id"], name: "index_users_on_role_id"
   end

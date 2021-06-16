@@ -39,7 +39,7 @@ class Api::V1::OffersController < ApplicationController
     end
   
     def offers_carosel
-      offers = Offer.select(:id, :title, :image_data).order(created_at: :desc).where(state: 1).limit(4)
+      offers = Offer.select(:id, :title, :image).order(created_at: :desc).where(state: 1).limit(4)
       render json:{
         data: offers.map{ |offer|
           {

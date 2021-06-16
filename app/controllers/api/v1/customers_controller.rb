@@ -77,8 +77,7 @@ class Api::V1::CustomersController < ApplicationController
   # LOGGING IN
   def login
     if params[:mobile] && params[:password]
-      @customer = Customer.find_by(mobile: params[:mobile])
-      if@customer.is_active
+      if @customer.is_active
         if @customer &.authenticate(params[:password])
           render json: {
             message: JSON.parse("Logged in successfully.".to_json),

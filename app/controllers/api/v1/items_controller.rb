@@ -58,7 +58,7 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def latest
-     items = Item.select(:id, :image_data, :name).order(created_at: :desc).limit(5).where(brand_id: params[:brand_id])
+     items = Item.select(:id, :image, :name).order(created_at: :desc).limit(5).where(brand_id: params[:brand_id])
      if items.any?
      render json: {
         message: JSON.parse("List of latest item(s) for brand: #{Brand.find(params[:brand_id]).name}".to_json),

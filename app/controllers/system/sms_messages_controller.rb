@@ -41,7 +41,8 @@ class System::SmsMessagesController < System::SystemApplicationController
           mobiles << "#{customer.mobile},"
         end
       end
-      mobiles = mobiles.gsub("[\"", '').gsub("\"]", '')
+      mobiles = mobiles.gsub(/\[\"/, '').gsub(/\"\]/, '')
+      puts "======> mobiles : #{mobiles}"
       mobiles
     end
 end
