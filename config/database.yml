@@ -31,13 +31,7 @@ test:
   <<: *default
   database: green_test
   host: localhost
-
-# production:
-#   <<: *default
-#   username: deploy
-#   password: root123
-#   database: green_production
-
+  
 production:
   <<: *default
   username: deploy
