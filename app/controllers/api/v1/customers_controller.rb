@@ -87,10 +87,16 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def password_reset
-    @customer.update(password: params[:password])
-    render json: {
-      message: JSON.parse("Password reset Successful.".to_json),
-    }, status: :ok
+    if @customer
+      @customer.update(password: params[:password])
+      render json: {
+        message: JSON.parse("Password reset Successful.".to_json),
+      }, status: :ok
+      else
+        render json: { 
+          error: JSON.parse("Unauthorized request!".to_json),
+        }, status: :unauthorized
+    end
   end
 
   def forgot_password_verification_code
@@ -107,7 +113,7 @@ class Api::V1::CustomersController < ApplicationController
 
   def forgot_password_mobile
     begin
-      @customer = Customer.find_by(mobile: params[:mobile])
+      @customer
     rescue
       render json: {
         error: JSON.parse("Account not found!".to_json)

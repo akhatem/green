@@ -37,10 +37,10 @@
             <% end %>
           </div>
           <div class="col-md-9">
-            <%# if !action_name.eql?('sign_in') and !action_name.eql?('logout') %>
-              <!-- <p class="notice" style="color:#00AB47;"><%#= notice %></p>
-              <p class="alert" style="color: red;"><%#= alert %></p> -->
-            <%# end %>
+            <% if !action_name.eql?('sign_in') and !action_name.eql?('logout') %>
+              <p class="notice" style="color:#00AB47;"><%= notice %></p>
+              <p class="alert" style="color: red;"><%= alert %></p>
+            <% end %>
             
             <% if action_name.eql?('index') %>
               <div class="row">

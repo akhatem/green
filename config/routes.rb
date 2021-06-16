@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     devise_for :users, path: '/users', path_names: {sign_in: 'login', sign_out: 'logout'}
     devise_scope :system_user do
       get '/users/index', to: "users#index"
+      get '/users/show', to: "users#show"
+      put '/users/:id/edit', to: "users#edit"
+      delete '/users/delete', to: "users#destroy"
    end
     
     root to: 'static_pages#index'
@@ -49,7 +52,7 @@ Rails.application.routes.draw do
     # mount Ckeditor::Engine => '/ckeditor'
     resources :sms_messages
 
-    resources :settings, only: [:index, :edit, :update]
+    resources :settings
     
   end # namespace system
 

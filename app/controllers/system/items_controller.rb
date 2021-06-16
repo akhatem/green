@@ -7,7 +7,6 @@ class System::ItemsController < System::SystemApplicationController
   end
 
   def show
-      puts "ANA HINA LEH !!!!"
       @item = Item.find(params[:id])
   end
 
