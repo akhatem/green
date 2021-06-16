@@ -37,7 +37,7 @@
                 <%= link_to item.id, system_item_path(item), style: "color: green" %>
             </th>
             <td><%= link_to item.name, system_item_path(item), style: "color: green" %></td>
-            <td><%= link_to item.categoryName, system_category_path(item.category), style: "color: green" %></td>
+            <td><%= link_to item.categoryName, system_category_path(item.categoryName), style: "color: green" %></td>
             <td><%= link_to item.brandName, system_brand_path(item.brandName), style: "color: green" %></td>
             <td><%= item.created_at %></td>
             <td class="table-action">

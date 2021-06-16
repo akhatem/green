@@ -15,8 +15,8 @@
 
 #   if City.count.zero?
 #     puts "Create Cities started #{DateTime.now.strftime("%H:%M:%S")}"
-#     City.find_or_create_by(name: "Alexandria")
-#     City.find_or_create_by(name: "Cairo")
+    City.find_or_create_by(name: "Alexandria")
+    City.find_or_create_by(name: "Cairo")
 #     City.find_or_create_by(name: "Portsaid")
 #     City.find_or_create_by(name: "Dahab")
 #   end
@@ -24,11 +24,11 @@
 
 #   if Branch.count.zero?
 #     puts "Create Branches started #{DateTime.now.strftime("%H:%M:%S")}"
-#     Branch.create(name: "Green Cafe", link: "https://www.google.com/maps/place/Starbucks+Coffee/@31.214832,29.9506971,16.5z/data=!4m8!1m2!2m1!1sPolo+court,+Smouha+Club,+Alexandria!3m4!1s0x14f5c58c234b59e3:0xb72d5a52e33276d6!8m2!3d31.2148738!4d29.9531291", 
-#       long: 31.215052632337116, lat: 29.953079249525377, address: "Polo court, Smouha Club, Alexandria", city_id: 1)
+    Branch.create(name: "Green Cafe", link: "https://www.google.com/maps/place/Starbucks+Coffee/@31.214832,29.9506971,16.5z/data=!4m8!1m2!2m1!1sPolo+court,+Smouha+Club,+Alexandria!3m4!1s0x14f5c58c234b59e3:0xb72d5a52e33276d6!8m2!3d31.2148738!4d29.9531291", 
+      long: 31.215052632337116, lat: 29.953079249525377, address: "Polo court, Smouha Club, Alexandria", city_id: 1)
 
-#     Branch.create(name: "Starbucks cafe", link: "https://www.google.com/maps/place/Platz/@30.0219911,31.4423278,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x522c5ba75e6b7468!8m2!3d30.0219979!4d31.4445239", 
-#       long: 30.02233223689489, lat: 31.44672603423963, address: "Platz, New Cairo City, Cairo Governorate", city_id: 2)
+    Branch.create(name: "Starbucks cafe", link: "https://www.google.com/maps/place/Platz/@30.0219911,31.4423278,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x522c5ba75e6b7468!8m2!3d30.0219979!4d31.4445239", 
+      long: 30.02233223689489, lat: 31.44672603423963, address: "Platz, New Cairo City, Cairo Governorate", city_id: 2)
 #   end
 #   puts "Create Branches finished #{DateTime.now.strftime("%H:%M:%S")}"
 
@@ -129,33 +129,44 @@
 # end
 
 
-  ExternalBrand.all.each do |eb|
-    ActiveRecord::Base.establish_connection(:production)
-    Brand.create(eb.attributes)
-  end
+  # ExternalBrand.all.each do |eb|
+  #   ActiveRecord::Base.establish_connection(:production)
+  #   Brand.create(eb.attributes)
+  # end
 
-  ExternalCategory.all.each do |ec|
-    ActiveRecord::Base.establish_connection(:production)
-    Category.create(ec.attributes)
-  end 
+  # ExternalCategory.all.each do |ec|
+  #   ActiveRecord::Base.establish_connection(:production)
+  #   Category.create(ec.attributes)
+  # end 
 
-  ExternalItem.all.each do |ei|
-    ActiveRecord::Base.establish_connection(:production)
-    Item.create(ei.attributes)
-  end
+  # ExternalItem.all.each do |ei|
+  #   ActiveRecord::Base.establish_connection(:production)
+  #   Item.create(ei.attributes)
+  # end
 
-  ExternalSize.all.each do |ez|
-    ActiveRecord::Base.establish_connection(:production)
-    Size.create(ez.attributes)
-  end
+  # ExternalSize.all.each do |ez|
+  #   ActiveRecord::Base.establish_connection(:production)
+  #   Size.create(ez.attributes)
+  # end
 
-  ExternalItemSize.all.each do |eis|
-    ActiveRecord::Base.establish_connection(:production)
-    ItemSize.create(eis.attributes)
-  end
+  # ExternalItemSize.all.each do |eis|
+  #   ActiveRecord::Base.establish_connection(:production)
+  #   ItemSize.create(eis.attributes)
+  # end
 
 
   ActiveRecord::Base.establish_connection(:production)
   Role.create!(id: 1, name: "Super", key: "super", description: "Full access", is_super: true)
   User.create!(name: "Ahmed Kareem", email: "ahmed.kareem.elshawadfy@gmail.com", password: "Root123",
     password_confirmation: "Root123", role_id: 1, branch_id: 1)
+
+    # User.create!(name: "Yasser Fayez", email: "yasser.fayez.aboibrahim@gmail.com", password: "4455662@roD",
+    #   password_confirmation: "4455662@roD", role_id: 1, branch_id: 1)
+
+
+item_image_url = Item.find(11).image_url
+
+Item.all.where(category_id: 8).each do |item|
+  item.update(remote_image_url: item_image_url)
+end
+      
