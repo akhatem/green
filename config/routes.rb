@@ -2,6 +2,11 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   
+  namespace :system do
+    get 'offers/index'
+    get 'offers/show'
+    get 'offers/edit'
+  end
   # devise_for :users
   
   get "/", to: redirect("/system")
@@ -48,6 +53,9 @@ Rails.application.routes.draw do
 
     # Notifications
     resources :notifications, except: [:destroy]
+
+    # Offers
+    resources :offers, except: [:destroy]
 
     # mount Ckeditor::Engine => '/ckeditor'
     resources :sms_messages

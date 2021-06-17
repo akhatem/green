@@ -82,6 +82,7 @@ gem 'mini_magick'
 gem 'geocoder'
 gem 'awesome_print'
 gem 'ffaker'
+
 gem 'sidekiq'
 gem 'sidekiq-cron'
 gem 'sidekiq-scheduler'
@@ -89,8 +90,8 @@ gem 'sidekiq-scheduler'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 
-
-# For the API
+# Pagination
+# For the APIs
 gem 'will_paginate'
 gem 'api-pagination'
 

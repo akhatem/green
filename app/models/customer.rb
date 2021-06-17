@@ -30,7 +30,7 @@ class Customer < ApplicationRecord
   validates :mobile, presence: true, allow_blank: false, format: { with: /(01)[0-9]{9}/ }
   validates_format_of :email, :multiline => true, :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
    
-  mount_uploader :barcode, CustomerBarcodeUploader
+  # mount_uploader :barcode, CustomerBarcodeUploader
   
   before_create :add_customer_data
 
@@ -50,11 +50,11 @@ class Customer < ApplicationRecord
 
   def generate_barcode
     brcode = Barby::UPCA.new(self.mobile).to_image.to_data_url
-    stripped_brcode = brcode.split(',')[1]
+    brcode.split(',')[1]
 
-    File.open("#{self.mobile}.png", 'wb') do |f|
-      f.write(Base64.decode64(stripped_brcode))
-    end
+    # File.open("#{self.mobile}.png", 'wb') do |f|
+    #   f.write(Base64.decode64(stripped_brcode))
+    # end
 
     # return stripped_brcode
     

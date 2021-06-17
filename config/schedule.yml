@@ -1,0 +1,5 @@
+check_offer_expiry_worker:
+  cron: "0 7 * * *" # Everyday at 7:00 AM
+  # cron: "* * * * *" # Every minute
+  queue: default
+  class: "CheckOfferExpiryWorker"

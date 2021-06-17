@@ -1,0 +1,54 @@
+<div class="col-lg-7">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter</button>
+            <div class="dropdown-menu">
+                <a class="dropdown-notification" href="#">Title</a>
+                <a class="dropdown-notification" href="#">State</a>
+                <div role="separator" class="dropdown-divider"></div>
+                <a class="dropdown-notification" href="#">Created at</a>
+                <a class="dropdown-notification" href="#">Updated at</a>
+            </div>
+        </div>
+        <span class="input-group-text input-search" id="addon-wrapping"><i class="fa fa-search"></i> </span>
+        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+    </div>
+</div>
+<div class="col-lg-5 main-btns">
+    <%= link_to "Add new Offer", new_system_offer_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
+    <!-- <button class="btn btn-outline-success btn-sm" type="button">Export as PDF</button>
+    <button class="btn btn-outline-success btn-sm" type="button">Export as Excel</button> -->
+</div>
+
+<table class="table mt-2">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">state</th>
+            <th scope="col">Start At</th>
+            <th scope="col">End At</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @offers.each do |offer| %>
+        <tr>
+            <th scope="row">
+                <%= link_to offer.id, system_offer_path(offer), style: "color: green" %>
+            </th>
+            <td><%= link_to offer.title, system_offer_path(offer), style: "color: green" %></td>
+            <td><%= offer.state %></td>
+            <td><%= offer.start_at %></td>
+            <td><%= offer.end_at %></td>
+            <td><%= offer.created_at %></td>
+            <td class="table-action">
+                <%= link_to '', system_offer_path(offer), class: "fa fa-eye" %>
+                <%= link_to '', edit_system_offer_path(offer), class: "fa fa-edit" %>
+                <%#= link_to '', system_offer_path(offer), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>
+            </td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>

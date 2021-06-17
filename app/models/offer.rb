@@ -26,13 +26,11 @@ class Offer < ApplicationRecord
     
     enum state: [ :expired, :valid ], _prefix: :state
 
-
     after_save :create_notification
     
     def dates
         self.errors.add(:end_at, :invalid) if end_at.present? && start_at.present? && end_at < start_at
     end
-
 
     private
     
