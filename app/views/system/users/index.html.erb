@@ -1,18 +1,12 @@
-<% @users.all.each do |user| %>
-    <%= user.email %>
-    <%= user.created_at %>
-<% end %>
-
-
-    <div class="col-lg-7">
+<div class="col-lg-7">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <button class="btn btn-outline-secondary dropdown-toggle" id="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter</button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Email</a>
                 <a class="dropdown-item" href="#">Name</a>
-                <a class="dropdown-item" href="#">Branch</a>
+                <a class="dropdown-item" href="#">Email</a>
                 <a class="dropdown-item" href="#">Role</a>
+                <a class="dropdown-item" href="#">Branch</a>
                 <div role="separator" class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Created at</a>
                 <a class="dropdown-item" href="#">Updated at</a>
@@ -34,6 +28,7 @@
             <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
+            <th scope="col">Role</th>
             <th scope="col">Branch</th>
             <th scope="col">Actions</th>
 
@@ -43,15 +38,16 @@
         <% @users.each do |user| %>
         <tr>
             <th scope="row">
-                <%= link_to user.id, system_user_path(user), style: "color: green" %>
+                <%= link_to user.id, system_path(user), style: "color: green" %>
             </th>
-            <td><%= link_to user.name, system_customer_path(customer), style: "color: green" %></td>
+            <td><%= link_to user.name, system_path(user), style: "color: green" %></td>
             <td><%= user.email %></td>
             <td><%= user.role.name %></td>
+            <td><%= user.branchName if user.branch_id %></td>
             <td class="table-action">
                 <%#= link_to '', system_item_path(item), class: "fa fa-eye" %>
-                <%= link_to '', edit_system_item_path(item), class: "fa fa-edit" %>
-                <%= link_to '', system_item_path(item), method: :delete, data: {confirm: "Are you sure?"}, class: "fa fa-trash" %>
+                <%= link_to '', edit_system_user_registration_path, method: :put, class: "fa fa-edit" %>
+                <%= link_to '', system_user_registration_path(user), method: :delete, data: {confirm: "Are you sure?"}, class: "fa fa-trash" %>
             </td>
         </tr>
     <% end %>

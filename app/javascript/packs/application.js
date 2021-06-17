@@ -19,5 +19,5 @@ require("bootstrap")
 import "popper.js";
 import "jquery";
 
-import "@fortawesome/fontawesome-free/css/all"
 import "../stylesheets/application";
+import "@fortawesome/fontawesome-free/css/all"

@@ -11,4 +11,5 @@
 class Setting < ApplicationRecord
 
     validates :name, presence: true, uniqueness: { case_sensitive: false }
+    validates :descirption, presence: true
 end

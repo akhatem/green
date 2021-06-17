@@ -21,6 +21,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :validatable
 
   belongs_to :role
+  
+  
+  def branchName
+    Branch.find(self.branch_id).name
+  end
 
   def is_super?
     self.role.is_super?

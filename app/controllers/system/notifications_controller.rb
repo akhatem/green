@@ -6,7 +6,7 @@ class System::NotificationsController < System::SystemApplicationController
   end
 
   def show
-      @notification = Notification.find(params[:id])
+      @notification
   end
 
   def edit    

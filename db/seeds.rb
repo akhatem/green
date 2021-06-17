@@ -101,14 +101,8 @@ if Rails.env.development?
   if Setting.count.zero?
     puts "Create Settings started #{DateTime.now.strftime("%H:%M:%S")}"
     
-    Setting.find_or_create_by(id: 1, name: "About Us", description: 'Where does it come from?
-  Contrary to popular belief, Lorem Ipsum is not simply random text. 
-  It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
-  Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, 
-  looked up one of the more obscure Latin words, consectetur, 
-  from a Lorem Ipsum passage, and going through the cites of the word in classical literature, 
-  discovered the undoubtable source.')
-    Setting.find_or_create_by(id: 2, name: "Contact Us", description: "+201010101010")
+    Setting.find_or_create_by(id: 1, name: "About Us", description: "Welcome to Green App. This app is all about Green Cafe")
+    Setting.find_or_create_by(id: 2, name: "Contact Us", description: "+201014911173")
   end
   puts "Create Settings finished #{DateTime.now.strftime("%H:%M:%S")}"
 
@@ -161,6 +155,9 @@ if Rails.env.production?
   Role.create!(id: 1, name: "Super", key: "super", description: "Full access", is_super: true)
   User.create!(name: "Ahmed Kareem", email: "ahmed.kareem.elshawadfy@gmail.com", password: "Root123",
     password_confirmation: "Root123", role_id: 1, branch_id: 1)
+
+  Setting.find_or_create_by(id: 1, name: "About Us", description: "Welcome to Green App. This app is all about Green Cafe")
+  Setting.find_or_create_by(id: 2, name: "Contact Us", description: "01014911173")
 
     # User.create!(name: "Yasser Fayez", email: "yasser.fayez.aboibrahim@gmail.com", password: "4455662@roD",
     #   password_confirmation: "4455662@roD", role_id: 1, branch_id: 1)

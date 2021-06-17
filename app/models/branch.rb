@@ -16,12 +16,12 @@ class Branch < ApplicationRecord
 
     belongs_to :city
 
+    validates :name, presence: true
     validates :city, presence: true
-
     validates :long, presence: true, if: -> { link.blank? }
     validates :lat, presence: true, if: -> {link.blank? }
     validates :link, presence: true, if: -> { long.blank? || lat.blank? }
-    validates :address, presence: true, if: -> { long.blank? || lat.blank? }
+    validates :address, presence: true, if: -> { long.blank? || lat.blank? }    
 
     def cityName
         City.find(self.city_id).name

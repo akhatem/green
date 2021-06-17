@@ -12,7 +12,7 @@ class Api::V1::SettingsController < ApplicationController
     render json:{
       data: {
         message: JSON.parse("For inquries please contact us on WhatsApp".to_json),
-        whatsapp: JSON.parse("+2#{contact_us.description}".to_json)
+        whatsapp: JSON.parse("#{contact_us.description}".to_json)
       }
     }, status: :ok
   end

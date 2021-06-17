@@ -1,10 +1,12 @@
 class System::SettingsController < System::SystemApplicationController
+
+  before_action :set_setting, only: [:show, :edit, :update]
     def index
        @pagy, @settings = pagy(Setting.all.order(updated_at: :desc))
     end
 
     def show
-      @setting = Setting.find(params[:id])
+      @setting
     end
 
     def edit 
@@ -26,5 +28,9 @@ class System::SettingsController < System::SystemApplicationController
     
     def setting_params
         params.require(:setting).permit(:name, :description)
+    end
+
+    def set_setting
+      @setting = Setting.find(params[:id])
     end
 end

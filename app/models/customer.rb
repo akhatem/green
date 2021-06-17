@@ -50,6 +50,14 @@ class Customer < ApplicationRecord
 
   def generate_barcode
     brcode = Barby::UPCA.new(self.mobile).to_image.to_data_url
+    stripped_brcode = brcode.split(',')[1]
+
+    File.open("#{self.mobile}.png", 'wb') do |f|
+      f.write(Base64.decode64(stripped_brcode))
+    end
+
+    # return stripped_brcode
+    
   end
   
   def add_customer_data
