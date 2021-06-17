@@ -11,7 +11,6 @@ CarrierWave.configure do |config|
         endpoint: Rails.application.credentials.digitalocean_spaces[:endpoint]
     }
     config.fog_public = true
-    config.asset_host = "http://green.mmgunited.com"
     config.fog_directory  = Rails.application.credentials.digitalocean_spaces[:bucket]
     config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" }
 end
