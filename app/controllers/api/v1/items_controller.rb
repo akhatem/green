@@ -9,11 +9,11 @@ class Api::V1::ItemsController < ApplicationController
            {
            id: item.id,
            name: item.name,
-           image: item.image_url,
+           image: item.image.url,
            sizes: item.sizes.map{ |size| 
               { 
                  name: size.name, 
-                 price: size.price 
+                 price: size.price.round(2)
               } 
            }
          }
@@ -44,11 +44,11 @@ class Api::V1::ItemsController < ApplicationController
            name: item.name,
            brand: item.brandName,
            category: item.categoryName,
-           image: item.image_url,
+           image: item.image.url,
            sizes: item.sizes.map{ |size| 
               { 
                  name: size.name, 
-                 price: size.price 
+                 price: size.price.round(2) 
               } 
            },
            descirption: item.description
@@ -66,7 +66,7 @@ class Api::V1::ItemsController < ApplicationController
            {
            id: item.id,
            name: item.name,
-           image: item.image_url
+           image: item.image.url
            }
         }
      }, status: :ok

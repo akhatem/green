@@ -45,8 +45,6 @@
             <td><%= user.role.name %></td>
             <td><%= user.branchName if user.branch_id %></td>
             <td class="table-action">
-                <%#= link_to '', system_item_path(item), class: "fa fa-eye" %>
-                <%= link_to '', edit_system_user_registration_path, method: :put, class: "fa fa-edit" %>
                 <%= link_to '', system_user_registration_path(user), method: :delete, data: {confirm: "Are you sure?"}, class: "fa fa-trash" %>
             </td>
         </tr>

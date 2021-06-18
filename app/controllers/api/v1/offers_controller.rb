@@ -3,18 +3,17 @@ class Api::V1::OffersController < ApplicationController
       @offers = paginate Offer.all.order(start_at: :desc)
       if @offers.any?
         render json: {
-          # data: offers.map{ |offer|
-          #   {
-          #     id: offer.id,
-          #     title: offer.title.join(', ').tr(',', ''),
-          #     description: offer.description.join(', ').tr(',', ''),
-          #     state: offer.state,
-          #     start_at: offer.start_at,
-          #     end_at: offer.end_at,
-          #     image: offer.image_url
-          #   }
-          # }
-          data: @offers
+          data: @offers.map{ |offer|
+            {
+              id: offer.id,
+              title: offer.title,
+              description: offer.description,
+              state: offer.state,
+              start_at: offer.start_at,
+              end_at: offer.end_at,
+              image: offer.image.url
+            }
+          }
         }, status: :ok
       end
     end
@@ -24,12 +23,12 @@ class Api::V1::OffersController < ApplicationController
       if offer
         render json: {
           data:{
-            title: JSON.parse(offer.title).join(', ').tr(',', ''),
-            description: JSON.parse(offer.description).join(', ').tr(',', ''),
+            title: JSON.parse(offer.title),
+            description: JSON.parse(offer.description),
             start_at: offer.start_at,
             end_at: offer.end_at,
             state: offer.state,
-            image: offer.image_url
+            image: offer.image.url
           }
         }, status: :ok
       else
@@ -46,7 +45,7 @@ class Api::V1::OffersController < ApplicationController
           {
             id: offer.id,
             title: offer.title,
-            image: offer.image_url
+            image: offer.image.url
             
           }
         }

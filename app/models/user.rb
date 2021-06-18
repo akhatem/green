@@ -16,10 +16,6 @@
 #  updated_at          :datetime         not null
 #
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
   devise :database_authenticatable, :registerable, :validatable
 
   belongs_to :role

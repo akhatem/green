@@ -37,7 +37,7 @@ class Api::V1::CustomersController < ApplicationController
   def verify_account
     if @customer
       if @customer.verification_code.eql?(verify_account_params[:verification_code])
-        @customer.update(is_active: true)
+        @customer.update(is_activated: true)
         render json: {
           message: JSON.parse("Account verified successfully.".to_json),
         }, status: :ok
@@ -77,7 +77,7 @@ class Api::V1::CustomersController < ApplicationController
   # LOGGING IN
   def login
     if params[:mobile] && params[:password]
-      if @customer.is_active
+      if @customer.is_activated
         if @customer &.authenticate(params[:password])
           render json: {
             message: JSON.parse("Logged in successfully.".to_json),
@@ -153,30 +153,6 @@ class Api::V1::CustomersController < ApplicationController
       end
     end
   end
-
-  # def reset_password
-  #   @customer = Customer.find_by(password_reset_token: params[:token], email: params[:email])
-  #   if @customer&.password_token_valid?
-  #     if @customer.reset_password(params[:password])
-  #       render json: {
-  #         alert: 'Your password has been successfuly reset!'
-  #       }
-  #       session[:customer_id] = @customer.id
-  #     else
-  #       render json: {
-  #         error: @customer.errors.full_messages
-  #       }, status: :unprocessable_entity
-  #     end
-  #   else
-  #     render json: {
-  #       error: JSON.parse("Link not valid or expired. Try generating a new link.".to_json)
-  #     }, status: :not_found
-  #   end
-  # end
-
-  # def auto_login
-  #   render json: @customer
-  # end
 
   # SHOW
   def show

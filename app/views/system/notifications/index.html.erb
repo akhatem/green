@@ -24,6 +24,7 @@
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Title</th>
+            <th scope="col">Offer Id</th>
             <th scope="col">Created At</th>
             <th scope="col">Actions</th>
         </tr>
@@ -36,7 +37,9 @@
             </th>
             <td><%= link_to notification.title, system_notification_path(notification), style: "color: green" %></td>
             <% if notification.offer_id %>
-                <td><%= link_to notification.offerTitle, system_offer_path(notification.offer_id), style: "color: green" %></td>
+                <td><%= link_to notification.offer_id, system_offer_path(notification.offer_id), style: "color: green" %></td>
+            <% else %>
+                <td><%= nil %></td>    
             <% end %>
             <td><%= notification.created_at %></td>
             <td class="table-action">
