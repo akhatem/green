@@ -2,27 +2,18 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   
-  namespace :system do
-    get 'offers/index'
-    get 'offers/show'
-    get 'offers/edit'
-  end
-  # devise_for :users
-  
   get "/", to: redirect("/system")
-  # get "/system", to: redirect("/system/users/login")
   
   # namespace system
   namespace :system do
     
-    
-    devise_for :users, path: '/users', path_names: {sign_in: 'login', sign_out: 'logout'}, controllers: {}
+    devise_for :users, path: '/users', path_names: {sign_in: 'login', sign_out: 'logout'}
     devise_scope :system_user do
       get '/users/index', to: "users#index"
       get "/users/:id/show", to: "users#show"
       put "/users/:id/edit", to: "users#edit"
       delete '/users/:id/delete', to: "users#destroy"
-   end
+    end
     
     root to: 'static_pages#index'
 
@@ -122,7 +113,7 @@ Rails.application.routes.draw do
 
 
       # Offers
-      resource :offers do
+      resource :offers, only: [:index, :show] do
         get '/', to: 'offers#index'
         get '/:id', to: 'offers#show'
       end

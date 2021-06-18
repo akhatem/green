@@ -5,7 +5,7 @@
 #  id          :bigint           not null, primary key
 #  name        :string           not null
 #  description :string
-#  image       :string           not null
+#  image       :string
 #  brand_id    :bigint           not null
 #  category_id :bigint           not null
 #  created_at  :datetime         not null

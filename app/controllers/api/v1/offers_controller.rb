@@ -2,6 +2,12 @@ class Api::V1::OffersController < ApplicationController
     def index
       offers = paginate Offer.all.order(start_at: :desc)
       if offers.any?
+        offers.each do |offer|
+          puts offer.id
+          puts offer.title
+          puts offer.state
+          puts offer.description
+        end
         render json: {
           data: offers.map{ |offer|
             {

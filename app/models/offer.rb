@@ -42,7 +42,7 @@ class Offer < ApplicationRecord
 
     def create_notification
         text = <<-TEXT
-#{self.description}. from #{self.start_at} - to #{self.end_at}
+#{self.description}. \nfrom #{self.start_at} - to #{self.end_at}
         TEXT
 
         Notification.create(offer_id: self.id, title: self.title, description: text, create_date: Date.today)
