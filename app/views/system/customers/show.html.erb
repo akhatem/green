@@ -201,11 +201,6 @@ div.form-group.row {
     </div>
 
     <div class="form-group row">
-        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Image</label>
-        <%= image_tag @customer.barcode_url, style: "max-width: 280px;max-height: 257px;", id: "form-label" if @customer.barcode %>
-    </div>
-
-    <div class="form-group row">
         <label for="formGroupExampleInput2" class="col-md-3 col-form-label">Mobile</label>
         <input class="form-control" id="form-label" type="text" placeholder="<%= @customer.mobile %>" disabled>
     </div>

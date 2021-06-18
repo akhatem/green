@@ -29,15 +29,6 @@ class System::CitiesController < System::SystemApplicationController
     end
 
     def edit
-        respond_to do |format|
-            if @city.update(city_params)
-              format.html { redirect_to system_cities_path, notice: "#{@city.name} was successfully edited." }
-              format.json { render :show, status: :ok, location: @city }
-            else
-              format.html { render :edit, status: :unprocessable_entity }
-              format.json { render json: @city.errors, status: :unprocessable_entity }
-            end
-        end
     end
 
     def update

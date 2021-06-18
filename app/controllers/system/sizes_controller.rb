@@ -30,7 +30,7 @@ class System::SizesController < System::SystemApplicationController
     def update
       respond_to do |format|
         if @size.update(size_params)
-          format.html { redirect_to system_items_path, notice: "Size was successfully updated." }
+          format.html { redirect_to system_sizes_path, notice: "Size was successfully updated." }
           format.json { render :show, status: :ok, location: @size }
         else
           format.html { render :edit, status: :unprocessable_entity }

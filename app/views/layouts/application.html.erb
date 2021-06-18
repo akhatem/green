@@ -34,10 +34,15 @@
           </div>
           <div class="col-md-9">
             <% if !controller_name.eql?("sesssions") and !action_name.eql?('new') %>
-              <%# if ... %>
-              <%# end %>
-              <p class="notice" style="color:#00AB47;"><%= notice %></p>
-              <p class="alert" style="color: red;"><%= alert %></p>
+              <div class="row">
+                <% flash.each do |type, msg| %>
+                  <% if type.eql?("notice") %>
+                    <p class="notice" style="color:#00AB47;"><%= msg %></p>
+                  <% else %>
+                    <p class="alert" style="color: red;"><%= msg %></p>
+                  <% end %>  
+                <% end %>
+              </div>
             <% end %>
             
             <% if action_name.eql?('index') %>
