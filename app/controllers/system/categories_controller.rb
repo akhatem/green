@@ -2,7 +2,7 @@ class System::CategoriesController < System::SystemApplicationController
     before_action :set_category, only: [:show, :edit, :update, :destroy]
     
     def index
-        @pagy, @categories = pagy(Category.all.order(updated_at: :desc))
+        @pagy, @categories = pagy(Category.all.order(id: :asc))
     end
 
     def show

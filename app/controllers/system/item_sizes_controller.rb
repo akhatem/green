@@ -2,7 +2,7 @@ class System::ItemSizesController < System::SystemApplicationController
     before_action :set_item_size, only: [:show, :edit, :update, :destroy]
     
     def index
-      @pagy, @item_sizes = pagy(ItemSize.all.order(updated_at: :desc))
+      @pagy, @item_sizes = pagy(ItemSize.all.order(id: :asc))
     end
 
     def show

@@ -1,4 +1,5 @@
 class Api::V1::OffersController < ApplicationController
+
     def index
       @offers = paginate Offer.all.order(start_at: :desc)
       if @offers.any?
@@ -19,22 +20,24 @@ class Api::V1::OffersController < ApplicationController
     end
   
     def show
-      offer = Offer.find(params[:id])
-      if offer
+      begin
+        @offer = Offer.find(params[:id])
+      rescue
+        render json:{
+          error: JSON.parse("No offer found with id: #{params[:id]}".to_json)
+        }, status: :not_found
+        
+      else
         render json: {
           data:{
-            title: JSON.parse(offer.title),
-            description: JSON.parse(offer.description),
+            title: offer.title,
+            description: offer.description,
             start_at: offer.start_at,
             end_at: offer.end_at,
             state: offer.state,
             image: offer.image.url
           }
         }, status: :ok
-      else
-        render json:{
-          error: JSON.parse("No offer found with id: #{Offer.find(params[:id])}".to_json)
-        }, status: :not_found
       end
     end
   

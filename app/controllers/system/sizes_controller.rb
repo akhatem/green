@@ -2,7 +2,7 @@ class System::SizesController < System::SystemApplicationController
     before_action :set_size, only: [:edit, :update, :destroy]
     
     def index
-        @pagy, @sizes = pagy(Size.all.order(id: :desc))
+        @pagy, @sizes = pagy(Size.all.order(id: :asc))
     end
 
     def new

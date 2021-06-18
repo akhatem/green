@@ -2,7 +2,7 @@ class System::NotificationsController < System::SystemApplicationController
   before_action :set_notification, only: [:show, :edit, :update, :destroy]
   
   def index
-      @pagy, @notifications = pagy(Notification.all.order(created_at: :desc))
+      @pagy, @notifications = pagy(Notification.all.order(id: :asc))
   end
 
   def show

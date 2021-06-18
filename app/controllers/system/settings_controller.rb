@@ -2,7 +2,7 @@ class System::SettingsController < System::SystemApplicationController
 
   before_action :set_setting, only: [:show, :edit, :update]
     def index
-       @pagy, @settings = pagy(Setting.all.order(updated_at: :desc))
+       @pagy, @settings = pagy(Setting.all.order(id: :asc))
     end
 
     def show

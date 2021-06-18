@@ -2,7 +2,7 @@ class System::ItemsController < System::SystemApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   
   def index
-    @pagy, @items = pagy(Item.all.order(updated_at: :desc))
+    @pagy, @items = pagy(Item.all.order(id: :asc))
       
   end
 

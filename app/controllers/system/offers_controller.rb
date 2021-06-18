@@ -2,7 +2,7 @@ class System::OffersController < System::SystemApplicationController
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
   
   def index
-      @pagy, @offers = pagy(Offer.all.order(created_at: :desc))
+      @pagy, @offers = pagy(Offer.all.order(id: :asc))
   end
 
   def show

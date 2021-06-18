@@ -1,7 +1,7 @@
 class System::SmsMessagesController < System::SystemApplicationController
 
     def index
-        @pagy, @sms_messages = pagy(SmsMessage.all.order(created_at: :desc))
+        @pagy, @sms_messages = pagy(SmsMessage.all.order(id: :asc))
     end
 
     def new
