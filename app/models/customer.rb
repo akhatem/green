@@ -11,7 +11,7 @@
 #  token             :string
 #  barcode           :string
 #  points            :integer          default(0), not null
-#  is_active         :boolean          default(FALSE), not null
+#  is_activated?     :boolean          default(FALSE), not null
 #  verification_code :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null

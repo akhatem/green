@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 2021_06_18_135822) do
     t.integer "offer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "is_new?", default: false
+    t.boolean "is_new", default: false
   end
 
   create_table "offers", force: :cascade do |t|

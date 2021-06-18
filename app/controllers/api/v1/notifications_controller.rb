@@ -8,7 +8,7 @@ class Api::V1::NotificationsController < ApplicationController
             offer_id: notification.offer_id ? notification.offer_id : nil,
             description: notification.description.gsub(/\r/, ' ').gsub(/\n/, '').html_safe,
             create_date: notification.create_date,
-            is_new?: notification.is_new?
+            is_new: notification.is_new ? "true" : "false"
           }
         }
       }, status: :ok

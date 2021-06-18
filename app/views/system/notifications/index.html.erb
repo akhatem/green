@@ -35,6 +35,9 @@
                 <%= link_to notification.id, system_notification_path(notification), style: "color: green" %>
             </th>
             <td><%= link_to notification.title, system_notification_path(notification), style: "color: green" %></td>
+            <% if notification.offer_id %>
+                <td><%= link_to notification.offerTitle, system_offer_path(notification.offer_id), style: "color: green" %></td>
+            <% end %>
             <td><%= notification.created_at %></td>
             <td class="table-action">
                 <%= link_to '', system_notification_path(notification), class: "fa fa-eye" %>

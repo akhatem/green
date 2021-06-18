@@ -1,19 +1,20 @@
 class Api::V1::OffersController < ApplicationController
     def index
-      offers = paginate Offer.all.order(start_at: :desc)
-      if offers.any?
+      @offers = paginate Offer.all.order(start_at: :desc)
+      if @offers.any?
         render json: {
-          data: offers.map{ |offer|
-            {
-              id: offer.id,
-              title: JSON.parse(offer.title).join(', ').tr(',', ''),
-              description: JSON.parse(offer.description).join(', ').tr(',', ''),
-              state: offer.state,
-              start_at: offer.start_at,
-              end_at: offer.end_at,
-              image: offer.image_url
-            }
-          }
+          # data: offers.map{ |offer|
+          #   {
+          #     id: offer.id,
+          #     title: offer.title.join(', ').tr(',', ''),
+          #     description: offer.description.join(', ').tr(',', ''),
+          #     state: offer.state,
+          #     start_at: offer.start_at,
+          #     end_at: offer.end_at,
+          #     image: offer.image_url
+          #   }
+          # }
+          data: @offers
         }, status: :ok
       end
     end
