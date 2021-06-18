@@ -77,27 +77,33 @@ class Api::V1::CustomersController < ApplicationController
   # LOGGING IN
   def login
     if params[:mobile] && params[:password]
-      if @customer.is_activated
-        if @customer &.authenticate(params[:password])
-          render json: {
-            message: JSON.parse("Logged in successfully.".to_json),
-            data: {
-              id: @customer.id,
-              name: @customer.name,
-              mobile: @customer.mobile,
-              email: @customer.email,
-              token: @customer.token
-            }
-          }, status: :ok
+      if @customer
+        if @customer.is_activated
+          if @customer.authenticate(params[:password])
+            render json: {
+              message: JSON.parse("Logged in successfully.".to_json),
+              data: {
+                id: @customer.id,
+                name: @customer.name,
+                mobile: @customer.mobile,
+                email: @customer.email,
+                token: @customer.token
+              }
+            }, status: :ok
+          else
+            render json: {
+              error: JSON.parse("Incorrect mobile number or password!".to_json)
+            }, status: :bad_request
+          end
         else
           render json: {
-            error: JSON.parse("Incorrect mobile number or password!".to_json)
-          }, status: :bad_request
+            error: JSON.parse("Account not verified!".to_json),
+            }, status: :not_acceptable
         end
       else
         render json: {
-          error: JSON.parse("Account not verified!".to_json),
-          }, status: :not_acceptable
+          error: JSON.parse("Account not found!".to_json)
+        }, status: :not_acceptable
       end
     else
       render json: {
