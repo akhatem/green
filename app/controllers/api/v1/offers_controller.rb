@@ -30,12 +30,12 @@ class Api::V1::OffersController < ApplicationController
       else
         render json: {
           data:{
-            title: offer.title,
-            description: offer.description,
-            start_at: offer.start_at,
-            end_at: offer.end_at,
-            state: offer.state,
-            image: offer.image.url
+            title: @offer.title,
+            description: @offer.description,
+            start_at: @offer.start_at,
+            end_at: @offer.end_at,
+            state: @offer.state,
+            image: @offer.image.url
           }
         }, status: :ok
       end
