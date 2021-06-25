@@ -26,23 +26,16 @@ class PointsMovement < ApplicationRecord
   private
   
   def calculate_current_points
-    puts "============> calculate current points earned: #{self.earned}"
-    puts "============> calculate current points redeemed: #{self.redeemed}"
     self.write_attribute(:current_points, (self.earned - self.redeemed))
   end
 
   def update_total
-    # total_current_points = PointsMovement.where(customer_id: self.customer_id).pluck(:current_points).sum
     pm_total = PointsMovement.where(customer_id: self.customer_id).last(2).first.total
-    puts "============> in update_total pm total: #{pm_total}"
     sum_of_points = pm_total + self.current_points
-    puts "============> sum of points: #{sum_of_points}"
     self.update(total: sum_of_points)
   end
 
   def redeemed_points_check
-    puts "============> redeemed: #{self.redeemed}"
-    puts "============> in update_customer_points total: #{self.total}"
     if self.redeemed > self.total
       self.errors.add(:redeemed, "Must be less than total!")
       PointsMovement.last.destroy

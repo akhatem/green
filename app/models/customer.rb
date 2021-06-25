@@ -31,7 +31,6 @@ class Customer < ApplicationRecord
   validates :mobile, presence: true, allow_blank: false, format: { with: /(01)[0-9]{9}/ }
   validates_format_of :email, :multiline => true, :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
    
-  mount_uploader :barcode, CustomerBarcodeUploader
   
   before_create :add_customer_data
 
@@ -61,13 +60,6 @@ class Customer < ApplicationRecord
 
     return splitted_barcode
   end
-
-  # def create_barcode_image
-  #   blob = Barby::PngOutputter.new(barcode).to_png #Raw PNG data
-  #   File.open('barcode.png', 'wb'){|f| f.write blob }
-  #   #Convenience method
-  #   File.open('barcode2.png', 'wb'){|f| f.write barcode.to_png }
-  # end
 
   def add_customer_data
     self.write_attribute(:token, generate_token)
