@@ -178,7 +178,7 @@ class Api::V1::CustomersController < ApplicationController
           mobile: @customer.mobile,
           email: @customer.email,
           points: @customer.points,
-          barcode: @customer.barcode
+          barcode: @customer.barcode.url
         }
       }, status: :ok
     end

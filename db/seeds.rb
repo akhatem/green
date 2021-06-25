@@ -87,9 +87,9 @@ if Rails.env.development?
   puts "Create ItemSizes finished #{DateTime.now.strftime("%H:%M:%S")}"
 
   # if PointsMovement.count.zero?
-  #   puts "Create PointsMovements started #{DateTime.now.strftime("%H:%M:%S")}"
-      # PointsMovement.create(customer_id: 18, branch_id: 1, earned: 100, date_time: DateTime.now)
-      # PointsMovement.create(customer_id: 21, branch_id: 2, redeemed: 150, date_time: DateTime.now)
+    # puts "Create PointsMovements started #{DateTime.now.strftime("%H:%M:%S")}"
+      # PointsMovement.create(customer_id: 18, branch_id: 1, earned: 50, date_time: DateTime.now)
+      # PointsMovement.create(customer_id: 18, branch_id: 2, redeemed: 50, date_time: DateTime.now)
       
   #     PointsMovement.create(customer_id: 2, branch_id: 2, earned: 500, date_time: DateTime.now)
   #     PointsMovement.create(customer_id: 2, branch_id: 2, redeemed: 200, date_time: DateTime.now)
