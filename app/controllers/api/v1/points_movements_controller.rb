@@ -1,6 +1,6 @@
 class Api::V1::PointsMovementsController < ApplicationController
     def index
-        customer = Customer.find_by(token: header_token) 
+        customer = paginate Customer.find_by(token: header_token) 
         if !header_token || customer.nil?
           render json: { 
             error: JSON.parse("Unauthorized request!".to_json),
