@@ -29,7 +29,26 @@ h2 {
 }
 
 .form-control {
-    width: 50%;
+    text-align:center;
+    width: 42%;
+    margin-right: 55px;
+    margin-left: 70px;
+}
+
+.image-tag{
+    margin-top: 16px;
+    margin-left: 340px;
+    margin-right: 160px;
+    float: left;
+    max-width: 280px;
+    max-height: 257px;
+}
+
+.file-field {
+    text-align: center;
+    width: 36%;
+    margin-left: 92px;
+    margin-right: 95px;
 }
 
 
@@ -37,8 +56,8 @@ h2 {
 
 div.form-group.row {
     text-align: center;
-    margin-left: 150px;
-    margin-top: 15px;
+    margin-left: 5px;
+    margin-top: 16px;
 }
 
 .btn-outline-success {
@@ -48,7 +67,7 @@ div.form-group.row {
     border-color: #00AB47;
     width: 50%;
     height: 36px;
-    font-size: 12px;
+    font-size: 16px;
 }
 
 .btn-outline-secondary {
@@ -58,9 +77,22 @@ div.form-group.row {
     border: 1px solid #ced4da;
     width: 50%;
     height: 36px;
-    font-size: 12px;
+    font-size: 16px;
 }
 
+.details-tab{
+    margin-left: 150px;
+    text-align: center;
+    border: 1px solid #ced4da;
+    border-radius: 7px;
+}
+
+.dropdown-toggle{
+    text-align: center;
+    width: 36%;
+    margin-left: 92px;
+    margin-right: 95px; 
+}
 
 </style>
 
@@ -69,65 +101,63 @@ div.form-group.row {
         <div class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
             <!--form-->
             <div class="row">
-                <div class="col-md-3">
-                    <h2 style="text-align: center;">Edit Branch</h2>
+                <div class="col-md-6">
+                    <h2 class="details-tab">Edit Brand</h2>
+                </div>
+            </div>
+        </div>
+        <%= form_with(model: @branch, url: system_branch_path) do |f| %>
+            <% if @branch.errors.any? %>
+                <div id="error_explanation">
+                    <h2><%= pluralize(@branch.errors.count, "error") %> found:</h2>
+                    <ul>
+                        <% @branch.errors.each do |error| %>
+                        <li><%= error.full_message %></li>
+                        <% end %>
+                    </ul>
+                </div>
+            <% end %>
+
+            <div class="form-group row">
+                <%= f.label :name, class: "col-md-3 col-form-label" %>
+                <%= f.text_field :name, class: "form-control"  %>
+            </div>
+
+            <div class="form-group row">
+                <%= f.label :address, class: "col-md-3 col-form-label" %>
+                <%= f.text_field :address, class: "form-control"  %>
+            </div>
+
+            <div class="form-group row">
+                <%= f.label :long, class: "col-md-3 col-form-label" %>
+                <%= f.text_field :long, class: "form-control"  %>
+            </div>
+
+            <div class="form-group row">
+                <%= f.label :lat, class: "col-md-3 col-form-label" %>
+                <%= f.text_field :lat, class: "form-control"  %>
+            </div>
+
+            <div class="form-group row">
+                <%= f.label :link, class: "col-md-3 col-form-label" %>
+                <%= f.text_field :link, class: "form-control"  %>
+            </div>
+
+            <div class="form-group row">
+                <%= f.label :city, class: "col-md-3 col-form-label" %>
+                <%= f.collection_select :city_id, City.order(:name), :id, :name,{ include_blank: true }, { class: "btn btn-outline-secondary dropdown-toggle" } %>
+            </div>
+            
+            <div class="row mt-5 actions">
+                <!--btns-->
+                <div class="btn col-lg-6">
+                    <%= link_to 'Cancel', system_branches_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
                 </div>
 
-            </div>                
-                <%= form_with(model: @branch, url: system_branch_path) do |f| %>
-                    <% if @branch.errors.any? %>
-                        <div id="error_explanation">
-                            <h2><%= pluralize(@branch.errors.count, "error") %> found:</h2>
-                            <ul>
-                                <% @branch.errors.each do |error| %>
-                                <li><%= error.full_message %></li>
-                                <% end %>
-                            </ul>
-                        </div>
-                    <% end %>
-
-                    <div class="form-group row">
-                        <%= f.label :name, class: "col-md-3 col-form-label" %>
-                        <%= f.text_field :name, class: "form-control"  %>
-                    </div>
-
-                    <div class="form-group row">
-                        <%= f.label :address, class: "col-md-3 col-form-label" %>
-                        <%= f.text_field :address, class: "form-control"  %>
-                    </div>
-
-                    <div class="form-group row">
-                        <%= f.label :long, class: "col-md-3 col-form-label" %>
-                        <%= f.text_field :long, class: "form-control"  %>
-                    </div>
-
-                    <div class="form-group row">
-                        <%= f.label :lat, class: "col-md-3 col-form-label" %>
-                        <%= f.text_field :lat, class: "form-control"  %>
-                    </div>
-
-                    <div class="form-group row">
-                        <%= f.label :link, class: "col-md-3 col-form-label" %>
-                        <%= f.text_field :link, class: "form-control"  %>
-                    </div>
-
-                    <div class="form-group row">
-                        <%= f.label :city, class: "col-md-3 col-form-label" %>
-                        <%= f.collection_select :city_id, City.order(:name), :id, :name,{ include_blank: true }, { class: "btn btn-outline-secondary dropdown-toggle" } %>
-                    </div>
-                    
-                    <div class="row mt-5 actions">
-                        <!--btns-->
-                        <div class="btn col-lg-6">
-                            <%= link_to 'Cancel', system_branches_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
-                        </div>
-
-                        <div class="btn col-lg-6">
-                            <%= f.submit "Save", class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
-                        </div>
-                    </div>
-                <% end %>
-        </div>
-
+                <div class="btn col-lg-6">
+                    <%= f.submit "Save", class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
+                </div>
+            </div>
+        <% end %>
     </div>
 </div>

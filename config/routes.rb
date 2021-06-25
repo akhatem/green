@@ -18,6 +18,12 @@ Rails.application.routes.draw do
     root to: 'static_pages#index'
 
     
+    # Cashier Pages
+    get "/barcode_search", to: "static_pages#barcode_search"
+    get "/customer_info/:decoded_barcode", to: "static_pages#customer_info", as: 'customer_info'
+    # get '/barcode_input', to: "static_pages#barcode_input"
+
+
     # Customers
     resources :customers, only: [:index, :show] 
 

@@ -16,7 +16,7 @@ class Api::V1::CustomersController < ApplicationController
       @customer = Customer.new(create_params)
       @customer.update(verification_code: generated_code)
       if @customer.valid?
-        SmsmisrOtpClient.new(@customer.mobile, generated_code)
+        # SmsmisrOtpClient.new(@customer.mobile, generated_code)
         render json: {
           message: JSON.parse("Account Created Successfully.".to_json),
           data: {
@@ -37,7 +37,7 @@ class Api::V1::CustomersController < ApplicationController
   def verify_account
     if @customer
       if @customer.verification_code.eql?(verify_account_params[:verification_code])
-        @customer.update(is_activated: true)
+        @customer.update(is_activated?: true)
         render json: {
           message: JSON.parse("Account verified successfully.".to_json),
         }, status: :ok
@@ -78,7 +78,7 @@ class Api::V1::CustomersController < ApplicationController
   def login
     if params[:mobile] && params[:password]
       if @customer
-        if @customer.is_activated
+        if @customer.is_activated?
           if @customer.authenticate(params[:password])
             render json: {
               message: JSON.parse("Logged in successfully.".to_json),

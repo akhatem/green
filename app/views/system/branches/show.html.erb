@@ -1,93 +1,4 @@
 <style>
-    main {
-    display: flex;
-    flex-wrap: nowrap;
-    height: 100vh;
-    height: -webkit-fill-available;
-    overflow-x: auto;
-    overflow-y: hidden;
-}
-
-main>* {
-    flex-shrink: 0;
-    min-height: -webkit-fill-available;
-}
-
-* {
-    font-family: poppins;
-    box-sizing: border-box;
-}
-
-/* side navigation */
-
-.side-nav-col {
-    padding-right: 2px;
-}
-
-.user-link a:hover,
-.user-link a:focus,
-.user-link:hover {
-    background-color: none !important;
-}
-
-.link-dark {
-    color: #2b2b2b;
-    font-weight: 400;
-    font-size: 18px;
-    padding-left: 50px;
-}
-
-.d-flex {
-    padding-left: 0;
-}
-
-.nav-pills .nav-link.active,
-.nav-pills .show>.nav-link {
-    background-color: #1ab359;
-    color: #fff;
-    width: 125px;
-    margin: 0 10px;
-    height: 40px;
-}
-
-.nav-pills .nav-link {
-    color: #2b2b2b;
-}
-
-.link-dark {
-    color: #2b2b2b;
-    font-weight: 400;
-    font-size: 18px;
-    padding-left: 50px;
-}
-
-.nav-flush .nav-link {
-    border-radius: 0;
-}
-
-.nav-pills .nav-link.ac {
-    background-color: #00AB47;
-    color: #ffffff;
-}
-
-/* end of side nav */
-
-.nav-link.ac .fas {
-    color: #ffffff;
-}
-
-/* side nav icons */
-
-.fas {
-    color: #9F9F9F;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-size: 18px;
-}
-
-/* end side nav icons */
-
-/* end of side nav */
 
 /*tabs */
 
@@ -105,7 +16,7 @@ main>* {
 }
 
 h2 {
-    font-size: 18px;
+    font-size: 19px;
     padding: 10px 0;
     color: #006B2D;
 }
@@ -118,7 +29,10 @@ h2 {
 }
 
 .form-control {
-    width: 50%;
+    text-align:center;
+    width: 42%;
+    margin-right: 68px;
+    margin-left: 70px;
 }
 
 .btn-primary {
@@ -126,6 +40,14 @@ h2 {
     border: none;
     width: 40%;
     height: 36px;
+}
+
+.copy-link{
+    margin-left: 590px;
+    margin-right: 160px;
+    float: left;
+    max-width: 280px;
+    max-height: 257px;
 }
 
 .btn-primary:hover {
@@ -164,71 +86,95 @@ div.form-group.row {
     height: 36px;
     font-size: 12px;
 }
+
+.details-tab{
+    margin-left: 150px;
+    text-align: center;
+    border: 1px solid #ced4da;
+    border-radius: 7px;
+}
+
+.col-label{
+    margin-right: 130px;
+    margin-left: 32px;
+
+}
+
+.col-input{
+    margin-right: 500px;
+    /* margin-left: 300px; */
+}
+
 </style>
 
 <div class="row">
     <div class="col-md-6">
-        <h2 style="text-align: center;">Basic Info</h2>
+        <h2 class="details-tab"><%= @branch.name %>'s Details</h2>
     </div>
     <div class="col-md-6">
         <%= link_to "Edit", edit_system_branch_path(@branch), class: "btn btn-primary edit-btn" %>
     </div>
 </div>
+
 <form>
-    <div class="form-group row" style="text-align:center;">
-        <label for="branch_id" class="col-md-2 col-form-label">Id</label>
-            <input type="number" class="form-control" id="branch_id" value="<%= @branch.id %>" disabled>
+    <div class="form-group row">
+        <label class="col-md-1 col-form-label">Id</label>
+        <input class="form-control" type="text" value="<%= @branch.id %>" disabled>
     </div>
 
     <div class="form-group row">
-        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Name</label>
-        <input class="form-control" id="form-label" type="text" value="<%= @branch.name %>" disabled>
+        <label class="col-md-1 col-form-label">Name</label>
+        <input class="form-control" type="text" value="<%= @branch.name %>" disabled>
     </div>
 
     <div class="form-group row">
-        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Address</label>
-        <input class="form-control" id="form-label" type="text" value="<%= @branch.address %>" disabled>
+        <label class="col-md-1 col-form-label">Address</label>
+        <input class="form-control" type="text" value="<%= @branch.address %>" disabled>
+    </div>
+
+        <div class="form-group row">
+        <label class="col-md-1 col-form-label">City</label>
+        <input class="form-control" type="text" value="<%= @branch.cityName %>" disabled>
     </div>
 
     <div class="form-group row">
-        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">City</label>
-        <input class="form-control" id="form-label" type="text" value="<%= @branch.cityName %>" disabled>
-    </div>
-
-    <div class="form-group row">
-        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Link</label>
+        <label class="col-md-1 col-form-label">Link</label>
         <input class="form-control" id="branch_link_id" type="text" value="<%= @branch.link.gsub("\n", '<br>').html_safe %>" readonly>
-        <div class="col-md-4">
-            <button onclick="copyLink()" class="mt-1 btn btn-primary btn-sm" style="max-width: 30%!important;" id="copy-button">Copy Link</button>
+    </div>
+    
+    <div class="form-group row">
+        <div class="col-md-6">
+            <button onclick="copyLink()" class="btn-primary btn-sm copy-link" style="max-width: 30%!important;" id="copy-button">Copy Link</button>
         </div>
     </div>
 
     <div class="form-group row">
-        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Longitude</label>
-        <input class="form-control" id="form-label" type="text" value="<%= @branch.long %>" disabled>
+        <label class="col-md-1 col-form-label">Longitude</label>
+        <input class="form-control" type="text" value="<%= @branch.long %>" disabled>
     </div>
 
     <div class="form-group row">
-        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Latitude</label>
-        <input class="form-control" id="form-label" type="text" value="<%= @branch.lat %>" disabled>
+        <label class="col-md-1 col-form-label">Latitude</label>
+        <input class="form-control" type="text" value="<%= @branch.lat%>" disabled>
     </div>
 
     <div class="form-group row">
-        <label class="col-md-2 col-form-label">Created at</label>
-        <input class="form-control" type="text" value="<%= @branch.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %>" disabled>
+        <label class="col-sm-3 col-form-label col-label">Created at</label>
+        <input class="col-input form-control" type="text" value="<%= @branch.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %>" disabled>
     </div>
 
     <div class="form-group row">
-        <label class="col-md-2 col-form-label">Updated at</label>
-        <input class="form-control" type="text" value="<%= @branch.updated_at.strftime("%A, %d %b %Y @ %H:%M:%S") %>" disabled>
+        <label class="col-md-2 col-form-label col-label">Updated at</label>
+        <input class="col-input form-control" type="text" value="<%= @branch.updated_at.strftime("%A, %d %b %Y @ %H:%M:%S") %>" disabled>
     </div>
 
-    <div class="row">
-        <div class="col-lg-12">
-            <%= link_to "Back", system_branches_path, class: "btn btn-outline-success back-btn" %>
-        </div>
-    </div>
 </form>
+
+<div class="row">
+    <div class="col-lg-12">
+        <%= link_to "Back", system_branches_path, class: "btn btn-outline-success back-btn" %>
+    </div>
+</div>
 
 <script>
     function copyLink() {

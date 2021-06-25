@@ -49,7 +49,6 @@ main>* {
     margin: 0 10px;
     height: 40px;
 }
-
 .nav-pills .nav-link {
     color: #2b2b2b;
 }
@@ -105,7 +104,7 @@ main>* {
 }
 
 h2 {
-    font-size: 18px;
+    font-size: 19px;
     padding: 10px 0;
     color: #006B2D;
 }
@@ -118,40 +117,29 @@ h2 {
 }
 
 .form-control {
-    width: 50%;
-}
-
-
-/* end of input feilds */
-
-.save-btn {
-    background-color: #00AB47;
-    width: 100px;
-    height: 36px;
-    border: none;
-}
-
-.save {
-    padding-top: 100px;
-    padding-left: 5px;
+    text-align:center;
+    width: 42%;
+    margin-right: 68px;
+    margin-left: 70px;
 }
 
 .btn-primary {
     background-color: #00AB47;
     border: none;
-    width: 100px;
+    width: 40%;
     height: 36px;
+}
+
+.btn-primary:hover {
+    background-color: #006B2D;
+    color: #fff;
 }
 
 div.form-group.row {
     text-align: center;
-    margin-left: 150px;
+    margin-left: 1px;
     margin-top: 15px;
-}
-
-.edit-btn {
-    float: right;
-    margin-bottom: 30px;
+    width: 100%;
 }
 
 .back-btn{
@@ -164,78 +152,99 @@ div.form-group.row {
     border: none;
 }
 
-
-/* footer */
-
-.footer {
-    position: fixed;
-    right: 60px;
-    bottom: 0;
-    width: 70%;
-    background-color: #fff;
-    color: #818181;
-    text-align: center;
-    font-size: 13px;
+.edit-btn {
+    float: right;
+    margin-bottom: 30px;
 }
 
+.btn-outline-secondary {
+    padding-top: 1px;
+    text-align: center;
+    white-space: normal;
+    border: 1px solid #ced4da;
+    width: 50%;
+    height: 36px;
+    font-size: 12px;
+}
 
-/* end of footer */
+.image-tag{
+    margin-top: 16px;
+    margin-left: 180px;
+    margin-right: 160px;
+    float: left;
+    max-width: 280px;
+    max-height: 257px;
+}
+
+.details-tab{
+    margin-left: 150px;
+    text-align: center;
+    border: 1px solid #ced4da;
+    border-radius: 7px;
+}
+
 </style>
 
+
 <div class="row">
-    <div class="col-md-3">
-        <h2 style="text-align: center;">Basic Info</h2>
+    <div class="col-md-6">
+        <h2 class="details-tab"><%= @customer.name %>'s Details</h2>
     </div>
 </div>
+
 <form>
-    <div class="form-group row" style="text-align:center;">
-        <label for="customer_Id" class="col-md-3 col-form-label">Id</label>
-        <!-- <div class="col-md-9"> -->
-            <input type="number" class="form-control" id="customer_id" placeholder="<%= @customer.id %>" disabled>
-        <!-- </div> -->
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label">Id</label>
+        <input class="form-control" type="text" value="<%= @customer.id %>" disabled>
     </div>
 
     <div class="form-group row">
-        <label for="formGroupExampleInput2" class="col-md-3 col-form-label">Name</label>
-        <input class="form-control" id="form-label" type="text" placeholder="<%= @customer.name %>" disabled>
+        <label class="col-md-2 col-form-label">Name</label>
+        <input class="form-control" type="text" value="<%= @customer.name %>" disabled>
     </div>
 
     <div class="form-group row">
-        <label for="formGroupExampleInput2" class="col-md-3 col-form-label">Mobile</label>
-        <input class="form-control" id="form-label" type="text" placeholder="<%= @customer.mobile %>" disabled>
+        <label class="col-md-2 col-form-label">Mobile</label>
+        <input class="form-control" type="text" value="<%= @customer.mobile %>" disabled>
     </div>
 
     <div class="form-group row">
-        <label for="formGroupExampleInput2" class="col-md-3 col-form-label">Email</label>
-        <input class="form-control" id="form-label" type="text" placeholder="<%= @customer.email %>" disabled>
-
+        <label class="col-md-2 col-form-label">Email</label>
+        <input class="form-control" type="text" value="<%= @customer.email %>" disabled>
     </div>
 
     <div class="form-group row">
-        <label class="col-md-3 col-form-label">Created at</label>
-        <input class="form-control" type="text" placeholder="<%= @customer.created_at %>" disabled>
+        <label class="col-md-2 col-form-label">Activated Account</label>
+        <input class="form-control" type="text" value="<%= @customer.is_activated? %>" disabled>
     </div>
 
     <div class="form-group row">
-        <label class="col-md-3 col-form-label">Updated at</label>
-        <input class="form-control" type="text" placeholder="<%= @customer.updated_at %>" disabled>
+        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Barcode</label>
+        <%= image_tag @customer.barcode_was, style: "max-width: 280px;max-height: 257px;", id: "form-label" %>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label">Created at</label>
+        <input class="form-control" type="text" value="<%= @customer.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %>" disabled>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label">Updated at</label>
+        <input class="form-control" type="text" value="<%= @customer.updated_at.strftime("%A, %d %b %Y @ %H:%M:%S") %>" disabled>
     </div>
 
     <div class="row">
-    <div class="col-md-3">
-            <h2 style="text-align: center;">Points</h2>
+        <div class="col-md-6 mt-5">
+            <h2 class="details-tab">Points</h2>
         </div>
-
     </div>
-
     <div class="form-group row">
-        <label class="col-md-3 col-form-label">Points</label>
-        <input class="form-control" type="text" placeholder="100 point" disabled>
-
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <%= link_to "Back", system_customers_path, class: "btn btn-outline-success back-btn" %>
-        </div>
+        <label class="col-md-2 col-form-label">Total Points</label>
+        <input class="form-control" type="text" value="<%= @customer.points %>" disabled>
     </div>
 </form>
+<div class="row">
+    <div class="col-lg-12">
+        <%= link_to "Back", system_customers_path, class: "btn btn-outline-success back-btn" %>
+    </div>
+</div>

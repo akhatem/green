@@ -6,11 +6,10 @@ class System::BranchesController < System::SystemApplicationController
     end
 
     def show
-        @branch = Branch.find(params[:id])
+        @branch
     end
 
     def new
-        # byebug
         @branch = Branch.new
     end
 
@@ -30,15 +29,6 @@ class System::BranchesController < System::SystemApplicationController
     end
 
     def edit
-        respond_to do |format|
-            if @branch.update(branch_params)
-              format.html { redirect_to system_branches_path, notice: "Branch #{@branch.name} was successfully edited." }
-              format.json { render :show, status: :ok, location: @branch }
-            else
-              format.html { render :edit, status: :unprocessable_entity }
-              format.json { render json: @branch.errors, status: :unprocessable_entity }
-            end
-        end
     end
 
     def update

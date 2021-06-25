@@ -1,0 +1,4 @@
+<%= @customer.id %><br />
+<%= @customer.name %><br />
+<%= image_tag @customer.barcode.url, style: "max-width: 280px;max-height: 257px;", id: "form-label" if @customer.barcode.url %><br />
+<%= @customer.email %><br />

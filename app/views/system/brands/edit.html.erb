@@ -37,7 +37,8 @@ h2 {
 
 .image-tag{
     margin-top: 16px;
-    margin-left: 450px;
+    margin-left: 340px;
+    margin-right: 160px;
     float: left;
     max-width: 280px;
     max-height: 257px;
@@ -79,6 +80,12 @@ div.form-group.row {
     font-size: 16px;
 }
 
+.details-tab{
+    margin-left: 150px;
+    text-align: center;
+    border: 1px solid #ced4da;
+    border-radius: 7px;
+}
 
 </style>
 
@@ -86,51 +93,50 @@ div.form-group.row {
     <div class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
         <!--form-->
         <div class="row">
-            <div class="col-md-3">
-                <h2 style="text-align: center;">Edit Brand</h2>
+            <div class="col-md-6">
+                <h2 class="details-tab">Edit Brand</h2>
             </div>
-
-        </div>                
-            <%= form_with(model: @brand, url: system_brand_path) do |f| %>
-                <div class="row">
-                    <% if @brand.errors.any? %>
-                        <div id="error_explanation">
-                            <h2><%= pluralize(@brand.errors.count, "error") %> found:</h2>
-                            <ul>
-                                <% @brand.errors.each do |error| %>
-                                    <li><%= error.full_message %></li>
-                                <% end %>
-                            </ul>
-                        </div>
-                    <% end %>
-                </div>
-
-                <div class="form-group row">
-                    <%= f.label :name, class: "col-md-3 col-form-label" %>
-                    <%= f.text_field :name, class: "form-control"  %>
-                </div>
-
-                <div class="form-group row">
-                    <%= f.label :image, class: "col-md-3 col-form-label" %>
-                    <%= f.file_field :image, class: "form-control file-field" %>
-                    <%= f.hidden_field :image, value: f.object.image_was %>
-                </div>
-                
-                <div class="form-group row">
-                    <%= image_tag @brand.image.url, class: "form-control image-tag col-lg-2" if @brand.image.url %>
-                </div>
-                
-                <div class="row mt-5 actions">
-                    <!--btns-->
-                    <div class="btn col-lg-6">
-                        <%= link_to 'Cancel', system_brands_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
-                    </div>
-
-                    <div class="btn col-lg-6">
-                        <%= f.submit "Save", class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
-                    </div>
+        </div>
+    </div>                
+    <%= form_with(model: @brand, url: system_brand_path) do |f| %>
+        <div class="row">
+            <% if @brand.errors.any? %>
+                <div id="error_explanation">
+                    <h2><%= pluralize(@brand.errors.count, "error") %> found:</h2>
+                    <ul>
+                        <% @brand.errors.each do |error| %>
+                            <li><%= error.full_message %></li>
+                        <% end %>
+                    </ul>
                 </div>
             <% end %>
-    </div>
+        </div>
+
+        <div class="form-group row">
+            <%= f.label :name, class: "col-md-3 col-form-label" %>
+            <%= f.text_field :name, class: "form-control"  %>
+        </div>
+
+        <div class="form-group row">
+            <%= f.label :image, class: "col-md-3 col-form-label" %>
+            <%= f.file_field :image, class: "form-control file-field" %>
+            <%= f.hidden_field :image, value: f.object.image_was %>
+        </div>
+        
+        <div class="form-group row">
+            <%= image_tag @brand.image.url, class: "form-control image-tag col-lg-2" if @brand.image.url %>
+        </div>
+        
+        <div class="row mt-5 actions">
+            <!--btns-->
+            <div class="btn col-lg-6">
+                <%= link_to 'Cancel', system_brands_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
+            </div>
+
+            <div class="btn col-lg-6">
+                <%= f.submit "Save", class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
+            </div>
+        </div>
+    <% end %>
 
 </div>

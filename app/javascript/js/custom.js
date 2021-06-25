@@ -36,3 +36,4 @@ $(document).on('turbolinks:load', function(){
   // }
 });
 // ###### Handle message disapearance ######
+

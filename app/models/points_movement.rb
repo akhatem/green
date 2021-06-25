@@ -14,12 +14,12 @@
 #  updated_at     :datetime         not null
 #
 class PointsMovement < ApplicationRecord
-  belongs_to :customer, dependent: :destroy
+  belongs_to :customer
   belongs_to :branch
 
   validates :total, numericality: { greater_than_or_equal: 0 }
   
-  # validate :redeemed_points
+  validate :redeemed_points
   
   before_create :calculate_current_points
   after_create :update_total, :update_customer_points
@@ -27,11 +27,13 @@ class PointsMovement < ApplicationRecord
 
   private
 
-  # def redeemed_points
-  #   if self.redeemed > self.total
-  #     self.errors.add(:redeemed, "Must be less than total!")
-  #   end
-  # end
+  def redeemed_points
+    puts "============> redeemed: #{redeemed}"
+    puts "============> total: #{total}"
+    if self.redeemed > self.total
+      self.errors.add(:redeemed, "Must be less than total!")
+    end
+  end
   
   def update_total
     # total_current_points = PointsMovement.where(customer_id: self.customer_id).pluck(:current_points).sum

@@ -1,94 +1,5 @@
 <style>
-    main {
-    display: flex;
-    flex-wrap: nowrap;
-    height: 100vh;
-    height: -webkit-fill-available;
-    overflow-x: auto;
-    overflow-y: hidden;
-}
-
-main>* {
-    flex-shrink: 0;
-    min-height: -webkit-fill-available;
-}
-
-* {
-    font-family: poppins;
-    box-sizing: border-box;
-}
-
-/* side navigation */
-
-.side-nav-col {
-    padding-right: 2px;
-}
-
-.user-link a:hover,
-.user-link a:focus,
-.user-link:hover {
-    background-color: none !important;
-}
-
-.link-dark {
-    color: #2b2b2b;
-    font-weight: 400;
-    font-size: 18px;
-    padding-left: 50px;
-}
-
-.d-flex {
-    padding-left: 0;
-}
-
-.nav-pills .nav-link.active,
-.nav-pills .show>.nav-link {
-    background-color: #1ab359;
-    color: #fff;
-    width: 125px;
-    margin: 0 10px;
-    height: 40px;
-}
-
-.nav-pills .nav-link {
-    color: #2b2b2b;
-}
-
-.link-dark {
-    color: #2b2b2b;
-    font-weight: 400;
-    font-size: 18px;
-    padding-left: 50px;
-}
-
-.nav-flush .nav-link {
-    border-radius: 0;
-}
-
-.nav-pills .nav-link.ac {
-    background-color: #00AB47;
-    color: #ffffff;
-}
-
-/* end of side nav */
-
-.nav-link.ac .fas {
-    color: #ffffff;
-}
-
-/* side nav icons */
-
-.fas {
-    color: #9F9F9F;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-size: 18px;
-}
-
-/* end side nav icons */
-
-/* end of side nav */
-
+    
 /*tabs */
 
 .nav-pills .nav-link.active,
@@ -105,7 +16,7 @@ main>* {
 }
 
 h2 {
-    font-size: 18px;
+    font-size: 19px;
     padding: 10px 0;
     color: #006B2D;
 }
@@ -118,6 +29,7 @@ h2 {
 }
 
 .form-control {
+    text-align:center;
     width: 42%;
     margin-right: 68px;
     margin-left: 70px;
@@ -166,32 +78,49 @@ div.form-group.row {
     height: 36px;
     font-size: 12px;
 }
+
+.image-tag{
+    margin-top: 16px;
+    margin-left: 180px;
+    margin-right: 160px;
+    float: left;
+    max-width: 280px;
+    max-height: 257px;
+}
+
+.details-tab{
+    margin-left: 150px;
+    text-align: center;
+    border: 1px solid #ced4da;
+    border-radius: 7px;
+}
+
 </style>
 
 
 <div class="row">
     <div class="col-md-6">
-        <h2 style="text-align: center;">Details</h2>
+        <h2 class="details-tab"><%= @brand.name %> Details</h2>
     </div>
     <div class="col-md-6">
         <%= link_to "Edit", edit_system_brand_path(@brand), class: "btn btn-primary edit-btn" %>
     </div>
 </div>
+
 <form>
     <div class="form-group row">
         <label class="col-md-1 col-form-label">Id</label>
-        <input class="col-md-1 form-control" type="number" value="<%= @brand.id %>" disabled>
+        <input class="form-control" type="text" value="<%= @brand.id %>" disabled>
     </div>
 
     <div class="form-group row">
         <label class="col-md-1 col-form-label">Name</label>
-        <input class="col-md-2 form-control" type="text" value="<%= @brand.name %>" disabled>
+        <input class="form-control" type="text" value="<%= @brand.name %>" disabled>
     </div>
 
     <div class="form-group row">
         <label class="col-md-1 col-form-label">Image</label>
-        <%= image_tag @brand.image.url, class: "col-md-2 form-control", style: "max-width: 280px;max-height: 257px;float:left;" if @brand.image.url %>
-        
+        <%= image_tag @brand.image.url, class: "form-control image-tag col-lg-2" if @brand.image.url %>
     </div>
 
     <div class="form-group row">
@@ -204,6 +133,7 @@ div.form-group.row {
         <input class="form-control" type="text" value="<%= @brand.updated_at.strftime("%A, %d %b %Y @ %H:%M:%S") %>" disabled>
     </div>
 </form>
+
 <div class="row">
     <div class="col-lg-12">
         <%= link_to "Back", system_brands_path, class: "btn btn-outline-success back-btn" %>

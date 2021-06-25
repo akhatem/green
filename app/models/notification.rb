@@ -9,6 +9,7 @@
 #  offer_id    :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  is_new      :boolean          default(FALSE)
 #
 class Notification < ApplicationRecord
     validates :title, presence: true
