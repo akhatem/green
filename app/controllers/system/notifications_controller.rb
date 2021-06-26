@@ -51,6 +51,6 @@ class System::NotificationsController < System::SystemApplicationController
   end
 
   def notification_params
-      params.require(:notification).permit(:title, :description)
+      params.require(:notification).permit(:title, :description, :create_date)
   end
 end

@@ -17,7 +17,7 @@ class Notification < ApplicationRecord
     validates :create_date, presence: true
 
     before_create :set_create_date
-    after_create :update_customer_has_new_notification_status
+    after_create :update_customer_has_new_notification
 
     def offerTitle
         Offer.find(offer_id).title
