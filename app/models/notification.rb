@@ -30,7 +30,9 @@ class Notification < ApplicationRecord
         self.write_attribute(:create_date, Date.today)
     end
 
-    def update_customer_has_new_notification_status
-        customer = Customer.
+    def update_customer_has_new_notification
+        Customer.all.each do |customer|
+            customer.update(has_new_notification: true)
+        end
     end
 end

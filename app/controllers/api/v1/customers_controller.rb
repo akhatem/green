@@ -2,7 +2,8 @@ class Api::V1::CustomersController < ApplicationController
   protect_from_forgery with: :null_session
   
   before_action :set_customer, only: [:login, :verify_account, :show, :forgot_password, :reset_password, 
-    :forgot_password_mobile, :forgot_password_verification_code, :password_reset, :resend_verification_code]
+    :forgot_password_mobile, :forgot_password_verification_code, :password_reset, :resend_verification_code,
+    :notification_check]
   
 
   # REGISTER
@@ -42,7 +43,7 @@ class Api::V1::CustomersController < ApplicationController
       }
     }, status: :ok
 
-    @customer.update(has_new_notificaiton: false)
+    @customer.update(has_new_notification: false)
   end
 
   def verify_account
