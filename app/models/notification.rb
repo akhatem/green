@@ -33,6 +33,7 @@ class Notification < ApplicationRecord
     def update_customer_has_new_notification
         Customer.all.each do |customer|
             customer.update(has_new_notification: true)
+            puts "================= > has new notification updated successfully."
         end
     end
 end

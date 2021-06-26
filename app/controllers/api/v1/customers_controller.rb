@@ -44,6 +44,7 @@ class Api::V1::CustomersController < ApplicationController
     }, status: :ok
 
     @customer.update(has_new_notification: false)
+    puts "=========> customer #{@customer.id} has new notification updated to false!"
   end
 
   def verify_account

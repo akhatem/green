@@ -13,10 +13,9 @@ class System::NotificationsController < System::SystemApplicationController
   end
 
   def update
-      # byebug
     respond_to do |format|
       if @notification.update(notification_params)
-        format.html { redirect_to system_notification_path(@notification), notice: "Item was successfully updated." }
+        format.html { redirect_to system_notification_path(@notification), notice: "Notification was successfully updated." }
         format.json { render :show, status: :ok, location: @notification }
       else
         format.html { render :edit, status: :unprocessable_entity }
