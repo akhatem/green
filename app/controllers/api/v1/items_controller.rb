@@ -21,7 +21,6 @@ class Api::V1::ItemsController < ApplicationController
      }, status: :ok
      else
         render json:{
-           message: JSON.parse("No items found!".to_json),
            error: JSON.parse("No items found in category: #{Category.find(params[:category_id]).name}".to_json)
         }, status: :not_found
      end
@@ -32,7 +31,6 @@ class Api::V1::ItemsController < ApplicationController
         item = Item.find_by(brand_id: params[:brand_id], category_id: params[:category_id], id: params[:item_id])  
      rescue
         render json: {
-           message: JSON.parse("Item not found!".to_json),
            error: JSON.parse("Item with id: #{params[:item_id]} not found!".to_json)
         }, status: :not_found
      else
@@ -57,11 +55,12 @@ class Api::V1::ItemsController < ApplicationController
      end
   end
 
-  def latest
-     items = Item.select(:id, :image, :name).order(created_at: :desc).limit(5).where(brand_id: params[:brand_id])
+  def popular_items
+     items = Item.select(:id, :image, :name).where("select from category name = ?", Item.categoryName)
+     .limit(5).where(brand_id: params[:brand_id])
      if items.any?
      render json: {
-        message: JSON.parse("List of latest item(s) for brand: #{Brand.find(params[:brand_id]).name}".to_json),
+        message: JSON.parse("Popular item(s) for brand: #{Brand.find(params[:brand_id]).name}".to_json),
         data: items.map{ |item|
            {
            id: item.id,
@@ -72,15 +71,8 @@ class Api::V1::ItemsController < ApplicationController
      }, status: :ok
      else
         render json: {
-           message: JSON.parse("Items not found!".to_json),
            error: JSON.parse("No new items in brand #{Brand.find(params[:brand_id]).name}!".to_json)
         }, status: :not_found
      end
   end
-
-
-# private
-#   def item_params
-#      params.require(:item).permit(size_ids: [])
-#   end
 end

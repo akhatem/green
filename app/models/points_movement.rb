@@ -22,6 +22,10 @@ class PointsMovement < ApplicationRecord
   before_create :calculate_current_points
   after_create :update_total, :redeemed_points_check, :update_customer_points
 
+  def get_customer
+    Customer.find(self.customer_id)
+  end
+
 
   private
   

@@ -33,4 +33,10 @@ class Item < ApplicationRecord
     def categoryName
         Category.find(self.category_id).name
     end
+
+    def popular_items
+        Item.all.each do |item|
+            
+        end
+    end
 end

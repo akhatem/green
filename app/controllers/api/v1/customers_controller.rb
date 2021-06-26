@@ -17,7 +17,7 @@ class Api::V1::CustomersController < ApplicationController
       @customer = Customer.new(create_params)
       @customer.update(verification_code: generated_code)
       if @customer.valid?
-        # SmsmisrOtpClient.new(@customer.mobile, generated_code)
+        SmsmisrOtpClient.new(@customer.mobile, generated_code)
         render json: {
           message: JSON.parse("Account Created Successfully.".to_json),
           data: {
