@@ -34,6 +34,17 @@ class Api::V1::CustomersController < ApplicationController
     end
   end
 
+  # def notification_check
+  #   render json: {
+  #     # message: JSON.parse("Account verified successfully.".to_json),
+  #     data: {
+  #       has_new_notification: @customer.has_new_notification
+  #     }
+  #   }, status: :ok
+
+  #   @customer.update(has_new_notificaiton: false)
+  # end
+
   def verify_account
     if @customer
       if @customer.verification_code.eql?(verify_account_params[:verification_code])

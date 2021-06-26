@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_23_194044) do
+ActiveRecord::Schema.define(version: 2021_06_26_110725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2021_06_23_194044) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.binary "decoded_barcode"
+    t.boolean "has_new_notification", default: false
     t.index ["mobile"], name: "index_customers_on_mobile", unique: true
     t.index ["token"], name: "index_customers_on_token", unique: true
   end

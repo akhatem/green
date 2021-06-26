@@ -81,6 +81,7 @@ Rails.application.routes.draw do
         # Customers show and edit
         get '/customer', to: 'customers#show'
         patch '/customer/edit', to: 'customers#update'
+        get '/notification_check', to: 'customers#notification_check'
 
         # Points movement
         resource :points_movements, only: [:index] do
