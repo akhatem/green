@@ -266,8 +266,10 @@ class Api::V1::CustomersController < ApplicationController
 
   def set_customer
     if header_token
+      puts "==========> params token #{header_token}"
       @customer = Customer.find_by(token: header_token)
     elsif params[:mobile]
+      puts "==========> params mobile #{params[:mobile]}"
       @customer = Customer.find_by(mobile: params[:mobile])
     end
   end

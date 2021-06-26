@@ -100,7 +100,7 @@ Rails.application.routes.draw do
       end # Cities
 
       # Brands      
-      resource :brands, only: [:index, :show, :popular_items] do
+      resource :brands, only: [:index, :show] do
         get '/', to: 'brands#index'
 
         # Categories
@@ -108,7 +108,7 @@ Rails.application.routes.draw do
 
         # Items
         get '/:brand_id/categories/:category_id/items', to: 'items#index'
-        get '/:brand_id/categories/items/popular_items', to: 'items#popular_items'
+        get '/:brand_id/categories/items/popular_items', to: 'items#popular_items', as: 'popular_items' 
         get '/:brand_id/categories/:category_id/items/:item_id', to: 'items#show'
       end # Brands
 
