@@ -17,6 +17,7 @@ class Notification < ApplicationRecord
     validates :create_date, presence: true
 
     before_create :set_create_date
+    after_create :update_customer_has_new_notification_status
 
     def offerTitle
         Offer.find(offer_id).title
@@ -27,5 +28,9 @@ class Notification < ApplicationRecord
 
     def set_create_date
         self.write_attribute(:create_date, Date.today)
+    end
+
+    def update_customer_has_new_notification_status
+        customer = Customer.
     end
 end
