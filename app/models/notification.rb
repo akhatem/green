@@ -17,7 +17,7 @@ class Notification < ApplicationRecord
     validates :create_date, presence: true
 
     before_create :set_create_date
-    after_create :update_customer_has_new_notification
+    before_save :update_customer_has_new_notification
 
     def offerTitle
         Offer.find(offer_id).title
@@ -32,7 +32,7 @@ class Notification < ApplicationRecord
 
     def update_customer_has_new_notification
         Customer.all.each do |customer|
-            customer.update(has_new_notification: true)
+            customer.write_attribute(:has_new_notification, true)
             puts "================= > has new notification updated successfully."
         end
     end
