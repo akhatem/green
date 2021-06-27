@@ -56,36 +56,26 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def popular_items
-   # items = Item.select(:id, :image, :name).limit(5).where(brand_id: params[:brand_id])
-   Item.select(:id, :image, :name).limit(5).where(brand_id: params[:brand_id]) do |item|
-      if item.categoryName.eql?("Extra".downcase.underscore)
-         puts "item name #{item.name}"
+      items = Item.where(brand_id: params[:brand_id])
+      if items.any?
          render json: {
-            data: {
-               id: item.id,
-               name: item.name,
-               image: item.image.url
-            }   
+            message: JSON.parse("Popular item(s) for brand: #{Brand.find(params[:brand_id]).name}".to_json),
+            data:
+               items.limit(5).map{ |item| 
+               unless item.categoryName.eql?("Extra")
+                  {
+                     id: item.id,
+                     name: item.name,
+                     category: item.categoryName,
+                     image: item.image.url
+                  }
+               end
+            }.compact
          }, status: :ok
+      else
+         render json: {
+            error: JSON.parse("No new items in brand #{Brand.find(params[:brand_id]).name}!".to_json)
+         }, status: :not_found
       end
-   end
-   if items.any?
-   render json: {
-      message: JSON.parse("Popular item(s) for brand: #{Brand.find(params[:brand_id]).name}".to_json),
-      items.select{|item| item.categoryName.eql?("Extra")}.map(
-         data: items.map{ |item| 
-            {
-               id: item.id,
-               name: item.name,
-               image: item.image.url
-            }
-         }   
-      )
-   }, status: :ok
-   else
-      render json: {
-         error: JSON.parse("No new items in brand #{Brand.find(params[:brand_id]).name}!".to_json)
-      }, status: :not_found
-   end
   end
 end

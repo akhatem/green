@@ -48,10 +48,8 @@ if Rails.env.development?
         
         
         puts "Create Items started at #{DateTime.now.strftime("%H:%M:%S")}"
-        for j in (1..30).to_a.shuffle do
-          Item.create(name: FFaker::Food::meat, 
-          description: FFaker::Food::ingredient, brand_id: brand.id, 
-          category_id: category.id, image: File.open(File.join(Rails.root, 'app/assets/images/items/placeholder.png')))
+        10.times do
+          Item.create(name: FFaker::Food::meat, description: FFaker::Food::ingredient, brand_id: 1, category_id: 3, image: File.open(File.join(Rails.root, 'app/assets/images/items/placeholder.png')))
         end
 
         for j in (31..60).to_a.shuffle do
