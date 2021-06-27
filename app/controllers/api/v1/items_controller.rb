@@ -56,27 +56,23 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def popular_items
-      categories = Category.all.where(brand_id: params[:brand_id]).where.not("name = ? OR name = ?", "Extras", "Other Beverage")
-      if categories.any?
-         render json: {
-            message: JSON.parse("Popular item(s) for brand: #{Brand.find(params[:brand_id]).name}".to_json),
-            data:
-            categories.map{ |category|
-               items = Item.all.where(category_id: category.id)
-               items.limit(2).map{ |item| 
-                  {
-                     id: item.id,
-                     name: item.name,
-                     category: item.categoryName,
-                     image: item.image.url
-                  }
-               }
-            }
-         }, status: :ok
-      else
-         render json: {
-            error: JSON.parse("No categories found in brand #{Brand.find(params[:brand_id]).name}!".to_json)
-         }, status: :not_found
+   popular_items = []
+   categories = Category.all.where(brand_id: params[:brand_id]).where.not("name = ? OR name = ?", "Extras", "Other Beverage")
+   categories.all.each do |category|
+      items = Item.all.where(category_id: category.id).limit(2)
+      items.select(:id, :name, :image).each do |item|
+         popular_items.push(item)
       end
+   end
+
+   render json: {
+      data: popular_items.map{ |popular_item|
+         {
+            id: popular_item.id,
+            name: popular_item.name,
+            image: popular_item.image.url
+         }
+      }
+   }, status: :ok
   end
 end
