@@ -17,7 +17,7 @@ class Api::V1::CustomersController < ApplicationController
       @customer = Customer.new(create_params)
       @customer.update(verification_code: generated_code)
       if @customer.valid?
-        SmsmisrOtpClient.new(@customer.mobile, generated_code)
+        # SmsmisrOtpClient.new(@customer.mobile, generated_code)
         render json: {
           message: JSON.parse("Account Created Successfully.".to_json),
           data: {
@@ -37,8 +37,8 @@ class Api::V1::CustomersController < ApplicationController
 
   def notification_check
     render json: {
-      # message: JSON.parse("Account verified successfully.".to_json),
       data: {
+        message: JSON.parse("Customer has new notifications?".to_json),
         has_new_notification: @customer.has_new_notification
       }
     }, status: :ok
@@ -261,15 +261,15 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def verify_account_params
-    params.require(:customer).permit(:token, :verification_code)
+    params.require(:customer).permit(:token, :verification_code, :mobile)
   end
 
   def set_customer
     if header_token
-      puts "==========> params token #{header_token}"
+      puts "==========> header token #{header_token}"
       @customer = Customer.find_by(token: header_token)
     elsif params[:mobile]
-      puts "==========> params mobile #{params[:mobile]}"
+      puts "==========> params[:mobile] #{params[:mobile]}"
       @customer = Customer.find_by(mobile: params[:mobile])
     end
   end
