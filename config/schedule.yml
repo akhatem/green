@@ -3,3 +3,10 @@ check_offer_expiry_worker:
   cron: "* * * * *" # Every minute
   queue: default
   class: "CheckOfferExpiryWorker"
+
+
+notification_expiry_worker:
+  cron: "*/10 * * * *" # Every 10 minutes
+  # cron: "* * * * *" # Every minute
+  queue: default
+  class: "NotificationExpiryWorker"

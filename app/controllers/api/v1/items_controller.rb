@@ -56,17 +56,16 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def popular_items
-      items = Item.where(brand_id: params[:brand_id])
+      items = Item.all.where(brand_id: params[:brand_id])
       if items.any?
          render json: {
             message: JSON.parse("Popular item(s) for brand: #{Brand.find(params[:brand_id]).name}".to_json),
             data:
                items.limit(5).map{ |item| 
-               unless item.categoryName.eql?("Extra")
+               unless item.categoryName.eql?("Extras")
                   {
                      id: item.id,
                      name: item.name,
-                     category: item.categoryName,
                      image: item.image.url
                   }
                end
