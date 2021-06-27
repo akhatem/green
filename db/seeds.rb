@@ -41,7 +41,7 @@ if Rails.env.development?
   puts "Create Brands finished at #{DateTime.now.strftime("%H:%M:%S")}"
 
   Brand.all.each do |brand|
-    unless Category.exists?(brand_id: brand.id)
+    # unless Category.exists?(brand_id: brand.id)
       puts "Create Categories started at #{DateTime.now.strftime("%H:%M:%S")}"
       for  i in 1..5 do
         category = Category.find_or_create_by(name: FFaker::Food::unique.fruit, brand_id: brand.id)
@@ -49,16 +49,17 @@ if Rails.env.development?
         
         puts "Create Items started at #{DateTime.now.strftime("%H:%M:%S")}"
         10.times do
-          Item.create(name: FFaker::Food::meat, description: FFaker::Food::ingredient, brand_id: 1, category_id: 3, image: File.open(File.join(Rails.root, 'app/assets/images/items/placeholder.png')))
+          Item.create(name: FFaker::Food::meat, description: FFaker::Food::ingredient, brand_id: brand.id, 
+            category_id: category.id, image: File.open(File.join(Rails.root, 'app/assets/images/items/placeholder.png')))
         end
 
-        for j in (31..60).to_a.shuffle do
-          Item.create(name: FFaker::Food::meat, 
-          description: FFaker::Food::ingredient, brand_id: brand.id, 
-          category_id: category.id, image: File.open(File.join(Rails.root, 'app/assets/images/items/placeholder.png')))
-        end
+        # for j in (31..60).to_a.shuffle do
+        #   Item.create(name: FFaker::Food::meat, 
+        #   description: FFaker::Food::ingredient, brand_id: brand.id, 
+        #   category_id: category.id, image: File.open(File.join(Rails.root, 'app/assets/images/items/placeholder.png')))
+        # end
         puts "Create Items finished #{DateTime.now.strftime("%H:%M:%S")}"
-      end
+      # end
       puts "Create Categories finished #{DateTime.now.strftime("%H:%M:%S")}"
     end
   end
