@@ -64,15 +64,23 @@ class Api::V1::ItemsController < ApplicationController
          popular_items.push(item)
       end
    end
-
-   render json: {
-      data: popular_items.map{ |popular_item|
-         {
-            id: popular_item.id,
-            name: popular_item.name,
-            image: popular_item.image.url
+   
+   if popular_items.size > 0
+      render json: {
+         message: JSON.parse("Popular item(s) for brand: #{Brand.find(params[:brand_id]).name}".to_json),
+         data: popular_items.map{ |popular_item|
+            {
+               id: popular_item.id,
+               name: popular_item.name,
+               image: popular_item.image.url
+            }
          }
-      }
-   }, status: :ok
+      }, status: :ok
+   else
+      render json: {
+         error: JSON.parse("No popular items found in brand #{Brand.find(params[:brand_id]).name}!".to_json)
+         }, status: :not_found
+   end
+      
   end
 end
