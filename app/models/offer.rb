@@ -33,18 +33,13 @@ class Offer < ApplicationRecord
     end
 
     private
-    
-    # def update_state
-    #     if (self.end_at < Date.today) && self.state == "valid"
-    #         CheckOfferExpiryWorker.perform_single_async(self.id)
-    #     end
-    # end
 
     def create_notification
+        if self.state.eql?(1)
         text = <<-TEXT
 #{self.description}. \nfrom #{self.start_at} - to #{self.end_at}
         TEXT
-
         Notification.create(offer_id: self.id, title: self.title, description: text, create_date: Date.today)
+        end
     end
 end

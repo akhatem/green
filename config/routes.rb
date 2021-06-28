@@ -21,8 +21,10 @@ Rails.application.routes.draw do
     # Cashier Pages
     get "/barcode_search", to: "static_pages#barcode_search"
     get "/customer_info/:decoded_barcode", to: "static_pages#customer_info", as: 'customer_info'
-    # get '/redeem_points', to: "static_pages#redeem_points"
+    get '/redeem_points', to: "static_pages#redeem_points"
 
+    # Receipts
+    resources :receipts
 
     # Customers
     resources :customers, only: [:index, :show] 

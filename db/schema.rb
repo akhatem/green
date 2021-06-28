@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_26_110725) do
+ActiveRecord::Schema.define(version: 2021_06_28_065337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,20 @@ ActiveRecord::Schema.define(version: 2021_06_26_110725) do
     t.index ["customer_id"], name: "index_points_movements_on_customer_id"
   end
 
+  create_table "receipts", force: :cascade do |t|
+    t.bigint "customer_id", null: false, comment: "Receipt belongs to a customer"
+    t.bigint "branch_id", null: false, comment: "Receipt belongs to a branch"
+    t.bigint "user_id", null: false, comment: "Receipt belongs to a user(Role: cashier)"
+    t.string "number", null: false
+    t.decimal "total_price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["branch_id"], name: "index_receipts_on_branch_id"
+    t.index ["customer_id"], name: "index_receipts_on_customer_id"
+    t.index ["number"], name: "index_receipts_on_number"
+    t.index ["user_id"], name: "index_receipts_on_user_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "key"
@@ -195,6 +209,9 @@ ActiveRecord::Schema.define(version: 2021_06_26_110725) do
   add_foreign_key "items", "categories"
   add_foreign_key "points_movements", "branches"
   add_foreign_key "points_movements", "customers"
+  add_foreign_key "receipts", "branches"
+  add_foreign_key "receipts", "customers"
+  add_foreign_key "receipts", "users"
   add_foreign_key "roles_permissions", "permissions"
   add_foreign_key "roles_permissions", "roles"
   add_foreign_key "users", "roles"

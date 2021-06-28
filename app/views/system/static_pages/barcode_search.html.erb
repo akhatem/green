@@ -1,7 +1,8 @@
+<h3 class="main-screen-text">Please click below and scan customer barcode!</h3>
 <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-12">
         <%= form_tag system_barcode_search_path, method: :get do |f| %>
-            <%= text_field_tag 'decoded_barcode'  %>            
+            <%= text_field_tag 'decoded_barcode', nil, style: "border: 1px solid rgb(19, 177, 58);" %>            
         <% end %>
     </div>
 </div>

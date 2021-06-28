@@ -1,6 +1,7 @@
 class System::StaticPagesController < System::SystemApplicationController
 
-  before_action :set_customer, only: [:barcode_search, :customer_info, :redeem_points]
+  before_action :set_customer, only: [:barcode_search, :customer_info]
+  before_action :set_receipt, only: [:redeem_points]
   def index
     render :index
   end
@@ -22,12 +23,21 @@ class System::StaticPagesController < System::SystemApplicationController
   end
 
   def redeem_points
-    
+    @receipt
   end
 
   private
 
   def set_customer
     @customer = Customer.find_by(decoded_barcode: params[:decoded_barcode])
+  end
+
+  def set_receipt
+    puts "=========> In static_pages : params: #{params}"
+    # @receipt = Receipt.find_by(number: params[:receipts][:number])
+  end
+
+  def receipt_params
+    params.require(:receipt).permit(:customer_id, :user_id, :number, :total_price)
   end
 end
