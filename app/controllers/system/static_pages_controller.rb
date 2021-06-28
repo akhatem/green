@@ -1,6 +1,6 @@
 class System::StaticPagesController < System::SystemApplicationController
 
-  before_action :set_customer, only: [:barcode_search, :customer_info, :redeem_customer_points]
+  before_action :set_customer, only: [:barcode_search, :customer_info, :redeem_points]
   def index
     render :index
   end
@@ -21,7 +21,8 @@ class System::StaticPagesController < System::SystemApplicationController
     @customer
   end
 
-  def redeem_customer_points
+  def redeem_points
+    
   end
 
   private

@@ -156,6 +156,9 @@ if Rails.env.production?
 
   User.create!(name: "Yara Samy", email: "yara.samy@green.com", password: "yara12345",
       password_confirmation: "yara12345", role_id: 1, branch_id: 1)
+  
+  # User.create!(name: "Yasser Fayez", email: "yasser.fayez@green.com", password: "4455662@roV",
+  #       password_confirmation: "4455662@roV", role_id: 1, branch_id: 1)
 
   Setting.find_or_create_by(id: 1, name: "About Us", description: "Welcome to Green App. This app is all about Green Cafe")
   Setting.find_or_create_by(id: 2, name: "Contact Us", description: "01014911173")

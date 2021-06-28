@@ -32,7 +32,8 @@ class Notification < ApplicationRecord
 
     def update_customer_has_new_notification
         Customer.all.each do |customer|
-            customer.write_attribute(:has_new_notification, true)
+            customer.update_column(:has_new_notification, true)
+            puts "================= > update_customer_has_new_notification : #{customer.write_attribute(:has_new_notification, true)}"
             puts "================= > has new notification updated successfully."
         end
     end
