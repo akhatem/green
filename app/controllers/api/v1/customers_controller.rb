@@ -139,7 +139,7 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def forgot_password_verification_code
-    if @customer.verification_code.eql?(params[:verification_code])
+    if @customer &.verification_code.eql?(params[:verification_code])
       render json: {
         message: JSON.parse("Verification Successful.".to_json),
       }, status: :ok
