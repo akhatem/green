@@ -42,6 +42,7 @@ class System::SmsMessagesController < System::SystemApplicationController
         end
       end
       mobiles = mobiles.gsub(/\[\"/, '').gsub(/\"\]/, '') 
+      puts "======> In sms_message_controlelr : mobiles: #{mobiles}"
       mobiles
     end
 end

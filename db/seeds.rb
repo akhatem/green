@@ -9,6 +9,8 @@ if Rails.env.development?
 
     Customer.find_or_create_by(name: "Yasser AboIbrahim", email: "yasser.aboibrahim@gmail.com", 
       password: "password", mobile: "01100851591")
+
+      
   end
   puts "Create Test Customers Finished at #{DateTime.now.strftime("%H:%M:%S")}"
 

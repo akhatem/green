@@ -1,9 +1,8 @@
 class Api::V1::CustomersController < ApplicationController
-  protect_from_forgery with: :null_session
   
   before_action :set_customer, only: [:login, :verify_account, :show, :forgot_password, :reset_password, 
     :forgot_password_mobile, :forgot_password_verification_code, :password_reset, :resend_verification_code,
-    :notification_check]
+    :notification_check, :update]
   
 
   # REGISTER
@@ -17,7 +16,7 @@ class Api::V1::CustomersController < ApplicationController
       @customer = Customer.new(create_params)
       @customer.update(verification_code: generated_code)
       if @customer.valid?
-        SmsmisrOtpClient.new(@customer.mobile, generated_code)
+        # SmsmisrOtpClient.new(@customer.mobile, generated_code)
         render json: {
           message: JSON.parse("Account Created Successfully.".to_json),
           data: {
@@ -199,6 +198,7 @@ class Api::V1::CustomersController < ApplicationController
 
   # Update
   def update
+    puts "========> In customers controller : #{params}"
     begin
       update_params.empty?
     rescue
@@ -206,13 +206,11 @@ class Api::V1::CustomersController < ApplicationController
         error: JSON.parse("No content!".to_json)
       }, status: :no_content
     else
-      if !header_token || Customer.find_by(token: header_token).nil?
+      if !header_token
         render json: { 
           error: JSON.parse("Unauthorized request!".to_json),
         }, status: :unauthorized   
       else
-        @customer = Customer.find_by(token: header_token)
-        
         if update_params[:name]
           @customer.write_attribute(:name, update_params[:name])
         end
@@ -227,7 +225,7 @@ class Api::V1::CustomersController < ApplicationController
           @customer.write_attribute(:email, update_params[:email])
         end
         
-        if update_params[:password]
+      if update_params[:password]
           @customer.write_attribute(:password, update_params[:password])
         end
 
@@ -257,7 +255,7 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def update_params
-    params.require(:customer).permit(:name, :email, :password, :mobile)
+    params.require(:customer).permit(:name, :email, :password, :password_digest, :mobile)
   end
 
   def verify_account_params
