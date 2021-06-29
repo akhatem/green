@@ -211,25 +211,25 @@ class Api::V1::CustomersController < ApplicationController
           error: JSON.parse("Unauthorized request!".to_json),
         }, status: :unauthorized   
       else
-        if update_params[:name]
-          @customer.write_attribute(:name, update_params[:name])
-        end
+        # if update_params[:name]
+        #   @customer.write_attribute(:name, update_params[:name])
+        # end
         
-        if update_params[:mobile] && (update_params[:mobile] != @customer.mobile)
-            new_token = @customer.encode_token(update_params[:mobile])
-            @customer.write_attribute(:token, new_token)
-            @customer.write_attribute(:mobile, update_params[:mobile]) 
-        end
+        # if update_params[:mobile] && (update_params[:mobile] != @customer.mobile)
+        #     new_token = @customer.encode_token(update_params[:mobile])
+        #     @customer.write_attribute(:token, new_token)
+        #     @customer.write_attribute(:mobile, update_params[:mobile]) 
+        # end
         
-        if update_params[:email]
-          @customer.write_attribute(:email, update_params[:email])
-        end
+        # if update_params[:email]
+        #   @customer.write_attribute(:email, update_params[:email])
+        # end
         
-      if update_params[:password]
-          @customer.write_attribute(:password, update_params[:password])
-        end
+        # if update_params[:password]
+        #   @customer.write_attribute(:password, update_params[:password])
+        # end
 
-        if @customer.save
+        if @customer.update(update_params)
           render json: {
             message: JSON.parse("Profile updated successfully.".to_json),
             data: {
