@@ -13,6 +13,7 @@ require "capistrano/deploy"
 # install_plugin Capistrano::SCM::Svn
 # or
 require "capistrano/scm/git"
+require 'capistrano/sidekiq'
 install_plugin Capistrano::SCM::Git
 install_plugin Capistrano::Sidekiq
 install_plugin Capistrano::Sidekiq::Systemd
@@ -21,7 +22,6 @@ install_plugin Capistrano::Sidekiq::Systemd
 require 'capistrano/rails'
 require 'capistrano/passenger'
 require 'capistrano/rbenv'
-require 'capistrano/sidekiq'
 
 set :rbenv_type, :user
 set :rbenv_ruby, '3.0.0'
