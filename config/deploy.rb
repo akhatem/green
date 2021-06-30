@@ -8,13 +8,15 @@ set :branch, 'master'
 
 set :deploy_to, "/home/deploy/#{fetch :application}"
 
-
 # set :passenger_in_gemfile, true
-
 
 set :rails_env, "production"
 
+# set :sidekiq_monit_use_sudo, false
 
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads', 'public/packs', 'node_modules'
 
 set :keep_releases, 5
+
+SSHKit.config.command_map[:sidekiq] = "bundle exec sidekiq"
+SSHKit.config.command_map[:sidekiqctl] = "bundle exec sidekiqctl"
