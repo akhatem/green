@@ -43,7 +43,7 @@ class Api::V1::ItemsController < ApplicationController
            brand: item.brandName,
            category: item.categoryName,
            image: item.image.url,
-           sizes: item.sizes.map{ |size| 
+           sizes: item.sizes.map{ |size|
               { 
                  name: size.name, 
                  price: size.price.round(2) 

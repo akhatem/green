@@ -23,6 +23,7 @@
             <th scope="col">Id</th>
             <th scope="col">Title</th>
             <th scope="col">Offer Id</th>
+            <th scope="col">Is new</th>
             <th scope="col">Created At</th>
             <th scope="col">Actions</th>
         </tr>
@@ -39,6 +40,7 @@
             <% else %>
                 <td><%= nil %></td>    
             <% end %>
+            <td><%= notification.is_new %></td>    
             <td><%= notification.created_at %></td>
             <td class="table-action">
                 <%= link_to '', system_notification_path(notification), class: "fa fa-eye" %>

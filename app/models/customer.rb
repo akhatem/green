@@ -54,7 +54,7 @@ class Customer < ApplicationRecord
   end
 
   def generate_barcode
-    sub_token = generate_barcode_token[0...11]
+    sub_token = generate_barcode_token[0...-11]
     brcode = Barby::Code128B.new(sub_token).to_image.to_data_url
     splitted_barcode = brcode.split(',')[1]
     self.write_attribute(:decoded_barcode, sub_token)
