@@ -16,7 +16,8 @@ require "capistrano/scm/git"
 require 'capistrano/sidekiq'
 install_plugin Capistrano::SCM::Git
 install_plugin Capistrano::Sidekiq
-install_plugin Capistrano::Sidekiq::Systemd
+# install_plugin Capistrano::Sidekiq::Systemd
+install_plugin Capistrano::Sidekiq::Upstart
 
 
 require 'capistrano/rails'
