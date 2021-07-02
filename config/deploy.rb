@@ -18,6 +18,8 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bund
 
 set :keep_releases, 5
 
+set :pty, true
+
 # SSHKit.config.command_map[:sidekiq] = "bundle exec sidekiq"
 # SSHKit.config.command_map[:sidekiqctl] = "bundle exec sidekiqctl"
 
@@ -28,15 +30,15 @@ namespace :sidekiq do
     task :stop do
       on roles(:app) do
         within current_path do
-          execute('sudo systemctl kill -s TSTP sidekiq')
-          execute('sudo systemctl stop sidekiq')
+          execute('systemctl kill -s TSTP sidekiq')
+          execute('systemctl stop sidekiq')
         end
       end
     end
   
     task :start do
       on roles(:app) do |host|
-        execute('sudo systemctl start sidekiq')
+        execute('systemctl start sidekiq')
         info "Host #{host} (#{host.roles.to_a.join(', ')}):\t#{capture(:uptime)}"
       end
     end
