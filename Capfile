@@ -22,8 +22,8 @@ require 'capistrano/rbenv'
 
 install_plugin Capistrano::SCM::Git
 install_plugin Capistrano::Sidekiq
-# install_plugin Capistrano::Sidekiq::Systemd
-install_plugin Capistrano::Sidekiq::Upstart
+install_plugin Capistrano::Sidekiq::Systemd
+# install_plugin Capistrano::Sidekiq::Upstart
 # install_plugin Capistrano::Sidekiq::Monit
 
 set :rbenv_type, :user
