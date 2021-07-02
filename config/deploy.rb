@@ -28,15 +28,15 @@ namespace :sidekiq do
     task :stop do
       on roles(:app) do
         within current_path do
-          execute('systemctl kill -s TSTP sidekiq')
-          execute('systemctl stop sidekiq')
+          execute('sudo systemctl kill -s TSTP sidekiq')
+          execute('sudo systemctl stop sidekiq')
         end
       end
     end
   
     task :start do
       on roles(:app) do |host|
-        execute('systemctl start sidekiq')
+        execute('sudo systemctl start sidekiq')
         info "Host #{host} (#{host.roles.to_a.join(', ')}):\t#{capture(:uptime)}"
       end
     end
