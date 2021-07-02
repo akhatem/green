@@ -13,7 +13,7 @@ require "capistrano/deploy"
 # install_plugin Capistrano::SCM::Svn
 # or
 require "capistrano/scm/git"
-require 'capistrano/sidekiq'
+# require 'capistrano/sidekiq'
 
 
 require 'capistrano/rails'
@@ -21,8 +21,8 @@ require 'capistrano/passenger'
 require 'capistrano/rbenv'
 
 install_plugin Capistrano::SCM::Git
-install_plugin Capistrano::Sidekiq
-install_plugin Capistrano::Sidekiq::Systemd
+# install_plugin Capistrano::Sidekiq
+# install_plugin Capistrano::Sidekiq::Systemd
 # install_plugin Capistrano::Sidekiq::Upstart
 # install_plugin Capistrano::Sidekiq::Monit
 
