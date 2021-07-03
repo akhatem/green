@@ -12,7 +12,7 @@ set :deploy_to, "/home/deploy/#{fetch :application}"
 
 set :rails_env, "production"
 
-# set :sidekiq_monit_use_sudo, false
+set :sidekiq_monit_use_sudo, false
 
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads', 'public/packs', 'node_modules'
 
@@ -23,23 +23,23 @@ set :keep_releases, 5
 # SSHKit.config.command_map[:sidekiq] = "bundle exec sidekiq"
 # SSHKit.config.command_map[:sidekiqctl] = "bundle exec sidekiqctl"
 
-namespace :sidekiq do
-    after 'deploy:starting', 'sidekiq:stop'
-    after 'deploy:finished', 'sidekiq:start'
+# namespace :sidekiq do
+#     after 'deploy:starting', 'sidekiq:stop'
+#     after 'deploy:finished', 'sidekiq:start'
   
-    task :stop do
-      on roles(:app) do
-        within current_path do
-          execute('systemctl kill -s TSTP sidekiq')
-          execute('systemctl stop sidekiq')
-        end
-      end
-    end
+#     task :stop do
+#       on roles(:app) do
+#         within current_path do
+#           execute('sudo systemctl kill -s TSTP sidekiq')
+#           execute('sudo systemctl stop sidekiq')
+#         end
+#       end
+#     end
   
-    task :start do
-      on roles(:app) do |host|
-        execute('systemctl start sidekiq')
-        info "Host #{host} (#{host.roles.to_a.join(', ')}):\t#{capture(:uptime)}"
-      end
-    end
-end
+#     task :start do
+#       on roles(:app) do |host|
+#         execute('systemctl start sidekiq')
+#         info "Host #{host} (#{host.roles.to_a.join(', ')}):\t#{capture(:uptime)}"
+#       end
+#     end
+# end
