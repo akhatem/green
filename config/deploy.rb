@@ -12,8 +12,6 @@ set :deploy_to, "/home/deploy/#{fetch :application}"
 
 set :rails_env, "production"
 
-set :sidekiq_monit_use_sudo, false
-
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads', 'public/packs', 'node_modules'
 
 set :keep_releases, 5
