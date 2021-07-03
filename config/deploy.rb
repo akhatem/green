@@ -42,4 +42,4 @@ namespace :sidekiq do
         info "Host #{host} (#{host.roles.to_a.join(', ')}):\t#{capture(:uptime)}"
       end
     end
-  end
+end
