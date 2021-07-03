@@ -20,8 +20,9 @@ set :keep_releases, 5
 
 # set :pty, true
 
-# SSHKit.config.command_map[:sidekiq] = "bundle exec sidekiq"
-# SSHKit.config.command_map[:sidekiqctl] = "bundle exec sidekiqctl"
+SSHKit.config.command_map[:sidekiq] = "bundle exec sidekiq"
+SSHKit.config.command_map[:sidekiqctl] = "bundle exec sidekiqctl"
+SSHKit.config.command_map[:cap] = "bundle exec cap"
 
 # namespace :sidekiq do
 #     after 'deploy:starting', 'sidekiq:stop'
