@@ -18,7 +18,7 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bund
 
 set :keep_releases, 5
 
-set :pty, true
+# set :pty, true
 
 # SSHKit.config.command_map[:sidekiq] = "bundle exec sidekiq"
 # SSHKit.config.command_map[:sidekiqctl] = "bundle exec sidekiqctl"
