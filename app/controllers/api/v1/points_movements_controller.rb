@@ -9,7 +9,7 @@ class Api::V1::PointsMovementsController < ApplicationController
       render json: {
         data: customer.points_movements.paginate(page: params[:page], per_page: 10).map{ |pm|
           {
-            date: pm.date_time,
+            date: pm.date_time.strftime("%d/%m/%Y"),
             earned: pm.earned,
             redeemed: (- pm.redeemed),
             total: pm.total
