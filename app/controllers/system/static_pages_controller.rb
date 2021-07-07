@@ -48,7 +48,7 @@ class System::StaticPagesController < System::SystemApplicationController
 
   def set_receipt
     puts "=========> In static_pages : params: #{params}"
-    @receipt = Receipt.find(params[:receipt_number])
+    @receipt = Receipt.find_by(number: params[:receipt_number])
   end
   
   def set_customer
