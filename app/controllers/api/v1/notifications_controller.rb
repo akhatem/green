@@ -7,7 +7,7 @@ class Api::V1::NotificationsController < ApplicationController
             title: notification.title,
             offer_id: notification.offer_id ? notification.offer_id : nil,
             description: notification.description.gsub(/\r/, ' ').gsub(/\n/, '').html_safe,
-            create_date: notification.create_date,
+            create_date: notification.create_date.strftime("%d/%m/%Y"),
             is_new: notification.is_new ? true : false
           }
         }
