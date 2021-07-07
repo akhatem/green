@@ -34,8 +34,9 @@ class Offer < ApplicationRecord
     end
 
     def self.search_by(search_term)
-        where(state: search_term)
-        # where("id = ?", search_term.to_i)
+        where(state: search_term.downcase)
+        .or(where("id = ?", search_term.to_i))
+        
         
     end
 
