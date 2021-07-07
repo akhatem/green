@@ -26,4 +26,9 @@ class Branch < ApplicationRecord
     def cityName
         City.find(self.city_id).name
     end
+
+    def self.search_by(search_term)
+        puts "=====> search term #{search_term}"
+        where("LOWER(name) LIKE ? OR id = ? ", "%" + search_term + "%", search_term.to_i)
+    end
 end

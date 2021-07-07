@@ -3,6 +3,10 @@ class System::BranchesController < System::SystemApplicationController
     
     def index
         @pagy, @branches = pagy(Branch.all.order(id: :asc))
+        if params[:search]
+            @search_term = params[:search]
+            @branches = @branches.search_by(@search_term)
+        end
     end
 
     def show

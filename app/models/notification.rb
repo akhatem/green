@@ -23,6 +23,11 @@ class Notification < ApplicationRecord
         Offer.find(offer_id).title
     end
 
+    def self.search_by(search_term)
+        where("id = ? OR LOWER(name) LIKE ? OR create_date LIKE ? OR LOWER(is_new) LIKE ? ",
+            search_term.to_i, "%" + search_term + "%", "%" + search_term + "%", "%" + search_term.downcase + "%")
+    end
+
 
     private
 

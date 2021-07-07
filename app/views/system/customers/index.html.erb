@@ -1,20 +1,16 @@
-    <div class="col-lg-7">
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <button class="btn btn-outline-secondary dropdown-toggle" id="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter</button>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Name</a>
-                <a class="dropdown-item" href="#">Mobile</a>
-                <a class="dropdown-item" href="#">Email</a>
-                <div role="separator" class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Created at</a>
-                <a class="dropdown-item" href="#">Updated at</a>
-            </div>
+<div class="col-lg-7">
+    <div class="row">
+        <div class="col-md-3 main-btns">
+            <%= link_to "Clear Search", system_customers_path, class: "btn btn-outline-success btn-sm", type: "button" %>
         </div>
-        <span class="input-group-text input-search" id="addon-wrapping"><i class="fa fa-search"></i> </span>
-        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+        <div class="col-md-4">
+            <%= form_for "", url: system_customers_path, role: "search", method: :get do %>
+                <%= text_field_tag :search, @search_term, placeholder: "Search by id or name or mobile or email", style: "text-align: center;" %>
+            <% end %>
+        </div>
     </div>
 </div>
+
 <div class="col-lg-5 main-btns">
         <button class="btn btn-outline-success btn-sm" type="button">Export as PDF</button>
         <button class="btn btn-outline-success btn-sm" type="button">Export as Excel</button>
@@ -26,7 +22,7 @@
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Name</th>
-            <th scope="col">Phone number</th>
+            <th scope="col">Mobile</th>
             <th scope="col">Email</th>
             <th scope="col">Points</th>
             <th scope="col">Actions</th>

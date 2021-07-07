@@ -203,7 +203,7 @@ div.form-group.row {
     </div>
 </div>
 
-<form>
+<!-- <form> -->
     <div class="form-group row">
         <label class="col-md-2 col-form-label">Id</label>
         <input class="form-control" type="text" value="<%= @customer.id %>" disabled>
@@ -213,13 +213,12 @@ div.form-group.row {
         <label class="col-md-2 col-form-label">Name</label>
         <input class="form-control" type="text" value="<%= @customer.name %>" disabled>
     </div>
-</form>
+<!-- </form> -->
 
-<%= form_with(model: @receipt, url: system_receipts_path) do |f| %>
+<%= form_with(model: Receipt.new, url: system_receipts_path) do |f| %>
     <%= f.hidden_field :user_id, value: current_system_user.id %>
     <%= f.hidden_field :customer_id, value: @customer.id %>
     <%= f.hidden_field :branch_id, value: current_system_user.branch_id %>
-
     
     <div class="form-group row">
         <%= f.label :receipt_number, class: "col-md-3 col-form-label" %>

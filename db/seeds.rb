@@ -123,6 +123,9 @@ if Rails.env.development?
 
 
   Role.create!(id: 1, name: "Super", key: "super", description: "Full access", is_super: true)
+  Role.create!(id: 2, name: "Cashier", key: "cashier", description: "Only Cashier specified pages", is_super: false)
+  User.create(name: "Omar Ali", email: "omar.ali@green.com", password: "pass123", password_confirmation: "pass123", role_id: 2, branch_id: 1)
+  
   User.create!(name: "Ahmed Kareem", email: "ahmed.kareem.elshawadfy@gmail.com", password: "Root123",
     password_confirmation: "Root123", role_id: 1, branch_id: 1)
 end
@@ -161,6 +164,8 @@ if Rails.env.production?
   
   # User.create!(name: "Yasser Fayez", email: "yasser.fayez@green.com", password: "4455662@roV",
   #       password_confirmation: "4455662@roV", role_id: 1, branch_id: 1)
+
+
 
   Setting.find_or_create_by(id: 1, name: "About Us", description: "Welcome to Green App. This app is all about Green Cafe")
   Setting.find_or_create_by(id: 2, name: "Contact Us", description: "01014911173")

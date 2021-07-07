@@ -16,12 +16,14 @@ Rails.application.routes.draw do
     end
     
     root to: 'static_pages#index'
-
+    
     
     # Cashier Pages
     get "/barcode_search", to: "static_pages#barcode_search"
     get "/customer_info/:decoded_barcode", to: "static_pages#customer_info", as: 'customer_info'
-    get '/redeem_points', to: "static_pages#redeem_points"
+    get '/redeem_points/:receipt_number', to: "static_pages#redeem_points", as: 'redeem_points'
+    
+    resources :points_movements, only: [:index, :show]
 
     # Receipts
     resources :receipts

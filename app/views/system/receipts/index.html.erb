@@ -1,0 +1,44 @@
+<div class="col-lg-7">
+    <div class="row">
+        <div class="col-md-3 main-btns">
+            <%= link_to "Clear Search", system_receipts_path, class: "btn btn-outline-success btn-sm", type: "button" %>
+        </div>
+        <div class="col-md-4">
+            <%= form_for "", url: system_receipts_path, role: "search", method: :get do %>
+                <%= text_field_tag :search, @search_term, placeholder: "Search by id or Customer or User", style: "text-align: center;" %>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<table class="table mt-2">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Branch</th>
+            <th scope="col">System User</th>
+            <th scope="col">Receipt Number</th>
+            <th scope="col">Total Price</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @receipts.each do |receipt| %>
+        <tr>
+            <th scope="row">
+                <%= link_to receipt.id, system_receipt_path(receipt), style: "color: green" %>
+            </th>
+            <td><%= link_to receipt.customerName, system_customer_path(receipt.customer_id), style: "color: green" %></td>
+            <td><%= link_to receipt.branchName, system_branch_path(receipt.branch_id), style: "color: green" %></td>
+            <td><%= receipt.userName %></td>
+            <td><%= receipt.number %></td>
+            <td><%= receipt.total_price %></td>
+            <td class="table-action">
+                <%= link_to '', system_receipt_path(receipt), class: "fa fa-eye" %>
+                <%#= link_to '', system_receipt_path(receipt), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>
+            </td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>

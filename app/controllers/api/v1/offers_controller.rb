@@ -9,9 +9,9 @@ class Api::V1::OffersController < ApplicationController
               id: offer.id,
               title: offer.title,
               description: offer.description,
+              start_at: offer.start_at.strftime("%d/%m/%Y"),
+              end_at: offer.end_at.strftime("%d/%m/%Y"),
               state: offer.state,
-              start_at: offer.start_at,
-              end_at: offer.end_at,
               image: offer.image.url
             }
           }
@@ -32,8 +32,8 @@ class Api::V1::OffersController < ApplicationController
           data:{
             title: @offer.title,
             description: @offer.description,
-            start_at: @offer.start_at,
-            end_at: @offer.end_at,
+            start_at: @offer.start_at.strftime("%d/%m/%Y"),
+            end_at: @offer.end_at.strftime("%d/%m/%Y"),
             state: @offer.state,
             image: @offer.image.url
           }

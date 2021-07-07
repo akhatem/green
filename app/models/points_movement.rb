@@ -15,6 +15,7 @@
 #
 class PointsMovement < ApplicationRecord
   belongs_to :customer
+  belongs_to :user
   belongs_to :branch
 
   validates :total, numericality: { greater_than_or_equal: 0 }
@@ -26,6 +27,9 @@ class PointsMovement < ApplicationRecord
     Customer.find(self.customer_id)
   end
 
+  def convert_points_to_price
+    self.total * 0.1 * 0.5
+  end
 
   private
   

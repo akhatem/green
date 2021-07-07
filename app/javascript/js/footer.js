@@ -1,4 +1,5 @@
-window.addEventListener("scroll", () => {
+$(document).on('turbolinks:load', function(){
+  window.addEventListener("scroll", () => {
     var footer = document.getElementById("footer_id");
     const currentScroll = window.pageYOffset;
     if (currentScroll <= 200) {
@@ -9,3 +10,4 @@ window.addEventListener("scroll", () => {
       footer.style.display = "block";
     }
   });
+});

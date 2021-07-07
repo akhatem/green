@@ -33,6 +33,12 @@ class Offer < ApplicationRecord
         self.errors.add(:end_at, :invalid) if end_at.present? && start_at.present? && end_at < start_at
     end
 
+    def self.search_by(search_term)
+        where(state: search_term)
+        # where("id = ?", search_term.to_i)
+        
+    end
+
     private
 
     def create_notification

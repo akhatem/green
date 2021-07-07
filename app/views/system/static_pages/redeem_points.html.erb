@@ -196,25 +196,40 @@ div.form-group.row {
 
 </style>
 
-
 <div class="row">
     <div class="col-md-6">
-        <h2 class="details-tab"><%#= @customer.name %>'s Details</h2>
+        <h2 class="details-tab"><%= @customer.name %>'s Details</h2>
     </div>
 </div>
 
 <form>
     <div class="form-group row">
         <label class="col-md-2 col-form-label">Name</label>
-        <input class="form-control" type="text" value="<%#= @customer.name %>" disabled>
+        <input class="form-control" type="text" value="<%= @customer.name %>" disabled>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label">Collected Points</label>
+        <input class="form-control" type="text" value="<%= @points_movement.earned %>" disabled>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label">Total Points</label>
+        <input class="form-control" type="text" value="<%= @points_movement.total %>" disabled>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label">Price of total points</label>
+        <input class="form-control" type="text" value="<%= @points_movement.convert_points_to_price %>" disabled>
     </div>
 </form>
+
 <div class="row">
     <div class="col-lg-6">
-        <%= link_to "Back", system_barcode_search_path, class: "btn btn-outline-success back-btn" %>
+        <%= link_to "Cancel", system_barcode_search_path, class: "btn btn-outline-success back-btn" %>
     </div>
 
     <div class="col-lg-6">
-        <%= link_to "Submit", system_barcode_search_path, class: "btn btn-outline-success submit-btn" %>
+        <%= link_to "Redeem", system_barcode_search_path, class: "btn btn-outline-success submit-btn" %>
     </div>
 </div>

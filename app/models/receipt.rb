@@ -20,10 +20,34 @@ class Receipt < ApplicationRecord
     validates :customer_id, presence: true
     validates :branch_id, presence: true
     validates :user_id, presence: true
-    validates :number, presence: true
+    validates :number, presence: true, uniqueness: true
     validates :total_price, presence: true
 
     after_create :customer_collect_points
+
+    def customerName
+        Customer.find(self.customer_id).name
+    end
+
+    def userName
+        User.find(self.user_id).name       
+    end
+
+    def branchName
+        Branch.find(self.branch_id).name
+    end
+
+    
+    def self.search_by(search_term)
+        joins(:customer)
+        .includes(:customer)
+        .where("LOWER(customers.name) LIKE ?", "%" + search_term.downcase + "%")
+        .or( where('Receipts.id = ?', search_term.to_i) )
+        .joins(:user)
+        .includes(:user)
+        .or(where("LOWER(users.name) LIKE ?", "%" + search_term.downcase + "%"))
+    end
+    
 
     private
 

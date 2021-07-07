@@ -2,7 +2,11 @@ class System::NotificationsController < System::SystemApplicationController
   before_action :set_notification, only: [:show, :edit, :update, :destroy]
   
   def index
-      @pagy, @notifications = pagy(Notification.all.order(id: :asc))
+    @pagy, @notifications = pagy(Notification.all.order(id: :asc))
+    if params[:search]
+      @search_term = params[:search]
+      @notifications = @notifications.search_by(@search_term)
+    end
   end
 
   def show

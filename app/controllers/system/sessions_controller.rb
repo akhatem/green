@@ -1,4 +1,6 @@
 class System::SessionsController < Devise::SessionsController
+    # after_action :after_login,  only: [:create]
+    # after_action :after_logout, only: [:destroy]
 
     # GET /resource/sign_in
     # def login

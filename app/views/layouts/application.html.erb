@@ -23,12 +23,12 @@
       <%= yield :login %>
       <div class="row">
         <!-- system_user_signed_in? : <%#= debug system_user_signed_in? %> -->
-        <% if system_user_signed_in? %>
+        <% if system_user_signed_in?  %>
           <%= render "system/shared/navbar" %>
         <% end %>
         <div class="row">
           <div class="col-md-3 side-nav-col">
-            <% if system_user_signed_in? %>
+            <% if system_user_signed_in? and !current_system_user.role.key.eql?("cashier") %>
               <%= render "system/shared/sidebar" %>
             <% end %>
           </div>

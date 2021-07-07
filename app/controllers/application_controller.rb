@@ -1,10 +1,8 @@
 class ApplicationController < ActionController::Base
-    protect_from_forgery prepend: true, with: :null_session
-    include Pundit
-
-    
-    include Pagy::Backend
     include Rails::Pagination
+    
+    protect_from_forgery prepend: true, with: :null_session
+
 
     def auth_header
         # { Authorization: 'Bearer <token>' }

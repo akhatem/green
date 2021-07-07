@@ -3,6 +3,10 @@ class System::OffersController < System::SystemApplicationController
   
   def index
       @pagy, @offers = pagy(Offer.all.order(id: :asc))
+      if params[:search]
+        @search_term = params[:search]
+        @offers = @offers.search_by(@search_term)
+    end
   end
 
   def show

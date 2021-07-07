@@ -15,13 +15,23 @@
     <%= link_to "Add new Notification", new_system_notification_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
 </div>
 
+customer_id    :bigint           not null
+user_id    :bigint           not null
+branch_id      :bigint           not null
+redeemed       :integer          default(0)
+earned         :integer          default(0)
+date_time      :datetime         not null
+total          :integer          default(0)
+current_points :integer          default(0)
+
 <table class="table mt-2">
     <thead>
         <tr>
             <th scope="col">Id</th>
-            <th scope="col">Title</th>
-            <th scope="col">Offer Id</th>
-            <th scope="col">Is new</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Branch</th>
+            <th scope="col">System User</th>
+            <th scope="col">Total Points</th>
             <th scope="col">Created At</th>
             <th scope="col">Actions</th>
         </tr>
