@@ -64,59 +64,68 @@ div.form-group.row {
 
 </style>
 
-<div>
-    <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
-            <!--form-->
-            <div class="row">
-                <div class="col-md-3">
-                    <h2 style="text-align: center;">Edit Offer</h2>
-                </div>
-
-            </div>                
-                <%= form_with(model: @offer, url: system_offer_path) do |f| %>
-                    <%= f.hidden_field :id %>
-                    <% if @offer.errors.any? %>
-                        <div id="error_explanation" class="row">
-                            <div class="col-md-4">
-                                <h3><%= pluralize(@offer.errors.count, "error") %> found:</h3>
-                                <ul>
-                                    <% @offer.errors.each do |error| %>
-                                        <li><%= error.full_message %></li>
-                                    <% end %>
-                                </ul>
-                            </div>
-                        </div>
-                    <% end %>
-
-                    <div class="form-group row">
-                        <%= f.label :title, class: "col-md-3 col-form-label" %>
-                        <%= f.text_field :title, class: "form-control"  %>
-                    </div>
-
-                    <div class="form-group row">
-                        <%= f.label :image, class: "col-md-3 col-form-label" %>
-                        <%= image_tag @offer.image_url, style: "max-width: 280px;max-height: 257px;" if @offer.image_url %>
-                        <%= f.hidden_field :image, value: f.object.image_was %>
-                        <%= f.file_field :image, class: "form-control" %>
-                    </div>
-
-                    <div class="form-group row">
-                        <%= f.label :descrption, class: "col-md-3 col-form-label" %>
-                        <%= f.cktext_area :description, class: "form-control", as: :ckeditor, input_html: { ckeditor: { toolbar: 'Full' }}  %>
-                    </div>
-                    
-                    <div class="row mt-5 actions">
-                        <!--btns-->
-                        <div class="btn col-lg-6">
-                            <%= link_to 'Cancel', system_offers_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
-                        </div>
-
-                        <div class="btn col-lg-6">
-                            <%= f.submit "Save", class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
-                        </div>
-                    </div>
-                <% end %>
-        </div>
+<div class="row">
+    <div class="col-md-3">
+        <h2 style="text-align: center;">Edit Offer</h2>
     </div>
 </div>
+
+<% if @offer.errors.any? %>
+    <div id="error_explanation" class="row">
+        <div class="col-md-4">
+            <h3><%= pluralize(@offer.errors.count, "error") %> found:</h3>
+            <ul>
+                <% @offer.errors.each do |error| %>
+                    <li><%= error.full_message %></li>
+                <% end %>
+            </ul>
+        </div>
+    </div>
+<% end %>
+
+<%= form_with(model: @offer, url: system_offer_path) do |f| %>
+    <%= f.hidden_field :is_default %>
+
+    <div class="form-group row">
+        <%= f.label :title, class: "col-md-3 col-form-label" %>
+        <%= f.text_field :title, class: "form-control"  %>
+    </div>
+
+    <div class="form-group row">
+        <%= f.label :is_default, class: "col-md-3 col-form-label" %>
+        <%= f.check_box :is_default, class: "form-control" %>
+    </div>
+
+    <div class="form-group row">
+        <%= f.label :state, class: "col-md-3 col-form-label" %>
+        <%= select_tag :state, options_for_select(Offer.states) %>
+    </div>
+
+    <div class="form-group row">
+        <%= f.label :end_at, class: "col-md-3 col-form-label" %>
+        <%= f.date_field :end_at, class: "form-control" %>
+    </div>
+
+    <div class="form-group row">
+        <%= f.label :image, class: "col-md-3 col-form-label" %>
+        <%= image_tag @offer.image_url, style: "max-width: 280px;max-height: 257px;" if @offer.image_url %>
+        <%= f.hidden_field :image, value: f.object.image_was %>
+        <%= f.file_field :image, class: "form-control" %>
+    </div>
+
+    <div class="form-group row">
+        <%= f.label :descrption, class: "col-md-3 col-form-label" %>
+        <%= f.cktext_area :description, class: "form-control", as: :ckeditor, input_html: { ckeditor: { toolbar: 'Full' }}  %>
+    </div>
+    
+    <div class="row mt-5 mb-5 actions">
+        <!--btns-->
+        <div class="btn col-lg-6">
+            <%= link_to 'Cancel', system_offers_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
+        </div>
+
+        <div class="btn col-lg-6">
+            <%= f.submit "Save", class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
+        </div>
+    </div>
+<% end %>

@@ -5,7 +5,7 @@
         </div>
         <div class="col-md-4">
             <%= form_for "", url: system_offers_path, role: "search", method: :get do %>
-                <%= text_field_tag :search, @search_term, placeholder: "Search by... Offer state", style: "text-align: center;" %>
+                <%= text_field_tag :search, @search_term, placeholder: "Search by... Id or state", style: "text-align: center;" %>
             <% end %>
         </div>
     </div>
@@ -21,6 +21,7 @@
             <th scope="col">Id</th>
             <th scope="col">Title</th>
             <th scope="col">state</th>
+            <th scope="col">Is Default?</th>
             <th scope="col">Start At</th>
             <th scope="col">End At</th>
             <th scope="col">Created At</th>
@@ -35,6 +36,7 @@
             </th>
             <td><%= link_to offer.title, system_offer_path(offer), style: "color: green" %></td>
             <td><%= offer.state %></td>
+            <td><%= offer.is_default %></td>
             <td><%= offer.start_at %></td>
             <td><%= offer.end_at %></td>
             <td><%= offer.created_at %></td>

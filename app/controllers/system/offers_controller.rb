@@ -54,6 +54,6 @@ class System::OffersController < System::SystemApplicationController
   end
 
   def offer_params
-      params.require(:offer).permit(:title, :description, :start_at, :end_at, :image, :state)
+      params.require(:offer).permit(:title, :description, :start_at, :end_at, :image, :state, :is_default)
   end
 end

@@ -31,17 +31,14 @@ class System::StaticPagesController < System::SystemApplicationController
     @receipt
     @customer
     @points_movement = PointsMovement.find_by(customer_id: @customer.id)
-    points_movement = PointsMovement.new(customer_id: @customer.id, branch_id: current_system_user.branch_id, redeemed: @points_movement.total,
-    earned: 0, date_time: DateTime.now, total: 0, user_id: current_system_user.id)
-    respond_to do |format|
-      if points_movement
-        format.html {redirect_to system_barcode_search_path, notice: "Points redeemed successfully." }
-        format.json { render :barcode_search, status: :ok }
+    points_movement = PointsMovement.new(customer_id: @customer.id, branch_id: current_system_user.branch_id, 
+      redeemed: @points_movement.total, earned: 0, date_time: DateTime.now, total: 0, user_id: current_system_user.id) 
+      if points_movement.save
+        points_movement.save
+        redirect_to system_barcode_search_path, notice: "Points redeemed successfully."
       else
-        format.html { render :redeem_points, alert: "Something went wrong!", status: :not_acceptable }
-        format.json { render json: @customer.errors, status: :not_acceptable }
-      end
-    end
+        render :redeem_points, alert: "Something went wrong!", status: :not_acceptable
+      end    
   end
 
   private

@@ -12,6 +12,7 @@
 #  current_points :integer          default(0)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  user_id        :integer
 #
 class PointsMovement < ApplicationRecord
   belongs_to :customer
@@ -28,7 +29,7 @@ class PointsMovement < ApplicationRecord
   end
 
   def convert_points_to_price
-    self.total * 0.1 * 0.5
+    self.total * 0.5
   end
 
   private

@@ -11,6 +11,7 @@
 #  image       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  is_default  :boolean          default(FALSE)
 #
 require "test_helper"
 

@@ -53,7 +53,8 @@ class Receipt < ApplicationRecord
 
     def customer_collect_points
         earned_points = self.total_price * 0.1
+
         PointsMovement.create(customer_id: self.customer_id, branch_id: self.branch_id, 
-            earned: earned_points, date_time: DateTime.now)
+            earned: earned_points, date_time: DateTime.now, user_id: self.user_id)
     end
 end

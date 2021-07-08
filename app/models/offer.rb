@@ -11,6 +11,7 @@
 #  image       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  is_default  :boolean          default(FALSE)
 #
 class Offer < ApplicationRecord
 
@@ -36,6 +37,7 @@ class Offer < ApplicationRecord
     def self.search_by(search_term)
         where(state: search_term.downcase)
         .or(where("id = ?", search_term.to_i))
+        # .or(where(is_default: search_term.to_i))
         
         
     end
