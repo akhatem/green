@@ -10,12 +10,13 @@ class Api::V1::ItemsController < ApplicationController
            id: item.id,
            name: item.name,
            image: item.image.url,
-           sizes: item.sizes.map{ |size| 
+           sizes: item.item_size.map{ |item_size| 
               { 
-                 name: size.name, 
-                 price: size.price.round(2)
+                 name: item_size.sizeName,
+                 price: item_size.price
               } 
-           }
+           },
+           description: item.description
          }
         } 
      }, status: :ok
