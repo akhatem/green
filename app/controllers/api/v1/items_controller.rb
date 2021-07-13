@@ -15,8 +15,7 @@ class Api::V1::ItemsController < ApplicationController
                  name: size.name, 
                  price: size.price.round(2)
               } 
-           },
-           description: item.description
+           }
          }
         } 
      }, status: :ok
