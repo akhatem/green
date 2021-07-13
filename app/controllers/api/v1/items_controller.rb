@@ -13,7 +13,7 @@ class Api::V1::ItemsController < ApplicationController
            sizes: item.item_sizes.map{ |item_size| 
               { 
                  name: item_size.sizeName,
-                 price: item_size.price
+                 price: item_size.pricing
               } 
            },
            description: item.description
@@ -29,7 +29,7 @@ class Api::V1::ItemsController < ApplicationController
 
   def show
      begin
-        item = Item.find_by(brand_id: params[:brand_id], category_id: params[:category_id], id: params[:item_id])  
+        item = Item.find_by(brand_id: params[:brand_id], category_id: params[:category_id], id: params[:item_id])
      rescue
         render json: {
            error: JSON.parse("Item with id: #{params[:item_id]} not found!".to_json)
@@ -44,12 +44,12 @@ class Api::V1::ItemsController < ApplicationController
            brand: item.brandName,
            category: item.categoryName,
            image: item.image.url,
-           sizes: item.sizes.map{ |size|
-              { 
-                 name: size.name, 
-                 price: size.price.round(2) 
-              } 
-           },
+           sizes: item.item_sizes.map{ |item_size| 
+            { 
+               name: item_size.sizeName,
+               price: item_size.pricing
+            } 
+            },
            descirption: item.description
            }
         }, status: :ok
