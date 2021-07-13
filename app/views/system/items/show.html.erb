@@ -191,10 +191,10 @@ div.form-group.row {
         <%= image_tag @item.image.url, style: "max-width: 280px;max-height: 257px;", id: "form-label" if @item.image.url %>
     </div>
 
-    <% @item.sizes.all.each do |size| %>
+    <% @item.item_size.all.each do |item_size| %>
         <div class="form-group row">
-            <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Size and Price</label>
-            <input class="form-control" id="form-label" type="text" value="<%= size.name %> : <%= size.price.round(2) %>" disabled>
+            <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Size and price</label>
+            <input class="form-control" id="form-label" type="text" value="<%= item_size.size_with_price %>" disabled>
         </div>
     <% end %>
 

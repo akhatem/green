@@ -106,6 +106,19 @@ div.form-group.row {
                         <%= f.collection_select :brand_id, Brand.order(:name), :id, :name, { inlcude_blank: true }, { class: "btn btn-outline-secondary dropdown-toggle" } %>
                     </div>
 
+                    <%= form_with(model: @item_size, url: system_item_sizes_path) do |form| %>
+                        
+                        <div class="form-group row">
+                            <%= form.label :size, class: "col-md-3 col-form-label" %>
+                            <%= form.collection_select :size_id, Size.order(:name), :id, :name,{ include_blank: true }, { class: "btn btn-outline-secondary dropdown-toggle", style: "font-size: 18px" } %>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <%= form.label :price, class: "col-md-3 col-form-label" %>
+                            <%= form.number_field :price, class: "form-control" %>
+                        </div>
+                    <% end %>
+
                     <div class="form-group row">
                         <%= f.label :category, class: "col-md-3 col-form-label" %>
                         <%= f.grouped_collection_select :category_id, Brand.order(:name), :categories, :name, :id, :name, { inlcude_blank: true }, { class: "btn btn-outline-secondary dropdown-toggle" } %>

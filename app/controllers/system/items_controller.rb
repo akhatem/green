@@ -1,5 +1,6 @@
 class System::ItemsController < System::SystemApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item_size, only: [:show]
   
   def index
     @pagy, @items = pagy(Item.all.order(id: :asc))
@@ -59,6 +60,10 @@ class System::ItemsController < System::SystemApplicationController
   def set_item
       @item = Item.find(params[:id])
   end
+
+  def set_item_size
+    @item_size = ItemSize.find(@item.id)
+end
 
   def item_params
       params.require(:item).permit(:name, :image, :category_id, :brand_id, :description)

@@ -24,7 +24,21 @@ class System::StaticPagesController < System::SystemApplicationController
   end
   
   def customer_info
-    @customer
+    # puts "=============> receipt.save? : #{@receipt.save}"
+    respond_to do |format|
+      if @receipt.save
+          format.html { redirect_to system_redeem_points_path(@receipt.number), 
+            notice: "Receipt #{@receipt.number} was successfully created." }
+          format.json { render :redeem_points, status: :created, location: @item }
+      else
+          puts "=============> receipt.errors? : #{@receipt.errors.full_messages}"
+          # @customer = Customer.find_by(decoded_barcode: @receipt.customer.decoded_barcode)
+          format.html { redirect_to system_customer_info_path(@receipt.customer.decoded_barcode), 
+            alert: "Something went wrong!", status: :unprocessable_entity }
+          format.json { render json: @receipt.errors, status: :unprocessable_entity }
+          
+      end
+    end
   end
 
   def redeem_points

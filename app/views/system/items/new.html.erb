@@ -99,6 +99,17 @@ div.form-group.row {
                         <%= f.file_field :image, class: "form-control" %>
                     </div>
 
+                    <%= form_with(model: @item_size, url: system_item_sizes_path) do |f| %>
+                        <div class="form-group row">
+                            <%= f.label :item, class: "col-md-3 col-form-label" %>
+                            <%= f.collection_select :item_id, Item.order(:name), :id, :name,{ include_blank: true }, { class: "btn btn-outline-secondary dropdown-toggle", style: "font-size: 18px" } %>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <%= f.number_field :price, class: "form-control" %>
+                        </div>
+                    <% end %>
+
                     <div class="form-group row">
                         <%= f.label :brand, class: "col-md-3 col-form-label" %>
                         <%= f.collection_select :brand_id, Brand.order(:name), :id, :name, { inlcude_blank: true }, { class: "btn btn-outline-secondary dropdown-toggle", style: "padding-top: 7px; font-size: 16px;" } %>
