@@ -5,7 +5,7 @@ class System::CustomersController < System::SystemApplicationController
     if params[:search]
       @search_term = params[:search]
       @customers = @customers.search_by(@search_term)
-  end
+    end
   end
 
   def show

@@ -20,6 +20,8 @@ import "@fortawesome/fontawesome-free/css/all"
 
 import "../js/custom"
 import "../js/footer"
+import "../js/add_fields"
+import "../js/remove_fields"
 
 Rails.start()
 Turbolinks.start()

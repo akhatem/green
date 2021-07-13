@@ -1,7 +1,7 @@
 class Api::V1::ItemsController < ApplicationController
   
   def index
-     items = paginate Item.all.where(brand_id: params[:brand_id], category_id: params[:category_id])
+     items = paginate Item.all.where(brand_id: params[:brand_id], category_id: params[:category_id]).order(name: :asc)
      if items.any?
      render json: {
         message: JSON.parse("List of item(s) in category: #{Category.find(params[:category_id]).name}".to_json),
@@ -10,7 +10,7 @@ class Api::V1::ItemsController < ApplicationController
            id: item.id,
            name: item.name,
            image: item.image.url,
-           sizes: item.item_size.map{ |item_size| 
+           sizes: item.item_sizes.map{ |item_size| 
               { 
                  name: item_size.sizeName,
                  price: item_size.price

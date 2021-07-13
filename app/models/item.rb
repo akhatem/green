@@ -16,8 +16,9 @@ class Item < ApplicationRecord
     belongs_to :brand
     belongs_to :category
     
-    has_many :item_size, dependent: :destroy
+    has_many :item_sizes, dependent: :destroy
     has_many :sizes, through: :item_size, dependent: :destroy
+    accepts_nested_attributes_for :item_sizes, allow_destroy: true, reject_if: :all_blank
     
     mount_uploader :image, ItemImageUploader
     
@@ -34,9 +35,16 @@ class Item < ApplicationRecord
         Category.find(self.category_id).name
     end
 
-    def popular_items
-        Item.all.each do |item|
+    # def popular_items
+    #     Item.all.each do |item|
             
-        end
+    #     end
+    # end
+
+    def self.search_by(search_term)
+        where("id = ?", search_term.to_i)
+        .or(where("LOWER(name) LIKE ?", "%" + search_term.downcase + "%"))
+        .or(where("brand_id = ?", Brand.find_by(name: search_term)))
+        .or(where("category_id = ?", Category.find_by(name: search_term)))
     end
 end

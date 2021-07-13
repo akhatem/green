@@ -1,10 +1,13 @@
 class System::ItemsController < System::SystemApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :set_item_size, only: [:show]
+  before_action :set_item_size, only: [:show, :edit, :update]
   
   def index
     @pagy, @items = pagy(Item.all.order(id: :asc))
-      
+    if params[:search]
+      @search_term = params[:search]
+      @items = @items.search_by(@search_term)
+    end
   end
 
   def show
@@ -13,6 +16,7 @@ class System::ItemsController < System::SystemApplicationController
 
   def new
       @item = Item.new
+      1.times { @item.item_sizes.build }
   end
 
   def create
@@ -62,10 +66,11 @@ class System::ItemsController < System::SystemApplicationController
   end
 
   def set_item_size
-    @item_size = ItemSize.find(@item.id)
+    @item_size = ItemSize.find_by(item_id: @item.id)
 end
 
   def item_params
-      params.require(:item).permit(:name, :image, :category_id, :brand_id, :description)
+      params.require(:item).permit(:name, :image, :category_id, :brand_id, 
+        :description, item_sizes_attributes: [:id, :size_id, :price, :_destroy])
   end
 end
