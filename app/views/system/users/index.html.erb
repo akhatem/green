@@ -1,19 +1,14 @@
 <div class="col-lg-7">
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <button class="btn btn-outline-secondary dropdown-toggle" id="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter</button>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Name</a>
-                <a class="dropdown-item" href="#">Email</a>
-                <a class="dropdown-item" href="#">Role</a>
-                <a class="dropdown-item" href="#">Branch</a>
-                <div role="separator" class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Created at</a>
-                <a class="dropdown-item" href="#">Updated at</a>
-            </div>
+    <div class="row">
+        <div class="col-md-3 main-btns">
+            <%= link_to "Clear Search", system_users_index_path, class: "btn btn-outline-success btn-sm", type: "button" %>
         </div>
-        <span class="input-group-text input-search" id="addon-wrapping"><i class="fa fa-search"></i> </span>
-        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+        <div class="col-md-4">
+            <%= form_for "", url: system_users_index_path, role: "search", method: :get do %>
+                <%= text_field_tag :search, @search_term, placeholder: "Search by id or name or mobile or email or branch", 
+                    style: "text-align: center;" %>
+            <% end %>
+        </div>
     </div>
 </div>
 <div class="col-lg-5 main-btns">
@@ -46,7 +41,8 @@
             <td><%= user.branchName if user.branch_id %></td>
                 <td class="table-action">
             <% unless user.role.name.eql?("Super") %>
-                    <%= link_to '', system_user_registration_path(user), method: :delete, data: {confirm: "Are you sure?"}, class: "fa fa-trash" %>
+                    <%= link_to '', system_user_registration_path(user), method: :delete, data: {confirm: "Are you sure?"}, 
+                        class: "fa fa-trash" %>
             <% end %>
                 </td>
         </tr>

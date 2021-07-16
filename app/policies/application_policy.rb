@@ -7,23 +7,27 @@ class ApplicationPolicy
   end
 
   def index?
-    false
+    !@user.role.name.eql?("Cashier")
   end
 
   def show?
     false
+    # !@user.role.name.eql?("Cashier")
   end
 
   def create?
     false
+    # !@user.role.name.eql?("Cashier")
   end
 
   def new?
     create?
+    # !@user.role.name.eql?("Cashier")
   end
 
   def update?
     false
+    # !@user.role.name.eql?("Cashier")
   end
 
   def edit?
@@ -31,6 +35,20 @@ class ApplicationPolicy
   end
 
   def destroy?
+    false
+    # !@user.role.name.eql?("Cashier")
+  end
+
+  def barcode_search?
+    false
+    # @user.role.name.eql?("Cashier")
+  end
+
+  def customer_info?
+    false
+  end
+
+  def redeem_points?
     false
   end
 

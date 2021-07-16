@@ -33,8 +33,10 @@ class Customer < ApplicationRecord
   validates_format_of :email, :multiline => true, :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
 
   def self.search_by(search_term)
-    where("id = ? OR LOWER(name) LIKE ? OR mobile LIKE ? OR LOWER(email) LIKE ? ",
-      search_term.to_i, "%" + search_term.downcase + "%", "%" + search_term + "%", "%" + search_term.downcase + "%")
+    where(id: search_term.to_i)
+    .or(where("name ILIKE ?", "%" + search_term + "%"))
+    .or(where("mobile LIKE ?", search_term + "%"))
+    .or(where("email ILIKE ?", "%" + search_term + "%"))
   end
    
   
@@ -60,7 +62,7 @@ class Customer < ApplicationRecord
 
   def generate_barcode
     sub_token = generate_barcode_token.reverse[0...11]
-    puts "==================> sub_token #{sub_token}"
+    # puts "==================> sub_token #{sub_token}"
     brcode = Barby::Code128B.new(sub_token).to_image.to_data_url
     splitted_barcode = brcode.split(',')[1]
     self.write_attribute(:decoded_barcode, sub_token)

@@ -39,7 +39,7 @@
                 <td><%= nil %></td>    
             <% end %>
             <td><%= notification.is_new %></td>    
-            <td><%= notification.created_at %></td>
+            <td><%= notification.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td>
             <td class="table-action">
                 <%= link_to '', system_notification_path(notification), class: "fa fa-eye" %>
                 <%= link_to '', edit_system_notification_path(notification), class: "fa fa-edit" %>

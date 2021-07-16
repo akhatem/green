@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     get "/customer_info/:decoded_barcode", to: "static_pages#customer_info", as: 'customer_info'
     get '/redeem_points/:receipt_number', to: "static_pages#redeem_points", as: 'redeem_points'
     
-    resources :points_movements, only: [:index, :show]
+    resources :points_movements, only: [:index, :show, :new, :create]
 
     # Receipts
     resources :receipts

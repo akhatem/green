@@ -28,4 +28,12 @@ class User < ApplicationRecord
   def is_super?
     self.role.is_super?
   end
+
+  def self.search_by(search_term)
+    where("id = ?", search_term.to_i)
+    .or(where("name ILIKE ?", "%" + search_term + "%"))
+    .or(where("email ILIKE ?", "%" + search_term + "%"))
+    .or(where(role_id: Role.where("name ILIKE ?", search_term)))
+    .or(where(branch_id: Branch.where("name ILIKE ?", "%" + search_term + "%")))
+  end
 end

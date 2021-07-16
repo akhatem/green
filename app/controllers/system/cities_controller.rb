@@ -3,6 +3,10 @@ class System::CitiesController < System::SystemApplicationController
     
     def index
         @pagy, @cities = pagy(City.all.order(id: :asc))
+        if params[:search]
+            @search_term = params[:search]
+            @cities = @cities.search_by(@search_term)
+          end
     end
 
     def show

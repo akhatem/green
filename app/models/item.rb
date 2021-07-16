@@ -34,13 +34,7 @@ class Item < ApplicationRecord
     def categoryName
         Category.find(self.category_id).name
     end
-
-    # def popular_items
-    #     Item.all.each do |item|
-            
-    #     end
-    # end
-
+    
     def self.search_by(search_term)
         where("id = ?", search_term.to_i)
         .or(where("LOWER(name) LIKE ?", "%" + search_term.downcase + "%"))

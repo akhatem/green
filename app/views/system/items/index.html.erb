@@ -36,7 +36,7 @@
             <td><%= link_to item.name, system_item_path(item), style: "color: green" %></td>
             <td><%= link_to item.categoryName, system_category_path(item.categoryName), style: "color: green" %></td>
             <td><%= link_to item.brandName, system_brand_path(item.brandName), style: "color: green" %></td>
-            <td><%= item.created_at %></td>
+            <td><%= item.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td>
             <td class="table-action">
                 <%= link_to '', system_item_path(item), class: "fa fa-eye" %>
                 <%= link_to '', edit_system_item_path(item), class: "fa fa-edit" %>

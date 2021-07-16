@@ -4,10 +4,9 @@
             <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter</button>
             <div class="dropdown-menu">
                 <a class="dropdown-size" href="#">Name</a>
-                <a class="dropdown-size" href="#">Price</a>
                 <div role="separator" class="dropdown-divider"></div>
                 <a class="dropdown-size" href="#">Created at</a>
-                <a class="dropdown-size" href="#">Updated at</a>
+                <!-- <a class="dropdown-size" href="#">Updated at</a> -->
             </div>
         </div>
         <span class="input-group-text input-search" id="addon-wrapping"><i class="fa fa-search"></i> </span>
@@ -25,9 +24,8 @@
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Name</th>
-            <th scope="col">Price</th>
             <th scope="col">Created At</th>
-            <th scope="col">Updated At</th>
+            <!-- <th scope="col">Updated At</th> -->
             <th scope="col">Actions</th>
         </tr>
     </thead>
@@ -38,9 +36,8 @@
                 <%= size.id %>
             </th>
             <td><%= size.name %></td>
-            <td><%= size.price %></td>
             <td><%= size.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td>
-            <td><%= size.updated_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td>
+            <!-- <td><%#= size.updated_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td> -->
             <td class="table-action">
                 <%= link_to '', edit_system_size_path(size), class: "fa fa-edit" %>
                 <%= link_to '', system_size_path(size), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>

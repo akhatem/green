@@ -1,24 +1,15 @@
 <div class="col-lg-7">
     <div class="row">
         <div class="col-md-3 main-btns">
-            <%= link_to "Clear Search", system_notifications_path, class: "btn btn-outline-success btn-sm", type: "button" %>
+            <%= link_to "Clear Search", system_points_movements_path, class: "btn btn-outline-success btn-sm", type: "button" %>
         </div>
         <div class="col-md-4">
-            <%= form_for "", url: system_notifications_path, role: "search", method: :get do %>
+            <%= form_for "", url: system_points_movements_path, role: "search", method: :get do %>
                 <%= text_field_tag :search, @search_term, placeholder: "Search by id or create date", style: "text-align: center;" %>
             <% end %>
         </div>
     </div>
 </div>
-
-customer_id    :bigint           not null
-user_id    :bigint           not null
-branch_id      :bigint           not null
-redeemed       :integer          default(0)
-earned         :integer          default(0)
-date_time      :datetime         not null
-total          :integer          default(0)
-current_points :integer          default(0)
 
 <table class="table mt-2">
     <thead>
@@ -27,29 +18,26 @@ current_points :integer          default(0)
             <th scope="col">Customer</th>
             <th scope="col">Branch</th>
             <th scope="col">System User</th>
+            <th scope="col">Earned</th>
+            <th scope="col">Redeemed</th>
             <th scope="col">Total Points</th>
-            <th scope="col">Created At</th>
             <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
-        <% @notifications.each do |notification| %>
+        <% @points_movements.each do |points_movement| %>
         <tr>
             <th scope="row">
-                <%= link_to notification.id, system_notification_path(notification), style: "color: green" %>
+                <%= link_to points_movement.id, system_points_movement_path(points_movement), style: "color: green" %>
             </th>
-            <td><%= link_to notification.title, system_notification_path(notification), style: "color: green" %></td>
-            <% if notification.offer_id %>
-                <td><%= link_to notification.offer_id, system_offer_path(notification.offer_id), style: "color: green" %></td>
-            <% else %>
-                <td><%= nil %></td>    
-            <% end %>
-            <td><%= notification.is_new %></td>    
-            <td><%= notification.created_at %></td>
+            <td><%= link_to points_movement.customerName, system_customer_path(points_movement.customer_id), style: "color: green" %></td>
+            <td><%= link_to points_movement.branchName, system_branch_path(points_movement.branch_id), style: "color: green" %></td>    
+            <td><%= link_to points_movement.userName, system_users_index_path, style: "color: green" %></td>
+            <td><%= points_movement.earned %></td>
+            <td><%= -points_movement.redeemed %></td>
+            <td><%= points_movement.total %></td>
             <td class="table-action">
-                <%= link_to '', system_notification_path(notification), class: "fa fa-eye" %>
-                <%= link_to '', edit_system_notification_path(notification), class: "fa fa-edit" %>
-                <%#= link_to '', system_notification_path(notification), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>
+                <%= link_to '', system_points_movement_path(points_movement), class: "fa fa-eye" %>
             </td>
         </tr>
     <% end %>

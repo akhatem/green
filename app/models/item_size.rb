@@ -16,9 +16,9 @@ class ItemSize < ApplicationRecord
 
     validates :item_id, uniqueness: { scope:  :size_id }
 
-    def pricing
-        number_with_precision(self.price, precision: 2).to_f
-    end
+    # def pricing
+    #     number_with_precision(self.price, precision: 2)
+    # end
 
     def sizeName
         Size.find(self.size_id).name

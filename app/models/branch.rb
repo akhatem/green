@@ -28,7 +28,8 @@ class Branch < ApplicationRecord
     end
 
     def self.search_by(search_term)
-        puts "=====> search term #{search_term}"
-        where("LOWER(name) LIKE ? OR id = ? ", "%" + search_term + "%", search_term.to_i)
+        where(id: search_term.to_i)
+        .or(where("name ILIKE ?", "%" + search_term + "%"))
+        .or(where(city_id: City.where("name ILIKE ?", "%" + search_term + "%")))
     end
 end

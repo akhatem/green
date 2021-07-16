@@ -44,33 +44,30 @@ if Rails.env.development?
 
   Brand.all.each do |brand|
     # unless Category.exists?(brand_id: brand.id)
+    if Category.count.zero?
       puts "Create Categories started at #{DateTime.now.strftime("%H:%M:%S")}"
-      for  i in 1..5 do
-        category = Category.find_or_create_by(name: FFaker::Food::unique.fruit, brand_id: brand.id)
-        
-        
-        puts "Create Items started at #{DateTime.now.strftime("%H:%M:%S")}"
-        10.times do
-          Item.create(name: FFaker::Food::meat, description: FFaker::Food::ingredient, brand_id: brand.id, 
-            category_id: category.id, image: File.open(File.join(Rails.root, 'app/assets/images/items/placeholder.png')))
-        end
-
-        # for j in (31..60).to_a.shuffle do
-        #   Item.create(name: FFaker::Food::meat, 
-        #   description: FFaker::Food::ingredient, brand_id: brand.id, 
-        #   category_id: category.id, image: File.open(File.join(Rails.root, 'app/assets/images/items/placeholder.png')))
-        # end
-        puts "Create Items finished #{DateTime.now.strftime("%H:%M:%S")}"
-      # end
-      puts "Create Categories finished #{DateTime.now.strftime("%H:%M:%S")}"
+        for  i in 1..5 do
+          category = Category.find_or_create_by(name: FFaker::Food::unique.fruit, brand_id: brand.id)
+          
+          if Item.count.zero?
+            puts "Create Items started at #{DateTime.now.strftime("%H:%M:%S")}"
+            5.times do
+              Item.create(name: FFaker::Food::meat, description: FFaker::Food::ingredient, brand_id: brand.id, 
+                category_id: category.id, image: File.open(File.join(Rails.root, 'app/assets/images/items/placeholder.png')))
+            end
+            puts "Create Items finished #{DateTime.now.strftime("%H:%M:%S")}"
+          end
+          sleep(10)
+        puts "Create Categories finished #{DateTime.now.strftime("%H:%M:%S")}"
+      end
     end
   end
 
   if Size.count.zero?
     puts "Create Sizes started #{DateTime.now.strftime("%H:%M:%S")}"
-    Size.find_or_create_by(id: 1, name: "Regular", price: 50)
-    Size.find_or_create_by(id: 2, name: "Grande", price: 45)
-    Size.find_or_create_by(id: 3, name: "Tall", price: 35)
+    Size.find_or_create_by(id: 1, name: "Regular")
+    Size.find_or_create_by(id: 2, name: "Grande")
+    Size.find_or_create_by(id: 3, name: "Tall")
   end
   puts "Create Sizes finished #{DateTime.now.strftime("%H:%M:%S")}"
 
@@ -80,7 +77,7 @@ if Rails.env.development?
     puts "Create Items started #{DateTime.now.strftime("%H:%M:%S")}"
     Item.all.each do |item|
       Size.all.each do |size|
-        ItemSize.find_or_create_by(item_id: item.id, size_id: size.id)
+        ItemSize.find_or_create_by(item_id: item.id, size_id: size.id, price: rand(15..200))
       end
     end
     puts "Create Items finished #{DateTime.now.strftime("%H:%M:%S")}"
@@ -115,14 +112,16 @@ if Rails.env.development?
 
   if Offer.count.zero?
     puts "Create Offers started #{DateTime.now.strftime("%H:%M:%S")}"
-    for i in 1..5 do
+    for i in 1..3 do
       Offer.create(title: FFaker::Lorem::words, description: FFaker::Lorem::sentences, state: 1, 
       start_at: Date.today, end_at: Date.today+1.day, image: File.open(File.join(Rails.root, 'app/assets/images/offers/offer1.png')))
+      sleep(10)
     end
 
-    for i in 1..15 do
+    for i in 1..3 do
       Offer.create(title: FFaker::Lorem::words, description: FFaker::Lorem::sentences, state: 0, 
       start_at: 3.days.ago, end_at: Date.yesterday, image: File.open(File.join(Rails.root, 'app/assets/images/offers/offer1.png')))
+      sleep(10)
     end
   end
   puts "Create Offers finished #{DateTime.now.strftime("%H:%M:%S")}"
@@ -186,3 +185,6 @@ if Rails.env.production?
   #   item.update(remote_image_url: item_image_url)
   # end
 end
+
+
+# Customer.reset_counters Customer.all.length - 1

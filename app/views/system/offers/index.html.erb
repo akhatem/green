@@ -39,7 +39,7 @@
             <td><%= offer.is_default %></td>
             <td><%= offer.start_at %></td>
             <td><%= offer.end_at %></td>
-            <td><%= offer.created_at %></td>
+            <td><%= offer.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td>
             <td class="table-action">
                 <%= link_to '', system_offer_path(offer), class: "fa fa-eye" %>
                 <%= link_to '', edit_system_offer_path(offer), class: "fa fa-edit" %>

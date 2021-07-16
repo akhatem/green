@@ -219,17 +219,27 @@ div.form-group.row {
     </div>
 
     <div class="form-group row">
-        <label class="col-md-3 col-form-label">Price of total points (L.E)</label>
-        <input class="form-control" type="text" value="<%= @points_movement.convert_points_to_price %>" disabled>
+        <label class="col-md-2 col-form-label">Price of total points</label>
+        <input class="form-control" type="text" value="<%= @points_movement.convert_points_to_price %> L.E" disabled>
     </div>
 </form>
 
-<div class="row">
-    <div class="col-lg-6">
-        <%= link_to "Cancel", system_barcode_search_path, class: "btn btn-outline-success back-btn" %>
-    </div>
+<%= form_with(model: PointsMovement.new, url: system_points_movements_path) do |f| %>
+    <%= f.hidden_field :customer_id, value: @customer.id %>
+    <%= f.hidden_field :branch_id, value: current_system_user.branch_id %>
+    <%= f.hidden_field :user_id, value: current_system_user.id %>
+    <%= f.hidden_field :date_time, value: DateTime.now %>
 
-    <div class="col-lg-6">
-        <%= link_to "Redeem", system_barcode_search_path, class: "btn btn-outline-success submit-btn" %>
+    <div class="row mt-5 actions">
+        <div class="col-lg-6">
+            <%= link_to "Cancel", system_barcode_search_path, class: "btn btn-outline-success back-btn" %>
+        </div>
+
+        <div class="col-lg-6">
+            <%= f.submit "Redeem", class: "btn btn-outline-success submit-btn" %>
+        </div>
     </div>
+<% end %>
+
+<div class="row">
 </div>

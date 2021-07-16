@@ -36,7 +36,6 @@ class Receipt < ApplicationRecord
     def branchName
         Branch.find(self.branch_id).name
     end
-
     
     def self.search_by(search_term)
         joins(:customer)
@@ -53,6 +52,7 @@ class Receipt < ApplicationRecord
 
     def customer_collect_points
         earned_points = self.total_price * 0.1
+        puts "================> In receipt model: earned_points: #{earned_points}"
 
         PointsMovement.create(customer_id: self.customer_id, branch_id: self.branch_id, 
             earned: earned_points, date_time: DateTime.now, user_id: self.user_id)

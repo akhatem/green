@@ -1,19 +1,4 @@
-    <div class="col-lg-7">
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter</button>
-            <div class="dropdown-menu">
-                <a class="dropdown-sms_message" href="#">Name</a>
-                <div role="separator" class="dropdown-divider"></div>
-                <a class="dropdown-sms_message" href="#">Created at</a>
-                <a class="dropdown-sms_message" href="#">Updated at</a>
-            </div>
-        </div>
-        <span class="input-group-text input-search" id="addon-wrapping"><i class="fa fa-search"></i> </span>
-        <input type="text" class="form-control" aria-label="Text input with dropdown button">
-    </div>
-</div>
-<div class="col-lg-5 main-btns">
+<div class="col-lg-9">
     <%= link_to "Send new SMS", new_system_sms_message_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
 </div>
 
@@ -36,7 +21,7 @@
             <%# sms_message.mobile.each do |mobile| %>
                 <td><%#= mobile %></td>
             <%# end %>
-            <td><%= sms_message.created_at %></td>
+            <td><%= sms_message.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td>
         </tr>
     <% end %>
     </tbody>

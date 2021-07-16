@@ -4,6 +4,10 @@ class System::UsersController < Devise::SessionsController
 
     def index
       @pagy, @users = pagy(User.all.order(id: :asc))
+      if params[:search]
+        @search_term = params[:search]
+        @users = @users.search_by(@search_term)
+      end
     end
 
     def show
