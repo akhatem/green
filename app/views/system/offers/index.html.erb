@@ -21,7 +21,6 @@
             <th scope="col">Id</th>
             <th scope="col">Title</th>
             <th scope="col">state</th>
-            <th scope="col">Is Default?</th>
             <th scope="col">Start At</th>
             <th scope="col">End At</th>
             <th scope="col">Created At</th>
@@ -36,14 +35,12 @@
             </th>
             <td><%= link_to offer.title, system_offer_path(offer), style: "color: green" %></td>
             <td><%= offer.state %></td>
-            <td><%= offer.is_default %></td>
             <td><%= offer.start_at %></td>
             <td><%= offer.end_at %></td>
             <td><%= offer.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td>
             <td class="table-action">
                 <%= link_to '', system_offer_path(offer), class: "fa fa-eye" %>
                 <%= link_to '', edit_system_offer_path(offer), class: "fa fa-edit" %>
-                <%#= link_to '', system_offer_path(offer), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>
             </td>
         </tr>
     <% end %>
