@@ -18,10 +18,11 @@ require("jquery")
 import "../stylesheets/application";
 import "@fortawesome/fontawesome-free/css/all"
 
-import "../js/add_fields"
-import "../js/remove_fields"
 import "../js/custom"
 import "../js/footer"
+
+import "../js/add_fields"
+import "../js/remove_fields"
 
 
 Rails.start()

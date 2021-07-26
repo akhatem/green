@@ -28,9 +28,11 @@ class Customer < ApplicationRecord
   has_secure_password
   
   has_many :points_movements, dependent: :destroy
+  has_many :receipts, dependent: :destroy
 
   validates :mobile, presence: true, allow_blank: false, format: { with: /(01)[0-9]{9}/ }
-  validates_format_of :email, :multiline => true, :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
+  validates_format_of :email, :multiline => true, 
+  :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
 
   def self.search_by(search_term)
     where(id: search_term.to_i)

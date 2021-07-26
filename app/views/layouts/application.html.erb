@@ -21,6 +21,7 @@
   <body class="<%= controller_name %> <%= action_name %>">
     <div class="container-fluid">
       <%= yield :login %>
+      <%= yield :register %>
       <div class="row">
         <!-- system_user_signed_in? : <%#= debug system_user_signed_in? %> -->
         <% if system_user_signed_in?  %>

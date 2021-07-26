@@ -51,7 +51,7 @@ class PointsMovement < ApplicationRecord
   def update_total
     pm_total = PointsMovement.where(customer_id: self.customer_id).last(2).first.total
     sum_of_points = pm_total + self.current_points
-    puts "========> sum of points: #{sum_of_points}"
+    # puts "========> sum of points: #{sum_of_points}"
     self.update(total: sum_of_points)
   end
 

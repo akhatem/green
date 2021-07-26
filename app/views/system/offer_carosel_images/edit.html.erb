@@ -87,33 +87,33 @@ div.form-group.row {
     border-radius: 7px;
 }
 
+.dropdown-toggle{
+    text-align: center;
+    width: 36%;
+    margin-left: 92px;
+    margin-right: 95px; 
+}
+
 </style>
 
 <div class="row">
     <div class="col-md-6">
-        <h2 class="details-tab">Edit Brand</h2>
+        <h2 class="details-tab">Edit Offer Carosel Image</h2>
     </div>
 </div>
 
-<div class="row">
-    <% if @brand.errors.any? %>
-        <div id="error_explanation">
-            <h2><%= pluralize(@brand.errors.count, "error") %> found:</h2>
-            <ul>
-                <% @brand.errors.each do |error| %>
-                    <li><%= error.full_message %></li>
-                <% end %>
-            </ul>
-        </div>
-    <% end %>
-</div>
-    
-<%= form_with(model: @brand, url: system_brand_path) do |f| %>
-
-    <div class="form-group row">
-        <%= f.label :name, class: "col-md-3 col-form-label" %>
-        <%= f.text_field :name, class: "form-control"  %>
+<% if @offer_carosel_image.errors.any? %>
+    <div id="error_explanation">
+        <h2><%= pluralize(@offer_carosel_image.errors.count, "error") %> found:</h2>
+        <ul>
+            <% @offer_carosel_image.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+            <% end %>
+        </ul>
     </div>
+<% end %>
+
+<%= form_with(model: @offer_carosel_image, url: system_offer_carosel_image_path) do |f| %>
 
     <div class="form-group row">
         <%= f.label :image, class: "col-md-3 col-form-label" %>
@@ -122,13 +122,13 @@ div.form-group.row {
     </div>
     
     <div class="form-group row">
-        <%= image_tag @brand.image.url, class: "form-control image-tag col-lg-2" if @brand.image.url %>
+        <%= image_tag @offer_carosel_image.image.url, class: "form-control image-tag col-lg-2" if @offer_carosel_image.image.url %>
     </div>
     
     <div class="row mt-5 actions">
         <!--btns-->
         <div class="btn col-lg-6">
-            <%= link_to 'Cancel', system_brands_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
+            <%= link_to 'Cancel', system_offer_carosel_images_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
         </div>
 
         <div class="btn col-lg-6">

@@ -36,10 +36,23 @@ class System::UsersController < Devise::SessionsController
     def login
       super
     end
+
+    def new_user
+      @user = User.new
+    end
   
     # POST /resource/sign_in
-    def create
-      super
+    def create_user
+      @user = User.new(user_params)
+      if @user.valid?
+        @user.save
+        redirect_to system_users_index_path
+        flash[:notice] = "User created successfully."
+      else
+        render :new_user
+        flash[:alert] = "Error creating user!"
+      end
+      # super
       # after_sign_in_path_for
     end
 
@@ -63,5 +76,11 @@ class System::UsersController < Devise::SessionsController
     # def configure_sign_in_params
     #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
     # end
+
+    private
+
+    def user_params
+      params.require(:user).permit(:email, :name, :password, :password_confirmation, :role_id, :branch_id)
+    end
   end
   

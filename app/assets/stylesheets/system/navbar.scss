@@ -48,6 +48,11 @@
     outline: 0;
 }
 
+.dropdown:hover .dropdown-content {
+    display: block;
+    margin-top: 0; // remove the gap so it doesn't close
+}
+
 .d-flex {
     padding-left: 0;
 }

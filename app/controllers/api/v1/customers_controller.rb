@@ -43,7 +43,7 @@ class Api::V1::CustomersController < ApplicationController
     }, status: :ok
 
     @customer.update(has_new_notification: false)
-    puts "=========> customer #{@customer.id} has new notification updated to false!"
+    # puts "=========> customer #{@customer.id} has new notification updated to false!"
   end
 
   def verify_account
@@ -198,7 +198,7 @@ class Api::V1::CustomersController < ApplicationController
 
   # Update
   def update
-    puts "========> In customers controller : #{params}"
+    # puts "========> In customers controller : #{params}"
     begin
       update_params.empty?
     rescue
@@ -264,10 +264,10 @@ class Api::V1::CustomersController < ApplicationController
 
   def set_customer
     if header_token
-      puts "==========> header token #{header_token}"
+      # puts "==========> header token #{header_token}"
       @customer = Customer.find_by(token: header_token)
     elsif params[:mobile]
-      puts "==========> params[:mobile] #{params[:mobile]}"
+      # puts "==========> params[:mobile] #{params[:mobile]}"
       @customer = Customer.find_by(mobile: params[:mobile])
     end
   end

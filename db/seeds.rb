@@ -1,8 +1,8 @@
 if Rails.env.development?
   if Customer.count.zero?
     puts "Create Test Customers started at #{DateTime.now.strftime("%H:%M:%S")}"
-    Customer.find_or_create_by(name: "Ahmed Karim", email: "ahmed.karim@gmail.com", 
-      password: "password", mobile: "01009051431")
+    Customer.find_or_create_by(name: "Ahmed Kareem", email: "ahmed.kareem.elshawadfy@gmail.com", 
+      password: "Pass_123!", mobile: "01009051431")
 
     Customer.find_or_create_by(name: "Omar Badreldin", email: "omar.badreldin@gmail.com", 
       password: "password", mobile: "01271307341")

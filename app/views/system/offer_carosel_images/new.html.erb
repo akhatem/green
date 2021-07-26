@@ -1,0 +1,116 @@
+<style>
+
+/* tabs */
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    background-color: #1ab359;
+    color: #fff;
+    width: 125px;
+    margin: 0 10px;
+    height: 40px;
+}
+
+.nav-pills .nav-link {
+    color: #2b2b2b;
+}
+
+h2 {
+    font-size: 18px;
+    padding: 10px 0;
+    color: #006B2D;
+}
+
+
+/* input feilds */
+
+.form-select {
+    width: 50%
+}
+
+.form-control {
+    width: 50%;
+}
+
+
+/* end of input feilds */
+
+div.form-group.row {
+    text-align: center;
+    margin-left: 0px;
+    margin-top: 15px;
+}
+
+.btn-outline-success {
+    padding-top: 1px;
+    text-align: center;
+    white-space: normal;
+    border-color: #00AB47;
+    width: 50%;
+    height: 36px;
+    font-size: 16px;
+}
+
+.btn-outline-secondary {
+    padding-top: 1px;
+    text-align: center;
+    white-space: normal;
+    border: 1px solid #ced4da;
+    width: 50%;
+    height: 36px;
+    font-size: 16px;
+}
+
+
+
+.required:after {
+    content:" *";
+    color: red;
+}
+
+.details-tab{
+    margin-left: 150px;
+    text-align: center;
+    border: 1px solid #ced4da;
+    border-radius: 7px;
+}
+
+</style>
+
+<% if @offer_carosel_image.errors.any? %>
+    <div id="error_explanation">
+        <h2 style= "color:red;"><%= pluralize(@offer_carosel_image.errors.count, "error") %> found:</h2>
+        <ul>
+            <% @offer_carosel_image.errors.each do |error| %>
+            <li style= "color:red;"><%= error.full_message %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="details-tab">Add new Offer Carosel Image</h2>
+    </div>
+</div>
+
+<%= form_with(model: OfferCaroselImage.new, url: system_offer_carosel_images_path) do |f| %>
+
+    <div class="form-group row">
+        <%= f.label :image, class: "col-md-3 col-form-label required" %>
+        <%= image_tag f.object.image_url, style: "max-width: 280px;"  if f.object.image_was %>
+        <%= f.hidden_field :image, value: f.object.image_was %>
+        <%= f.file_field :image, class: "form-control" %>
+    </div>
+    
+    <div class="row mt-5 mb-5 actions">
+        <!--btns-->
+        <div class="btn col-lg-6">
+            <%= link_to 'Cancel', system_offer_carosel_images_path, class: "btn btn-outline-success btn-sm" %>
+        </div>
+
+        <div class="btn col-lg-6">
+            <%= f.submit "Save", class: "btn btn-outline-success btn-sm" %>
+        </div>
+    </div>
+<% end %>

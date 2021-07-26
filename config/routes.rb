@@ -7,15 +7,21 @@ Rails.application.routes.draw do
   # namespace system
   namespace :system do
     
-    devise_for :users, path: '/users', path_names: {sign_in: 'login', sign_out: 'logout'}
+    devise_for :users, path: '/users', path_names: {sign_in: 'login', sign_out: 'logout'}, controllers: {registrations: 'users/new_user'}
     devise_scope :system_user do
       get '/users/index', to: "users#index"
       get "/users/:id/show", to: "users#show"
       put "/users/:id/edit", to: "users#edit"
+      get '/users/new', to: "users#new_user"
+      post '/users/create', to: "users#create_user"
       delete '/users/:id/delete', to: "users#destroy"
     end
     
     root to: 'static_pages#index'
+
+    
+    # Offer Carosel Images
+    resources :offer_carosel_images
     
     
     # Cashier Pages

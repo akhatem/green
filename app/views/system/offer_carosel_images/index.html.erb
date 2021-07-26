@@ -1,0 +1,42 @@
+<!-- <div class="col-lg-7">
+    <div class="row">
+        <div class="col-md-3 main-btns">
+            <%#= link_to "Clear Search", system_items_path, class: "btn btn-outline-success btn-sm", type: "button" %>
+        </div>
+        <div class="col-md-4">
+            <%#= form_for "", url: system_items_path, role: "search", method: :get do %>
+                <%#= text_field_tag :search, @search_term, placeholder: "Search by id or name or category or brand", style: "text-align: center;" %>
+            <%# end %>
+        </div>
+    </div>
+</div> -->
+<div class="col-lg-5 main-btns">
+    <%= link_to "Add new Offer Carosel Image", new_system_offer_carosel_image_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
+</div>
+
+<table class="table mt-2">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">File Name</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @offer_carosel_images.each do |offer_carosel_image| %>
+        <tr>
+            <th scope="row">
+                <%= offer_carosel_image.id %>
+            </th>
+            <td><%= offer_carosel_image.image.identifier %></td>
+            <td><%= offer_carosel_image.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td>
+            
+            <td class="table-action">
+                <%= link_to '', edit_system_offer_carosel_image_path(offer_carosel_image), class: "fa fa-edit" %>
+                <%= link_to '', system_offer_carosel_image_path(offer_carosel_image), method: :delete, data: {confirm: "Are you sure?"}, class: "fa fa-trash" %>
+            </td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>

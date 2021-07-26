@@ -43,16 +43,43 @@ class Api::V1::OffersController < ApplicationController
   
     def offers_carosel
       offers = Offer.select(:id, :title, :image).order(created_at: :desc).where(state: 1).limit(4)
-      render json:{
-        data: offers.map{ |offer|
-          {
-            id: offer.id,
-            title: offer.title,
-            image: offer.image.url
-            
+      offer_carosel_images = OfferCaroselImage.select(:id, :image).order(created_at: :desc).limit(4)
+
+      if offers.any?
+        render json:{
+          data: offers.map{ |offer|
+            {
+              id: offer.id,
+              title: offer.title,
+              image: offer.image.url
+              
+            }
           }
-        }
-      }, status: :ok
+        }, status: :ok
+      else
+        render json:{
+          data: offer_carosel_images.map{ |offer_carosel_image|
+            {
+              id: offer_carosel_image.id,
+              title: "",
+              image: offer_carosel_image.image.url
+              
+            }
+          }
+        }, status: :ok
+      end
     end
   end
+
+
+  # render json:{
+  #   data: offers.map{ |offer|
+  #     {
+  #       id: offer.id,
+  #       title: offer.title,
+  #       image: offer.image.url
+        
+  #     }
+  #   }
+  # }, status: :ok
   
