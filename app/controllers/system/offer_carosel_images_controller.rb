@@ -36,7 +36,7 @@ class System::OfferCaroselImagesController < ApplicationController
     respond_to do |format|
       if @offer_carosel_image.update(offer_carosel_image_params)
         format.html { redirect_to system_offer_carosel_images_path, notice: "Offer Carosel Image was updated successfully." }
-        format.json { render :index, status: :ok, location: offer_carosel_image }
+        format.json { render :index, status: :ok, location: @offer_carosel_image }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @offer_carosel_image.errors, status: :unprocessable_entity }

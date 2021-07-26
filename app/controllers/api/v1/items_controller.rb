@@ -48,7 +48,7 @@ class Api::V1::ItemsController < ApplicationController
            sizes: item.item_sizes.map{ |item_size| 
             { 
                name: item_size.sizeName,
-               price: item_size.pricing
+               price: item_size.price.to_f
             } 
             },
            descirption: item.description
