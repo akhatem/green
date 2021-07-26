@@ -14,7 +14,6 @@ class Api::V1::ItemsController < ApplicationController
               { 
                  name: item_size.sizeName,
                  price: item_size.price.to_f
-               #   price: item_size.pricing
               } 
            },
            description: item.description
