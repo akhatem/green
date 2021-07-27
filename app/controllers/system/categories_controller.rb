@@ -3,6 +3,10 @@ class System::CategoriesController < System::SystemApplicationController
     
     def index
         @pagy, @categories = pagy(Category.all.order(id: :asc))
+        if params[:search]
+            @search_term = params[:search]
+            @categories = @categories.search_by(@search_term)
+        end
     end
 
     def show

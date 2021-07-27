@@ -1,16 +1,13 @@
-    <div class="col-lg-7">
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter</button>
-            <div class="dropdown-menu">
-                <a class="dropdown-size" href="#">Name</a>
-                <div role="separator" class="dropdown-divider"></div>
-                <a class="dropdown-size" href="#">Created at</a>
-                <!-- <a class="dropdown-size" href="#">Updated at</a> -->
-            </div>
+<div class="col-lg-7">
+    <div class="row">
+        <div class="col-md-3 main-btns">
+            <%= link_to "Clear Search", system_sizes_path, class: "btn btn-outline-success btn-sm", type: "button" %>
         </div>
-        <span class="input-group-text input-search" id="addon-wrapping"><i class="fa fa-search"></i> </span>
-        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+        <div class="col-md-4">
+            <%= form_for "", url: system_sizes_path, role: "search", method: :get do %>
+                <%= text_field_tag :search, @search_term, placeholder: "Search by id or name", style: "text-align: center;" %>
+            <% end %>
+        </div>
     </div>
 </div>
 <div class="col-lg-5 main-btns">
@@ -25,7 +22,6 @@
             <th scope="col">Id</th>
             <th scope="col">Name</th>
             <th scope="col">Created At</th>
-            <!-- <th scope="col">Updated At</th> -->
             <th scope="col">Actions</th>
         </tr>
     </thead>
@@ -37,7 +33,6 @@
             </th>
             <td><%= size.name %></td>
             <td><%= size.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td>
-            <!-- <td><%#= size.updated_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td> -->
             <td class="table-action">
                 <%= link_to '', edit_system_size_path(size), class: "fa fa-edit" %>
                 <%= link_to '', system_size_path(size), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>

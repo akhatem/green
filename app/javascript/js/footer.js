@@ -6,8 +6,8 @@
     // console.log(document.body.classList[0]);
     // window_h = window.screen.availHeight;
     // console.log("window height: ", window_h);
-    if (currentScroll <= 250) {
-      console.log("currentScroll <= 250");
+    if (currentScroll < 200) {
+      console.log("currentScroll < 200");
       footer.style.display = "none";
       return;
     }

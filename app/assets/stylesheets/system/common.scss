@@ -105,3 +105,15 @@ div.form-group.row {
     float: right;
     margin-bottom: 30px;
 }
+
+.required:after {
+    content:" *";
+    color: red;
+}
+
+.details-tab{
+    margin-left: 150px;
+    text-align: center;
+    border: 1px solid #ced4da;
+    border-radius: 7px;
+}

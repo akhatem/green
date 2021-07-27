@@ -3,6 +3,10 @@ class System::SizesController < System::SystemApplicationController
     
     def index
         @pagy, @sizes = pagy(Size.all.order(id: :asc))
+        if params[:search]
+          @search_term = params[:search]
+          @sizes = @sizes.search_by(@search_term)
+        end
     end
 
     def new
