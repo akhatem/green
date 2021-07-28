@@ -32,7 +32,7 @@ Built this app using the following:
 * gem 'web-console', '>= 4.1.0'
 * gem 'rack-mini-profiler', '~> 2.0'
 * gem 'spring'
-` For Production "Capistrano" `
+* ` For Production "Capistrano" `
   * gem 'capistrano', '~> 3.11'
   * gem 'capistrano-rails', '~> 1.4'
   * gem 'capistrano-passenger', '~> 0.2.0'
