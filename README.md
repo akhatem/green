@@ -1,4 +1,4 @@
-# README
+# About Green Application
 # green application with APIs for both Android and IOS mobiles deployed to digitalocean droplet
 
 # Screenshots from the application uploaded to digitalocean spaces
