@@ -10,7 +10,6 @@
 * https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_brands_starbucks_edit.png
 * https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_brands.png
 * https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_categories.png
-* https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_categories.png
 * https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_cities.png
 * https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_items.png
 * https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_notifications.png
