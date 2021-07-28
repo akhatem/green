@@ -17,7 +17,7 @@ class Item < ApplicationRecord
     belongs_to :category
     
     has_many :item_sizes, dependent: :destroy
-    has_many :sizes, through: :item_size, dependent: :destroy
+    has_many :sizes, through: :item_sizes, dependent: :destroy
     accepts_nested_attributes_for :item_sizes, allow_destroy: true, reject_if: :all_blank
     
     mount_uploader :image, ItemImageUploader
