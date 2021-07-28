@@ -10,15 +10,10 @@
 #  price      :decimal(10, 2)
 #
 class ItemSize < ApplicationRecord
-    include ActionView::Helpers::NumberHelper
     belongs_to :item
     belongs_to :size
 
     validates :item_id, uniqueness: { scope:  :size_id }
-
-    # def pricing
-    #     number_with_precision(self.price, precision: 2)
-    # end
 
     def sizeName
         Size.find(self.size_id).name

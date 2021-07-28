@@ -19,7 +19,7 @@ class System::SizesController < System::SystemApplicationController
       respond_to do |format|
           if @size.save
               format.html { redirect_to system_sizes_path, notice: "Size #{@size.name} was successfully created." }
-            #   format.json { render :show, status: :created, location: @size }
+              format.json { render :index, status: :created }
           else
               format.html { render :new, status: :unprocessable_entity }
               format.json { render json: @size.errors, status: :unprocessable_entity }
@@ -35,7 +35,7 @@ class System::SizesController < System::SystemApplicationController
       respond_to do |format|
         if @size.update(size_params)
           format.html { redirect_to system_sizes_path, notice: "Size was successfully updated." }
-          format.json { render :show, status: :ok, location: @size }
+          format.json { render :index, status: :ok }
         else
           format.html { render :edit, status: :unprocessable_entity }
           format.json { render json: @size.errors, status: :unprocessable_entity }
@@ -59,6 +59,6 @@ class System::SizesController < System::SystemApplicationController
     end
   
     def size_params
-        params.require(:size).permit(:name, :price)
+        params.require(:size).permit(:name)
     end
 end
