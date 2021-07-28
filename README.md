@@ -1,10 +1,11 @@
 # About Green Application
 # green application with APIs for both Android and IOS mobiles deployed to digitalocean droplet
-1* APIs for Android and IOS apps. Menu and barcode with points system per customer. 
-2* Admin page for managing the application which includes  *customers, system users, receipts, points movements, sms messages, system settings, branches, account verification and password reset verification via OTP api*. 
-## Deploy to DigitalOcean droplet
-## Digitalocean spaces for uploading files. 
-## Customize the application for production.
+* APIs for Android and IOS apps. Menu and barcode with points system per customer. 
+* Admin page for managing the application which includes  *customers, system users, receipts, points movements, sms messages, system settings, branches, account verification and password reset verification via OTP api*. 
+
+` Deploy to DigitalOcean droplet.
+` Digitalocean spaces for uploading files. 
+` Customize the application for production.
 
 Built this app using the following:
 * *Ruby on Rails*
