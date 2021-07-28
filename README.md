@@ -39,7 +39,7 @@ Built this app using the following:
   * gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
 
 ###### Additional gems
-*gem 'barby'
+* gem 'barby'
 * gem 'rack-cors'
 * gem 'chunky_png'
 * gem 'devise'
