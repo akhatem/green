@@ -8,11 +8,11 @@
 * ` Customize the application for production. `
 
 Built this app using the following:
-* ` *Ruby on Rails* `
-* ` *Javascript* `
-* ` *HTML5* `
-* ` *CSS* `
-* ` *Bootstrap* `
+* ` Ruby on Rails `
+* ` Javascript `
+* ` HTML5 `
+* ` CSS `
+* ` Bootstrap `
 
 # Screenshots from the application uploaded to digitalocean spaces
 * https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_branches_edit.png
