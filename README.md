@@ -1,6 +1,13 @@
 # About Green Application
 # green application with APIs for both Android and IOS mobiles deployed to digitalocean droplet
 
+Built this app using the following:
+* *Ruby on Rails*
+* *Javascript*
+* *HTML5*
+* *CSS*
+* *Bootstrap*
+
 # Screenshots from the application uploaded to digitalocean spaces
 * https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_branches_edit.png
 * https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_branches_show.png
