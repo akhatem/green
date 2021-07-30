@@ -1,6 +1,6 @@
 Sidekiq.configure_server do |config|
 
-  config.redis = { url: 'redis://redis.green.mmgunited.com:6379/0' }
+  config.redis = { url: 'redis://redis.green.mmgunited.com:7372/0' }
   schedule_file = "config/schedule.yml"
 
   if File.exists?(schedule_file)
@@ -9,5 +9,5 @@ Sidekiq.configure_server do |config|
 end
 
 Sidekiq.configure_client do |config|
-  config.redis = { url: 'redis://redis.green.mmgunited.com:6379/0' }
+  config.redis = { url: 'redis://redis.green.mmgunited.com:7372/0' }
 end

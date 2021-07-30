@@ -65,8 +65,11 @@ Rails.application.routes.draw do
     resources :offers, except: [:destroy]
 
     # mount Ckeditor::Engine => '/ckeditor'
+    
+    # Sms Messages
     resources :sms_messages
 
+    # Settings
     resources :settings
     
   end # namespace system
