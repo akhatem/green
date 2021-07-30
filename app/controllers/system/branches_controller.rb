@@ -1,5 +1,7 @@
 class System::BranchesController < System::SystemApplicationController
     before_action :set_branch, only: [:show, :edit, :update, :destroy]
+
+    
     
     def index
         @pagy, @branches = pagy(Branch.all.order(id: :asc))
@@ -10,7 +12,7 @@ class System::BranchesController < System::SystemApplicationController
     end
 
     def show
-        @branch
+        
     end
 
     def new
@@ -61,6 +63,7 @@ class System::BranchesController < System::SystemApplicationController
 
     def set_branch
         @branch = Branch.find(params[:id])
+        authorize @branch
     end
 
     def branch_params

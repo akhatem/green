@@ -129,7 +129,11 @@ if Rails.env.development?
 
   Role.create!(id: 1, name: "Super", key: "super", description: "Full access", is_super: true)
   Role.create!(id: 2, name: "Cashier", key: "cashier", description: "Only Cashier specified pages", is_super: false)
+  Role.create!(id: 3, name: "Admin", key: "admin", description: "Only admin pages", is_super: false)
+  
   User.create(name: "Omar Ali", email: "omar.ali@green.com", password: "pass123", password_confirmation: "pass123", role_id: 2, branch_id: 1)
+  
+  # User.create(name: "Hatem Mohamed", email: "hatem.mohamed@green.com", password: "Password_123", password_confirmation: "Password_123", role_id: 3, branch_id: 1)
   
   User.create!(name: "Ahmed Kareem", email: "ahmed.kareem.elshawadfy@gmail.com", password: "Root123",
     password_confirmation: "Root123", role_id: 1, branch_id: 1)
@@ -188,3 +192,8 @@ end
 
 
 # Customer.reset_counters Customer.all.length - 1
+
+
+# ActiveRecord::Base.connection.tables.each do |t|
+#   ActiveRecord::Base.connection.reset_pk_sequence!(t)
+# end

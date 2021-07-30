@@ -7,12 +7,12 @@ class ApplicationPolicy
   end
 
   def index?
-    !@user.role.name.eql?("Cashier")
+    !@user.roleKey.eql?("Cashier")
   end
 
   def show?
-    false
-    # !@user.role.name.eql?("Cashier")
+    # false
+    !user.roleKey.eql?("admin")
   end
 
   def create?

@@ -18,7 +18,9 @@ class Role < ApplicationRecord
 
     validates_presence_of :name
     validates_uniqueness_of :name, case_sensitive: false
-    # validates_uniqueness_of :key, case_sensitive: false
+    validates_uniqueness_of :key, case_sensitive: false
+
+    after_create :generate_role_key
 
     def self.get_super
         self.where(is_super: true).first
@@ -26,5 +28,11 @@ class Role < ApplicationRecord
 
     def is_super?
         self.is_super
+    end
+    
+    private
+
+    def generate_role_key
+        self.update(key: self.name.gsub(' ', '').underscore)
     end
 end

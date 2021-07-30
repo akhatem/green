@@ -29,6 +29,10 @@ class User < ApplicationRecord
     self.role.is_super?
   end
 
+  def roleKey
+    Role.find(self.role_id).key
+  end
+
   def self.search_by(search_term)
     where("id = ?", search_term.to_i)
     .or(where("name ILIKE ?", "%" + search_term + "%"))

@@ -1,7 +1,5 @@
 class ApplicationController < ActionController::Base
     include Rails::Pagination
-    include Pagy::Backend
-    include Pundit
     
     protect_from_forgery prepend: true, with: :null_session
 
