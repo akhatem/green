@@ -183,10 +183,15 @@ div.form-group.row {
 </style>
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-6">
         <h2 style="text-align: center;">Basic Info</h2>
     </div>
+    <div class="col-md-6">
+        <%# byebug %>
+        <%= link_to "Edit", edit_system_setting_path(@setting), class: "btn btn-primary edit-btn" %>
+    </div>
 </div>
+
 <form>
     <div class="form-group row" style="text-align:center;">
         <label for="customersId" class="col-md-3 col-form-label">ID</label>

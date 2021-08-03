@@ -64,52 +64,46 @@ div.form-group.row {
 
 </style>
 
-<div>
-    <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
-            <!--form-->
-            <div class="row">
-                <div class="col-md-3">
-                    <h2 style="text-align: center;">Edit Setting</h2>
-                </div>
-
-            </div>                
-                <%= form_with(model: @setting, url: system_setting_path) do |f| %>
-                    <%= f.hidden_field :id %>
-                    <% if @setting.errors.any? %>
-                        <div id="error_explanation" class="row">
-                            <div class="col-md-4">
-                                <h3><%= pluralize(@setting.errors.count, "error") %> found:</h3>
-                                <ul>
-                                    <% @setting.errors.each do |error| %>
-                                        <li><%= error.full_message %></li>
-                                    <% end %>
-                                </ul>
-                            </div>
-                        </div>
-                    <% end %>
-
-                    <div class="form-group row">
-                        <%= f.label :name, class: "col-md-3 col-form-label" %>
-                        <%= f.text_field :name, class: "form-control"  %>
-                    </div>
-
-                    <div class="form-group row">
-                        <%= f.label :descrption, class: "col-md-3 col-form-label" %>
-                        <%= f.cktext_area :description, class: "form-control", as: :ckeditor, input_html: { ckeditor: { toolbar: 'Full' }}  %>
-                    </div>
-                    
-                    <div class="row mt-5 actions">
-                        <!--btns-->
-                        <div class="btn col-lg-6">
-                            <%= link_to 'Cancel', system_settings_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
-                        </div>
-
-                        <div class="btn col-lg-6">
-                            <%= f.submit "Save", class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
-                        </div>
-                    </div>
-                <% end %>
-        </div>
+<div class="row">
+    <div class="col-md-3">
+        <h2 style="text-align: center;">Edit Setting</h2>
     </div>
 </div>
+
+<% if @setting.errors.any? %>
+    <div id="error_explanation" class="row">
+        <div class="col-md-4">
+            <h3><%= pluralize(@setting.errors.count, "error") %> found:</h3>
+            <ul>
+                <% @setting.errors.each do |error| %>
+                    <li><%= error.full_message %></li>
+                <% end %>
+            </ul>
+        </div>
+    </div>
+<% end %>
+
+<%= form_with(model: @setting, url: system_setting_path) do |f| %>
+    <%= f.hidden_field :id %>
+
+    <div class="form-group row">
+        <%= f.label :name, class: "col-md-3 col-form-label" %>
+        <%= f.text_field :name, class: "form-control"  %>
+    </div>
+
+    <div class="form-group row">
+        <%= f.label :descrption, class: "col-md-3 col-form-label" %>
+        <%= f.cktext_area :description, class: "form-control", as: :ckeditor, input_html: { ckeditor: { toolbar: 'Full' }}  %>
+    </div>
+    
+    <div class="row mt-5 actions">
+        <!--btns-->
+        <div class="btn col-lg-6">
+            <%= link_to 'Cancel', system_settings_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
+        </div>
+
+        <div class="btn col-lg-6">
+            <%= f.submit "Save", class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
+        </div>
+    </div>
+<% end %>
