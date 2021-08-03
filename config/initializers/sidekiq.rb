@@ -1,6 +1,6 @@
 Sidekiq.configure_server do |config|
 
-  config.redis = { url: 'redis://redis.example.com:7372/0' }
+  # config.redis = { url: 'redis://127.0.0.1:7372/0' }
   schedule_file = "config/schedule.yml"
 
   if File.exists?(schedule_file)
@@ -8,6 +8,6 @@ Sidekiq.configure_server do |config|
   end
 end
 
-Sidekiq.configure_client do |config|
-  config.redis = { url: 'redis://redis.example.com:7372/0' }
-end
+# Sidekiq.configure_client do |config|
+  # config.redis = { url: 'redis://127.0.0.1:7372/0' }
+# end

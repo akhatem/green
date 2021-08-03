@@ -11,7 +11,6 @@
 #  image       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  is_default  :boolean          default(FALSE)
 #
 
 # This model initially had no columns defined. If you add columns to the

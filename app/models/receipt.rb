@@ -40,11 +40,11 @@ class Receipt < ApplicationRecord
     def self.search_by(search_term)
         joins(:customer)
         .includes(:customer)
-        .where("LOWER(customers.name) LIKE ?", "%" + search_term.downcase + "%")
+        .where("customers.name ILIKE ?", "%" + search_term + "%")
         .or( where('Receipts.id = ?', search_term.to_i) )
         .joins(:user)
         .includes(:user)
-        .or(where("LOWER(users.name) LIKE ?", "%" + search_term.downcase + "%"))
+        .or(where("users.name ILIKE ?", "%" + search_term + "%"))
     end
     
 

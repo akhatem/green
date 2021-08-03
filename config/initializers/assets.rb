@@ -15,4 +15,6 @@ Rails.application.config.assets.precompile += %w[ckeditor/config.js]
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 
-Rails.application.config.assets.precompile += %w( application.js application.scss )
+Rails.application.config.assets.precompile += %w( application.js application.scss blueprint/screen.css pdf.css pdf.js)
+# config.assets.precompile += ['blueprint/screen.css', 'pdf.css', 'jquery.ui.datepicker.js', 'pdf.js', ...etc...]
+

@@ -24,11 +24,6 @@ Rails.application.routes.draw do
     resources :offer_carosel_images
     
     
-    # Cashier Pages
-    get "/barcode_search", to: "static_pages#barcode_search"
-    get "/customer_info/:decoded_barcode", to: "static_pages#customer_info", as: 'customer_info'
-    get '/redeem_points/:receipt_number', to: "static_pages#redeem_points", as: 'redeem_points'
-    
     resources :points_movements, only: [:index, :show, :new, :create]
 
     # Receipts
@@ -63,8 +58,6 @@ Rails.application.routes.draw do
 
     # Offers
     resources :offers, except: [:destroy]
-
-    # mount Ckeditor::Engine => '/ckeditor'
     
     # Sms Messages
     resources :sms_messages
@@ -72,7 +65,18 @@ Rails.application.routes.draw do
     # Settings
     resources :settings
     
+    # mount Ckeditor::Engine => '/ckeditor'
+    # Sidekiq
+    mount Sidekiq::Web => "/sidekiq"
+    
   end # namespace system
+
+  namespace :cashier do
+    # Cashier Pages
+    get "/barcode_search", to: "cashier_pages#barcode_search"
+    get "/customer_info/:decoded_barcode", to: "cashier_pages#customer_info", as: 'customer_info'
+    get '/redeem_points/:receipt_number', to: "cashier_pages#redeem_points", as: 'redeem_points'
+  end
 
   # namespace Api::V1
   namespace :api do

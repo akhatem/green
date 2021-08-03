@@ -1,0 +1,26 @@
+<table class="table mt-2">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Branch</th>
+            <th scope="col">System User</th>
+            <th scope="col">Receipt Number</th>
+            <th scope="col">Total Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @receipts.each do |receipt| %>
+            <tr>
+                <th scope="row">
+                    <%= link_to receipt.id, system_receipt_path(receipt), style: "color: green" %>
+                </th>
+                <td><%= link_to receipt.customerName, system_customer_path(receipt.customer_id), style: "color: green" %></td>
+                <td><%= link_to receipt.branchName, system_branch_path(receipt.branch_id), style: "color: green" %></td>
+                <td><%= receipt.userName %></td>
+                <td><%= receipt.number %></td>
+                <td><%= receipt.total_price %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

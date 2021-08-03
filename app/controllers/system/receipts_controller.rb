@@ -8,6 +8,15 @@ class System::ReceiptsController < System::SystemApplicationController
             @search_term = params[:search]
             @receipts = @receipts.search_by(@search_term)
         end
+
+        respond_to do |format|
+            format.html
+            format.pdf do
+              render pdf: "#{params[:controller].split('/').second}_#{DateTime.now.strftime('%d/%m/%Y')}", 
+                template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_index_pdf.html.erb",
+                  header: { right: '[page] of [topage]' }, page_offset: 0
+            end
+        end
     end
 
     def show
@@ -22,12 +31,12 @@ class System::ReceiptsController < System::SystemApplicationController
         receipt = Receipt.new(receipt_params)
         respond_to do |format|
             if receipt.save
-                format.html { redirect_to system_redeem_points_path(receipt.number), 
+                format.html { redirect_to cashier_redeem_points_path(receipt.number), 
                     notice: "Receipt #{receipt.number} was successfully created." }
                 format.json { render :redeem_points, status: :created }
             else
                 @customer = Customer.find_by(decoded_barcode: receipt.customer.decoded_barcode)
-                format.html { redirect_to system_customer_info_path(receipt.customer.decoded_barcode), 
+                format.html { redirect_to cashier_customer_info_path(receipt.customer.decoded_barcode), 
                     alert: receipt.errors.full_messages, status: :unprocessable_entity }
                 format.json { render json: receipt.errors.full_messages, status: :unprocessable_entity }
                 

@@ -1,20 +1,3 @@
-<div class="col-lg-7">
-    <div class="row">
-        <div class="col-md-3 main-btns">
-            <%= link_to "Clear Search", system_points_movements_path, class: "btn btn-outline-success btn-sm", type: "button" %>
-        </div>
-        <div class="col-md-4">
-            <%= form_for "", url: system_points_movements_path, role: "search", method: :get do %>
-                <%= text_field_tag :search, @search_term, placeholder: "Search by id or create date", style: "text-align: center;" %>
-            <% end %>
-        </div>
-    </div>
-</div>
-
-<div class="col-lg-5 main-btns">
-    <%= link_to "Export as PDF", system_points_movements_path(format: :pdf), class: "btn btn-outline-success btn-sm", type: "button"  %>
-</div>
-
 <table class="table mt-2">
     <thead>
         <tr>
@@ -25,7 +8,6 @@
             <th scope="col">Earned</th>
             <th scope="col">Redeemed</th>
             <th scope="col">Total Points</th>
-            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -40,9 +22,6 @@
             <td><%= points_movement.earned %></td>
             <td><%= -points_movement.redeemed %></td>
             <td><%= points_movement.total %></td>
-            <td class="table-action">
-                <%= link_to '', system_points_movement_path(points_movement), class: "fa fa-eye" %>
-            </td>
         </tr>
     <% end %>
     </tbody>

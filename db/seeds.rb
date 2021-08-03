@@ -167,6 +167,7 @@ if Rails.env.production?
   #   ItemSize.create(eis.attributes)
   # end
 
+  Role.create!(id: 1, name: "Super", key: "super", description: "Full access", is_super: true)
 
   User.create!(name: "Yara Samy", email: "yara.samy@green.com", password: "yara12345",
       password_confirmation: "yara12345", role_id: 1, branch_id: 1)

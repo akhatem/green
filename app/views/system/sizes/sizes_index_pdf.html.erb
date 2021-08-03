@@ -1,0 +1,20 @@
+<table class="table mt-2">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Created At</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @sizes.each do |size| %>
+        <tr>
+            <th scope="row">
+                <%= size.id %>
+            </th>
+            <td><%= size.name %></td>
+            <td><%= size.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>

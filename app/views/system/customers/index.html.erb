@@ -12,8 +12,7 @@
 </div>
 
 <div class="col-lg-5 main-btns">
-        <button class="btn btn-outline-success btn-sm" type="button">Export as PDF</button>
-        <button class="btn btn-outline-success btn-sm" type="button">Export as Excel</button>
+        <%= link_to "Export as PDF", system_customers_path(format: :pdf), class: "btn btn-outline-success btn-sm", type: "button"  %>
 </div>    
 
 
@@ -26,7 +25,6 @@
             <th scope="col">Email</th>
             <th scope="col">Points</th>
             <th scope="col">Actions</th>
-
         </tr>
     </thead>
     <tbody>

@@ -8,6 +8,15 @@ class System::ItemsController < System::SystemApplicationController
       @search_term = params[:search]
       @items = @items.search_by(@search_term)
     end
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "#{params[:controller].split('/').second}_#{DateTime.now.strftime('%d/%m/%Y')}", 
+          template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_index_pdf.html.erb",
+            header: { right: '[page] of [topage]' }, page_offset: 0
+      end
+    end
   end
 
   def show

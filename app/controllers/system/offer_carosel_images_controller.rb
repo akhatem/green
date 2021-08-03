@@ -1,4 +1,4 @@
-class System::OfferCaroselImagesController < ApplicationController
+class System::OfferCaroselImagesController < System::SystemApplicationController
 
   before_action :set_offer_carosel_image, only: [:show, :edit, :update, :destroy]
   

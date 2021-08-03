@@ -9,6 +9,14 @@ class System::BranchesController < System::SystemApplicationController
             @search_term = params[:search]
             @branches = @branches.search_by(@search_term)
         end
+
+        respond_to do |format|
+            format.html
+            format.pdf do
+              render pdf: "#{params[:controller].split('/').second}_#{DateTime.now.strftime('%d/%m/%Y')}", 
+                template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_index_pdf.html.erb"
+            end
+        end
     end
 
     def show

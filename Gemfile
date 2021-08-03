@@ -88,7 +88,6 @@ gem 'sidekiq'
 gem 'sidekiq-cron'
 gem 'sidekiq-scheduler'
 
-
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 
@@ -116,5 +115,4 @@ gem 'aws-sdk-s3'
 gem 'httpclient'
 
 gem 'listen'
-gem 'semantic-ui-sass'
- 
+gem 'semantic-ui-sass' 

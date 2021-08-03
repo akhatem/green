@@ -13,7 +13,8 @@
 
 <div class="col-lg-5 main-btns">
     <%= link_to "Add new Branch", new_system_branch_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
-    <button class="btn btn-outline-success btn-sm" type="button">Export as PDF</button>
+    <%= link_to "Export as PDF", system_branches_path(format: :pdf), class: "btn btn-outline-success btn-sm", type: "button"  %>
+    <!-- <button class="btn btn-outline-success btn-sm" type="button">Export as PDF</button> -->
     <button class="btn btn-outline-success btn-sm" type="button">Export as Excel</button>
 </div>
 
@@ -29,19 +30,19 @@
     </thead>
     <tbody>
         <% @branches.each do |branch| %>
-        <tr>
-            <th scope="row">
-                <%= link_to branch.id, system_branch_path(branch), style: "color: green" %>
-            </th>
-            <td><%= link_to branch.name, system_branch_path(branch), style: "color: green" %></td>
-            <td><%= branch.address %></td>
-            <td><%= branch.cityName %></td>
-            <td class="table-action">
-                <%= link_to '', system_branch_path(branch), class: "fa fa-eye" %>
-                <%= link_to '', edit_system_branch_path(branch), class: "fa fa-edit" %>
-                <%= link_to '', system_branch_path(branch), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>
-            </td>
-        </tr>
-    <% end %>
+            <tr>
+                <th scope="row">
+                    <%= link_to branch.id, system_branch_path(branch), style: "color: green" %>
+                </th>
+                <td><%= link_to branch.name, system_branch_path(branch), style: "color: green" %></td>
+                <td><%= branch.address %></td>
+                <td><%= branch.cityName %></td>
+                <td class="table-action">
+                    <%= link_to '', system_branch_path(branch), class: "fa fa-eye" %>
+                    <%= link_to '', edit_system_branch_path(branch), class: "fa fa-edit" %>
+                    <%= link_to '', system_branch_path(branch), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>
+                </td>
+            </tr>
+        <% end %>
     </tbody>
 </table>

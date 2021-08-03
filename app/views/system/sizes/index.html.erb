@@ -12,8 +12,7 @@
 </div>
 <div class="col-lg-5 main-btns">
     <%= link_to "Add new Size", new_system_size_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
-    <button class="btn btn-outline-success btn-sm" type="button">Export as PDF</button>
-    <button class="btn btn-outline-success btn-sm" type="button">Export as Excel</button>
+    <%= link_to "Export as PDF", system_sizes_path(format: :pdf), class: "btn btn-outline-success btn-sm", type: "button"  %>
 </div>
 
 <table class="table mt-2">

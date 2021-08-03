@@ -11,6 +11,10 @@
     </div>
 </div>
 
+<div class="col-lg-5 main-btns">
+    <%= link_to "Export as PDF", system_receipts_path(format: :pdf), class: "btn btn-outline-success btn-sm", type: "button"  %>
+</div>
+
 <table class="table mt-2">
     <thead>
         <tr>
@@ -20,7 +24,7 @@
             <th scope="col">System User</th>
             <th scope="col">Receipt Number</th>
             <th scope="col">Total Price</th>
-            <th scope="col">Actions</th>
+            <!-- <th scope="col">Actions</th> -->
         </tr>
     </thead>
     <tbody>
@@ -34,10 +38,6 @@
             <td><%= receipt.userName %></td>
             <td><%= receipt.number %></td>
             <td><%= receipt.total_price %></td>
-            <td class="table-action">
-                <%= link_to '', system_receipt_path(receipt), class: "fa fa-eye" %>
-                <%#= link_to '', system_receipt_path(receipt), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>
-            </td>
         </tr>
     <% end %>
     </tbody>

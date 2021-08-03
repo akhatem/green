@@ -1,0 +1,24 @@
+<table class="table mt-2">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Mobile</th>
+            <th scope="col">Email</th>
+            <th scope="col">Points</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @customers.each do |customer| %>
+        <tr>
+            <th scope="row">
+                <%= link_to customer.id, system_customer_path(customer), style: "color: green" %>
+            </th>
+            <td><%= link_to customer.name, system_customer_path(customer), style: "color: green" %></td>
+            <td><%= customer.mobile %></td>
+            <td><%= customer.email %></td>
+            <td><%= customer.points %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>

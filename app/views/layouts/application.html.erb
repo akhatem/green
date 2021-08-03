@@ -14,6 +14,9 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
+    <%= wicked_pdf_stylesheet_link_tag "pdf" %>
+    <%= wicked_pdf_javascript_include_tag "number_pages" %>
+
     
 
   </head>
@@ -29,11 +32,11 @@
         <% end %>
         <div class="row">
           <div class="col-md-3 side-nav-col">
-            <% if system_user_signed_in? and !current_system_user.role.key.eql?("cashier") %>
+            <% unless params[:controller].split('/').first.eql?('cashier') %>
               <%= render "system/shared/sidebar" %>
             <% end %>
           </div>
-          <% if system_user_signed_in? and current_system_user.role.key.eql?("cashier") %>
+          <% if params[:controller].split('/').first.eql?('cashier') %>
             <div class="col-lg-12">
               <%= yield %>
             </div>
@@ -64,7 +67,9 @@
                   <%= render 'system/shared/pagination' %>
                 </div>
               <% end %>
-              <%= render 'system/shared/footer' %>
+              <% unless params[:controller].split('/').first.eql?('cashier') %>
+                <%= render 'system/shared/footer' %>
+              <% end %>
             </div>
           <% end %>
         </div>
