@@ -179,8 +179,8 @@ if Rails.env.production?
 
   Setting.find_or_create_by(id: 1, name: "About Us", description: "Welcome to Green App. This app is all about Green Cafe")
   Setting.find_or_create_by(id: 2, name: "Contact Us", description: "01014911173")
-  Setting.find_or_create_by(id: 2, name: "Redeem Equation", description: "total_price * 0.5")
-  Setting.find_or_create_by(id: 2, name: "Collect Equation", description: "total")
+  Setting.find_or_create_by(id: 3, name: "Redeem Equation", description: "total_price * 0.1")
+  Setting.find_or_create_by(id: 4, name: "Collect Equation", description: "previous_total_price * 0.5")
 
     # User.create!(name: "Yasser Fayez", email: "yasser.fayez.aboibrahim@gmail.com", password: "4455662@roD",
     #   password_confirmation: "4455662@roD", role_id: 1, branch_id: 1)
