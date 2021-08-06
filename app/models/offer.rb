@@ -26,7 +26,7 @@ class Offer < ApplicationRecord
     
     enum state: [ :expired, :valid ], _prefix: :state
 
-    after_save :create_notification
+    after_create :create_notification
     
     def dates
         self.errors.add(:end_at, :invalid) if end_at.present? && start_at.present? && end_at < start_at
@@ -35,18 +35,18 @@ class Offer < ApplicationRecord
     def self.search_by(search_term)
         where(state: search_term.downcase)
         .or(where("id = ?", search_term.to_i))
-        
-        
     end
 
     private
 
     def create_notification
-        if self.state.eql?(1)
+        # puts "================> HERE"
         text = <<-TEXT
 #{self.description}. \nfrom #{self.start_at} - to #{self.end_at}
         TEXT
+        # puts "================> text: #{text}"
+
         Notification.create(offer_id: self.id, title: self.title, description: text, create_date: Date.today)
-        end
+        # puts "================> notification valid?: #{notification.valid?}"
     end
 end

@@ -28,7 +28,9 @@
       <!-- Page <span class="page"></span> of <span class="topage"></span> -->
     </div>
     <div id="content">
-      <%= yield %>
+      <% if system_user_signed_in?  %>
+        <%= yield %>
+      <% end %>
     </div>
   </body>
 </html>
