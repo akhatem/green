@@ -54,10 +54,10 @@ Rails.application.routes.draw do
     resources :item_sizes, except: [:show]
 
     # Notifications
-    resources :notifications, except: [:destroy]
+    resources :notifications
 
     # Offers
-    resources :offers, except: [:destroy]
+    resources :offers
     
     # Sms Messages
     resources :sms_messages

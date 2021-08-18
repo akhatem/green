@@ -41,35 +41,74 @@ class Api::V1::OffersController < ApplicationController
       end
     end
   
-    def offers_carosel
-      offers = Offer.select(:id, :title, :image).order(created_at: :desc).where(state: 1).limit(4)
-      offer_carosel_images = OfferCaroselImage.select(:id, :image).order(created_at: :desc).limit(4)
+  #   def offers_carosel
+  #     offers = Offer.select(:id, :title, :image).order(created_at: :desc).where(state: 1).limit(4)
+  #     offer_carosel_images = OfferCaroselImage.select(:id, :image).order(created_at: :desc).limit(4)
 
-      if offers.any?
-        render json:{
-          data: offers.map{ |offer|
-            {
-              id: offer.id,
-              title: offer.title,
-              image: offer.image.url
+  #     if offers.any?
+  #       render json:{
+  #         data: offers.map{ |offer|
+  #           {
+  #             id: offer.id,
+  #             title: offer.title,
+  #             image: offer.image.url
               
-            }
-          }
-        }, status: :ok
-      else
-        render json:{
-          data: offer_carosel_images.map{ |offer_carosel_image|
-            {
-              id: offer_carosel_image.id,
-              title: "",
-              image: offer_carosel_image.image.url
+  #           }
+  #         }
+  #       }, status: :ok
+  #     else
+  #       render json:{
+  #         data: offer_carosel_images.map{ |offer_carosel_image|
+  #           {
+  #             id: offer_carosel_image.id,
+  #             title: "",
+  #             image: offer_carosel_image.image.url
               
-            }
-          }
-        }, status: :ok
-      end
+  #           }
+  #         }
+  #       }, status: :ok
+  #     end
+  #   end
+  # end
+
+  def offers_carosel
+    offers_images = []
+    # categories = Category.all.where(brand_id: params[:brand_id]).where.not("name = ? OR name = ?", "Extras", "Other Beverage")
+    offers = Offer.select(:id, :title, :image).order(created_at: :desc).where(state: 1).limit(4)
+    offer_carosel_images = OfferCaroselImage.select(:id, :image).order(created_at: :desc).limit(4)
+    offers.all.each do |offer|
+      offers_images.push(offer)
     end
-  end
+    
+    if offers_images.size.eql?(4)
+       render json: {
+          data: offers_images.map{ |offers_image|
+             {
+                id: offers_image.id,
+                title: offers_image.title.present? ? offers_image.title : "",
+                image: offers_image.image.url
+             }
+          }
+       }, status: :ok
+    else
+
+      offer_carosel_images.all.each do |offer_carosel_image|
+        offers_images.push(offer_carosel_image)
+      end
+      
+      render json: {
+        data: offers_images.map{ |offers_image|
+           {
+              id: offers_image.id,
+              title: offers_image.title.present? ? offers_image.title : "",
+              image: offers_image.image.url
+           }
+        }
+     }, status: :ok
+    end
+    end
+       
+   end
 
 
   # render json:{

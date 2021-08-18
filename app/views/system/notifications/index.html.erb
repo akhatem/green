@@ -43,7 +43,7 @@
             <td class="table-action">
                 <%= link_to '', system_notification_path(notification), class: "fa fa-eye" %>
                 <%= link_to '', edit_system_notification_path(notification), class: "fa fa-edit" %>
-                <%#= link_to '', system_notification_path(notification), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>
+                <%= link_to '', system_notification_path(notification), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>
             </td>
         </tr>
     <% end %>

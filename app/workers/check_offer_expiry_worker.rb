@@ -2,13 +2,12 @@ class CheckOfferExpiryWorker
     include Sidekiq::Worker
     
     def perform
-      puts "CheckOfferExpiryWorker : START"
-      Offer.all.where("end_at < ?",  Date.today).where(state: 1).each do |offer|
-          puts "-= Changing offer state from #{offer.state} =-"
+      puts "Checking for expired offers..."
+      Offer.all.where("end_at > ?",  DateTime.now).where(state: 1).each do |offer|
           offer.update(state: 0)
-          puts "-= Changed offer state to #{offer.state} =-"
+          puts "-= Offer #{offer.id} =- state changed to #{offer.state}!"
       end
-      puts "CheckOfferExpiryWorker : END"
+      puts "Done."
     end
   end
   

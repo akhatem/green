@@ -47,6 +47,14 @@ class System::NotificationsController < System::SystemApplicationController
       end
   end
 
+  def destroy
+    @notification.destroy
+    respond_to do |format|
+      format.html { redirect_to system_notifications_path, notice: "notification was destroyed successfully." }
+      format.json { head :no_content }
+    end
+  end
+
   private
 
   def set_notification

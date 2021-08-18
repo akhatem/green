@@ -2,13 +2,12 @@ class NotificationExpiryWorker
     include Sidekiq::Worker
     
     def perform
-      puts "NotificationExpiryWorker : START"
+      puts "Checking for expired notifictaions..."
       Notification.all.where("create_date < ?",  Date.today).where(is_new: true).each do |notification|
-          puts "-= Changing notification is_new from #{notification.is_new} =-"
           notification.update(is_new: false)
-          puts "-= Changed notification is_new to #{notification.is_new} =-"
+          puts "-= Notification #{notification.id} =- is_new changed! =- to #{notification.is_new}"
       end
-      puts "NotificationExpiryWorker : END"
+      puts "Done."
     end
   end
   

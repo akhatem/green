@@ -46,6 +46,14 @@ class System::OffersController < System::SystemApplicationController
       end
   end
 
+  def destroy
+    @offer.destroy
+    respond_to do |format|
+      format.html { redirect_to system_offers_path, notice: "offer was destroyed successfully." }
+      format.json { head :no_content }
+    end
+  end
+
   private
 
   def set_offer

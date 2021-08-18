@@ -92,12 +92,14 @@ div.form-group.row {
 
     <div class="form-group row">
         <%= f.label :state, class: "col-md-3 col-form-label" %>
-        <%= collection_select(:offer, :state, options_for_select(Offer.states), selected: @offer.state) %>
+        <%#= collection_select(:offer, :state, options_for_select(Offer.states), selected: @offer.state) %>
+        <%= f.select :state, Offer.states.keys, selected: @offer.state %>
+        <%#= f.select :phone_number_type, Phone.phone_number_types.keys %>
     </div>
 
     <div class="form-group row">
         <%= f.label :end_at, class: "col-md-3 col-form-label" %>
-        <%= f.date_field :end_at, class: "form-control" %>
+        <%= f.datetime_field :end_at, class: "form-control" %>
     </div>
 
     <div class="form-group row">

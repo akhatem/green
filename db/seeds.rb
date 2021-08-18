@@ -195,8 +195,20 @@ end
 
 
 # Customer.reset_counters Customer.all.length - 1
+# Offer.reset_counters Offer.all.length
 
 
 # ActiveRecord::Base.connection.tables.each do |t|
 #   ActiveRecord::Base.connection.reset_pk_sequence!(t)
+# end
+
+# regular = Size.find(44).name
+# grand = Size.find(45).name
+# solo = Size.find(46).name
+# doppio = Size.find(47).name
+# tall = Size.find(48).name
+# ItemSize.all.each do |item_size|
+#   if item_size.sizeName.eql?("Tall")
+#     item_size.update(size_id: 48)
+#   end
 # end
