@@ -42,11 +42,6 @@ class Offer < ApplicationRecord
     end
 
     def state_of_offer
-        puts"==========> state 0: #{self.state.eql?(0)}"
-        puts"==========> state 1: #{self.state.eql?(1)}"
-        puts"==========> state expired: #{self.state.eql?("expired")}"
-        puts"==========> state valid: #{self.state.eql?("valid")}"
-        puts "validate date and state: #{self.end_at > DateTime.now and self.state.eql?("valid")}"
         self.errors.add(:state, :invalid) if self.end_at > DateTime.now and self.state.eql?("valid")
     end
 
