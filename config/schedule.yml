@@ -1,12 +1,12 @@
 check_offer_expiry_worker:
-  cron: "59 * * * *" # Every 1 hour
-  # cron: "* * * * *" # Every minute
+  # cron: "59 * * * *" # Every 1 hour
+  cron: "* * * * *" # Every minute
   queue: default
   class: "CheckOfferExpiryWorker"
 
 
 notification_expiry_worker:
-  cron: "59 * * * *" # Every 1 hour
-  # cron: "* * * * *" # Every minute
+  # cron: "59 * * * *" # Every 1 hour
+  cron: "* * * * *" # Every minute
   queue: default
   class: "NotificationExpiryWorker"
