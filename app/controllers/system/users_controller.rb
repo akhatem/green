@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 class System::UsersController < Devise::SessionsController
     before_action :authenticate_system_user!
+    before_action :set_user, only: [:show, :edit, :update, :destroy]
 
     def index
       @pagy, @users = pagy(User.all.order(id: :asc))
@@ -19,26 +20,32 @@ class System::UsersController < Devise::SessionsController
     end
 
     def show
-      @customer = Customer.find(params[:id])
+      @user = User.find(params[:id])
     end
 
     def edit
     end
 
     def update
-      @customer = Customer.find(params[:id])
       respond_to do |format|
-        if @customer.update(customer_params)
-          format.html { redirect_to system_users_index_path, notice: "#{@customer.name} was successfully updated." }
+        if @user.update(user_params)
+          format.html { redirect_to system_users_index_path, notice: "#{@user.name} was updated successfully." }
           format.json { render :index, status: :ok }
         else
           format.html { render :edit, status: :unprocessable_entity }
-          format.json { render json: @customer.errors, status: :unprocessable_entity }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
         end
       end
     end
 
-    def 
+    def destroy
+      respond_to do |format|
+        if @user.destroy
+          format.html { redirect_to system_users_index_path, notice: "User was destroyed successfully." }
+          format.json { head :no_content }
+        end
+      end
+    end
   
     # GET /resource/sign_in
     def login
@@ -89,6 +96,10 @@ class System::UsersController < Devise::SessionsController
 
     def user_params
       params.require(:user).permit(:email, :name, :password, :password_confirmation, :role_id, :branch_id)
+    end
+
+    def set_user
+      @user = User.find(params[:id])
     end
   end
   
