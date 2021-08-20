@@ -16,6 +16,8 @@ class Notification < ApplicationRecord
     validates :description, presence: true
     validates :create_date, presence: true
 
+    mount_uploader :image, OfferImageUploader
+
     before_create :set_create_date
     before_save :update_customer_has_new_notification
 

@@ -200,15 +200,14 @@ div.form-group.row {
         <input class="form-control" type="text" value="<%= @offer.end_at.strftime("%A, %d %b %Y @ %H:%M:%S") %>" disabled>
     </div>
 
+    <div class="form-group row">
+        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Image</label>
+        <%= image_tag @offer.image.url, style: "max-width: 280px;max-height: 257px;", id: "form-label" if @offer.image.url %>
+    </div>
 
     <div class="form-group row">
         <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Description</label>
         <textarea class= "form-control" id= "form-label" type= "text" disabled><%= @offer.description.gsub('<p>', '').gsub('</p>', '').html_safe %></textarea>
-    </div>
-
-    <div class="form-group row">
-        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Image</label>
-        <%= image_tag @offer.image_url, style: "max-width: 280px;max-height: 257px;", id: "form-label" if @offer.image_url %>
     </div>
 
     <div class="form-group row">

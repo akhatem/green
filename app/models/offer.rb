@@ -20,10 +20,10 @@ class Offer < ApplicationRecord
     validates :start_at, presence: true
     validates :end_at, presence: true
 
-    mount_uploader :image, OfferImageUploader
-    
     validate :dates
     validate :state_of_offer
+    
+    mount_uploader :image, OfferImageUploader
     
     enum state: { expired: 0, valid: 1 }, _prefix: :state
 
@@ -52,7 +52,7 @@ class Offer < ApplicationRecord
         TEXT
         # puts "================> text: #{text}"
 
-        Notification.create(offer_id: self.id, title: self.title, description: text, create_date: Date.today)
+        Notification.create(offer_id: self.id, title: self.title, description: text, create_date: Date.today, image: self.image)
         # puts "================> notification valid?: #{notification.valid?}"
     end
 

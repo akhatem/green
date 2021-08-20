@@ -193,6 +193,11 @@ div.form-group.row {
 <% end %>
 
 <div class="form-group row">
+        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Image</label>
+        <%= image_tag @notification.image.url, style: "max-width: 280px;max-height: 257px;", id: "form-label" if @notification.image.url %>
+</div>
+
+<div class="form-group row">
     <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Description</label>
     <textarea class= "form-control" id= "form-label" type= "text" disabled><%= @notification.description.gsub('<p>', '').gsub('</p>', '').html_safe %></textarea>
 </div>

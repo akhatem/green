@@ -19,23 +19,26 @@ class Api::V1::NotificationsController < ApplicationController
     end
   end
 
-  # def show
-  #   begin
-  #     notification = Notification.find(params[:id])  
-  #   rescue
-  #     render json:{
-  #       error: JSON.parse("Notification with id: #{params[:id]} not found!".to_json)
-  #     }, status: :not_found
-  #   else
-  #     render json: {
-  #       data:{
-  #         id: notification.id,
-  #         title: JSON.parse(notification.title).join(', ').tr(',', ''),
-  #         description: notification.description.gsub('"', '').gsub('[','').gsub(']','').tr(',', '').strip!,
-  #         create_date: notification.create_date,
-  #       }
-  #     }, status: :ok
-  #   end
-  # end
+  def show
+    begin
+      @notification = Notification.find(params[:id])
+    rescue
+      render json:{
+        error: JSON.parse("No notification found with id: #{params[:id]}".to_json)
+      }, status: :not_found
+      
+    else
+      render json: {
+        data:{
+          title: @notification.title,
+          offer_id: @notification.offer_id ? @notification.offer_id : nil,
+          image: @notification.image.url,
+          description: @notification.description,
+          is_new: @notification.is_new ? true : false
+        }
+      }, status: :ok
+    end
+  end
+
 end
   
