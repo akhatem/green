@@ -1,45 +1,45 @@
 class Api::V1::OffersController < ApplicationController
 
-    def index
-      @offers = paginate Offer.all.order(start_at: :desc)
-      if @offers.any?
-        render json: {
-          data: @offers.map{ |offer|
-            {
-              id: offer.id,
-              title: offer.title,
-              description: offer.description,
-              start_at: offer.start_at.strftime("%d/%m/%Y"),
-              end_at: offer.end_at.strftime("%d/%m/%Y"),
-              state: offer.state,
-              image: offer.image.url
-            }
+  def index
+    @offers = paginate Offer.all.order(start_at: :desc)
+    if @offers.any?
+      render json: {
+        data: @offers.map{ |offer|
+          {
+            id: offer.id,
+            title: offer.title,
+            description: offer.description,
+            start_at: offer.start_at.strftime("%d/%m/%Y"),
+            end_at: offer.end_at.strftime("%d/%m/%Y"),
+            state: offer.state,
+            image: offer.image.url
           }
-        }, status: :ok
-      end
+        }
+      }, status: :ok
     end
-  
-    def show
-      begin
-        @offer = Offer.find(params[:id])
-      rescue
-        render json:{
-          error: JSON.parse("No offer found with id: #{params[:id]}".to_json)
-        }, status: :not_found
-        
-      else
-        render json: {
-          data:{
-            title: @offer.title,
-            description: @offer.description,
-            start_at: @offer.start_at.strftime("%d/%m/%Y"),
-            end_at: @offer.end_at.strftime("%d/%m/%Y"),
-            state: @offer.state,
-            image: @offer.image.url
-          }
-        }, status: :ok
-      end
+  end
+
+  def show
+    begin
+      @offer = Offer.find(params[:id])
+    rescue
+      render json:{
+        error: JSON.parse("No offer found with id: #{params[:id]}".to_json)
+      }, status: :not_found
+      
+    else
+      render json: {
+        data:{
+          title: @offer.title,
+          description: @offer.description,
+          start_at: @offer.start_at.strftime("%d/%m/%Y"),
+          end_at: @offer.end_at.strftime("%d/%m/%Y"),
+          state: @offer.state,
+          image: @offer.image.url
+        }
+      }, status: :ok
     end
+  end
 
   def offers_carosel
     offers_images = []
@@ -75,19 +75,5 @@ class Api::V1::OffersController < ApplicationController
         }
      }, status: :ok
     end
-    end
-       
-   end
-
-
-  # render json:{
-  #   data: offers.map{ |offer|
-  #     {
-  #       id: offer.id,
-  #       title: offer.title,
-  #       image: offer.image.url
-        
-  #     }
-  #   }
-  # }, status: :ok
-  
+  end    
+end
