@@ -17,4 +17,3 @@ class CheckOfferExpiryWorker
       puts "Done."
     end
   end
-  
