@@ -32,8 +32,8 @@ class System::PointsMovementsController < System::SystemApplicationController
     respond_to do |format|
       puts "==========> params[:commit]: #{params[:commit]}"
       if params[:commit].eql?("Redeem")
-        points_movement = PointsMovement.new(customer_id: @customer.id, branch_id: current_system_user.branch_id, 
-          redeemed: last_pm_total, date_time: DateTime.now, total: 0, user_id: current_system_user.id)
+        points_movement = PointsMovement.new(customer_id: @customer.id, branch_id: current_user.branch_id, 
+          redeemed: last_pm_total, date_time: DateTime.now, total: 0, user_id: current_user.id)
         if points_movement.valid?
           points_movement.save
           format.html {redirect_to cashier_barcode_search_path, notice: "Points redeemed successfully." }

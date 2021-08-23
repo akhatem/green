@@ -226,8 +226,8 @@ div.form-group.row {
 
 <%= form_with(model: PointsMovement.new, url: system_points_movements_path) do |f| %>
     <%= f.hidden_field :customer_id, value: @customer.id %>
-    <%= f.hidden_field :branch_id, value: current_system_user.branch_id %>
-    <%= f.hidden_field :user_id, value: current_system_user.id %>
+    <%= f.hidden_field :branch_id, value: current_user.branch_id %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.hidden_field :date_time, value: DateTime.now %>
 
     <div class="row mt-5 actions">

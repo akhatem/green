@@ -216,9 +216,9 @@ div.form-group.row {
 <!-- </form> -->
 
 <%= form_with(model: Receipt.new, url: system_receipts_path) do |f| %>
-    <%= f.hidden_field :user_id, value: current_system_user.id %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.hidden_field :customer_id, value: @customer.id %>
-    <%= f.hidden_field :branch_id, value: current_system_user.branch_id %>
+    <%= f.hidden_field :branch_id, value: current_user.branch_id %>
     
     <div class="form-group row">
         <%= f.label :receipt_number, class: "col-md-3 col-form-label" %>
