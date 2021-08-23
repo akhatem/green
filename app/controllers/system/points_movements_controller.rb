@@ -1,4 +1,7 @@
 class System::PointsMovementsController < System::SystemApplicationController
+
+  before_action :set_points_movement, only: [:show]
+
   def index
     @pagy, @points_movements = pagy(PointsMovement.all.order(id: :asc))
     if params[:search]
@@ -17,6 +20,14 @@ class System::PointsMovementsController < System::SystemApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "#{params[:controller].split('/').second}_#{DateTime.now.strftime('%d/%m/%Y')}", 
+          template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_show_pdf.html.erb",
+            header: { right: '[page] of [topage]' }, page_offset: 0
+      end
+    end
   end
 
   def new
@@ -24,13 +35,9 @@ class System::PointsMovementsController < System::SystemApplicationController
   end
 
   def create
-    puts "===========> In points movements controller: create"
-    puts "===========> params: #{params}"
     @customer = Customer.find(params[:points_movement][:customer_id])
     last_pm_total = PointsMovement.where(customer_id: @customer.id).last.total
-    puts "===========> last_pm_total: #{last_pm_total}"
     respond_to do |format|
-      puts "==========> params[:commit]: #{params[:commit]}"
       if params[:commit].eql?("Redeem")
         points_movement = PointsMovement.new(customer_id: @customer.id, branch_id: current_user.branch_id, 
           redeemed: last_pm_total, date_time: DateTime.now, total: 0, user_id: current_user.id)
@@ -49,10 +56,9 @@ class System::PointsMovementsController < System::SystemApplicationController
     end
   end
 
-  # private 
+  private
 
-  # def points_movement_params
-  #   params.require(:points_movement).permit(:branch_id, :customer_id, :user_id, :number, :total, :date_time, :earned, :redeemed)
-  # end
-
+  def set_points_movement
+    @points_movement = PointsMovement.find(params[:id])
+  end
 end

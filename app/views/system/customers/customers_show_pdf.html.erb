@@ -1,0 +1,37 @@
+<table class="table mt-2" style="text-align:center">
+    
+    <tr scope="row">
+        <th>Id</th>
+        <td><%= @customer.id %></td>
+    </tr>
+
+    <tr scope="row">
+        <th>Name</th>
+        <td><%= @customer.name %></td>
+    </tr>
+
+    <tr scope="row">
+        <th>Mobile</th>
+        <td><%= @customer.mobile %></td>
+    </tr>
+
+    <tr scope="row">
+        <th>Email</th>
+        <td><%= @customer.email %></td>
+    </tr>
+
+    <tr scope="row">
+        <th>Points</th>
+        <td><%= @customer.points %></td>
+    </tr>
+
+    <tr scope="row">
+        <th>Is Activated?</th>
+        <td><%= @customer.is_activated? %></td>
+    </tr>
+    
+    <tr scope="row">
+        <th>Create Date </th>
+        <td><%= @customer.created_at.strftime("%l %p - %d/%m/%Y") %></td>
+    </tr>
+</table>

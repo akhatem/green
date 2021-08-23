@@ -8,20 +8,22 @@
             <th scope="col">Earned</th>
             <th scope="col">Redeemed</th>
             <th scope="col">Total Points</th>
+            <th scope="col">Create Date</th>
         </tr>
     </thead>
     <tbody>
         <% @points_movements.each do |points_movement| %>
         <tr>
             <th scope="row">
-                <%= link_to points_movement.id, system_points_movement_path(points_movement), style: "color: green" %>
+                <%= points_movement.id %>
             </th>
-            <td><%= link_to points_movement.customerName, system_customer_path(points_movement.customer_id), style: "color: green" %></td>
-            <td><%= link_to points_movement.branchName, system_branch_path(points_movement.branch_id), style: "color: green" %></td>    
-            <td><%= link_to points_movement.userName, system_users_index_path, style: "color: green" %></td>
+            <td><%= points_movement.customerName %></td>
+            <td><%= points_movement.branchName %></td>    
+            <td><%= points_movement.userName %></td>
             <td><%= points_movement.earned %></td>
             <td><%= -points_movement.redeemed %></td>
             <td><%= points_movement.total %></td>
+            <td><%= points_movement.date_time.strftime("%l %p - %d/%m/%Y") %></td>
         </tr>
     <% end %>
     </tbody>

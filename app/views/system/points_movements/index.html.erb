@@ -36,7 +36,7 @@
             </th>
             <td><%= link_to points_movement.customerName, system_customer_path(points_movement.customer_id), style: "color: green" %></td>
             <td><%= link_to points_movement.branchName, system_branch_path(points_movement.branch_id), style: "color: green" %></td>    
-            <td><%= link_to points_movement.userName, system_users_index_path, style: "color: green" %></td>
+            <td><%= link_to points_movement.userName, users_index_path, style: "color: green" %></td>
             <td><%= points_movement.earned %></td>
             <td><%= -points_movement.redeemed %></td>
             <td><%= points_movement.total %></td>

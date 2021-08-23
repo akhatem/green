@@ -23,12 +23,12 @@
     </script>
   </head>
   <body onload="number_pages()">
-    <div id="header">
+    <!-- <div id="header"> -->
       <%#= wicked_pdf_image_tag 'mysite.jpg' %>
       <!-- Page <span class="page"></span> of <span class="topage"></span> -->
-    </div>
+    <!-- </div> -->
     <div id="content">
-      <% if system_user_signed_in?  %>
+      <% if user_signed_in?  %>
         <%= yield %>
       <% end %>
     </div>

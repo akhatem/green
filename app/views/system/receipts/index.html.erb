@@ -24,7 +24,7 @@
             <th scope="col">System User</th>
             <th scope="col">Receipt Number</th>
             <th scope="col">Total Price</th>
-            <!-- <th scope="col">Actions</th> -->
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -38,6 +38,9 @@
             <td><%= receipt.userName %></td>
             <td><%= receipt.number %></td>
             <td><%= receipt.total_price %></td>
+            <td class="table-action">
+                <%= link_to '', system_receipt_path(receipt), class: "fa fa-eye" %>
+            </td>
         </tr>
     <% end %>
     </tbody>

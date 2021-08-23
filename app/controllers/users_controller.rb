@@ -6,47 +6,14 @@ class UsersController < Devise::SessionsController
   before_action :set_custom_user, only: [:show, :edit, :update, :destroy_user]
 
   # Devise methods
-
-  # GET /resource/sign_in
-  # def sign_in
-  # super
-    # puts "=============================================="
-    # puts "User signed in ? : #{user_signed_in?}"
-    # puts "=============================================="
-    # if user_signed_in?
-    #   puts "=============================================="
-    #   puts "User signed in"
-    #   puts "=============================================="
-    #   # after_sign_in_path_for
-    # else
-    #   redirect_to new_user_session_path
-    # end
-    # # after_sign_in_path_for('static_pages#index')
-  # end
-
-  # def after_sign_out_path_for
-  #   # redirect_to new_user_session_path
-  #   puts "=============================================="
-  #   puts "HERE in after_sign_out"
-  #   puts "=============================================="
-  # end
-
-  # DELETE /resource/sign_out
-  def sign_out
-    puts "=============================================="
-    puts "HERE in sign_out"
-    puts "=============================================="
-    
-    super
+  
+  def login
+    redirect_to new_user_session_path and return
   end
 
   # Devise methods
 
   # Custom User methods
-  
-  def login
-    redirect_to new_user_session_path and return
-  end
 
   def index
     @pagy, @users = pagy(User.all.order(id: :asc))
@@ -74,7 +41,7 @@ class UsersController < Devise::SessionsController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to system_users_index_path, notice: "#{@user.name} was updated successfully." }
+        format.html { redirect_to users_index_path, notice: "#{@user.name} was updated successfully." }
         format.json { render :index, status: :ok }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -91,7 +58,7 @@ class UsersController < Devise::SessionsController
     @user = User.new(user_params)
     if @user.valid?
       @user.save
-      redirect_to system_users_index_path
+      redirect_to users_index_path
       flash[:notice] = "User created successfully."
     else
       render :new_user

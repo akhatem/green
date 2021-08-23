@@ -1,0 +1,36 @@
+<table class="table mt-2" style="text-align:center">
+    <tr scope="row">
+        <th>Id</th>
+        <td><%= @receipt.id %></td>
+    </tr>
+
+    <tr scope="row">
+        <th>System User</th>
+        <td><%= @receipt.userName %></td>
+    </tr>
+
+    <tr scope="row">
+        <th>Customer</th>
+        <td><%= @receipt.customerName %></td>
+    </tr>
+
+    <tr scope="row">
+        <th>Branch</th>
+        <td><%= @receipt.branchName %></td>
+    </tr>
+
+    <tr scope="row">
+        <th>Receipt #</th>
+        <td><%= @receipt.number %></td>
+    </tr>
+
+    <tr scope="row">
+        <th>Total Price</th>
+        <td><%= @receipt.total_price %></td>
+    </tr>
+    
+    <tr scope="row">
+        <th>Create Date </th>
+        <td><%= @receipt.created_at.strftime("%l %p - %d/%m/%Y") %></td>
+    </tr>
+</table>

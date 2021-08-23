@@ -20,7 +20,14 @@ class System::ReceiptsController < System::SystemApplicationController
     end
 
     def show
-        @receipt
+        respond_to do |format|
+            format.html
+            format.pdf do
+              render pdf: "#{params[:controller].split('/').second}_#{DateTime.now.strftime('%d/%m/%Y')}", 
+                template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_show_pdf.html.erb",
+                  header: { right: '[page] of [topage]' }, page_offset: 0
+            end
+        end
     end
 
     def new

@@ -58,10 +58,10 @@ class ApplicationController < ActionController::Base
     
     def user_not_authorized
         flash[:alert] = "You are not authorized to perform this action."
-        puts "============================================================="
-        puts "request: #{request}"
-        puts "request.referrer: #{request.referrer}"
-        puts "============================================================="
-        redirect_to(request.referrer || cashier_path)
+        if current_user.roleKey.eql?("cashier")
+            redirect_to(request.referrer || cashier_path)
+        else
+            redirect_to(request.referrer || system_root_path)
+        end
     end
 end  
