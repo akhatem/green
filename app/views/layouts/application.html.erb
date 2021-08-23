@@ -23,17 +23,24 @@
 
   <body class="<%= controller_name %> <%= action_name %>">
     <div class="container-fluid">
-      <%= yield :login %>
-      <%= yield :register %>
+      <% if !user_signed_in? %>
+        <%= yield :login %>
+        <%= yield :register %>
+      <% end  %>
       <div class="row">
-        <!-- system_user_signed_in? : <%#= debug system_user_signed_in? %> -->
-        <% if system_user_signed_in?  %>
-          <%= render "system/shared/navbar" %>
+        <% if user_signed_in? %>
+            <%= render "system/shared/navbar" %>
         <% end %>
         <div class="row">
           <div class="col-md-3 side-nav-col">
-            <% unless params[:controller].split('/').first.eql?('cashier') %>
-              <%= render "system/shared/sidebar" %>
+            <!-- user_signed_in? : <%#= debug user_signed_in? %> <br> -->
+            <!-- user roleKey : <%#= debug current_user.roleKey ? current_user.roleKey : "---" if user_signed_in? %><br> -->
+            <!-- controller name : <%#= debug params[:controller].split('/').first %><br> -->
+            <!-- check this: <%#= debug  params[:controller].split('/').first.eql?('cashier') or user_signed_in? or !current_user.roleKey.eql?("cashier") %> <br> -->
+            <% if user_signed_in? %>
+              <% if  !params[:controller].split('/').first.eql?('cashier') and user_signed_in? and !current_user.roleKey.eql?("cashier") %>
+                <%= render "system/shared/sidebar" %>
+              <% end %>
             <% end %>
           </div>
           <% if params[:controller].split('/').first.eql?('cashier') %>

@@ -9,13 +9,13 @@
         <ul class="nav justify-content-end px-5">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle user-link" style="color: #00AB47;" data-bs-toggle="dropdown" 
-                    href="#" role="button" aria-expanded="false"><%= current_system_user.name %></a>
+                    href="#" role="button" aria-expanded="false"><%= current_user.name %></a>
                 
-                <div class="user-typeli>"><%= current_system_user.role.name %></div>
+                <div class="user-typeli>"><%= current_user.role.name %></div>
                 
                 <ul class="dropdown-menu">
                     <li>
-                        <%= link_to "Logout", destroy_system_user_session_path, method: :delete, 
+                        <%= link_to "Logout", destroy_user_session_path, method: :delete, 
                             class: "xdropdown dropdown-item" %>
                     </li>
                 </ul>

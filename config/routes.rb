@@ -2,24 +2,25 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   
-  get "/", to: redirect("/system")
+  devise_for :users, path: '/users',
+  controllers: {registrations: 'users/new_user', sessions: :users} 
+
+  devise_scope :user do
+    root to: 'users#login'
+    get "/users/sign_out", to: "users#destroy"
+    
+    get '/users/index', to: "users#index"
+    get "/users/:id/show", to: "users#show"
+    get '/users/new', to: "users#new_user"
+    post '/users/create', to: "users#create_user"
+    delete '/users/:id/delete', to: "users#destroy_user"
+  end
+
   
   # namespace system
   namespace :system do
-    
-    devise_for :users, path: '/users', path_names: {sign_in: 'login', sign_out: 'logout'}, 
-      controllers: {registrations: 'users/new_user'}
-    
-    devise_scope :system_user do
-      get '/users/index', to: "users#index"
-      get "/users/:id/show", to: "users#show"
-      get '/users/new', to: "users#new_user"
-      post '/users/create', to: "users#create_user"
-      delete '/users/:id/delete', to: "users#destroy"
-    end
-    
-    root to: 'static_pages#index'
 
+    root to: 'static_pages#index'
     
     # Offer Carosel Images
     resources :offer_carosel_images
@@ -74,8 +75,13 @@ Rails.application.routes.draw do
   end # namespace system
 
   namespace :cashier do
+
+    # root to: 'cashier_pages#barcode_search'
+
     # Cashier Pages
-    get "/barcode_search", to: "cashier_pages#barcode_search"
+    get "/", to: redirect("cashier/barcode_search")
+    # get "/", to: redirect("/users/login")
+    get "/barcode_search", to: "cashier_pages#barcode_search", as: 'barcode_search'
     get "/customer_info/:decoded_barcode", to: "cashier_pages#customer_info", as: 'customer_info'
     get '/redeem_points/:receipt_number', to: "cashier_pages#redeem_points", as: 'redeem_points'
   end
@@ -150,6 +156,10 @@ Rails.application.routes.draw do
       get '/notifications', to: 'notifications#index'
       get '/notifications/:id', to: 'notifications#show'
       # Notifications
+
+      # Push notifications
+      get '/push_notification', to: 'push_notifications#index'
+      # Push notifications
 
     end # v1
   end # api

@@ -6,8 +6,8 @@
 #  title       :string
 #  description :text
 #  state       :integer          default("valid"), not null
-#  start_at    :date             not null
-#  end_at      :date             not null
+#  start_at    :datetime         not null
+#  end_at      :datetime         not null
 #  image       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

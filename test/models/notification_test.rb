@@ -10,6 +10,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  is_new      :boolean          default(TRUE)
+#  image       :string
 #
 require "test_helper"
 

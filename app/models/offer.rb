@@ -6,8 +6,8 @@
 #  title       :string
 #  description :text
 #  state       :integer          default("valid"), not null
-#  start_at    :date             not null
-#  end_at      :date             not null
+#  start_at    :datetime         not null
+#  end_at      :datetime         not null
 #  image       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -19,6 +19,7 @@ class Offer < ApplicationRecord
     validates :state, presence: true
     validates :start_at, presence: true
     validates :end_at, presence: true
+    validates :image, presence: true
 
     validate :dates
     validate :state_of_offer

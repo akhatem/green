@@ -10,6 +10,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  is_new      :boolean          default(TRUE)
+#  image       :string
 #
 class Notification < ApplicationRecord
     validates :title, presence: true
@@ -20,9 +21,14 @@ class Notification < ApplicationRecord
 
     before_create :set_create_date
     before_save :update_customer_has_new_notification
+    after_save :create_push_notification
 
     def offerTitle
         Offer.find(offer_id).title
+    end
+
+    def update_date
+        self.updated_at
     end
 
     def self.search_by(search_term)
@@ -40,6 +46,18 @@ class Notification < ApplicationRecord
     def update_customer_has_new_notification
         Customer.all.each do |customer|
             customer.update_column(:has_new_notification, true)
+        end
+    end
+
+    def create_push_notification
+        if self.updated_at > self.created_at
+            push_notification = PushNotification.find_by(notification_id: self.id)
+            if push_notification
+                puts "=========> HERE destroy"
+                push_notification.destroy
+            end
+            puts "=========> HERE create"
+            PushNotification.create!(title: self.title, description: self.description, image: self.image, notification_id: self.id)
         end
     end
 end

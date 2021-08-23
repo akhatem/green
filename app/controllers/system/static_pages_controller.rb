@@ -1,6 +1,6 @@
 class System::StaticPagesController < System::SystemApplicationController
  
   def index
-    render :index
+    authorize :static_pages_controller
   end
 end

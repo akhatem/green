@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
     include Pagy::Backend
     include Rails::Pagination
+    include Pundit
+    
+
+    rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
     
     protect_from_forgery prepend: true, with: :null_session
 
@@ -48,5 +52,16 @@ class ApplicationController < ActionController::Base
         else
             return code
         end
+    end
+
+    private
+    
+    def user_not_authorized
+        flash[:alert] = "You are not authorized to perform this action."
+        puts "============================================================="
+        puts "request: #{request}"
+        puts "request.referrer: #{request.referrer}"
+        puts "============================================================="
+        redirect_to(request.referrer || cashier_path)
     end
 end  
