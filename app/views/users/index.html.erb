@@ -1,10 +1,10 @@
 <div class="col-lg-7">
     <div class="row">
         <div class="col-md-3 main-btns">
-            <%= link_to "Clear Search", system_users_index_path, class: "btn btn-outline-success btn-sm", type: "button" %>
+            <%= link_to "Clear Search", users_index_path, class: "btn btn-outline-success btn-sm", type: "button" %>
         </div>
         <div class="col-md-4">
-            <%= form_for "", url: system_users_index_path, role: "search", method: :get do %>
+            <%= form_for "", url: users_index_path, role: "search", method: :get do %>
                 <%= text_field_tag :search, @search_term, placeholder: "Search by id or name or mobile or email or branch", 
                     style: "text-align: center;" %>
             <% end %>
@@ -12,8 +12,8 @@
     </div>
 </div>
 <div class="col-lg-5 main-btns">
-    <%= link_to "Add new User", system_users_new_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;", type: "button" %>
-    <%= link_to "Export as PDF", system_users_index_path(format: :pdf), class: "btn btn-outline-success btn-sm", type: "button"  %>
+    <%= link_to "Add new User", users_new_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;", type: "button" %>
+    <%= link_to "Export as PDF", users_index_path(format: :pdf), class: "btn btn-outline-success btn-sm", type: "button"  %>
 </div>    
 
 
