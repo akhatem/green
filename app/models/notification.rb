@@ -21,7 +21,7 @@ class Notification < ApplicationRecord
 
     before_create :set_create_date
     before_save :update_customer_has_new_notification
-    after_save :create_push_notification
+    # after_save :create_push_notification
 
     def offerTitle
         Offer.find(offer_id).title
@@ -49,15 +49,13 @@ class Notification < ApplicationRecord
         end
     end
 
-    def create_push_notification
-        if self.updated_at > self.created_at
-            push_notification = PushNotification.find_by(notification_id: self.id)
-            if push_notification
-                puts "=========> HERE destroy"
-                push_notification.destroy
-            end
-            puts "=========> HERE create"
-            PushNotification.create!(title: self.title, description: self.description, image: self.image, notification_id: self.id)
-        end
-    end
+    # def create_push_notification
+    #     if self.updated_at > self.created_at
+    #         push_notification = PushNotification.find_by(notification_id: self.id)
+    #         if push_notification
+    #             push_notification.destroy
+    #         end
+    #         PushNotification.create!(title: self.title, description: self.description, image: self.image, notification_id: self.id)
+    #     end
+    # end
 end

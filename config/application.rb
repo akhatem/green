@@ -9,13 +9,12 @@ Bundler.require(*Rails.groups)
 module Green
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+
+    
     config.load_defaults 6.1
-  
-  
-    config.active_job.queue_adapter = :sidekiq
-
-
     config.autoload_paths += %W[#{config.root}/lib]
+    
+    config.active_job.queue_adapter = :sidekiq
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
