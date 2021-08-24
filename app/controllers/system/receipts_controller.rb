@@ -59,7 +59,7 @@ class System::ReceiptsController < System::SystemApplicationController
     end
 
     def set_points_movement       
-        @points_movement = PointsMovement.where(customer_id: @receipt.customer_id)
+        @points_movement = PointsMovement.where(customer_id: @receipt.customer_id, user_id: @receipt.user_id).last
     end
 
     def receipt_params
