@@ -9,6 +9,8 @@ Bundler.require(*Rails.groups)
 module Green
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+    config.time_zone = "Africa/Cairo"
+    config.active_record.default_timezone = :local
 
     
     config.load_defaults 6.1

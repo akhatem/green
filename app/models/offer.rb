@@ -43,7 +43,7 @@ class Offer < ApplicationRecord
     end
 
     def state_of_offer
-        self.errors.add(:state, :invalid) if self.end_at < DateTime.now and self.state.eql?("valid")
+        self.errors.add(:state, :invalid) if self.end_at.to_datetime < Time.current.to_datetime and self.state.eql?("valid")
     end
 
     def create_notification
