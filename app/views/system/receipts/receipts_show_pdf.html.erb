@@ -31,7 +31,11 @@
 
     <tr scope="row">
         <th>Redeemed cash (L.E)</th>
-        <td><%= @points_movement.convert_points_to_price %></td>
+        <% if @points_movement %>
+            <td><%= @points_movement.convert_points_to_price %> L.E</td>
+        <% else %>
+        <td>0 L.E</td>
+        <% end %>
     </tr>
     
     <tr scope="row">

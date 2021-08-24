@@ -58,8 +58,8 @@ class System::ReceiptsController < System::SystemApplicationController
         @receipt = Receipt.find(params[:id])
     end
 
-    def set_points_movement       
-        @points_movement = PointsMovement.where(customer_id: @receipt.customer_id, user_id: @receipt.user_id).last
+    def set_points_movement
+        @points_movement = PointsMovement.where(customer_id: @receipt.customer_id).last if @receipt.customer_id
     end
 
     def receipt_params
