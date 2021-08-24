@@ -26,6 +26,11 @@
     </tr>
 
     <tr scope="row">
+        <th>Points as cash</th>
+        <td><%= @points_movement.convert_points_to_price %> L.E</td>
+    </tr>
+
+    <tr scope="row">
         <th>Is Activated?</th>
         <td><%= @customer.is_activated? %></td>
     </tr>

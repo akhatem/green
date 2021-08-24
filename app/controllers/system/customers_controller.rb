@@ -1,6 +1,7 @@
 class System::CustomersController < System::SystemApplicationController
 
   before_action :set_customer, only: [:show]
+  before_action :set_points_movement, only: [:show]
   
   def index
     @pagy, @customers = pagy(Customer.all.order(id: :asc))
@@ -33,5 +34,9 @@ class System::CustomersController < System::SystemApplicationController
   
   def set_customer
     @customer = Customer.find(params[:id])
+  end
+  
+  def set_points_movement
+    @points_movement = PointsMovement.where(customer_id: @customer.id).last
   end
 end

@@ -28,6 +28,11 @@
         <th>Total Price</th>
         <td><%= @receipt.total_price %></td>
     </tr>
+
+    <tr scope="row">
+        <th>Redeemed cash (L.E)</th>
+        <td><%= @points_movement.convert_points_to_price %></td>
+    </tr>
     
     <tr scope="row">
         <th>Create Date </th>

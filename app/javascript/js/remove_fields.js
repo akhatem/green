@@ -7,9 +7,6 @@ class removeFields {
     iterateLinks() {
       // Use event delegation to ensure any fields added after the page loads are captured.
       document.addEventListener('click', e => {
-        console.log("e: ", e)
-        console.log("e.target: ", e.target)
-        console.log("e.target.className: ", e.target.className)
         if (e.target && e.target.classList.contains('remove_fields')) {
           this.handleClick(e.target, e)
         }
@@ -18,8 +15,6 @@ class removeFields {
   
     handleClick(link, e) {
       // Stop the function from executing if a link or event were not passed into the function.
-      // console.log("link: ", link)
-      // console.log("e: ", e)
       if (!link || !e) return
       // Prevent the browser from following the URL.
       e.preventDefault()
