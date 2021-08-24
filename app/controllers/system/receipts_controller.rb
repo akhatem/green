@@ -1,6 +1,7 @@
 class System::ReceiptsController < System::SystemApplicationController
 
     before_action :set_receipt, only: [:show]
+    before_action :set_points_movement, only: [:show]
 
     def index
         @pagy, @receipts = pagy(Receipt.all.order(id: :asc))
@@ -55,6 +56,10 @@ class System::ReceiptsController < System::SystemApplicationController
 
     def set_receipt       
         @receipt = Receipt.find(params[:id])
+    end
+
+    def set_points_movement       
+        @points_movement = PointsMovement.where(customer_id: )
     end
 
     def receipt_params

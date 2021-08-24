@@ -209,6 +209,11 @@ div.form-group.row {
     </div>
 
     <div class="form-group row">
+        <label class="col-md-2 col-form-label">Price of total points</label>
+        <input class="form-control" type="text" value="<%= @points_movement.convert_points_to_price %> L.E" disabled>
+    </div>
+
+    <div class="form-group row">
         <label class="col-md-2 col-form-label">Created at</label>
         <input class="form-control" type="text" value="<%= @receipt.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %>" disabled>
     </div>
