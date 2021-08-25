@@ -80,9 +80,9 @@ class UsersController < Devise::SessionsController
   protected
   # Devise methods
     def after_sign_in_path_for(resource)
-      puts "=============================================="
-      puts "current_user role key: #{current_user.roleKey}"
-      puts "=============================================="
+      # puts "=============================================="
+      # puts "current_user role key: #{current_user.roleKey}"
+      # puts "=============================================="
       if current_user.roleKey.eql?("cashier")
         cashier_path
       else

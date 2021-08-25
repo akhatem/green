@@ -211,8 +211,8 @@ div.form-group.row {
     <div class="form-group row">
         <label class="col-md-3 col-form-label">Redeemed cash (L.E)</label>
         <% if @points_movement %>
-            <input class="form-control" type="text" value="<%= @points_movement.convert_points_to_price ? @points_movement.convert_points_to_price : "-" %> L.E" disabled>
-            <% else %>
+            <input class="form-control" type="text" value="<%= @points_movement.redeemed ? @points_movement.redeemed * 0.5 : 0 %> L.E" disabled>
+        <% else %>
             <input class="form-control" type="text" value="0 L.E" disabled>
         <% end %>
     </div>
