@@ -11,6 +11,8 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+
+include ActionView::Helpers::NumberHelper
 class Item < ApplicationRecord
     
     belongs_to :brand
