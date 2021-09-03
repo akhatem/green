@@ -11,7 +11,7 @@ class BranchPolicy < ApplicationPolicy
     end
 
     def show?
-      !user.roleKey.eql?("admin")
+      !user.roleKey.eql?("cashier")
     end
   
     def resolve

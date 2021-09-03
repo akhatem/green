@@ -29,6 +29,7 @@ class System::CategoriesController < System::SystemApplicationController
     def create
         @category = Category.new(category_params)
         authorize @category
+        
         respond_to do |format|
             if @category.save
                 format.html { redirect_to system_categories_path, notice: "Category #{@category.name} was successfully created." }

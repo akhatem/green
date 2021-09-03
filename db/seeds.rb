@@ -172,7 +172,10 @@ if Rails.env.production?
   Role.create!(id: 1, name: "Super", key: "super", description: "Full access", is_super: true)
 
   User.create!(name: "Yara Samy", email: "yara.samy@green.com", password: "yara12345",
-      password_confirmation: "yara12345", role_id: 1, branch_id: 1)
+    password_confirmation: "yara12345", role_id: 1)
+  
+  User.create!(name: "Ahmed Kareem", email: "ahmed.kareem@green.com", password: "Kareem",
+      password_confirmation: "Kareem", role_id: 1)
   
   # User.create!(name: "Yasser Fayez", email: "yasser.fayez@green.com", password: "4455662@roV",
   #       password_confirmation: "4455662@roV", role_id: 1, branch_id: 1)

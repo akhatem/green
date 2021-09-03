@@ -8,10 +8,6 @@ class ItemPolicy < ApplicationPolicy
     def initialize(user, scope)
       @user = user
       @scope = scope
-      puts "=============================================="
-      puts " User: #{@user}"
-      puts " Scope All: #{@scope}"
-      puts "=============================================="
     end
 
     def index?
@@ -19,7 +15,7 @@ class ItemPolicy < ApplicationPolicy
     end
 
     def show?
-      !user.roleKey.eql?("admin")
+      !user.roleKey.eql?("cashier")
     end
   
     def resolve
