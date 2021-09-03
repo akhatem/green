@@ -5,6 +5,9 @@ class System::CustomersController < System::SystemApplicationController
   
   def index
     @pagy, @customers = pagy(Customer.all.order(id: :asc))
+
+    authorize @customers
+    
     if params[:search]
       @search_term = params[:search]
       @customers = @customers.search_by(@search_term)
@@ -34,6 +37,7 @@ class System::CustomersController < System::SystemApplicationController
   
   def set_customer
     @customer = Customer.find(params[:id])
+    authorize @customer
   end
   
   def set_points_movement

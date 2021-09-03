@@ -13,7 +13,8 @@ class Api::V1::ItemsController < ApplicationController
            sizes: item.item_sizes.map{ |item_size| 
               { 
                  name: item_size.sizeName,
-                 price: item_size.price_with_precision
+               #   price: item_size.price_with_precision
+                 price: item_size.price.to_f
               } 
            },
            description: item.description
@@ -47,7 +48,8 @@ class Api::V1::ItemsController < ApplicationController
            sizes: item.item_sizes.map{ |item_size| 
             { 
                name: item_size.sizeName,
-               price: item_size.price_with_precision
+               price: item_size.price.to_f
+               # price: item_size.price_with_precision
             } 
             },
            descirption: item.description

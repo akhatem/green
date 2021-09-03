@@ -20,7 +20,7 @@ class Receipt < ApplicationRecord
     validates :customer_id, presence: true
     validates :branch_id, presence: true
     validates :user_id, presence: true
-    validates :number, presence: true, uniqueness: { scope:  :branch_id }
+    validates :number, presence: true, uniqueness: { scope: :branch_id }
     validates :total_price, presence: true
 
     after_create :customer_collect_points

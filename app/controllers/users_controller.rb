@@ -56,13 +56,15 @@ class UsersController < Devise::SessionsController
 
   def create_user
     @user = User.new(user_params)
+    puts "=================================="
+    puts "=================================="
     if @user.valid?
       @user.save
       redirect_to users_index_path
       flash[:notice] = "User created successfully."
     else
+      flash.now[:alert] = "Error creating user!"
       render :new_user
-      flash[:alert] = "Error creating user!"
     end
   end
 

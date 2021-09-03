@@ -7,27 +7,23 @@ class ApplicationPolicy
   end
 
   def index?
-    !@user.roleKey.eql?("Cashier")
+    !@user.roleKey.eql?("cashier")
   end
 
   def show?
-    # false
-    !user.roleKey.eql?("admin")
+    !@user.roleKey.eql?("cashier")
   end
 
   def create?
-    false
-    # !@user.role.name.eql?("Cashier")
+    !@user.roleKey.eql?("cashier")
   end
 
   def new?
     create?
-    # !@user.role.name.eql?("Cashier")
   end
 
   def update?
-    false
-    # !@user.role.name.eql?("Cashier")
+    !@user.roleKey.eql?("cashier")
   end
 
   def edit?
@@ -35,8 +31,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    false
-    # !@user.role.name.eql?("Cashier")
+    !@user.roleKey.eql?("cashier")
   end
 
   def barcode_search?
@@ -50,6 +45,11 @@ class ApplicationPolicy
 
   def redeem_points?
     false
+  end
+
+
+  def scope
+    Pundit.policy_scope!(user, record.class)
   end
 
   class Scope

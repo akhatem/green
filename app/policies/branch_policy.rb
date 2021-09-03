@@ -6,6 +6,10 @@ class BranchPolicy < ApplicationPolicy
       @scope = scope
     end
 
+    def index?
+      !user.roleKey.eql?("cashier")
+    end
+
     def show?
       !user.roleKey.eql?("admin")
     end

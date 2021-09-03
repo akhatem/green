@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Green</title>
+    <link rel="browser icon" type="image/x-icon" href="<%='/assets/favicon.ico'%>" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -33,10 +34,6 @@
         <% end %>
         <div class="row">
           <div class="col-md-3 side-nav-col">
-            <!-- user_signed_in? : <%#= debug user_signed_in? %> <br> -->
-            <!-- user roleKey : <%#= debug current_user.roleKey ? current_user.roleKey : "---" if user_signed_in? %><br> -->
-            <!-- controller name : <%#= debug params[:controller].split('/').first %><br> -->
-            <!-- check this: <%#= debug  params[:controller].split('/').first.eql?('cashier') or user_signed_in? or !current_user.roleKey.eql?("cashier") %> <br> -->
             <% if user_signed_in? %>
               <% if  !params[:controller].split('/').first.eql?('cashier') and user_signed_in? and !current_user.roleKey.eql?("cashier") %>
                 <%= render "system/shared/sidebar" %>
@@ -74,9 +71,9 @@
                   <%= render 'system/shared/pagination' %>
                 </div>
               <% end %>
-              <% unless params[:controller].split('/').first.eql?('cashier') %>
+              <%# unless params[:controller].split('/').first.eql?('cashier') %>
                 <%= render 'system/shared/footer' %>
-              <% end %>
+              <%# end %>
             </div>
           <% end %>
         </div>

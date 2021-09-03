@@ -5,6 +5,8 @@ class System::BranchesController < System::SystemApplicationController
     
     def index
         @pagy, @branches = pagy(Branch.all.order(id: :asc))
+        authorize @branches
+        
         if params[:search]
             @search_term = params[:search]
             @branches = @branches.search_by(@search_term)
@@ -20,15 +22,16 @@ class System::BranchesController < System::SystemApplicationController
     end
 
     def show
-        
     end
 
     def new
         @branch = Branch.new
+        authorize @branch
     end
 
     def create
         @branch = Branch.new(branch_params)
+        authorize @branch
 
         respond_to do |format|
             if @branch.save
@@ -58,12 +61,10 @@ class System::BranchesController < System::SystemApplicationController
     end
 
     def destroy
-        def destroy
-            @branch.destroy
-            respond_to do |format|
-                format.html { redirect_to system_branches_path, notice: "Branch was successfully destroyed." }
-                format.json { head :no_content }
-              end
+        @branch.destroy
+        respond_to do |format|
+            format.html { redirect_to system_branches_path, notice: "Branch was successfully destroyed." }
+            format.json { head :no_content }
         end
     end
 

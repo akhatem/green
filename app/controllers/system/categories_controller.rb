@@ -3,6 +3,7 @@ class System::CategoriesController < System::SystemApplicationController
     
     def index
         @pagy, @categories = pagy(Category.all.order(id: :asc))
+        authorize @categories
         if params[:search]
             @search_term = params[:search]
             @categories = @categories.search_by(@search_term)
@@ -18,17 +19,16 @@ class System::CategoriesController < System::SystemApplicationController
     end
 
     def show
-        @category = Category.find(params[:id])
     end
 
     def new
         @category = Category.new
+        authorize @category
     end
 
     def create
-    # byebug
         @category = Category.new(category_params)
-
+        authorize @category
         respond_to do |format|
             if @category.save
                 format.html { redirect_to system_categories_path, notice: "Category #{@category.name} was successfully created." }
@@ -68,6 +68,7 @@ class System::CategoriesController < System::SystemApplicationController
 
     def set_category
         @category = Category.find(params[:id])
+        authorize @category
     end
 
     def category_params

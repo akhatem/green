@@ -4,6 +4,9 @@ class System::ItemsController < System::SystemApplicationController
   
   def index
     @pagy, @items = pagy(Item.all.order(id: :asc))
+
+    authorize @items
+    
     if params[:search]
       @search_term = params[:search]
       @items = @items.search_by(@search_term)
@@ -72,6 +75,7 @@ class System::ItemsController < System::SystemApplicationController
 
   def set_item
       @item = Item.find(params[:id])
+      authorize @item
   end
 
   def set_item_size

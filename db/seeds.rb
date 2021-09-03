@@ -11,8 +11,8 @@ if Rails.env.development?
       password: "password", mobile: "01100851591")
 
       
+    puts "Create Test Customers Finished at #{DateTime.now.strftime("%H:%M:%S")}"
   end
-  puts "Create Test Customers Finished at #{DateTime.now.strftime("%H:%M:%S")}"
 
 
   if City.count.zero?
@@ -21,8 +21,8 @@ if Rails.env.development?
     City.find_or_create_by(name: "Cairo")
     City.find_or_create_by(name: "Portsaid")
     City.find_or_create_by(name: "Dahab")
+    puts "Create Cities finished #{DateTime.now.strftime("%H:%M:%S")}"
   end
-  puts "Create Cities finished #{DateTime.now.strftime("%H:%M:%S")}"
 
   if Branch.count.zero?
     puts "Create Branches started #{DateTime.now.strftime("%H:%M:%S")}"
@@ -31,16 +31,16 @@ if Rails.env.development?
 
     Branch.create(name: "Starbucks cafe", link: "https://www.google.com/maps/place/Platz/@30.0219911,31.4423278,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x522c5ba75e6b7468!8m2!3d30.0219979!4d31.4445239", 
       long: 30.02233223689489, lat: 31.44672603423963, address: "Platz, New Cairo City, Cairo Governorate", city_id: 2)
+    puts "Create Branches finished #{DateTime.now.strftime("%H:%M:%S")}"
   end
-  puts "Create Branches finished #{DateTime.now.strftime("%H:%M:%S")}"
 
   if Brand.count.zero?
     puts "Create Brands started at #{DateTime.now.strftime("%H:%M:%S")}"
     Brand.create(id: 1, name: "Green", image: File.open(File.join(Rails.root, 'app/assets/images/brands/green_logo.png')))
     
     Brand.create(id: 2, name: "Starbucks", image: File.open(File.join(Rails.root, 'app/assets/images/brands/starbucks_logo.png')))
+    puts "Create Brands finished at #{DateTime.now.strftime("%H:%M:%S")}"
   end
-  puts "Create Brands finished at #{DateTime.now.strftime("%H:%M:%S")}"
 
   Brand.all.each do |brand|
     # unless Category.exists?(brand_id: brand.id)
@@ -54,12 +54,12 @@ if Rails.env.development?
             5.times do
               Item.create(name: FFaker::Food::meat, description: FFaker::Food::ingredient, brand_id: brand.id, 
                 category_id: category.id, image: File.open(File.join(Rails.root, 'app/assets/images/items/placeholder.png')))
+                sleep(2)
             end
             puts "Create Items finished #{DateTime.now.strftime("%H:%M:%S")}"
           end
-          sleep(10)
-        puts "Create Categories finished #{DateTime.now.strftime("%H:%M:%S")}"
-      end
+        end
+      puts "Create Categories finished #{DateTime.now.strftime("%H:%M:%S")}"
     end
   end
 
@@ -68,8 +68,8 @@ if Rails.env.development?
     Size.find_or_create_by(id: 1, name: "Regular")
     Size.find_or_create_by(id: 2, name: "Grande")
     Size.find_or_create_by(id: 3, name: "Tall")
+    puts "Create Sizes finished #{DateTime.now.strftime("%H:%M:%S")}"
   end
-  puts "Create Sizes finished #{DateTime.now.strftime("%H:%M:%S")}"
 
   if ItemSize.count.zero?
     puts "Create ItemSizes started #{DateTime.now.strftime("%H:%M:%S")}"
@@ -80,9 +80,8 @@ if Rails.env.development?
         ItemSize.find_or_create_by(item_id: item.id, size_id: size.id, price: rand(15..200))
       end
     end
-    puts "Create Items finished #{DateTime.now.strftime("%H:%M:%S")}"
+    puts "Create ItemSizes finished #{DateTime.now.strftime("%H:%M:%S")}"
   end
-  puts "Create ItemSizes finished #{DateTime.now.strftime("%H:%M:%S")}"
 
   # if PointsMovement.count.zero?
     # puts "Create PointsMovements started #{DateTime.now.strftime("%H:%M:%S")}"
@@ -115,28 +114,31 @@ if Rails.env.development?
     for i in 1..3 do
       Offer.create(title: FFaker::Lorem::words, description: FFaker::Lorem::sentences, state: 1, 
       start_at: Date.today, end_at: Date.today+1.day, image: File.open(File.join(Rails.root, 'app/assets/images/offers/offer1.png')))
-      sleep(10)
+      sleep(2)
     end
 
     for i in 1..3 do
       Offer.create(title: FFaker::Lorem::words, description: FFaker::Lorem::sentences, state: 0, 
       start_at: 3.days.ago, end_at: Date.yesterday, image: File.open(File.join(Rails.root, 'app/assets/images/offers/offer1.png')))
-      sleep(10)
+      sleep(2)
     end
+    puts "Create Offers finished #{DateTime.now.strftime("%H:%M:%S")}"
   end
-  puts "Create Offers finished #{DateTime.now.strftime("%H:%M:%S")}"
 
 
   Role.create!(id: 1, name: "Super", key: "super", description: "Full access", is_super: true)
-  Role.create!(id: 2, name: "Cashier", key: "cashier", description: "Only Cashier specified pages", is_super: false)
-  Role.create!(id: 3, name: "Admin", key: "admin", description: "Only admin pages", is_super: false)
-  
-  User.create(name: "Omar Ali", email: "omar.ali@green.com", password: "pass123", password_confirmation: "pass123", role_id: 2, branch_id: 1)
-  
-  # User.create(name: "Hatem Mohamed", email: "hatem.mohamed@green.com", password: "Password_123", password_confirmation: "Password_123", role_id: 3, branch_id: 1)
+  Role.create!(id: 2, name: "Admin", key: "admin", description: "Only admin pages", is_super: false)
+  Role.create!(id: 3, name: "Cashier", key: "cashier", description: "Only Cashier specified pages", is_super: false)
   
   User.create!(name: "Ahmed Kareem", email: "ahmed.kareem.elshawadfy@gmail.com", password: "Root123",
-    password_confirmation: "Root123", role_id: 1, branch_id: 1)
+    password_confirmation: "Root123", role_id: 1)
+  
+  User.create(name: "Hatem Mohamed", email: "hatem.mohamed@green.com", password: "Hatem123", 
+    password_confirmation: "Hatem123", role_id: 3, branch_id: 1)
+
+    User.create(name: "Omar Ali", email: "omar.ali@green.com", password: "Omar123", 
+      password_confirmation: "Omar123", role_id: 2, branch_id: 1)
+  
 end
 
 
@@ -180,7 +182,6 @@ if Rails.env.production?
   Setting.find_or_create_by(id: 1, name: "About Us", description: "Welcome to Green App. This app is all about Green Cafe")
   Setting.find_or_create_by(id: 2, name: "Contact Us", description: "01014911173")
   Setting.find_or_create_by(id: 3, name: "Redeem Equation", description: "total_price * 0.1")
-  Setting.find_or_create_by(id: 4, name: "Collect Equation", description: "previous_total_price * 0.5")
 
     # User.create!(name: "Yasser Fayez", email: "yasser.fayez.aboibrahim@gmail.com", password: "4455662@roD",
     #   password_confirmation: "4455662@roD", role_id: 1, branch_id: 1)
@@ -201,3 +202,21 @@ end
 # ActiveRecord::Base.connection.tables.each do |t|
 #   ActiveRecord::Base.connection.reset_pk_sequence!(t)
 # end
+
+
+  # classes = [ActiveRecord::Base.connection.tables.map{ |model| model.capitalize.singularize.camelize }, :tables_list]
+
+  # permissions = {}
+
+  # classes.each do |clazz|
+  #   policy =  Pundit.policy(User.last, :Branch)
+  #   policy.public_methods(false).sort.each do |m|
+  #     result = policy.send m
+  #     permissions["#{clazz}.#{m}"] = result
+  #   end
+  # end
+
+  # permissions
+
+
+  # ActiveRecord::Base.connection.tables.map{ |model| model.capitalize.singularize.camelize }

@@ -118,4 +118,4 @@ gem 'listen'
 gem 'semantic-ui-sass' 
 
 # Push Notification
-gem 'rpush'
+# gem 'rpush'

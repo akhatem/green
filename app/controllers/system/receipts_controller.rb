@@ -1,10 +1,12 @@
 class System::ReceiptsController < System::SystemApplicationController
 
     before_action :set_receipt, only: [:show]
-    before_action :set_points_movement, only: [:show]
+    # before_action :set_points_movement, only: [:show]
 
     def index
         @pagy, @receipts = pagy(Receipt.all.order(id: :asc))
+        authorize @receipts
+        
         if params[:search]
             @search_term = params[:search]
             @receipts = @receipts.search_by(@search_term)
@@ -21,6 +23,8 @@ class System::ReceiptsController < System::SystemApplicationController
     end
 
     def show
+        @points_movement = PointsMovement.where(customer_id: @receipt.customer_id, branch_id: @receipt.branch_id, 
+            user_id: @receipt.user_id).last if @receipt
         respond_to do |format|
             format.html
             format.pdf do
@@ -33,10 +37,12 @@ class System::ReceiptsController < System::SystemApplicationController
 
     def new
         @receipt = Receipt.new
+        authorize @receipt
     end
 
     def create
         receipt = Receipt.new(receipt_params)
+        authorize receipt
         respond_to do |format|
             if receipt.save
                 format.html { redirect_to cashier_redeem_points_path(receipt.number), 
@@ -56,11 +62,13 @@ class System::ReceiptsController < System::SystemApplicationController
 
     def set_receipt       
         @receipt = Receipt.find(params[:id])
+        authorize @receipt
     end
 
-    def set_points_movement
-        @points_movement = PointsMovement.where(customer_id: @receipt.customer_id).last if @receipt.customer_id
-    end
+    # def set_points_movement
+    #     @points_movement = PointsMovement.where(customer_id: @receipt.customer_id, branch_id: @receipt.branch_id, 
+    #                                             user_id: @receipt.user_id).last if @receipt.customer_id
+    # end
 
     def receipt_params
         params.require(:receipt).permit(:branch_id, :customer_id, :user_id, :number, :total_price)

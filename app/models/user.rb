@@ -19,6 +19,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :validatable
 
   belongs_to :role
+
+  validate :branch_exist, on: [:update, :create]
   
   
   def branchName
@@ -39,5 +41,11 @@ class User < ApplicationRecord
     .or(where("email ILIKE ?", "%" + search_term + "%"))
     .or(where(role_id: Role.where("name ILIKE ?", search_term)))
     .or(where(branch_id: Branch.where("name ILIKE ?", "%" + search_term + "%")))
+  end
+
+  private
+
+  def branch_exist
+    self.errors.add(:branch_id, "can't be blank") if self.roleKey.eql?("cashier")
   end
 end

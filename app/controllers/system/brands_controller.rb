@@ -3,6 +3,8 @@ class System::BrandsController < System::SystemApplicationController
   
   def index
     @pagy, @brands = pagy(Brand.all.order(id: :asc))
+
+    authorize @brands
       
   end
 
@@ -12,11 +14,12 @@ class System::BrandsController < System::SystemApplicationController
 
   def new
       @brand = Brand.new
+      authorize @brand
   end
 
   def create
     @brand = Brand.new(brand_params)
-
+    authorize @brand
     respond_to do |format|
         if @brand.save
             format.html { redirect_to system_brands_path, notice: "Brand #{@brand.name} was successfully created." }
@@ -57,6 +60,7 @@ class System::BrandsController < System::SystemApplicationController
 
   def set_brand
       @brand = Brand.find(params[:id])
+      authorize @brand
   end
 
   def brand_params
