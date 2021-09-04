@@ -1,7 +1,7 @@
 class Cashier::CashierPagesController < System::SystemApplicationController
 
   before_action :set_receipt, only: [:customer_info, :redeem_points]
-  before_action :set_customer, except: [:index, :barcode_search]
+  before_action :set_customer, except: [:barcode_search]
   before_action :set_points_movement, only: [:redeem_points]
   
   def barcode_search

@@ -35,15 +35,18 @@ class ApplicationPolicy
   end
 
   def barcode_search?
-    @user.roleKey.eql?("cashier")
+    false
+    # @user.roleKey.eql?("cashier")
   end
 
   def customer_info?
-    @user.roleKey.eql?("cashier")
+    false
+    # @user.roleKey.eql?("cashier")
   end
 
   def redeem_points?
-    @user.roleKey.eql?("cashier")
+    false
+    # @user.roleKey.eql?("cashier")
   end
 
 

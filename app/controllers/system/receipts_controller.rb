@@ -1,5 +1,6 @@
 class System::ReceiptsController < System::SystemApplicationController
-
+    
+    skip_after_action :verify_authorized
     before_action :set_receipt, only: [:show]
     # before_action :set_points_movement, only: [:show]
 
@@ -37,10 +38,12 @@ class System::ReceiptsController < System::SystemApplicationController
 
     def new
         @receipt = Receipt.new
+        # authorize @receipt
     end
 
     def create
         @receipt = Receipt.new(receipt_params)
+        # authorize @receipt
         respond_to do |format|
             if @receipt.save
                 format.html { redirect_to cashier_redeem_points_path(@receipt.number), 
@@ -60,6 +63,7 @@ class System::ReceiptsController < System::SystemApplicationController
 
     def set_receipt       
         @receipt = Receipt.find(params[:id])
+        # authorize @receipt
     end
 
     # def set_points_movement

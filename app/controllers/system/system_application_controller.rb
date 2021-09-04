@@ -1,6 +1,6 @@
 class System::SystemApplicationController < ApplicationController
     
-    after_action :verify_authorized, except: [:index, :barcode_search, :customer_info, :redeem_points]
+    after_action :verify_authorized, except: [:index, :barcode_search, :customer_info, :redeem_points, :receipts_controller]
     after_action :verify_policy_scoped, only: :index
     
     before_action :authenticate_user!
@@ -10,7 +10,7 @@ class System::SystemApplicationController < ApplicationController
         current_user
     end
 
-    private 
+    # private 
 
     # def set_customer
     #     @customer = Customer.find_by(decoded_barcode: params[:decoded_barcode])

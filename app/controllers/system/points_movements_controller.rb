@@ -1,5 +1,6 @@
 class System::PointsMovementsController < System::SystemApplicationController
 
+  skip_after_action :verify_authorized
   before_action :set_points_movement, only: [:show]
 
   def index
