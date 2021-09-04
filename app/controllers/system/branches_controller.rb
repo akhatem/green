@@ -4,7 +4,7 @@ class System::BranchesController < System::SystemApplicationController
     
     
     def index
-        @pagy, @branches = pagy(Branch.all.order(id: :asc))
+        @pagy, @branches = pagy(policy_scope(Branch.all.order(id: :asc)))
         authorize @branches
         
         if params[:search]
@@ -16,9 +16,10 @@ class System::BranchesController < System::SystemApplicationController
             format.html
             format.pdf do
               render pdf: "#{params[:controller].split('/').second}_#{DateTime.now.strftime('%d/%m/%Y')}", 
-                template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_index_pdf.html.erb"
+                template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_index_pdf.html.erb",
+                header: { right: "#{@pagy.page} of #{@pagy.last}" }
             end
-        end
+          end
     end
 
     def show

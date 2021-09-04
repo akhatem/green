@@ -10,10 +10,10 @@ Rails.application.routes.draw do
     get "/users/sign_out", to: "users#destroy"
     
     get '/users/index', to: "users#index"
-    get "/users/:id/show", to: "users#show"
+    # get "/users/:id/show", to: "users#show"
     get '/users/new', to: "users#new_user"
     post '/users/create', to: "users#create_user"
-    delete '/users/:id/delete', to: "users#destroy_user"
+    delete '/users/:id/delete', to: "users#destroy_user", as: "destroy_user"
   end
 
   

@@ -10,15 +10,15 @@
     </thead>
     <tbody>
         <% @items.each do |item| %>
-        <tr>
-            <th scope="row">
-                <%= link_to item.id, system_item_path(item), style: "color: green" %>
-            </th>
-            <td><%= link_to item.name, system_item_path(item), style: "color: green" %></td>
-            <td><%= link_to item.categoryName, system_category_path(item.categoryName), style: "color: green" %></td>
-            <td><%= link_to item.brandName, system_brand_path(item.brandName), style: "color: green" %></td>
-            <td><%= item.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td>
-        </tr>
-    <% end %>
+            <tr>
+                <th scope="row">
+                    <%= item.id %>
+                </th>
+                <td><%= item.name %></td>
+                <td><%= item.categoryName %></td>
+                <td><%= item.brandName %></td>
+                <td><%= item.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td>
+            </tr>
+        <% end %>
     </tbody>
 </table>

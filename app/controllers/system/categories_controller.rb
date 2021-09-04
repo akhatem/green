@@ -2,7 +2,7 @@ class System::CategoriesController < System::SystemApplicationController
     before_action :set_category, only: [:show, :edit, :update, :destroy]
     
     def index
-        @pagy, @categories = pagy(Category.all.order(id: :asc))
+        @pagy, @categories = pagy(policy_scope(Category.all.order(id: :asc)))
         authorize @categories
         if params[:search]
             @search_term = params[:search]
@@ -13,9 +13,10 @@ class System::CategoriesController < System::SystemApplicationController
             format.html
             format.pdf do
               render pdf: "#{params[:controller].split('/').second}_#{DateTime.now.strftime('%d/%m/%Y')}", 
-                template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_index_pdf.html.erb"
+                template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_index_pdf.html.erb",
+                header: { right: "#{@pagy.page} of #{@pagy.last}" }
             end
-        end
+          end
     end
 
     def show

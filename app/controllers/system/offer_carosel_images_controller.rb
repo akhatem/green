@@ -3,30 +3,30 @@ class System::OfferCaroselImagesController < System::SystemApplicationController
   before_action :set_offer_carosel_image, only: [:show, :edit, :update, :destroy]
   
   def index
-    @pagy, @offer_carosel_images = pagy(OfferCaroselImage.all.order(id: :asc))
+    @pagy, @offer_carosel_images = pagy(policy_scope(OfferCaroselImage.all.order(id: :asc)))
   end
 
   def show
-    @offer_carosel_image = OfferCaroselImage.find(params[:id])
   end
 
   def new
     @offer_carosel_image = OfferCaroselImage.new
+    authorize @offer_carosel_image
   end
   
   def edit
   end
 
   def create
-    offer_carosel_image = OfferCaroselImage.new(offer_carosel_image_params)
-
+    @offer_carosel_image = OfferCaroselImage.new(offer_carosel_image_params)
+    authorize @offer_carosel_image
     respond_to do |format|
-        if offer_carosel_image.save
+        if @offer_carosel_image.save
             format.html { redirect_to system_offer_carosel_images_path, notice: "Offer Carosel Image was created successfully." }
-            format.json { render :index, status: :created, location: offer_carosel_image }
+            format.json { render :index, status: :created, location: @offer_carosel_image }
         else
             format.html { render :new, status: :unprocessable_entity }
-            format.json { render json: offer_carosel_image.errors, status: :unprocessable_entity }
+            format.json { render json: @offer_carosel_image.errors, status: :unprocessable_entity }
             
         end
     end
@@ -57,6 +57,7 @@ class System::OfferCaroselImagesController < System::SystemApplicationController
 
   def set_offer_carosel_image
     @offer_carosel_image = OfferCaroselImage.find(params[:id])
+    authorize @offer_carosel_image
   end
   
   def offer_carosel_image_params

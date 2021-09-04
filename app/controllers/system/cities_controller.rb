@@ -2,7 +2,8 @@ class System::CitiesController < System::SystemApplicationController
     before_action :set_city, only: [:show, :edit, :update, :destroy]
     
     def index
-        @pagy, @cities = pagy(City.all.order(id: :asc))
+        @pagy, @cities = pagy(policy_scope(City.all.order(id: :asc)))
+        authorize @cities
         if params[:search]
             @search_term = params[:search]
             @cities = @cities.search_by(@search_term)
@@ -11,23 +12,24 @@ class System::CitiesController < System::SystemApplicationController
         respond_to do |format|
             format.html
             format.pdf do
-                render pdf: "#{params[:controller].split('/').second}_#{DateTime.now.strftime('%d/%m/%Y')}", 
-                template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_index_pdf.html.erb"
+              render pdf: "#{params[:controller].split('/').second}_#{DateTime.now.strftime('%d/%m/%Y')}", 
+                template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_index_pdf.html.erb",
+                header: { right: "#{@pagy.page} of #{@pagy.last}" }
             end
-        end
+          end
     end
 
     def show
-        @city = City.find(params[:id])
     end
 
     def new
         @city = City.new
+        authorize @city
     end
   
     def create
       @city = City.new(city_params)
-  
+      authorize @city
       respond_to do |format|
           if @city.save
               format.html { redirect_to system_cities_path, notice: "City #{@city.name} was successfully created." }
@@ -69,6 +71,7 @@ class System::CitiesController < System::SystemApplicationController
 
     def set_city
         @city = City.find(params[:id])
+        authorize @city
     end
 
     def city_params

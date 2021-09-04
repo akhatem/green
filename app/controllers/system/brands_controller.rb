@@ -2,14 +2,11 @@ class System::BrandsController < System::SystemApplicationController
   before_action :set_brand, only: [:show, :edit, :update, :destroy]
   
   def index
-    @pagy, @brands = pagy(Brand.all.order(id: :asc))
-
+    @pagy, @brands = pagy(policy_scope(Brand.all.order(id: :asc)))
     authorize @brands
-      
   end
 
   def show
-      @brand = Brand.find(params[:id])
   end
 
   def new
@@ -21,7 +18,7 @@ class System::BrandsController < System::SystemApplicationController
     @brand = Brand.new(brand_params)
     authorize @brand
     respond_to do |format|
-        if @brand.save
+        if brand.save
             format.html { redirect_to system_brands_path, notice: "Brand #{@brand.name} was successfully created." }
             format.json { render :show, status: :created, location: @brand }
         else

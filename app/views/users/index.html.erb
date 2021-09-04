@@ -13,7 +13,7 @@
 </div>
 <div class="col-lg-5 main-btns">
     <%= link_to "Add new User", users_new_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;", type: "button" %>
-    <%= link_to "Export as PDF", users_index_path(format: :pdf), class: "btn btn-outline-success btn-sm", type: "button"  %>
+    <%= link_to "Export as PDF", users_index_path(format: :pdf, page: params[:page]), class: "btn btn-outline-success btn-sm", type: "button"  %>
 </div>    
 
 
@@ -41,7 +41,7 @@
             <td><%= user.branchName if user.branch_id %></td>
                 <td class="table-action">
             <% unless user.role.name.eql?("Super") %>
-                <%= link_to '', user_registration_path(user), method: :delete, data: {confirm: "Are you sure?"}, 
+                <%= link_to '', destroy_user_path(user), method: :delete, data: {confirm: "Are you sure?"}, 
                         class: "fa fa-trash" %>
             <% end %>
                 </td>

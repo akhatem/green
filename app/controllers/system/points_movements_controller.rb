@@ -3,7 +3,7 @@ class System::PointsMovementsController < System::SystemApplicationController
   before_action :set_points_movement, only: [:show]
 
   def index
-    @pagy, @points_movements = pagy(PointsMovement.all.order(id: :asc))
+    @pagy, @points_movements = pagy(policy_scope(PointsMovement.all.order(id: :asc)))
     if params[:search]
       @search_term = params[:search]
       @points_movements = @points_movements.search_by(@search_term)
@@ -14,7 +14,7 @@ class System::PointsMovementsController < System::SystemApplicationController
       format.pdf do
         render pdf: "#{params[:controller].split('/').second}_#{DateTime.now.strftime('%d/%m/%Y')}", 
           template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_index_pdf.html.erb",
-            header: { right: '[page] of [topage]' }, page_offset: 0
+          header: { right: "#{@pagy.page} of #{@pagy.last}" }
       end
     end
   end

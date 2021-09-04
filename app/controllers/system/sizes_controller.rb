@@ -2,7 +2,8 @@ class System::SizesController < System::SystemApplicationController
     before_action :set_size, only: [:edit, :update, :destroy]
     
     def index
-      @pagy, @sizes = pagy(Size.all.order(id: :asc))
+      @pagy, @sizes = pagy(policy_scope(Size.all.order(id: :asc)))
+      authorize @sizes
       if params[:search]
         @search_term = params[:search]
         @sizes = @sizes.search_by(@search_term)
@@ -12,18 +13,20 @@ class System::SizesController < System::SystemApplicationController
         format.html
         format.pdf do
           render pdf: "#{params[:controller].split('/').second}_#{DateTime.now.strftime('%d/%m/%Y')}", 
-            template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_index_pdf.html.erb"
+            template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_index_pdf.html.erb",
+            header: { right: "#{@pagy.page} of #{@pagy.last}" }
         end
       end
     end
 
     def new
         @size = Size.new
-        puts "Size: #{@size}"
+        authorize @size
     end
   
     def create
       @size = Size.new(size_params)
+      authorize @size
       respond_to do |format|
           if @size.save
               format.html { redirect_to system_sizes_path, notice: "Size #{@size.name} was successfully created." }
@@ -64,6 +67,7 @@ class System::SizesController < System::SystemApplicationController
 
     def set_size
         @size = Size.find(params[:id])
+        authorize @size
     end
   
     def size_params

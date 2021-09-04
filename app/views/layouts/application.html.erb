@@ -14,12 +14,6 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <%= wicked_pdf_stylesheet_link_tag "pdf" %>
-    <%= wicked_pdf_javascript_include_tag "number_pages" %>
-
-    
-
   </head>
 
   <body class="<%= controller_name %> <%= action_name %>">
@@ -68,7 +62,7 @@
               
               <% if !controller_name.eql?('static_pages') and action_name.eql?('index') %>
                 <div class="row">
-                  <%= render 'system/shared/pagination' %>
+                  <%= render 'system/shared/pagination', locals: {pagy: @pagy} %>
                 </div>
               <% end %>
               <%# unless params[:controller].split('/').first.eql?('cashier') %>

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 class UsersController < Devise::SessionsController
-  # prepend_before_action :require_no_authentication, only: :cancel
-  # before_action :configure_sign_in_params, only: [:create]
   before_action :authenticate_user!
   before_action :set_custom_user, only: [:show, :edit, :update, :destroy_user]
 
@@ -9,14 +7,13 @@ class UsersController < Devise::SessionsController
   
   def login
     redirect_to new_user_session_path and return
-  end
-
-  # Devise methods
+  end # Devise methods
 
   # Custom User methods
 
   def index
-    @pagy, @users = pagy(User.all.order(id: :asc))
+    @pagy, @users = pagy(policy_scope(User.all.order(id: :asc)))
+    authorize @users
     if params[:search]
       @search_term = params[:search]
       @users = @users.search_by(@search_term)
@@ -26,13 +23,13 @@ class UsersController < Devise::SessionsController
       format.html
       format.pdf do
         render pdf: "#{params[:controller].split('/').second}_#{DateTime.now.strftime('%d/%m/%Y')}", 
-          template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_index_pdf.html.erb"
+          template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_index_pdf.html.erb",
+          header: { right: "#{@pagy.page} of #{@pagy.last}" }
       end
     end
   end
 
   def show
-    @user = User.find(params[:id])
   end
 
   def edit
@@ -52,12 +49,12 @@ class UsersController < Devise::SessionsController
 
   def new_user
     @user = User.new
+    authorize current_user
   end
 
   def create_user
     @user = User.new(user_params)
-    puts "=================================="
-    puts "=================================="
+    authorize current_user
     if @user.valid?
       @user.save
       redirect_to users_index_path
@@ -71,43 +68,32 @@ class UsersController < Devise::SessionsController
   def destroy_user
     respond_to do |format|
       if @user.destroy
-        format.html { redirect_to users_index_path, notice: "User was destroyed successfully." }
+        format.html { redirect_to users_index_path, notice: "User was removed successfully." }
         format.json { head :no_content }
       end
     end
-  end
-  
-  # Custom user methods
+  end # Custom user methods
 
   protected
+  
   # Devise methods
     def after_sign_in_path_for(resource)
-      # puts "=============================================="
-      # puts "current_user role key: #{current_user.roleKey}"
-      # puts "=============================================="
       if current_user.roleKey.eql?("cashier")
         cashier_path
       else
         system_root_path
       end
-      # super
-    end
-
-    # Devise methods
-
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
-  # end
-
+    end # Devise methods
+  
   private
 
-    def user_params
-      params.require(:user).permit(:email, :name, :password, :password_confirmation, :role_id, :branch_id)
-    end
-
-    def set_custom_user
-      @user = User.find(params[:id])
-    end
+  def set_custom_user
+    @user = User.find(params[:id])
+    authorize current_user
+  end
+    
+  def user_params
+    params.require(:user).permit(:email, :name, :password, :password_confirmation, :role_id, :branch_id)
+  end
 end
   

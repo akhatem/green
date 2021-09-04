@@ -223,3 +223,41 @@ end
 
 
   # ActiveRecord::Base.connection.tables.map{ |model| model.capitalize.singularize.camelize }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  # Brand.all.each do |brand|
+  #   for  i in 1..5 do
+  #     category = Category.find_or_create_by(name: FFaker::Food::unique.fruit, brand_id: brand.id)
+  #     5.times do
+  #       Item.create(name: FFaker::Food::meat, description: FFaker::Food::ingredient, brand_id: brand.id, 
+  #         category_id: category.id, image: File.open(File.join(Rails.root, 'app/assets/images/items/placeholder.png')))
+  #     end
+  #   end
+  # end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

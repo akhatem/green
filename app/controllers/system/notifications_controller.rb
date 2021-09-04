@@ -2,7 +2,8 @@ class System::NotificationsController < System::SystemApplicationController
   before_action :set_notification, only: [:show, :edit, :update, :destroy]
   
   def index
-    @pagy, @notifications = pagy(Notification.all.order(id: :asc))
+    @pagy, @notifications = pagy(policy_scope(Notification.all.order(id: :asc)))
+    authorize @notifications
     if params[:search]
       @search_term = params[:search]
       @notifications = @notifications.search_by(@search_term)
@@ -10,7 +11,6 @@ class System::NotificationsController < System::SystemApplicationController
   end
 
   def show
-      @notification
   end
 
   def edit    
@@ -30,21 +30,22 @@ class System::NotificationsController < System::SystemApplicationController
 
   def new
     @notification = Notification.new
+    authorize @notification
   end
 
   def create   
     @notification = Notification.new(notification_params)
-
-      respond_to do |format|
-        if @notification.save
-            format.html { redirect_to system_notification_path(@notification), notice: "Notification was successfully created." }
-            format.json { render :show, status: :created, location: @notification }
-        else
-            format.html { render :new, status: :unprocessable_entity }
-            format.json { render json: @notification.errors, status: :unprocessable_entity }
-            
-        end
+    authorize @notification
+    respond_to do |format|
+      if @notification.save
+          format.html { redirect_to system_notification_path(@notification), notice: "Notification was successfully created." }
+          format.json { render :show, status: :created, location: @notification }
+      else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @notification.errors, status: :unprocessable_entity }
+          
       end
+    end
   end
 
   def destroy
@@ -59,6 +60,7 @@ class System::NotificationsController < System::SystemApplicationController
 
   def set_notification
     @notification = Notification.find(params[:id])
+    authorize @notification
   end
 
   def notification_params

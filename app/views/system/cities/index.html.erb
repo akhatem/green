@@ -13,7 +13,7 @@
 
 <div class="col-lg-5 main-btns">
     <%= link_to "Add new City", new_system_city_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;", type: "button" %>
-    <%= link_to "Export as PDF", system_cities_path(format: :pdf), class: "btn btn-outline-success btn-sm", type: "button"  %>
+    <%= link_to "Export as PDF", system_cities_path(format: :pdf, page: params[:page]), class: "btn btn-outline-success btn-sm", type: "button"  %>
 </div>
 
 <table class="table mt-2">

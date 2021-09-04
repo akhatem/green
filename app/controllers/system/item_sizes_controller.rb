@@ -2,7 +2,8 @@ class System::ItemSizesController < System::SystemApplicationController
     before_action :set_item_size, only: [:show, :edit, :update, :destroy]
     
     def index
-      @pagy, @item_sizes = pagy(ItemSize.all.order(id: :asc))
+      @pagy, @item_sizes = pagy(policy_scope(ItemSize.all.order(id: :asc)))
+      authorize @item_sizes
     end
 
     def show
@@ -10,12 +11,13 @@ class System::ItemSizesController < System::SystemApplicationController
     end
 
     def new
-      @item_size = ItemSize.new   
+      @item_size = ItemSize.new
+      authorize @item_size
     end
 
     def create
       @item_size = ItemSize.new(item_size_params)
-
+      authorize @item_size
       respond_to do |format|
         if @item_size.save
             format.html { redirect_to system_item_sizes_path, notice: "Item Size was successfully created." }
@@ -56,6 +58,7 @@ class System::ItemSizesController < System::SystemApplicationController
 
   def set_item_size
     @item_size = ItemSize.find(params[:id])
+    authorize @item_size
   end
 
   def item_size_params

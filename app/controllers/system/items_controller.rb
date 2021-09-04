@@ -1,39 +1,39 @@
 class System::ItemsController < System::SystemApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_item_size, only: [:show, :edit, :update]
-  
-  def index
-    @pagy, @items = pagy(Item.all.order(id: :asc))
 
+
+  def index  
+    @pagy, @items = pagy(policy_scope(Item.all.order(id: :asc)))
     authorize @items
     
     if params[:search]
       @search_term = params[:search]
       @items = @items.search_by(@search_term)
     end
-
+    
     respond_to do |format|
       format.html
       format.pdf do
         render pdf: "#{params[:controller].split('/').second}_#{DateTime.now.strftime('%d/%m/%Y')}", 
           template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_index_pdf.html.erb",
-            header: { right: '[page] of [topage]' }, page_offset: 0
+          header: { right: "#{@pagy.page} of #{@pagy.last}" }
       end
     end
   end
 
   def show
-      @item = Item.find(params[:id])
   end
 
   def new
       @item = Item.new
+      authorize @item
       1.times { @item.item_sizes.build }
   end
 
   def create
     @item = Item.new(item_params)
-
+    authorize @item
     respond_to do |format|
         if @item.save
             format.html { redirect_to system_item_path(@item), notice: "Item #{@item.name} was successfully created." }

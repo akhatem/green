@@ -2,11 +2,11 @@ class System::SettingsController < System::SystemApplicationController
 
   before_action :set_setting, only: [:show, :edit, :update]
     def index
-       @pagy, @settings = pagy(Setting.all.order(id: :asc))
+       @pagy, @settings = pagy(policy_scope(Setting.all.order(id: :asc)))
+       authorize @settings
     end
 
     def show
-      @setting
     end
 
     def edit 
@@ -32,5 +32,6 @@ class System::SettingsController < System::SystemApplicationController
 
     def set_setting
       @setting = Setting.find(params[:id])
+      authorize @setting
     end
 end

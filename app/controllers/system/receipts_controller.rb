@@ -4,7 +4,7 @@ class System::ReceiptsController < System::SystemApplicationController
     # before_action :set_points_movement, only: [:show]
 
     def index
-        @pagy, @receipts = pagy(Receipt.all.order(id: :asc))
+        @pagy, @receipts = pagy(policy_scope(Receipt.all.order(id: :asc)))
         authorize @receipts
         
         if params[:search]
@@ -17,14 +17,14 @@ class System::ReceiptsController < System::SystemApplicationController
             format.pdf do
               render pdf: "#{params[:controller].split('/').second}_#{DateTime.now.strftime('%d/%m/%Y')}", 
                 template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_index_pdf.html.erb",
-                  header: { right: '[page] of [topage]' }, page_offset: 0
+                header: { right: "#{@pagy.page} of #{@pagy.last}" }
             end
         end
     end
 
     def show
-        @points_movement = PointsMovement.where(customer_id: @receipt.customer_id, branch_id: @receipt.branch_id, 
-            user_id: @receipt.user_id).last if @receipt
+        # @points_movement = PointsMovement.where(customer_id: @receipt.customer_id, branch_id: @receipt.branch_id, 
+        #     user_id: @receipt.user_id).last if @receipt
         respond_to do |format|
             format.html
             format.pdf do
@@ -37,22 +37,20 @@ class System::ReceiptsController < System::SystemApplicationController
 
     def new
         @receipt = Receipt.new
-        authorize @receipt
     end
 
     def create
-        receipt = Receipt.new(receipt_params)
-        authorize receipt
+        @receipt = Receipt.new(receipt_params)
         respond_to do |format|
-            if receipt.save
-                format.html { redirect_to cashier_redeem_points_path(receipt.number), 
-                    notice: "Receipt #{receipt.number} was successfully created." }
+            if @receipt.save
+                format.html { redirect_to cashier_redeem_points_path(@receipt.number), 
+                    notice: "Receipt #{@receipt.number} was successfully created." }
                 format.json { render :redeem_points, status: :created }
             else
-                @customer = Customer.find_by(decoded_barcode: receipt.customer.decoded_barcode)
-                format.html { redirect_to cashier_customer_info_path(receipt.customer.decoded_barcode), 
-                    alert: receipt.errors.full_messages, status: :unprocessable_entity }
-                format.json { render json: receipt.errors.full_messages, status: :unprocessable_entity }
+                @customer = Customer.find_by(decoded_barcode: @receipt.customer.decoded_barcode)
+                format.html { redirect_to cashier_customer_info_path(@receipt.customer.decoded_barcode), 
+                    alert: @receipt.errors.full_messages, status: :unprocessable_entity }
+                format.json { render json: @receipt.errors.full_messages, status: :unprocessable_entity }
                 
             end
         end
@@ -62,7 +60,6 @@ class System::ReceiptsController < System::SystemApplicationController
 
     def set_receipt       
         @receipt = Receipt.find(params[:id])
-        authorize @receipt
     end
 
     # def set_points_movement

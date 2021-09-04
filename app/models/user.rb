@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
   belongs_to :role
 
-  validate :branch_exist, on: [:update, :create]
+  validate :selection_of_branch, on: [:update, :create]
   
   
   def branchName
@@ -45,7 +45,7 @@ class User < ApplicationRecord
 
   private
 
-  def branch_exist
+  def selection_of_branch
     self.errors.add(:branch_id, "can't be blank") if self.roleKey.eql?("cashier")
   end
 end

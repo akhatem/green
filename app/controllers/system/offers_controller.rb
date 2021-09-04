@@ -2,7 +2,7 @@ class System::OffersController < System::SystemApplicationController
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
   
   def index
-      @pagy, @offers = pagy(Offer.all.order(id: :asc))
+      @pagy, @offers = pagy(policy_scope(Offer.all.order(id: :asc)))
       if params[:search]
         @search_term = params[:search]
         @offers = @offers.search_by(@search_term)
@@ -29,11 +29,12 @@ class System::OffersController < System::SystemApplicationController
 
   def new
     @offer = Offer.new
+    authorize @offer
   end
 
   def create   
     @offer = Offer.new(offer_params)
-
+    authorize @offer
       respond_to do |format|
         if @offer.save
             format.html { redirect_to system_offer_path(@offer), notice: "Offer was successfully created." }
@@ -58,6 +59,7 @@ class System::OffersController < System::SystemApplicationController
 
   def set_offer
     @offer = Offer.find(params[:id])
+    authorize @offer
   end
 
   def offer_params

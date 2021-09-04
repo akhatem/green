@@ -12,7 +12,7 @@
 </div>
 
 <div class="col-lg-5 main-btns">
-    <%= link_to "Export as PDF", system_receipts_path(format: :pdf), class: "btn btn-outline-success btn-sm", type: "button"  %>
+    <%= link_to "Export as PDF", system_receipts_path(format: :pdf, page: params[:page]), class: "btn btn-outline-success btn-sm", type: "button"  %>
 </div>
 
 <table class="table mt-2">

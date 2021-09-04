@@ -11,10 +11,10 @@
         <% @categories.each do |category| %>
         <tr>
             <th scope="row">
-                <%= link_to category.id, system_category_path(category), style: "color: green" %>
+                <%= category.id %>
             </th>
-            <td><%= link_to category.name, system_category_path(category), style: "color: green" %></td>
-            <td><%= link_to category.brandName, system_brand_path(category.brand), style: "color: green" %></td>
+            <td><%= category.name %></td>
+            <td><%= category.brandName %></td>
             <td><%= category.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td>
         </tr>
     <% end %>

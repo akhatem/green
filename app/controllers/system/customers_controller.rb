@@ -4,7 +4,7 @@ class System::CustomersController < System::SystemApplicationController
   before_action :set_points_movement, only: [:show]
   
   def index
-    @pagy, @customers = pagy(Customer.all.order(id: :asc))
+    @pagy, @customers = pagy(policy_scope(Customer.all.order(id: :asc)))
 
     authorize @customers
     
@@ -17,7 +17,8 @@ class System::CustomersController < System::SystemApplicationController
       format.html
       format.pdf do
         render pdf: "#{params[:controller].split('/').second}_#{DateTime.now.strftime('%d/%m/%Y')}", 
-          template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_index_pdf.html.erb"
+          template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_index_pdf.html.erb",
+          header: { right: "#{@pagy.page} of #{@pagy.last}" }
       end
     end
   end
