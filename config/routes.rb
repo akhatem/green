@@ -2,6 +2,9 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   
+  namespace :system do
+    get 'roles/index'
+  end
   devise_for :users, path: '/users',
   controllers: {registrations: 'users/new_user', sessions: :users} 
 
@@ -66,6 +69,8 @@ Rails.application.routes.draw do
 
     # Settings
     resources :settings
+
+    resources :roles
     
     # mount Ckeditor::Engine => '/ckeditor'
     

@@ -27,6 +27,11 @@ class Role < ApplicationRecord
     def is_super?
         self.is_super
     end
+
+    def self.search_by(search_term)
+        where("id = ?", search_term.to_i)
+        .or(where("LOWER(name) LIKE ?", "%" + search_term.downcase + "%"))
+    end
     
     private
 

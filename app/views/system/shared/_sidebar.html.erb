@@ -61,11 +61,6 @@
             <a href="<%= system_receipts_path %>" class="nav-link link-dark <%= is_active?(system_receipts_path)%>">
                 <i class="fas fa-receipt"></i> Receipts</a>
         </li>
-
-        <li>
-            <a href="<%= system_roless_path %>" class="nav-link link-dark <%= is_active?(system_roless_path)%>">
-                <i class="fas fa-receipt"></i> Roles</a>
-        </li>
         
         <li>
             <a href="<%= system_settings_path %>" class="nav-link link-dark <%= is_active?(system_settings_path) %>">
@@ -87,10 +82,9 @@
                 <i class="fas fa-user-tie"></i> System Users</a>
         </li>
 
-        <!-- <li>
-            <a href="#" class="nav-link link-dark">
-                <i class="fas fa-tag"></i> User Policies</a>
-        </li> -->
-
+        <li>
+            <a href="<%= system_roles_path %>" class="nav-link link-dark <%= is_active?(system_roles_path)%>">
+                <i class="fas fa-receipt"></i> System User Roles</a>
+        </li>
     </ul>
 </div>
