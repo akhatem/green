@@ -67,18 +67,18 @@ Built this app using the following:
 * gem 'semantic-ui-sass'
 
 ### Screenshots from the application uploaded to digitalocean spaces
-* https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_branches_edit.png
-* https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_branches_show.png
-* https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_branches.png
-* https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_brands_edit.png
-* https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_brands_show.png
-* https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_brands_starbucks_edit.png
-* https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_brands.png
-* https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_categories.png
-* https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_cities.png
-* https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_items.png
-* https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_notifications.png
-* https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_points_movements.png
-* https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_receipts.png
-* https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_settings.png
-* https://greenapp.fra1.digitaloceanspaces.com/screenshots/green_sms.png
+* https://greenfiles.fra1.digitaloceanspaces.com/uploads/green_branches_edit.png
+* https://greenfiles.fra1.digitaloceanspaces.com/uploads/green_branches_show.png
+* https://greenfiles.fra1.digitaloceanspaces.com/uploads/green_branches.png
+* https://greenfiles.fra1.digitaloceanspaces.com/uploads/green_brands_edit.png
+* https://greenfiles.fra1.digitaloceanspaces.com/uploads/green_brands_show.png
+* https://greenfiles.fra1.digitaloceanspaces.com/uploads/green_brands_starbucks_edit.png
+* https://greenfiles.fra1.digitaloceanspaces.com/uploads/green_brands.png
+* https://greenfiles.fra1.digitaloceanspaces.com/uploads/green_categories.png
+* https://greenfiles.fra1.digitaloceanspaces.com/uploads/green_cities.png
+* https://greenfiles.fra1.digitaloceanspaces.com/uploads/green_items.png
+* https://greenfiles.fra1.digitaloceanspaces.com/uploads/green_notifications.png
+* https://greenfiles.fra1.digitaloceanspaces.com/uploads/green_points_movements.png
+* https://greenfiles.fra1.digitaloceanspaces.com/uploads/green_receipts.png
+* https://greenfiles.fra1.digitaloceanspaces.com/uploads/green_settings.png
+* https://greenfiles.fra1.digitaloceanspaces.com/uploads/green_sms.png
