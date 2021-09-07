@@ -38,8 +38,9 @@ class PointsMovement < ApplicationRecord
       Branch.find(self.branch_id).name
   end
 
-  def convert_points_to_price
-    self.total * 0.5
+  def convert_points_to_cash
+    # self.total * 0.5
+    self.total * Setting.find_by(key: :points_to_cash)
   end
 
   private
