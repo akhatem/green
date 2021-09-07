@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_31_100359) do
+ActiveRecord::Schema.define(version: 2021_09_07_035247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,8 +128,10 @@ ActiveRecord::Schema.define(version: 2021_08_31_100359) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+    t.bigint "receipt_id", null: false
     t.index ["branch_id"], name: "index_points_movements_on_branch_id"
     t.index ["customer_id"], name: "index_points_movements_on_customer_id"
+    t.index ["receipt_id"], name: "index_points_movements_on_receipt_id"
   end
 
   create_table "push_notifications", force: :cascade do |t|
@@ -210,6 +212,7 @@ ActiveRecord::Schema.define(version: 2021_08_31_100359) do
   add_foreign_key "items", "categories"
   add_foreign_key "points_movements", "branches"
   add_foreign_key "points_movements", "customers"
+  add_foreign_key "points_movements", "receipts"
   add_foreign_key "receipts", "branches"
   add_foreign_key "receipts", "customers"
   add_foreign_key "receipts", "users"

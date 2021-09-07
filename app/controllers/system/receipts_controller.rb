@@ -2,7 +2,7 @@ class System::ReceiptsController < System::SystemApplicationController
     
     skip_after_action :verify_authorized
     before_action :set_receipt, only: [:show]
-    # before_action :set_points_movement, only: [:show]
+    before_action :set_points_movement, only: [:show]
 
     def index
         @pagy, @receipts = pagy(policy_scope(Receipt.all.order(id: :asc)))
@@ -24,8 +24,6 @@ class System::ReceiptsController < System::SystemApplicationController
     end
 
     def show
-        # @points_movement = PointsMovement.where(customer_id: @receipt.customer_id, branch_id: @receipt.branch_id, 
-        #     user_id: @receipt.user_id).last if @receipt
         respond_to do |format|
             format.html
             format.pdf do
@@ -66,10 +64,9 @@ class System::ReceiptsController < System::SystemApplicationController
         # authorize @receipt
     end
 
-    # def set_points_movement
-    #     @points_movement = PointsMovement.where(customer_id: @receipt.customer_id, branch_id: @receipt.branch_id, 
-    #                                             user_id: @receipt.user_id).last if @receipt.customer_id
-    # end
+    def set_points_movement
+        @points_movement = PointsMovement.find_by(@receipt.id).where("earned = ?", 0)
+    end
 
     def receipt_params
         params.require(:receipt).permit(:branch_id, :customer_id, :user_id, :number, :total_price)
