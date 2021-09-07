@@ -4,6 +4,7 @@ class System::OfferCaroselImagesController < System::SystemApplicationController
   
   def index
     @pagy, @offer_carosel_images = pagy(policy_scope(OfferCaroselImage.all.order(id: :asc)))
+    authorize @offer_carosel_images
   end
 
   def show

@@ -5,7 +5,6 @@
 #  id             :bigint           not null, primary key
 #  customer_id    :bigint           not null
 #  branch_id      :bigint           not null
-#  user_id        :integer
 #  redeemed       :integer          default(0)
 #  earned         :integer          default(0)
 #  date_time      :datetime         not null
@@ -13,6 +12,8 @@
 #  current_points :integer          default(0)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  user_id        :integer
+#  receipt_id     :bigint           not null
 #
 class PointsMovement < ApplicationRecord
   belongs_to :customer
@@ -39,7 +40,7 @@ class PointsMovement < ApplicationRecord
 
   def receiptNumber
     Receipt.find(self.receipt_id).number
-end
+  end
 
   def convert_points_to_cash
     # self.total * 0.5
@@ -63,4 +64,5 @@ end
     customer = Customer.find(self.customer_id)
     customer.update(points: self.total)
   end
+
 end

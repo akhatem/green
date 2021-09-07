@@ -227,19 +227,6 @@ end
 
   # ActiveRecord::Base.connection.tables.map{ |model| model.capitalize.singularize.camelize }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
   # Brand.all.each do |brand|
   #   for  i in 1..5 do
   #     category = Category.find_or_create_by(name: FFaker::Food::unique.fruit, brand_id: brand.id)
@@ -251,7 +238,11 @@ end
   # end
 
 
-
+PointsMovement.all.each do |pm|
+  receipt = Receipt.find_by(customer_id: pm.customer_id, created_at: pm.created_at, branch_id: pm.branch_id)
+  pm.update(receipt_id: receipt.id)
+  puts "receipt: #{receipt.id} : pm: #{pm.id}" 
+end
 
 
 

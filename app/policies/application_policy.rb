@@ -49,6 +49,10 @@ class ApplicationPolicy
     # @user.roleKey.eql?("cashier")
   end
 
+  def daily_redeemed_points_and_cash?
+    !@user.roleKey.eql?("cashier")
+  end
+
 
   def scope
     Pundit.policy_scope!(user, record.class)

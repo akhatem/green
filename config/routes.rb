@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     resources :offer_carosel_images
     
     
-    resources :points_movements, only: [:index, :show, :new, :create]
+    resources :points_movements, only: [:index, :show, :new, :create, :daily_redeemed_points_and_cash]
 
     # Receipts
     resources :receipts
