@@ -70,7 +70,7 @@ Rails.application.routes.draw do
     # Settings
     resources :settings
 
-    resources :roles
+    resources :roles, only: [:index, :show]
     
     # mount Ckeditor::Engine => '/ckeditor'
     

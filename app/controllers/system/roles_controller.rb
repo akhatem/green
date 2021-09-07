@@ -5,7 +5,7 @@ class System::RolesController < ApplicationController
 
     if params[:search]
       @search_term = params[:search]
-      @items = @items.search_by(@search_term)
+      @roles = @roles.search_by(@search_term)
     end
   end
 
