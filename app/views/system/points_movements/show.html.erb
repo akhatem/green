@@ -197,6 +197,12 @@ div.form-group.row {
     </div>
 
     <div class="form-group row">
+        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Receipt #</label>
+        <%= link_to @points_movement.receiptNumber, system_receipt_path(@points_movement.receipt_id), 
+            style: "color: green;", class: "form-control" %>
+    </div>
+
+    <div class="form-group row">
         <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Earned</label>
         <input class="form-control" id="form-label" type="text" value="<%= @points_movement.earned %>" disabled>
     </div>

@@ -16,7 +16,7 @@ class Receipt < ApplicationRecord
     belongs_to :user
     belongs_to :branch
     
-    has_many :points_movements
+    has_many :points_movements, dependent: :destroy
     
 
     validates :customer_id, presence: true
@@ -55,7 +55,6 @@ class Receipt < ApplicationRecord
     def customer_collect_points
         # earned_points = self.total_price * 0.1
         earned_points = self.total_price *  Setting.find_by(key: :cash_to_points).description.to_f
-        # puts "================> In receipt model: earned_points: #{earned_points}"
 
         PointsMovement.create(customer_id: self.customer_id, branch_id: self.branch_id, 
             earned: earned_points, date_time: DateTime.now, user_id: self.user_id, receipt_id: self.id)

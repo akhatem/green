@@ -20,8 +20,7 @@ class User < ApplicationRecord
 
   belongs_to :role
 
-  validate :selection_of_branch, on: [:update, :create]
-  
+  before_save :selection_of_branch
   
   def branchName
     Branch.find(self.branch_id).name

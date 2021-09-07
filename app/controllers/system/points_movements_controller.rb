@@ -51,7 +51,7 @@ class System::PointsMovementsController < System::SystemApplicationController
           format.json { render :barcode_search, status: 202 }
         else
           format.html { redirect_to cashier_customer_info_path(@customer.decoded_barcode), alert: "Points can't be redeemed!" }
-          format.json { render json: points_movement.errors, status: :not_acceptable }  
+          format.json { render json: points_movement.errors.full_messages, status: :not_acceptable }  
         end
       else
         format.html { redirect_to cashier_barcode_search_path, notice: "No action was taken." }

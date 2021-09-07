@@ -106,6 +106,8 @@ if Rails.env.development?
     
     Setting.find_or_create_by(id: 1, name: "About Us", description: "Welcome to Green App. This app is all about Green Cafe")
     Setting.find_or_create_by(id: 2, name: "Contact Us", description: "+201014911173")
+    Setting.find_or_create_by(id: 3, name: "Cash to points", description: "0.1")
+    Setting.find_or_create_by(id: 4, name: "Points to cash", description: "0.5")
   end
   puts "Create Settings finished #{DateTime.now.strftime("%H:%M:%S")}"
 
@@ -134,10 +136,11 @@ if Rails.env.development?
     password_confirmation: "Root123", role_id: 1)
   
   User.create(name: "Hatem Mohamed", email: "hatem.mohamed@green.com", password: "Hatem123", 
-    password_confirmation: "Hatem123", role_id: 3, branch_id: 1)
+    password_confirmation: "Hatem123", role_id: 2, branch_id: 1)
 
-    User.create(name: "Omar Ali", email: "omar.ali@green.com", password: "Omar123", 
-      password_confirmation: "Omar123", role_id: 2, branch_id: 1)
+  User.create(name: "Omar Ali", email: "omar.ali@green.com", password: "Omar123", 
+    password_confirmation: "Omar123", role_id: 3, branch_id: 1)
+
   
 end
 
