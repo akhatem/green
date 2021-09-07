@@ -117,9 +117,23 @@ h2 {
     width: 50%
 }
 
-.form-control {
+/* .form-control {
     width: 50%;
+    text-align: center;
+} */
+
+.form-control {
+    text-align:center;
+    width: 42%;
+    margin-right: 68px;
+    margin-left: 70px;
 }
+
+.link-to{
+    width: 36%;
+    margin-right: 12%;
+}
+
 
 .btn-primary {
     background-color: #00AB47;
@@ -168,38 +182,45 @@ div.form-group.row {
 
 <div class="row">
     <div class="col-md-6">
-        <h2 style="text-align: center;">Basic Info</h2>
+        <h2 class="details-tab">Basic Info</h2>
     </div>
     <div class="col-md-6">
-        <%= link_to "Export as PDF", system_points_movement_path(@points_movement, format: :pdf), class: "btn btn-outline-success btn-sm", type: "button"  %>
-    </div>    
+        <%= link_to "Export as PDF", system_points_movement_path(@points_movement, format: :pdf), 
+        class: "btn btn-outline-success btn-sm", type: "button"  %>
+    </div>
 </div>
 
 <form>
-    <div class="form-group row" style="text-align:center;">
-        <label for="points_movement_id" class="col-md-2 col-form-label">Id</label>
-        <input type="number" class="form-control" id="points_movement_id" value="<%= @points_movement.id %>" disabled>
+    <div class="form-group row">
+        <label for="points_movement_id" class="col col-md-2 col-form-label">Id</label>
+        <input type="text" class="form-control" id="points_movement_id" value="<%= @points_movement.id %>" disabled>
     </div>
 
     <div class="form-group row">
         <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Customer</label>
-        <%= link_to @points_movement.customerName, system_customer_path(@points_movement.customer_id), style: "color: green;", class: "form-control" %>
+        <%= link_to @points_movement.customerName, system_customer_path(@points_movement.customer_id), style: "color: green;", 
+        class: "form-control link-to" %>
     </div>
 
     <div class="form-group row">
         <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Branch</label>
-        <%= link_to @points_movement.branchName, system_branch_path(@points_movement.branch_id), style: "color: green;", class: "form-control" %>
+        <%= link_to @points_movement.branchName, system_branch_path(@points_movement.branch_id), 
+            class: "form-control link-to", id: "form-label", style: "color: green;" %>
     </div>
 
     <div class="form-group row">
         <label for="formGroupExampleInput2" class="col-md-2 col-form-label">System User</label>
-        <%= link_to @points_movement.userName, users_index_path, style: "color: green;", class: "form-control" %>
+        <%= link_to @points_movement.userName, users_index_path, style: "color: green;", class: "form-control link-to" %>
     </div>
 
     <div class="form-group row">
-        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Receipt #</label>
-        <%= link_to @points_movement.receiptNumber, system_receipt_path(@points_movement.receipt_id), 
-            style: "color: green;", class: "form-control" %>
+        <label for="points_movement_receipt_id" class="col-md-2 col-form-label">Receipt Id</label>
+        <% unless @points_movement.receipt_id.nil? %>
+            <%= link_to @points_movement.receipt_id, system_receipt_path(@points_movement.receipt_id),
+                style: "color: green;", class: "form-control link-to" %>
+        <% else %>
+            <input type="text" class="form-control" id="points_movement_receipt_id" value="-" disabled>
+        <% end %>
     </div>
 
     <div class="form-group row">
