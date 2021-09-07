@@ -45,12 +45,14 @@ class System::ItemSizesController < System::SystemApplicationController
     end
   
     def destroy
-      respond_to do |format|
-        if @item_size.destroy
-          format.html { redirect_to edit_system_item_path(@item_size.item_id), notice: "Size was successfully removed." }
-          format.json { head :no_content }
-        end
-      end
+      redirect_to edit_system_item_path(@item_size.item_id), notice: "Size was successfully removed."
+      @item_size.destroy
+      # respond_to do |format|
+        # if @item_size.destroy
+          # format.html { }
+          # format.json { head :no_content }
+        # end
+      # end
     end
 
   private
