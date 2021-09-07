@@ -16,11 +16,11 @@ class Setting < ApplicationRecord
     validates :key, uniqueness: { case_sensitive: false }
 
 
-    before_create :generate_key
+    after_create :generate_key
     
     private 
     
     def generate_key
-        self.write_attribute(:key, self.name.gsub(' ', '').underscore)
+        self.update(key: self.name.gsub(' ', '_').underscore)
     end
 end

@@ -52,7 +52,7 @@ class Receipt < ApplicationRecord
 
     def customer_collect_points
         # earned_points = self.total_price * 0.1
-        earned_points = self.total_price *  Setting.find_by(key: :cash_to_points).to_i
+        earned_points = self.total_price *  Setting.find_by(key: :cash_to_points).to_f
         # puts "================> In receipt model: earned_points: #{earned_points}"
 
         PointsMovement.create(customer_id: self.customer_id, branch_id: self.branch_id, 

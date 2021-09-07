@@ -31,6 +31,6 @@ class Role < ApplicationRecord
     private
 
     def generate_key
-        self.update(key: self.name.gsub(' ', '').underscore)
+        self.update(key: self.name.gsub(' ', '_').underscore)
     end
 end
