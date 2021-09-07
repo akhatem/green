@@ -45,14 +45,16 @@ class System::ItemSizesController < System::SystemApplicationController
     end
   
     def destroy
-      redirect_to edit_system_item_path(@item_size.item_id), notice: "Size was successfully removed."
-      @item_size.destroy
-      # respond_to do |format|
-        # if @item_size.destroy
-          # format.html { }
-          # format.json { head :no_content }
-        # end
-      # end
+      respond_to do |format|
+        if ItemSize.where(item_id: @item_size.item_id).count.eql?(1)
+          format.html { redirect_to edit_system_item_path(@item_size.item_id), alert: "Item must have at least 1 size!"}
+          format.json { head :no_content }
+        else
+          @item_size.destroy
+          format.html { redirect_to edit_system_item_path(@item_size.item_id), notice: "Size was successfully removed."}
+          format.json { head :no_content }
+        end
+      end
     end
 
   private

@@ -82,7 +82,7 @@ div.form-group.row {
                                 <h3><%= pluralize(@item.errors.count, "error") %> found:</h3>
                                 <ul>
                                     <% @item.errors.each do |error| %>
-                                        <li><%= error.full_message %></li>
+                                        <li><%= error.full_message.sub!("Item sizes", "") %></li>
                                     <% end %>
                                 </ul>
                             </div>
