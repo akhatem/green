@@ -15,7 +15,6 @@ class ItemSize < ApplicationRecord
 
     validates :item_id, uniqueness: { scope:  :size_id }
     validates :price, presence: true
-    validate :count_of_sizes
 
     def price_with_precision
         number_with_precision(self.price, precision: 2)
@@ -27,13 +26,5 @@ class ItemSize < ApplicationRecord
 
     def size_with_price
         "#{self.sizeName} : #{self.price}"
-    end
-
-    private
-
-    def count_of_sizes
-        if ItemSize.where(item_id: self.item_id).count.eql?(1)
-            self.errors.add("", "Item Must have at least 1 size and price!")
-        end
     end
 end
