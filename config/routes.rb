@@ -53,7 +53,7 @@ Rails.application.routes.draw do
     resources :sizes
 
     # Item sizes
-    resources :item_sizes, except: [:show]
+    resources :item_sizes, except: [:index, :show]
 
     # Notifications
     resources :notifications

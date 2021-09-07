@@ -1,14 +1,13 @@
 class System::ItemSizesController < System::SystemApplicationController
-    before_action :set_item_size, only: [:show, :edit, :update, :destroy]
+    before_action :set_item_size, only: [:edit, :update, :destroy]
     
-    def index
-      @pagy, @item_sizes = pagy(policy_scope(ItemSize.all.order(id: :asc)))
-      authorize @item_sizes
-    end
+    # def index
+    #   @pagy, @item_sizes = pagy(policy_scope(ItemSize.all.order(id: :asc)))
+    #   authorize @item_sizes
+    # end
 
-    def show
-      @item_size = ItemSize.find(params[:id])
-    end
+    # def show
+    # end
 
     def new
       @item_size = ItemSize.new
@@ -34,7 +33,6 @@ class System::ItemSizesController < System::SystemApplicationController
     end
   
     def update
-    # byebug
       respond_to do |format|
         if @item_size.update(item_size_params)
           format.html { redirect_to system_item_sizes_path, notice: "Item was successfully updated." }
@@ -47,11 +45,12 @@ class System::ItemSizesController < System::SystemApplicationController
     end
   
     def destroy
-        @item_size.destroy
-        respond_to do |format|
-            format.html { redirect_to edit_system_item_path(@item_size.item_id), notice: "Size was successfully removed." }
-            format.json { head :no_content }
-          end
+      respond_to do |format|
+        if @item_size.destroy
+          format.html { redirect_to edit_system_item_path(@item_size.item_id), notice: "Size was successfully removed." }
+          format.json { head :no_content }
+        end
+      end
     end
 
   private
