@@ -224,12 +224,12 @@ div.form-group.row {
     </div>
 
     <div class="form-group row">
-        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Earned</label>
+        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Earned points</label>
         <input class="form-control" id="form-label" type="text" value="<%= @points_movement.earned %>" disabled>
     </div>
 
     <div class="form-group row">
-        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Redeemed</label>
+        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Redeemed points</label>
         <% if @points_movement.redeemed == 0 %>
             <input class="form-control" id="form-label" type="text" value="<%= @points_movement.redeemed %>" disabled>
         <% else %>

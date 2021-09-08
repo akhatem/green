@@ -2,7 +2,7 @@ class System::ReceiptsController < System::SystemApplicationController
     
     skip_after_action :verify_authorized
     before_action :set_receipt, only: [:show]
-    # before_action :set_points_movement, only: [:show]
+    before_action :set_points_movement, only: [:show]
 
     def index
         @pagy, @receipts = pagy(policy_scope(Receipt.all.order(id: :asc)))
@@ -65,7 +65,8 @@ class System::ReceiptsController < System::SystemApplicationController
     end
 
     def set_points_movement
-        @points_movement = PointsMovement.find_by(@receipt.id).where("earned = ?", 0)
+        @points_movement = PointsMovement.where(earned: 0).find_by(receipt_id: @receipt.id)
+
     end
 
     def receipt_params
