@@ -22,6 +22,8 @@
             <th scope="col">Customer</th>
             <th scope="col">Branch</th>
             <th scope="col">System User</th>
+            <th scope="col">Receipt Id</th>
+            <th scope="col">Action</th>
             <th scope="col">Earned</th>
             <th scope="col">Redeemed</th>
             <th scope="col">Total Points</th>
@@ -37,6 +39,8 @@
             <td><%= link_to points_movement.customerName, system_customer_path(points_movement.customer_id), style: "color: green" %></td>
             <td><%= link_to points_movement.branchName, system_branch_path(points_movement.branch_id), style: "color: green" %></td>    
             <td><%= link_to points_movement.userName, users_index_path, style: "color: green" %></td>
+            <td><%= link_to points_movement.receipt_id, system_receipt_path(points_movement.receipt_id), style: "color: green" %></td>
+            <td><%= points_movement.earned.eql?(0) ? "Redeemed" : "Earned" %></td>
             <td><%= points_movement.earned %></td>
             <td><%= -points_movement.redeemed %></td>
             <td><%= points_movement.total %></td>
