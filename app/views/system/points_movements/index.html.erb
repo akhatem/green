@@ -39,7 +39,11 @@
             <td><%= link_to points_movement.customerName, system_customer_path(points_movement.customer_id), style: "color: green" %></td>
             <td><%= link_to points_movement.branchName, system_branch_path(points_movement.branch_id), style: "color: green" %></td>    
             <td><%= link_to points_movement.userName, users_index_path, style: "color: green" %></td>
-            <td><%= link_to points_movement.receipt_id, system_receipt_path(points_movement.receipt_id), style: "color: green" %></td>
+            <% unless points_movement.receipt_id.nil? %>
+                <td><%= link_to points_movement.receipt_id, system_receipt_path(points_movement.receipt_id), style: "color: green" %></td>
+            <% else %>
+                <td>-</td>
+            <% end %>
             <td><%= points_movement.earned.eql?(0) ? "Redeemed" : "Earned" %></td>
             <td><%= points_movement.earned %></td>
             <td><%= -points_movement.redeemed %></td>
