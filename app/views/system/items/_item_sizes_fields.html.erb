@@ -13,7 +13,9 @@
     </div>
 
     <div class="form-group row">
-        <%= link_to "Remove", system_item_size_path(@item_size), method: :delete, data: {confirm: "Are you sure?"}, 
-            class: "remove_fields btn btn-outline-success btn-sm" %>
+        <% if @item_size %>
+            <%= link_to "Remove", system_item_size_path(@item_size), method: :delete, data: {confirm: "Are you sure?"}, 
+                class: "remove_fields btn btn-outline-success btn-sm" %>
+        <% end %>
     </div>
 </div>
