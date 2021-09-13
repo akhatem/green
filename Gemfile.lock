@@ -165,6 +165,8 @@ GEM
     execjs (2.8.1)
     ffaker (2.18.0)
     ffi (1.15.3)
+    firebase-ruby (0.3.1)
+      jwt (~> 2.2)
     fog-aws (3.10.0)
       fog-core (~> 2.1)
       fog-json (~> 1.1)
@@ -399,6 +401,7 @@ DEPENDENCIES
   ckeditor
   devise
   ffaker
+  firebase-ruby
   fog-aws
   geocoder
   grape
