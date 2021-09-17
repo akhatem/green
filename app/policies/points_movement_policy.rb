@@ -8,4 +8,8 @@ class PointsMovementPolicy < ApplicationPolicy
       end
     end
   end
+
+  def daily_points_movements?
+    !@user.roleKey.eql?("cashier")
+  end
 end

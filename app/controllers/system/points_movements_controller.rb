@@ -61,7 +61,7 @@ class System::PointsMovementsController < System::SystemApplicationController
   end
 
   def daily_points_movements
-    @pagy, @daily_points_movements = pagy_array(PointsMovement.group("DATE(date_time)").order("DATE(date_time) ASC").pluck("DATE(date_time)", "SUM(earned)", "SUM(redeemed)", "SUM(total)"))
+    @pagy, @daily_points_movements = pagy_array(policy_scope(PointsMovement.group("DATE(date_time)")).order("DATE(date_time) ASC").pluck("DATE(date_time)", "SUM(earned)", "SUM(redeemed)", "SUM(total)"))
     
     daily_points_movements = []
     if params[:search]
