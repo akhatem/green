@@ -60,7 +60,7 @@
                 <%= yield %>
               <% end %>
               
-              <% if !controller_name.eql?('static_pages') and action_name.eql?('index') %>
+              <% if !controller_name.eql?('static_pages') and (action_name.eql?('index') or action_name.eql?('daily_points_movements')) %>
                 <div class="row">
                   <%= render 'system/shared/pagination', locals: {pagy: @pagy} %>
                 </div>
