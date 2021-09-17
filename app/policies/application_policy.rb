@@ -49,7 +49,7 @@ class ApplicationPolicy
     # @user.roleKey.eql?("cashier")
   end
 
-  def daily_redeemed_points_and_cash?
+  def daily_points_movements?
     !@user.roleKey.eql?("cashier")
   end
 

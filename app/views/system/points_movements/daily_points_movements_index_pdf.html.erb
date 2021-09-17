@@ -1,0 +1,22 @@
+<table class="table mt-2">
+    <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Earned</th>
+            <th scope="col">Redeemed</th>
+            <th scope="col">Total Points</th>
+            <th scope="col">Total Cash</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @daily_points_movements.each do |dpm| %>
+            <tr>
+                <td><%= dpm[0].strftime("%A, %d %B %Y") %></td>
+                <td><%= dpm[1] %></td>
+                <td><%= dpm[2] %></td>
+                <td><%= dpm[3] %></td>
+                <td><%= dpm[3] * Setting.find_by(key: :points_to_cash).description.to_f %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

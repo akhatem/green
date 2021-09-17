@@ -1,7 +1,7 @@
 class System::PointsMovementsController < System::SystemApplicationController
 
   skip_after_action :verify_authorized
-  before_action :set_points_movement, only: [:show, :daily_redeemed_points_and_cash]
+  before_action :set_points_movement, only: [:show]
 
   def index
     @pagy, @points_movements = pagy(policy_scope(PointsMovement.all.order(id: :asc)))
@@ -60,8 +60,29 @@ class System::PointsMovementsController < System::SystemApplicationController
     end
   end
 
-  def daily_redeemed_points_and_cash
-    @daily_redeemed = PointsMovment.group(:date_time)
+  def daily_points_movements
+    @pagy, @daily_points_movements = pagy_array(PointsMovement.group("DATE(date_time)").order("DATE(date_time) ASC").pluck("DATE(date_time)", "SUM(earned)", "SUM(redeemed)", "SUM(total)"))
+    
+    daily_points_movements = []
+    if params[:search]
+      @search_term = params[:search]
+      
+      @daily_points_movements.each do |dpm|
+        if dpm[0].strftime("%A, %d %B %Y").include?(@search_term.capitalize)
+          daily_points_movements.push(dpm)
+        end
+      end
+      @daily_points_movements = daily_points_movements
+    end
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "#{params[:action]}_#{DateTime.now.strftime('%d/%m/%Y')}", 
+          template: "system/#{params[:controller].split('/').second}/#{params[:action]}_index_pdf.html.erb",
+          header: { right: "#{@pagy.page} of #{@pagy.last}" }
+      end
+    end
   end
 
   private
