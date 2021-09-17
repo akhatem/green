@@ -47,6 +47,12 @@ class PointsMovement < ApplicationRecord
     self.total * Setting.find_by(key: :points_to_cash).description.to_f
   end
 
+  def self.search_by(search_term)
+    where(id: search_term.to_i)
+    .or(where("receipt_id = ?", Receipt.find_by(id: search_term.to_i)))
+    # .or(where("DATE(date_time) ILIKE ?", "%" + search_term + "%"))
+  end
+
   private
   
   def calculate_current_points

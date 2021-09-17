@@ -2,7 +2,6 @@ module ApplicationHelper
     include Pagy::Frontend
     
     def is_active?(link_path)
-        # byebug
         current_page?(link_path) ? 'ac' : ""
         # path = request.fullpath.split('/')
         # cnt = path.count
