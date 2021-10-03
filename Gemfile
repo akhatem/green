@@ -117,6 +117,8 @@ gem 'httpclient'
 gem 'listen'
 gem 'semantic-ui-sass' 
 
-# Push Notification
-gem 'firebase-ruby'
-# gem 'rpush'
+# Push Notifications
+gem 'firebase'
+
+# Change integer values to words
+gem 'humanize'

@@ -61,14 +61,21 @@ class System::PointsMovementsController < System::SystemApplicationController
   end
 
   def daily_points_movements
-    @pagy, @daily_points_movements = pagy_array(policy_scope(PointsMovement.group("DATE(date_time)")).order("DATE(date_time) ASC").pluck("DATE(date_time)", "SUM(earned)", "SUM(redeemed)", "SUM(total)"))
+    # byebug
+    @pagy, @branches = pagy(Branch.all)
+    # @pagy, @daily_points_movements = pagy_array(policy_scope(PointsMovement.group(:branch_id, "DATE(date_time)"))
+    #   .order("DATE(date_time) ASC")
+    #   .pluck(:branch_id, "DATE(date_time)", "SUM(earned)", "SUM(redeemed)", "SUM(total)"))
+
+    # @pagy, @daily_points_movements = pagy_array(PointsMovement.group(:branch_id, "DATE(date_time)").pluck(:branch_id, "DATE(date_time)", "SUM(earned)", "SUM(redeemed)"))
+    # @daily_points_movements = PointsMovement.group(:branch_id, "DATE(date_time)").pluck(:branch_id, "DATE(date_time)", "SUM(earned)", "SUM(redeemed)")
     
     daily_points_movements = []
     if params[:search]
       @search_term = params[:search]
       
       @daily_points_movements.each do |dpm|
-        if dpm[0].strftime("%A, %d %B %Y").include?(@search_term.capitalize)
+        if dpm[1].strftime("%A, %d %B %Y").include?(@search_term.capitalize)
           daily_points_movements.push(dpm)
         end
       end

@@ -163,10 +163,31 @@ GEM
       tzinfo
     excon (0.85.0)
     execjs (2.8.1)
+    faraday (1.8.0)
+      faraday-em_http (~> 1.0)
+      faraday-em_synchrony (~> 1.0)
+      faraday-excon (~> 1.1)
+      faraday-httpclient (~> 1.0.1)
+      faraday-net_http (~> 1.0)
+      faraday-net_http_persistent (~> 1.1)
+      faraday-patron (~> 1.0)
+      faraday-rack (~> 1.0)
+      multipart-post (>= 1.2, < 3)
+      ruby2_keywords (>= 0.0.4)
+    faraday-em_http (1.0.0)
+    faraday-em_synchrony (1.0.0)
+    faraday-excon (1.1.0)
+    faraday-httpclient (1.0.1)
+    faraday-net_http (1.0.1)
+    faraday-net_http_persistent (1.2.0)
+    faraday-patron (1.0.0)
+    faraday-rack (1.0.0)
     ffaker (2.19.0)
     ffi (1.15.4)
-    firebase-ruby (0.3.1)
-      jwt (~> 2.2)
+    firebase (0.2.8)
+      googleauth
+      httpclient (>= 2.5.3)
+      json
     fog-aws (3.12.0)
       fog-core (~> 2.1)
       fog-json (~> 1.1)
@@ -190,6 +211,13 @@ GEM
     geocoder (1.6.7)
     globalid (0.5.2)
       activesupport (>= 5.0)
+    googleauth (0.17.1)
+      faraday (>= 0.17.3, < 2.0)
+      jwt (>= 1.4, < 3.0)
+      memoist (~> 0.16)
+      multi_json (~> 1.11)
+      os (>= 0.9, < 2.0)
+      signet (~> 0.15)
     grape (1.5.3)
       activesupport
       builder
@@ -198,6 +226,7 @@ GEM
       rack (>= 1.3.0)
       rack-accept
     httpclient (2.8.3)
+    humanize (2.5.1)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.1)
@@ -207,6 +236,7 @@ GEM
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     jmespath (1.4.0)
+    json (2.5.1)
     jwt (2.2.3)
     listen (3.7.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -217,6 +247,7 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.1)
+    memoist (0.16.2)
     method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
@@ -226,6 +257,7 @@ GEM
     minitest (5.14.4)
     msgpack (1.4.2)
     multi_json (1.15.0)
+    multipart-post (2.1.1)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     mustermann-grape (1.0.1)
@@ -237,6 +269,7 @@ GEM
     nokogiri (1.12.4-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    os (1.1.1)
     pagy (4.11.0)
     pg (1.2.3)
     public_suffix (4.0.6)
@@ -328,6 +361,11 @@ GEM
       sidekiq (>= 3)
       thwait
       tilt (>= 1.4.0)
+    signet (0.16.0)
+      addressable (~> 2.8)
+      faraday (>= 0.17.3, < 2.0)
+      jwt (>= 1.5, < 3.0)
+      multi_json (~> 1.10)
     spring (3.0.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -401,11 +439,12 @@ DEPENDENCIES
   ckeditor
   devise
   ffaker
-  firebase-ruby
+  firebase
   fog-aws
   geocoder
   grape
   httpclient
+  humanize
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   jwt
