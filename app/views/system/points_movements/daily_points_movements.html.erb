@@ -18,7 +18,7 @@
 
 <% @branches.each do |branch| %>
     <% @daily_points_movements = PointsMovement.where(branch_id: branch.id)
-        .group("DATE(date_time)")
+        .group("DATE(date_time) ASC")
         .pluck("DATE(date_time)", "SUM(earned)", "SUM(redeemed)", "SUM(total)") %>
 
 <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -47,7 +47,7 @@
                         <td><%= dpm[1] %></td>
                         <td><%= dpm[2] %></td>
                         <td><%= dpm[3] %></td>
-                        <td><%#= dpm[4] * Setting.find_by(key: :points_to_cash).description.to_f %></td>
+                        <td><%= dpm[3] * Setting.find_by(key: :points_to_cash).description.to_f %></td>
                     </tr>
                 <% end %>
             </tbody>
