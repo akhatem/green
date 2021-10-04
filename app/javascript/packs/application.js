@@ -9,11 +9,7 @@ import 'bootstrap/dist/css/bootstrap'
 
 
 import "bootstrap";
-require("bootstrap")
-import "popper.js";
-require("popper.js")
-import "jquery";
-require("jquery")
+
 
 import "../stylesheets/application";
 import "@fortawesome/fontawesome-free/css/all"

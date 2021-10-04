@@ -22,14 +22,14 @@
         .order("DATE(date_time) ASC")
         .pluck("DATE(date_time)", "SUM(earned)", "SUM(redeemed)", "SUM(total)") %>
 
-<div class="accordion accordion-flush" id="accordionFlushExample">
+<div class="accordion mt-3 mb-3" id="accordionExample">
   <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-heading<%= branch.id.humanize.capitalize %>">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%= branch.id.humanize.capitalize %>" aria-expanded="false" aria-controls="flush-collapse<%= branch.id.humanize.capitalize %>">
+    <h2 class="accordion-header" id="heading<%= branch.id.humanize.capitalize %>">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= branch.id.humanize.capitalize %>" aria-expanded="true" aria-controls="collapse<%= branch.id.humanize.capitalize %>">
         <%= branch.name %>
       </button>
     </h2>
-    <div id="flush-collapse<%= branch.id.humanize.capitalize %>" class="accordion-collapse collapse" aria-labelledby="flush-heading<%= branch.id.humanize.capitalize %>" data-bs-parent="#accordionFlushExample">
+    <div id="collapse<%= branch.id.humanize.capitalize %>" class="accordion-collapse collapse show" aria-labelledby="heading<%= branch.id.humanize.capitalize %>" data-bs-parent="#accordionExample">
       <div class="accordion-body">
           <table class="table mt-2">
             <thead>
