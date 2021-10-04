@@ -1,22 +1,42 @@
-<table class="table mt-2">
-    <thead>
-        <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Earned</th>
-            <th scope="col">Redeemed</th>
-            <th scope="col">Total Points</th>
-            <th scope="col">Total Cash</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @daily_points_movements.each do |dpm| %>
-            <tr>
-                <td><%= dpm[0].strftime("%A, %d %B %Y") %></td>
-                <td><%= dpm[1] %></td>
-                <td><%= dpm[2] %></td>
-                <td><%= dpm[3] %></td>
-                <td><%= dpm[3] * Setting.find_by(key: :points_to_cash).description.to_f %></td>
-            </tr>
-        <% end %>
-    </tbody>
-</table>
+<% @branches.each do |branch| %>
+    <% @daily_points_movements = PointsMovement.where(branch_id: branch.id)
+        .group("DATE(date_time)")
+        .order("DATE(date_time) ASC")
+        .pluck("DATE(date_time)", "SUM(earned)", "SUM(redeemed)", "SUM(total)") %>
+
+<div class="accordion mt-3 mb-3" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="heading<%= branch.id.humanize.capitalize %>">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= branch.id.humanize.capitalize %>" aria-expanded="true" aria-controls="collapse<%= branch.id.humanize.capitalize %>">
+            <%= branch.name %>
+        </button>
+        </h2>
+        <div id="collapse<%= branch.id.humanize.capitalize %>" class="accordion-collapse collapse show" aria-labelledby="heading<%= branch.id.humanize.capitalize %>" data-bs-parent="#accordionExample">
+            <div class="accordion-body">        
+                <table class="table mt-2">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Earned</th>
+                            <th scope="col">Redeemed</th>
+                            <th scope="col">Total Points</th>
+                            <th scope="col">Total Cash</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @daily_points_movements.each do |dpm| %>
+                            <tr>
+                                <td><%= dpm[0].strftime("%A, %d %B %Y") %></td>
+                                <td><%= dpm[1] %></td>
+                                <td><%= dpm[2] %></td>
+                                <td><%= dpm[3] %></td>
+                                <td><%= dpm[3] * Setting.find_by(key: :points_to_cash).description.to_f %></td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>
