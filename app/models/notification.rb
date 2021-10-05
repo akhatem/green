@@ -17,10 +17,11 @@ class Notification < ApplicationRecord
     validates :description, presence: true
     validates :create_date, presence: true
 
-    mount_uploader :image, OfferImageUploader
+    mount_uploader :image, NotificationImageUploader
 
     before_create :set_create_date
     before_save :update_customer_has_new_notification
+    after_create :set_image
 
     def offerTitle
         Offer.find(offer_id).title
@@ -40,6 +41,10 @@ class Notification < ApplicationRecord
 
     def set_create_date
         self.write_attribute(:create_date, Date.today)
+    end
+
+    def set_image
+        self.update(image: File.open(File.join(Rails.root, 'app/assets/images/main_logo.png'))) if self.offer_id.nil?
     end
 
     def update_customer_has_new_notification
