@@ -96,12 +96,12 @@ div.form-group.row {
                     <%= f.date_field :create_date, as: :date, class: "form-control" %>
                 </div>
 
-                <div class="form-group row">
-                    <%= f.label :image, class: "col-md-3 col-form-label" %>
-                    <%= image_tag f.object.image_url, style: "max-width: 280px;"  if f.object.image_was %>
-                    <%= f.hidden_field :image, value: f.object.image_was %>
-                    <%= f.file_field :image, class: "form-control" %>
-                </div>
+                <!-- <div class="form-group row">
+                    <%#= f.label :image, class: "col-md-3 col-form-label" %>
+                    <%#= image_tag f.object.image_url, style: "max-width: 280px;"  if f.object.image_was %>
+                    <%#= f.hidden_field :image, value: f.object.image_was %>
+                    <%#= f.file_field :image, class: "form-control" %>
+                </div> -->
 
                 <div class="form-group row">
                     <%= f.label :description, class: "col-md-3 col-form-label" %>

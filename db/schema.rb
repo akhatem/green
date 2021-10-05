@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 2021_09_07_035247) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
-    t.bigint "receipt_id", null: false
+    t.bigint "receipt_id"
     t.index ["branch_id"], name: "index_points_movements_on_branch_id"
     t.index ["customer_id"], name: "index_points_movements_on_customer_id"
     t.index ["receipt_id"], name: "index_points_movements_on_receipt_id"
