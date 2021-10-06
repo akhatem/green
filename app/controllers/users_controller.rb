@@ -22,8 +22,8 @@ class UsersController < Devise::SessionsController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "#{params[:controller].split('/').second}_#{DateTime.now.strftime('%d/%m/%Y')}", 
-          template: "system/#{params[:controller].split('/').second}/#{params[:controller].split('/').second}_index_pdf.html.erb",
+        render pdf: "users/users_index_pdf_#{DateTime.now.strftime('%d/%m/%Y')}", 
+          template: "users/users_index_pdf.html.erb",
           header: { right: "#{@pagy.page} of #{@pagy.last}" }
       end
     end
