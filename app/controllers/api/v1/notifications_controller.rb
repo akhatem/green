@@ -1,6 +1,6 @@
 class Api::V1::NotificationsController < ApplicationController
   def index
-    notifications =  paginate Notification.all.order(updated_at: :desc)
+    notifications =  paginate Notification.all.order(created_at: :desc)
     if notifications.any?
       render json: {
         data: notifications.map{ |notification|{

@@ -26,51 +26,53 @@
         <% if user_signed_in? %>
             <%= render "system/shared/navbar" %>
         <% end %>
-        <div class="row">
-          <div class="col-md-3 side-nav-col">
-            <% if user_signed_in? %>
-              <% if  !params[:controller].split('/').first.eql?('cashier') and user_signed_in? and !current_user.roleKey.eql?("cashier") %>
-                <%= render "system/shared/sidebar" %>
-              <% end %>
+        <div class="col-md-3 side-nav-col">
+          <% if user_signed_in? %>
+            <% if  !params[:controller].split('/').first.eql?('cashier') and user_signed_in? and !current_user.roleKey.eql?("cashier") %>
+              <%= render "system/shared/sidebar" %>
             <% end %>
-          </div>
-          <% if params[:controller].split('/').first.eql?('cashier') %>
-            <div class="col-lg-12">
-              <%= yield %>
-            </div>
-            <% else %>
-              <div class="col-md-9">
-                <% if !controller_name.eql?("sesssions") and !action_name.eql?('new') %>
-                  <div class="row">
-                    <% flash.each do |type, msg| %>
-                      <% if type.eql?("notice") %>
-                        <p class="notice" style="color:#00AB47;"><%= msg %></p>
-                      <% else %>
-                        <p class="alert" style="color: red;"><%= msg %></p>
-                      <% end %>  
-                    <% end %>
-                  </div>
-                <% end %>
-            
-              <% if action_name.eql?('index') %>
-                <div class="row">
-                  <%= yield %>
-                </div>
-              <% else %>
-                <%= yield %>
-              <% end %>
-              
-              <% if !controller_name.eql?('static_pages') and (action_name.eql?('index') or action_name.eql?('daily_points_movements')) %>
-                <div class="row">
-                  <%= render 'system/shared/pagination', locals: {pagy: @pagy} %>
-                </div>
-              <% end %>
-              <%# unless params[:controller].split('/').first.eql?('cashier') %>
-                <%= render 'system/shared/footer' %>
-              <%# end %>
-            </div>
           <% end %>
         </div>
+        <% if params[:controller].split('/').first.eql?('cashier') %>
+          <div class="col-md-12">
+            <%= yield %>
+          </div>
+        <% else %>
+          <div class="col-md-9">
+            <% if !controller_name.eql?("sesssions") and !action_name.eql?('new') %>
+              <div class="row">
+                <% flash.each do |type, msg| %>
+                  <% if type.eql?("notice") %>
+                    <p class="notice" style="color:#00AB47;"><%= msg %></p>
+                  <% else %>
+                    <p class="alert" style="color: red;"><%= msg %></p>
+                  <% end %>  
+                <% end %>
+              </div>
+            <% end %>
+        
+            <% if action_name.eql?('index') %>
+              <div class="row">
+                <%= yield %>
+              </div>
+            <% else %>
+              <%= yield %>
+            <% end %>
+          
+            <% if !controller_name.eql?('static_pages') and (action_name.eql?('index') or action_name.eql?('daily_points_movements')) %>
+              <div class="row">
+                <%= render 'system/shared/pagination', locals: {pagy: @pagy} %>
+              </div>
+            <% end %>
+            <%# unless params[:controller].split('/').first.eql?('cashier') %>
+            <div class="row">
+              <!-- <div class="col-md-9"> -->
+                <%= render 'system/shared/footer' %>
+              <!-- </div> -->
+            </div>
+            <%# end %>
+          </div>
+        <% end %>
       </div>
     </div>
     

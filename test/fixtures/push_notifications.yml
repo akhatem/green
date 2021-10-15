@@ -4,7 +4,7 @@
 #
 #  id              :bigint           not null, primary key
 #  title           :string
-#  description     :string
+#  body            :string
 #  image           :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

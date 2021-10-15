@@ -13,7 +13,7 @@
     }
     else{
       // console.log("currentScroll > 250");
-      footer.style.display = "block";
+      footer.style.display = "flex";
     }
   });
 // });

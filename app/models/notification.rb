@@ -21,7 +21,7 @@ class Notification < ApplicationRecord
 
     before_create :set_create_date
     before_save :update_customer_has_new_notification
-    after_create :set_image
+    after_create :set_image, :create_push_notification
 
     def offerTitle
         Offer.find(offer_id).title
@@ -51,5 +51,9 @@ class Notification < ApplicationRecord
         Customer.all.each do |customer|
             customer.update_column(:has_new_notification, true)
         end
+    end
+
+    def create_push_notification
+        FirebasePushNotification.new(self.title, self.description, self.image)
     end
 end
