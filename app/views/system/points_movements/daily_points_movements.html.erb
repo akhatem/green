@@ -37,6 +37,7 @@
                     <th scope="col">Date</th>
                     <th scope="col">Earned</th>
                     <th scope="col">Redeemed</th>
+                    <th scope="col">Redeemed To Cash</th>
                     <th scope="col">Total Points</th>
                     <th scope="col">Total Cash</th>
                 </tr>
@@ -47,6 +48,7 @@
                         <td><%= dpm[0].strftime("%A, %d %B %Y") %></td>
                         <td><%= dpm[1] %></td>
                         <td><%= dpm[2] %></td>
+                        <td><%= dpm[2] * Setting.find_by(key: :points_to_cash).description.to_f %></td>
                         <td><%= dpm[3] %></td>
                         <td><%= dpm[3] * Setting.find_by(key: :points_to_cash).description.to_f %></td>
                     </tr>
