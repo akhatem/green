@@ -15,6 +15,7 @@ class OfferCaroselImageUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    super.chomp(File.extname(super)) + "-" + append_name_code + '.png' if original_filename.present?
+    super.chomp(File.extname(super)) + "-#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}" + 
+    append_name_code + '.png'
   end
 end
