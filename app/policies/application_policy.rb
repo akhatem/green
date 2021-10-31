@@ -34,6 +34,10 @@ class ApplicationPolicy
     !@user.roleKey.eql?("cashier")
   end
 
+  def home?
+    !@user.roleKey.eql?("cashier")
+  end
+
   def barcode_search?
     false
     # @user.roleKey.eql?("cashier")

@@ -164,6 +164,17 @@ div.form-group.row {
     height: 36px;
     font-size: 12px;
 }
+
+a[type=text] {
+    height: 40px;
+    width: 350px;
+    display: Block;
+    align-items: center;
+    border: 1px solid #e2e2e2;
+    border-radius: 4px;
+    padding-right: 8px;
+    margin: 0 auto;
+}
 </style>
 
 <div class="row">
@@ -171,31 +182,33 @@ div.form-group.row {
         <h2 style="text-align: center;">Basic Info</h2>
     </div>
     <div class="col-md-6">
-        <%= link_to "Export as PDF", system_receipt_path(@receipt, format: :pdf), class: "btn btn-outline-success btn-sm", type: "button" %>
+        <%= link_to "Export as PDF", system_receipt_path(@receipt, format: :pdf), class: "btn btn-outline-success btn-sm", 
+        type: "button" %>
     </div>    
 </div>
 
 <form>
     <div class="form-group row" style="text-align:center;">
-        <label for="receipt_id" class="col-md-2 col-form-label">Id</label>
-        <input type="number" class="form-control" id="receipt_id" value="<%= @receipt.id %>" disabled>
+        
+        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Id</label>
+        <input type="text" class="form-control" id="form-label" value="<%= @receipt.id %>" disabled>
     </div>
 
     <div class="form-group row">
         <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Customer</label>
         <%= link_to @receipt.customerName, system_customer_path(@receipt.customer_id), 
-            style: "color: green;", class: "form-control" %>
+            style: "color: green;", class: "form-control", type: "text" %>
     </div>
 
     <div class="form-group row">
         <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Branch</label>
         <%= link_to @receipt.branchName, system_branch_path(@receipt.branch_id), style: "color: green;", 
-            class: "form-control" %>
+            class: "form-control", type: "text" %>
     </div>
 
     <div class="form-group row">
         <label for="formGroupExampleInput2" class="col-md-2 col-form-label">System User</label>
-        <%= link_to @receipt.userName, users_index_path, style: "color: green;", class: "form-control" %>
+        <%= link_to @receipt.userName, users_index_path, style: "color: green;", class: "form-control", type: "text" %>
     </div>
 
     <div class="form-group row">
@@ -209,9 +222,10 @@ div.form-group.row {
     </div>
 
     <div class="form-group row">
-        <label class="col-md-3 col-form-label">Redeemed cash (L.E)</label>
+        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Redeemed cash (L.E)</label>
         <% if @points_movement %>
-            <input class="form-control" type="text" value="<%= @points_movement.redeemed * Setting.find_by(key: :points_to_cash).description.to_f %> L.E" disabled>
+            <input class="form-control" type="text" 
+            value="<%= @points_movement.redeemed * Setting.find_by(key: :points_to_cash).description.to_f %> L.E" disabled>
         <% else %>
             <input class="form-control" type="text" value="0 L.E" disabled>
         <% end %>

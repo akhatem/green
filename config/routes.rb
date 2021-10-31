@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   # namespace system
   namespace :system do
 
-    root to: 'static_pages#index'
+    root to: 'static_pages#home'
     
     # Offer Carosel Images
     resources :offer_carosel_images
