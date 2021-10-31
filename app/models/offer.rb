@@ -49,7 +49,7 @@ class Offer < ApplicationRecord
     def create_notification
         # puts "================> HERE"
         text = <<-TEXT
-#{self.description}. \nfrom #{self.start_at.strftime("%l %p - %d/%m/%Y")} - to #{self.end_at.strftime("%l %p - %d/%m/%Y")}
+#{self.description}. \nfrom #{self.start_at.strftime("%l:%M %p - %d/%m/%Y")} - to #{self.end_at.strftime("%l:%M %p - %d/%m/%Y")}
         TEXT
         # puts "================> text: #{text}"
 
