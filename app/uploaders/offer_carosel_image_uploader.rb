@@ -10,11 +10,11 @@ class OfferCaroselImageUploader < CarrierWave::Uploader::Base
     if code.length < 4
       append_name_code
     else
-        return code
+      return code
     end
   end
 
   def filename
-      super.chomp(File.extname(super)) + append_name_code + '.png' if original_filename.present?
+    super.chomp(File.extname(super)) + append_name_code + '.png' if original_filename.present?
   end
 end
