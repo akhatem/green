@@ -25,6 +25,6 @@ class ItemSize < ApplicationRecord
     end
 
     def size_with_price
-        "#{self.sizeName} : #{self.price}"
+        "#{self.sizeName} : #{self.price_with_precision}"
     end
 end
