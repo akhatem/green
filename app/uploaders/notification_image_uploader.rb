@@ -8,15 +8,14 @@ class NotificationImageUploader < CarrierWave::Uploader::Base
     charset = Array('A'..'Z') + Array('a'..'z') + Array(0..9)
     code = Array.new(4) { charset.sample }.uniq.join
     if code.length < 4
-      append_name_code
+        append_name_code
     else
-      return code
+        return code
     end
   end
 
-  def filename
-    super.chomp(File.extname(super)) + "-#{model.class.to_s.underscore}-#{model.id}" + 
-    append_name_code + '.png' if original_filename.present?
+  def original_filename
+    file_ext = File.extname(super)
+    super.chomp(File.extname(super)) + "_" + append_name_code + file_ext
   end
-
 end

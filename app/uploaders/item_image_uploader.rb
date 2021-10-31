@@ -14,8 +14,8 @@ class ItemImageUploader < CarrierWave::Uploader::Base
         end
     end
 
-    def filename
-        super.chomp(File.extname(super)) + "-#{model.class.to_s.underscore}-#{model.id}-" + 
-        append_name_code + '.png'
+    def original_filename
+        file_ext = File.extname(super)
+        super.chomp(File.extname(super)) + "_" + append_name_code + file_ext
     end
 end
