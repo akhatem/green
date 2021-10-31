@@ -22,7 +22,6 @@ class Notification < ApplicationRecord
     before_create :set_create_date
     before_save :update_customer_has_new_notification
     after_create :set_image, :create_push_notification
-    before_destroy :delete_offer
 
     def offerTitle
         Offer.find(offer_id).title
@@ -56,10 +55,5 @@ class Notification < ApplicationRecord
 
     def create_push_notification
         FirebasePushNotification.new(self.title, self.description, self.image)
-    end
-
-    def delete_offer
-        offer = Offer.find(offer_id)
-        offer.destroy
     end
 end
