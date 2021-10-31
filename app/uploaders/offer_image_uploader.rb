@@ -14,8 +14,8 @@ class OfferImageUploader < CarrierWave::Uploader::Base
     #     end
     # end
 
-    def filename
-        # super.chomp(File.extname(super)) + 
-        "#{model.class.to_s.underscore}-#{model.id}" + '.png'
-    end
+    # def filename
+    #     # super.chomp(File.extname(super)) + 
+    #     "#{model.class.to_s.underscore}-#{model.id}" + '.png'
+    # end
 end
