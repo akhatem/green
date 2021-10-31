@@ -1,6 +1,6 @@
 class System::StaticPagesController < System::SystemApplicationController
  
-  def index
+  def home
     policy_scope(:static_pages)
     authorize :static_pages
   end
