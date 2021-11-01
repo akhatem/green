@@ -33,7 +33,7 @@
             </th>
             <td><%= link_to offer.title, system_offer_path(offer), style: "color: green" %></td>
             <td><%= offer.state %></td>
-            <td><%= offer.end_at.strftime("%l %p - %A, %d %b %Y @ %H:%M:%S") %></td>
+            <td><%= offer.end_at.strftime("%I:%M %p %a, %d %b %Y") %></td>
             <td class="table-action">
                 <%= link_to '', system_offer_path(offer), class: "fa fa-eye" %>
                 <%= link_to '', edit_system_offer_path(offer), class: "fa fa-edit" %>

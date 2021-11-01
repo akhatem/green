@@ -32,7 +32,7 @@
                 <%= city.id %>
             </th>
             <td><%= city.name %></td>
-            <td><%= city.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td>
+            <td><%= city.created_at.strftime("%I:%M %p %a, %d %b %Y") %></td>
             <td class="table-action">
                 <%= link_to '', edit_system_city_path(city), class: "fa fa-edit" %>
                 <%= link_to '', system_city_path(city), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>

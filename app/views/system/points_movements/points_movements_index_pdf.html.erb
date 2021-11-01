@@ -23,7 +23,7 @@
             <td><%= points_movement.earned %></td>
             <td><%= -points_movement.redeemed %></td>
             <td><%= points_movement.total %></td>
-            <td><%= points_movement.date_time.strftime("%l %p - %d/%m/%Y") %></td>
+            <td><%= points_movement.date_time.strftime("%I:%M %p %a, %d %b %Y") %></td>
         </tr>
     <% end %>
     </tbody>

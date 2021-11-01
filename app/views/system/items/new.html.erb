@@ -1,69 +1,3 @@
-<style>
-
-/* tabs */
-
-.nav-pills .nav-link.active,
-.nav-pills .show>.nav-link {
-    background-color: #1ab359;
-    color: #fff;
-    width: 125px;
-    margin: 0 10px;
-    height: 40px;
-}
-
-.nav-pills .nav-link {
-    color: #2b2b2b;
-}
-
-h2 {
-    font-size: 18px;
-    padding: 10px 0;
-    color: #006B2D;
-}
-
-
-/* input feilds */
-
-.form-select {
-    width: 50%
-}
-
-.form-control {
-    width: 50%;
-}
-
-
-/* end of input feilds */
-
-div.form-group.row {
-    text-align: center;
-    margin-left: 150px;
-    margin-top: 15px;
-}
-
-.btn-outline-success {
-    padding-top: 1px;
-    text-align: center;
-    white-space: normal;
-    border-color: #00AB47;
-    width: 50%;
-    height: 36px;
-    font-size: 16px;
-}
-
-.btn-outline-secondary {
-    padding-top: 1px;
-    text-align: center;
-    white-space: normal;
-    border: 1px solid #ced4da;
-    width: 50%;
-    height: 36px;
-    font-size: 16px;
-}
-
-
-</style>
-
 <% if @item.errors.any? %>
     <div id="error_explanation">
         <h2 style= "color:red;"><%= pluralize(@item.errors.count, "error") %> found:</h2>
@@ -75,68 +9,62 @@ div.form-group.row {
     </div>
 <% end %>
 
-<div>
-    <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
-            <!--form-->
-            <div class="row">
-                <div class="col-md-3">
-                    <h2 style="text-align: center;">Add new Item</h2>
-                </div>
 
-            </div>                
-                <%= form_with(model: @item, url: system_items_path) do |f| %>
-
-                    <div class="form-group row">
-                        <%= f.label :name, class: "col-md-3 col-form-label" %>
-                        <%= f.text_field :name, class: "form-control"  %>
-                    </div>
-
-                    <div class="form-group row">
-                        <%= f.label :image, class: "col-md-3 col-form-label" %>
-                        <%= image_tag f.object.image_url, style: "max-width: 280px;"  if f.object.image_was %>
-                        <%= f.hidden_field :image, value: f.object.image_was %>
-                        <%= f.file_field :image, class: "form-control" %>
-                    </div>
-
-                    <%= f.fields_for :item_sizes do |item_size_form| %>
-                        <%= render "item_sizes_fields", f: item_size_form %>
-                    <% end %>
-
-                    <div class="form-group row">
-                        <%= link_to_add_fields "Add size and price", f, :item_sizes, class: "btn btn-outline-success btn-sm"  %>
-                    </div>
-
-                    <div class="form-group row">
-                        <%= f.label :brand, class: "col-md-3 col-form-label" %>
-                        <%= f.collection_select :brand_id, Brand.order(:name), :id, :name, { inlcude_blank: true }, 
-                        { class: "btn btn-outline-secondary dropdown-toggle", style: "padding-top: 7px; font-size: 16px;" } %>
-                    </div>
-
-                    <div class="form-group row">
-                        <%= f.label :category, class: "col-md-3 col-form-label" %>
-                        <%= f.grouped_collection_select :category_id, Brand.order(:name), :categories, :name, :id, :name, 
-                        { inlcude_blank: true }, { class: "btn btn-outline-secondary dropdown-toggle", 
-                        style: "padding-top: 7px; font-size: 16px;" } %>
-                    </div>
-
-                    <div class="form-group row">
-                        <%= f.label :description, class: "col-md-3 col-form-label" %>
-                        <%= f.text_area :description, class: "form-control"  %>
-                    </div>
-                    
-                    <div class="row mt-5 mb-5 actions">
-                        <!--btns-->
-                        <div class="btn col-lg-6">
-                            <%= link_to 'Cancel', system_items_path, class: "btn btn-outline-success btn-sm" %>
-                        </div>
-
-                        <div class="btn col-lg-6">
-                            <%= f.submit "Save", class: "btn btn-outline-success btn-sm" %>
-                        </div>
-                    </div>
-                <% end %>
-        </div>
-
+<div class="row">
+    <div class="col-md-4">
+        <h2 class="details-tab">Add new item</h2>
     </div>
 </div>
+
+<%= form_with(model: @item, url: system_items_path) do |f| %>
+
+    <div class="form-group row">
+        <%= f.label :name, class: "col-md-3 col-form-label" %>
+        <%= f.text_field :name, class: "form-control"  %>
+    </div>
+
+    <div class="form-group row">
+        <%= f.label :image, class: "col-md-3 col-form-label" %>
+        <%= image_tag f.object.image_url, style: "max-width: 280px;"  if f.object.image_was %>
+        <%= f.hidden_field :image, value: f.object.image_was %>
+        <%= f.file_field :image, { class: "form-control", style: "max-width: 30%" } %>
+    </div>
+
+    <%= f.fields_for :item_sizes do |item_size_form| %>
+        <%= render "item_sizes_fields", f: item_size_form %>
+    <% end %>
+
+    
+    <div class="form-group row">
+        <%= link_to_add_fields "Add size and price", f, :item_sizes, class: "btn" %>
+    </div>
+
+    <div class="form-group row">
+        <%= f.label :brand, class: "col-md-3 col-form-label" %>
+        <%= f.collection_select :brand_id, Brand.order(:name), :id, :name, { inlcude_blank: true }, 
+        { class: "btn btn-outline-secondary dropdown-toggle", style: "padding-top: 7px; font-size: 16px; max-width: 30%" } %>
+    </div>
+
+    <div class="form-group row">
+        <%= f.label :category, class: "col-md-3 col-form-label" %>
+        <%= f.grouped_collection_select :category_id, Brand.order(:name), :categories, :name, :id, :name, 
+        { inlcude_blank: true }, { class: "btn btn-outline-secondary dropdown-toggle", 
+        style: "padding-top: 7px; font-size: 16px; max-width: 30%" } %>
+    </div>
+
+    <div class="form-group row">
+        <%= f.label :description, class: "col-md-3 col-form-label" %>
+        <%= f.text_area :description, { class: "form-control", style: "max-width: 30%" }  %>
+    </div>
+    
+    <div class="row mt-5 mb-5 actions">
+        <!--btns-->
+        <div class="btn col-lg-6">
+            <%= link_to 'Cancel', system_items_path, class: "btn btn-outline-success" %>
+        </div>
+
+        <div class="btn col-lg-6">
+            <%= f.submit "Save", class: "btn btn-outline-success" %>
+        </div>
+    </div>
+<% end %>

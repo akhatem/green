@@ -46,7 +46,6 @@ div.form-group.row {
     text-align: center;
     white-space: normal;
     border-color: #00AB47;
-    width: 50%;
     height: 36px;
     font-size: 16px;
 }
@@ -56,7 +55,6 @@ div.form-group.row {
     text-align: center;
     white-space: normal;
     border: 1px solid #ced4da;
-    width: 50%;
     height: 36px;
     font-size: 16px;
 }
@@ -103,11 +101,11 @@ div.form-group.row {
 
                     <div class="form-group row">
                         <%= f.label :brand, class: "col-md-3 col-form-label" %>
-                        <%= f.collection_select :brand_id, Brand.order(:name), :id, :name, { inlcude_blank: true }, { class: "btn btn-outline-secondary dropdown-toggle" } %>
+                        <%= f.collection_select :brand_id, Brand.order(:name), :id, :name, { inlcude_blank: true }, { class: "btn btn-outline-secondary dropdown-toggle", style: "max-width: 30%" } %>
                     </div>
 
                     <%= f.fields_for :item_sizes do |item_size_form| %>
-                        <%= render "item_sizes_fields", f: item_size_form %>
+                        <%= render "item_sizes_fields", f: item_size_form, class: "mt-5" %>
                     <% end %>
 
                     <div class="form-group row">

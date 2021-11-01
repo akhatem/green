@@ -24,7 +24,7 @@ class Category < ApplicationRecord
     def self.search_by(search_term)
       where("id = ?", search_term.to_i)
       .or(where("name ILIKE ?", "%" + search_term + "%"))
-      .or(where("brand_id = ?", Brand.find_by(name: search_term.capitalize)))
+      .or(where(brand_id: Brand.where("name ILIKE ?", "%" + search_term + "%")))
     end
 end
   

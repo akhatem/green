@@ -1,3 +1,10 @@
+<style>
+    h6 {
+        font-size: .8rem;
+    }
+</style>
+
+
 <div class="col-lg-7">
     <div class="row">
         <div class="col-md-3 main-btns">
@@ -5,8 +12,16 @@
         </div>
         <div class="col-md-4">
             <%= form_for "", url: system_notifications_path, role: "search", method: :get do %>
-                <%= text_field_tag :search, @search_term, placeholder: "Search by id or create date", style: "text-align: center;" %>
+                <%= text_field_tag :search, @search_term, placeholder: "Search by id or create date or is new", style: "text-align: center;" %>
             <% end %>
+        </div>
+    </div>
+    <div class="row" style="color:red">
+        <div class="col-md-9">
+            <h6>
+            To search for create date please use the following format:<br>
+            ex: "Sun, 1 Jan 2021"
+            </h6>
         </div>
     </div>
 </div>
@@ -22,7 +37,7 @@
             <th scope="col">Title</th>
             <th scope="col">Offer Id</th>
             <th scope="col">Is new</th>
-            <th scope="col">Created At</th>
+            <th scope="col">Create date</th>
             <th scope="col">Actions</th>
         </tr>
     </thead>
@@ -38,8 +53,8 @@
             <% else %>
                 <td><%= nil %></td>    
             <% end %>
-            <td><%= notification.is_new %></td>    
-            <td><%= notification.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td>
+            <td><%= notification.is_new_attr %></td>    
+            <td><%= notification.create_date.strftime("%I:%M %p %a, %d %b %Y") %></td>
             <td class="table-action">
                 <%= link_to '', system_notification_path(notification), class: "fa fa-eye" %>
                 <%= link_to '', edit_system_notification_path(notification), class: "fa fa-edit" %>

@@ -30,7 +30,7 @@
                 <%= offer_carosel_image.id %>
             </th>
             <td><%= offer_carosel_image.image.identifier %></td>
-            <td><%= offer_carosel_image.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td>
+            <td><%= offer_carosel_image.created_at.strftime("%I:%M %p %a, %d %b %Y") %></td>
             
             <td class="table-action">
                 <%= link_to '', edit_system_offer_carosel_image_path(offer_carosel_image.id), class: "fa fa-edit" %>

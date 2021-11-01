@@ -13,7 +13,7 @@
 class PushNotification < ApplicationRecord
 
     validates :title, presence: true
-validates :body, presence: true
+    validates :body, presence: true
     validates :image, presence: true
     validates :notification_id, presence: true
 

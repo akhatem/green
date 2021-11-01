@@ -233,12 +233,12 @@ a[type=text] {
 
     <div class="form-group row">
         <label class="col-md-2 col-form-label">Created at</label>
-        <input class="form-control" type="text" value="<%= @receipt.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %>" disabled>
+        <input class="form-control" type="text" value="<%= @receipt.created_at.strftime("%I:%M %p %a, %d %b %Y") %>" disabled>
     </div>
 
     <div class="form-group row">
         <label class="col-md-2 col-form-label">Updated at</label>
-        <input class="form-control" type="text" value="<%= @receipt.updated_at.strftime("%A, %d %b %Y @ %H:%M:%S") %>" disabled>
+        <input class="form-control" type="text" value="<%= @receipt.updated_at.strftime("%I:%M %p %a, %d %b %Y") %>" disabled>
     </div>
 
     <div class="form-group row mb-5 pb-5">

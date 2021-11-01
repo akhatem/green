@@ -39,8 +39,8 @@ class Item < ApplicationRecord
     
     def self.search_by(search_term)
         where("id = ?", search_term.to_i)
-        .or(where("LOWER(name) LIKE ?", "%" + search_term.downcase + "%"))
-        .or(where("brand_id = ?", Brand.find_by(name: search_term)))
-        .or(where("category_id = ?", Category.find_by(name: search_term)))
+        .or(where("name ILIKE ?", "%" + search_term + "%"))
+        .or(where(brand_id: Brand.where("name ILIKE ?", "%" + search_term + "%")))
+        .or(where(category_id: Category.where("name ILIKE ?", "%" + search_term + "%")))
     end
 end

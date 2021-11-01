@@ -31,7 +31,7 @@
                 <%= size.id %>
             </th>
             <td><%= size.name %></td>
-            <td><%= size.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td>
+            <td><%= size.created_at.strftime("%I:%M %p %a, %d %b %Y") %></td>
             <td class="table-action">
                 <%= link_to '', edit_system_size_path(size), class: "fa fa-edit" %>
                 <%= link_to '', system_size_path(size), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>

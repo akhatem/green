@@ -109,8 +109,8 @@ div.form-group.row {
 </style>
 
 <div class="row">
-    <div class="col-md-6">
-        <h2 class="details-tab"><%= @branch.name %>'s Details</h2>
+    <div class="col-md-4">
+        <h4 class="details-tab"><%= @branch.name %>'s Details</h4>
     </div>
     <div class="col-md-3">
         <%= link_to "Edit", edit_system_branch_path(@branch), class: "btn btn-primary edit-btn" %>
@@ -161,12 +161,12 @@ div.form-group.row {
 
     <div class="form-group row">
         <label class="col-sm-3 col-form-label col-label">Created at</label>
-        <input class="col-input form-control" type="text" value="<%= @branch.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %>" disabled>
+        <input class="col-input form-control" type="text" value="<%= @branch.created_at.strftime("%I:%M %p %A, %d %b %Y") %>" disabled>
     </div>
 
     <div class="form-group row">
         <label class="col-md-2 col-form-label col-label">Updated at</label>
-        <input class="col-input form-control" type="text" value="<%= @branch.updated_at.strftime("%A, %d %b %Y @ %H:%M:%S") %>" disabled>
+        <input class="col-input form-control" type="text" value="<%= @branch.updated_at.strftime("%I:%M %p %A, %d %b %Y") %>" disabled>
     </div>
 
 </form>

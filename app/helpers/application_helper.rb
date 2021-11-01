@@ -44,7 +44,16 @@ module ApplicationHelper
         # The `fields:` are rendered from the `fields` blocks.
             # We use `gsub("\n", "")` to remove anywhite space from the rendered partial.
         # The `id:` value needs to match the value used in `child_index: id`.
-        link_to(name, '#', class: "add_fields #{html_class}", data: {id: id, fields: fields.gsub("\n", "")})
+        style = "
+        max-width: 15%;
+        height: 40px;
+        text-align: center;
+        padding: 7px;
+        color: #FFFFFF;
+        background-color: #006B2D;
+        border-radius: 5px;
+        "
+        link_to(name, '#', data: {id: id, fields: fields.gsub("\n", "")}, class: "add_fields #{html_class} mt-3", style: style)
 
     end
 end

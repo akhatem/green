@@ -25,8 +25,8 @@
             <th scope="col">Email</th>
             <th scope="col">Role</th>
             <th scope="col">Branch</th>
+            <th scope="col">Created at</th>
             <th scope="col">Actions</th>
-
         </tr>
     </thead>
     <tbody>
@@ -39,6 +39,7 @@
             <td><%= user.email %></td>
             <td><%= user.role.name %></td>
             <td><%= user.branchName if user.branch_id %></td>
+            <td><%= user.created_at.strftime("%I:%M %P %A, %d %b %Y") %></td>
                 <td class="table-action">
             <% unless user.role.name.eql?("Super") %>
                 <%= link_to '', destroy_user_path(user), method: :delete, data: {confirm: "Are you sure?"}, 

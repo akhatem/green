@@ -14,7 +14,7 @@
                     <%= setting.id %>
                 </th>
                 <td><%= setting.name %></td>
-                <td><%= setting.created_at.strftime("%A, %d %b %Y @ %H:%M:%S") %></td>
+                <td><%= setting.created_at.strftime("%I:%M %p %a, %d %b %Y") %></td>
                 <td class="table-action">
                     <%= link_to '', system_setting_path(setting), class: "fa fa-eye" %>
                     <%= link_to '', edit_system_setting_path(setting), class: "fa fa-edit" %>

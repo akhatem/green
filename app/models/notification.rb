@@ -23,6 +23,11 @@ class Notification < ApplicationRecord
     before_save :update_customer_has_new_notification
     after_create :set_image, :create_push_notification
 
+    def is_new_attr
+        return self.is_new ? "true" : "false"
+
+    end
+
     def offerTitle
         Offer.find(offer_id).title
     end
@@ -32,8 +37,18 @@ class Notification < ApplicationRecord
     end
 
     def self.search_by(search_term)
-        where("id = ? OR LOWER(name) LIKE ? OR create_date LIKE ? OR LOWER(is_new) LIKE ? ",
-            search_term.to_i, "%" + search_term + "%", "%" + search_term + "%", "%" + search_term.downcase + "%")
+        # byebug
+        puts "=====> search term: #{search_term}"
+        if search_term == "true"
+            search_term = true
+            where("is_new = ?", search_term)
+        elsif search_term == "false"
+            search_term = false
+            where("is_new = ?", search_term)
+        else
+            where("id = ?", search_term.to_i)
+            .or(where(create_date: "%" + search_term + "%"))
+        end
     end
 
 
