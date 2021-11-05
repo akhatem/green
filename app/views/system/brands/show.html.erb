@@ -1,112 +1,43 @@
-<style>
-    
-/* input feilds */
-
-.form-select {
-    width: 50%
-}
-
-.form-control {
-    text-align:center;
-    width: 42%;
-    margin-right: 68px;
-    margin-left: 70px;
-}
-
-.btn-primary {
-    background-color: #00AB47;
-    border: none;
-    width: 40%;
-    height: 36px;
-}
-
-.btn-primary:hover {
-    background-color: #006B2D;
-    color: #fff;
-}
-
-div.form-group.row {
-    text-align: center;
-    margin-left: 1px;
-    margin-top: 15px;
-    width: 100%;
-}
-
-.back-btn{
-    float: left;
-    margin-top: 100px;
-    background-color: #00AB47;
-    color: white;
-    width: 18%;
-    height: 36px;
-    border: none;
-}
-
-.edit-btn {
-    float: right;
-    margin-bottom: 30px;
-}
-
-.btn-outline-secondary {
-    padding-top: 1px;
-    text-align: center;
-    white-space: normal;
-    border: 1px solid #ced4da;
-    width: 50%;
-    height: 36px;
-    font-size: 12px;
-}
-
-.image-tag{
-    margin-top: 16px;
-    margin-left: 140px;
-    margin-right: 240px;
-    float: left;
-    max-width: 280px;
-    max-height: 257px;
-}
-
-</style>
-
-
-<div class="row">
-    <div class="col-md-4">
-        <h2 class="details-tab"><%= @brand.name %>'s details</h2>
+<div class="show-card">
+    <div class="row">
+        <div class="col-md-5">
+            <h2 class="details-tab"><%= @brand.name %>'s details</h2>
+        </div>
+        <div class="col-md-4">
+            <%= link_to "Edit", edit_system_brand_path(@brand), class: "btn btn-primary edit-btn" %>
+        </div>
     </div>
-    <div class="col-md-4">
-        <%= link_to "Edit", edit_system_brand_path(@brand), class: "btn btn-primary edit-btn" %>
-    </div>
-</div>
 
-<form>
-    <div class="form-group row">
-        <label class="col-md-1 col-form-label">Id</label>
-        <input class="form-control" type="text" value="<%= @brand.id %>" disabled>
-    </div>
+    <form>
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Id</label>
+            <input class="form-control" type="text" value="<%= @brand.id %>" disabled>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Name</label>
+            <input class="form-control" type="text" value="<%= @brand.name %>" disabled>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Image</label>
+            <%= image_tag @brand.image.url, class: "form-control image-tag" if @brand.image.url %>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Created at</label>
+            <input class="form-control" type="text" value="<%= @brand.created_at.strftime("%I:%M %p %A, %d %b %Y") %>" disabled>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Updated at</label>
+            <input class="form-control" type="text" value="<%= @brand.updated_at.strftime("%I:%M % %A, %d %b %Y") %>" disabled>
+        </div>
+    </form>
 
     <div class="form-group row">
-        <label class="col-md-1 col-form-label">Name</label>
-        <input class="form-control" type="text" value="<%= @brand.name %>" disabled>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-md-1 col-form-label">Image</label>
-        <%= image_tag @brand.image.url, class: "form-control image-tag col-lg-2" if @brand.image.url %>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-md-2 col-form-label">Created at</label>
-        <input class="form-control" type="text" value="<%= @brand.created_at.strftime("%I:%M %p %A, %d %b %Y") %>" disabled>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-md-2 col-form-label">Updated at</label>
-        <input class="form-control" type="text" value="<%= @brand.updated_at.strftime("%I:%M % %A, %d %b %Y") %>" disabled>
-    </div>
-</form>
-
-<div class="row">
-    <div class="col-lg-12">
-        <%= link_to "Back", system_brands_path, class: "btn btn-outline-success back-btn" %>
+        <div class="col-10 col-form-label">
+            <%= link_to "Back", system_brands_path, class: "btn back-btn" %>
+        </div>
     </div>
 </div>

@@ -1,44 +1,32 @@
 /* side navigation */
 
 .side-nav-col {
-    padding-right: 2px;
-}
-
-.user-link a:hover,
-.user-link a:focus,
-.user-link:hover {
-    background-color: none !important;
-}
-
-.link-dark {
-    color: #2b2b2b;
-    font-weight: 400;
-    font-size: 18px;
-    padding-left: 50px;
+    inline-size: min-content;
+    // padding-right: 1px;
+    height: 100%;
+    margin-bottom:15px!important;
+    max-width: 90%;
 }
 
 .d-flex {
-    padding-left: 0;
+    border: 1px solid #ced4da;
+    box-shadow: 5px 5px #00AB47;
 }
 
-.nav-pills .nav-link.active,
-.nav-pills .show>.nav-link {
+.nav-pills .nav-link.ac,
+.nav-pills >.nav-link {
+    text-align: center;
     background-color: #1ab359;
     color: #fff;
-    width: 125px;
-    margin: 0 10px;
     height: 40px;
 }
 
-.nav-pills .nav-link {
+.nav-pills .nav-link:hover{
     color: #2b2b2b;
-}
-
-.link-dark {
-    color: #2b2b2b;
-    font-weight: 400;
-    font-size: 18px;
-    padding-left: 50px;
+    text-align: center;
+    border: 1px solid #006B2D;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 
 .nav-flush .nav-link {
@@ -48,6 +36,10 @@
 .nav-pills .nav-link.ac {
     background-color: #00AB47;
     color: #ffffff;
+}
+
+.nav-pills .nav-link{
+    color: #2b2b2b;
 }
 
 /* end of side nav */
@@ -60,11 +52,20 @@
 
 .fas {
     color: #9F9F9F;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 1px;
+    padding-right: 2px;
     font-size: 18px;
 }
 
+.nav-link{
+    text-align: left;
+}
+
+#side-bar{
+    font-size: 1rem;
+    margin-bottom:3px!important;
+    width: 260px;
+}
 /* end side nav icons */
 
 /* end of side nav */

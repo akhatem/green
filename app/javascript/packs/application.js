@@ -19,7 +19,6 @@ import "../js/footer"
 
 import "../js/add_fields"
 import "../js/remove_fields"
-// import "../js/firebase"
 
 
 Rails.start()

@@ -1,37 +1,32 @@
-<div class="col-lg-9">
+<!-- <div class="col-lg-5" style="margin-left:140px;">
     <div class="row">
-        <div class="col-md-3 main-btns">
-            <%= link_to "Clear Search", system_daily_points_movements_path, class: "btn btn-outline-success btn-sm", type: "button" %>
+        <div class="col-md-5 main-btns">
+            <%#= link_to "Clear Search", system_daily_points_movements_path, class: "btn btn-outline-success", type: "button" %>
         </div>
-        <div class="col-md-7">
-            <%= form_for "", url: system_daily_points_movements_path, role: "search", method: :get do %>
-                <%= text_field_tag :search, @search_term, placeholder: "Search by date", style: "text-align: center;" %>
-            <% end %>
-        </div>
-
-        <div class="col-md-2 main-btns">
-            <%= link_to "Export as PDF", system_daily_points_movements_path(format: :pdf, page: params[:page]), 
-                class: "btn btn-outline-success btn-sm", type: "button"  %>
+        <div class="col-md-3">
+            <div class="row mb-1">
+                <%#= form_for "", url: system_daily_points_movements_path, role: "search", method: :get do %>
+                    <%#= text_field_tag :search, @search_term, placeholder: "Search by date", style: "text-align: center;" %>
+                <%# end %>
+            </div>
         </div>
     </div>
+</div> -->
+
+<div class="col-lg-5 main-btns">
+    <%= link_to "View PDF", system_points_movements_path(format: :pdf, page: params[:page]), 
+        class: "btn btn-outline-success", type: "button"  %>
 </div>
 
 <% @branches.each do |branch| %>
     <% @daily_points_movements = PointsMovement.where(branch_id: branch.id)
-        .group("DATE(date_time)")
-        .order("DATE(date_time) ASC")
-        .pluck("DATE(date_time)", "SUM(earned)", "SUM(redeemed)", "SUM(total)") %>
+    .group("DATE(date_time)")
+    .order("DATE(date_time) ASC")
+    .pluck("DATE(date_time)", "SUM(earned)" , "SUM(redeemed)" , "SUM(total)" ) %>
 
-<div class="accordion mt-3 mb-3" id="accordionExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="heading<%= branch.id.humanize.capitalize %>">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= branch.id.humanize.capitalize %>" aria-expanded="true" aria-controls="collapse<%= branch.id.humanize.capitalize %>">
-        <%= branch.name %>
-      </button>
-    </h2>
-    <div id="collapse<%= branch.id.humanize.capitalize %>" class="accordion-collapse collapse show" aria-labelledby="heading<%= branch.id.humanize.capitalize %>" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-          <table class="table mt-2">
+    <button class="accordion" id="accordion-id"><%= branch.name %></button>
+    <div class="panel">
+        <table class="table mt-2">
             <thead>
                 <tr>
                     <th scope="col">Date</th>
@@ -39,24 +34,45 @@
                     <th scope="col">Redeemed</th>
                     <th scope="col">Redeemed To Cash</th>
                     <th scope="col">Total Points</th>
-                    <!-- <th scope="col">Total Cash</th> -->
                 </tr>
             </thead>
             <tbody>
                 <% @daily_points_movements.each do |dpm| %>
                     <tr>
-                        <td><%= dpm[0].strftime("%A, %d %B %Y") %></td>
-                        <td><%= dpm[1] %></td>
-                        <td><%= dpm[2] %></td>
-                        <td><%= dpm[2] * Setting.find_by(key: :points_to_cash).description.to_f %></td>
-                        <td><%= dpm[3] %></td>
-                        <!-- <td><%#= dpm[3] * Setting.find_by(key: :points_to_cash).description.to_f %></td> -->
+                        <td>
+                            <%= dpm[0].strftime("%A, %d %b %Y") %>
+                        </td>
+                        <td>
+                            <%= dpm[1] %>
+                        </td>
+                        <td>
+                            <%= dpm[2] %>
+                        </td>
+                        <td>
+                            <%= dpm[2] * Setting.find_by(key: :points_to_cash).description.to_f %>
+                        </td>
+                        <td>
+                            <%= dpm[3] %>
+                        </td>
                     </tr>
                 <% end %>
             </tbody>
         </table>
-      </div>
     </div>
-  </div>
-</div>
 <% end %>
+
+<script>
+    var acc = document.getElementsByClassName("accordion");
+
+    for (var i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+        this.classList.toggle("ac");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+        } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+        } 
+    });
+    }
+</script>

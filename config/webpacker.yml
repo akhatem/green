@@ -17,6 +17,13 @@ default: &default
 
   # Extract and emit a css file
   extract_css: true
+  
+  performance: {
+    hints: true,
+    maxBundleSize: 250,
+    warnAtPercent: 80
+  }
+
 
   static_assets_extensions:
     - .jpg

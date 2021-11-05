@@ -26,7 +26,7 @@
         <% if user_signed_in? %>
             <%= render "system/shared/navbar" %>
         <% end %>
-        <div class="col-md-3 side-nav-col">
+        <div class="col-3 side-nav-col">
           <% if user_signed_in? %>
             <% if  !params[:controller].split('/').first.eql?('cashier') and user_signed_in? and !current_user.roleKey.eql?("cashier") %>
               <%= render "system/shared/sidebar" %>
@@ -34,11 +34,11 @@
           <% end %>
         </div>
         <% if params[:controller].split('/').first.eql?('cashier') %>
-          <div class="col-md-12">
+          <div class="col-md-12 mb-3">
             <%= yield %>
           </div>
         <% else %>
-          <div class="col-md-9">
+          <div class="col-9">
             <% if !controller_name.eql?("sesssions") and !action_name.eql?('new') %>
               <div class="row">
                 <% flash.each do |type, msg| %>
@@ -51,7 +51,7 @@
               </div>
             <% end %>
         
-            <% if action_name.eql?('index') %>
+            <% if action_name.eql?('index') or action_name.eql?('daily_points_movements') %>
               <div class="row">
                 <%= yield %>
               </div>

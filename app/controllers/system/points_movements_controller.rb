@@ -63,21 +63,6 @@ class System::PointsMovementsController < System::SystemApplicationController
   def daily_points_movements
     # byebug
     @pagy, @branches = pagy(Branch.all)
-    # @pagy, @daily_points_movements = pagy_array(policy_scope(PointsMovement.group(:branch_id, "DATE(date_time)"))
-    #   .order("DATE(date_time) ASC")
-    #   .pluck(:branch_id, "DATE(date_time)", "SUM(earned)", "SUM(redeemed)", "SUM(total)"))
-    
-    daily_points_movements = []
-    if params[:search]
-      @search_term = params[:search]
-      
-      @daily_points_movements.each do |dpm|
-        if dpm[1].strftime("%A, %d %B %Y").include?(@search_term.capitalize)
-          daily_points_movements.push(dpm)
-        end
-      end
-      @daily_points_movements = daily_points_movements
-    end
 
     respond_to do |format|
       format.html

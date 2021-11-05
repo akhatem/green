@@ -1,15 +1,21 @@
-<div class="col-lg-7">
+<div class="col-lg-5" style="margin-left:140px;">
     <div class="row">
-        <div class="col-md-3">
-            <%= link_to "Clear Search", system_offers_path, class: "btn btn-outline-success btn-sm" %>
+        <div class="col-md-5 main-btns">
+            <%= link_to "Clear Search", system_offers_path, class: "btn btn-outline-success" %>
         </div>
-        <div class="col-md-4">
-            <%= form_for "", url: system_offers_path, role: "search", method: :get do %>
-                <%= text_field_tag :search, @search_term, placeholder: "Search by... Id or state", style: "text-align: center;" %>
-            <% end %>
+        <div class="col-md-3">
+            <div class="row mb-1">
+                <%= form_for "", url: system_offers_path, role: "search", method: :get do %>
+                    <%= text_field_tag :search, @search_term, placeholder: "Search by... Id or state", style: "text-align: center;" %>
+                <% end %>
+            </div>
         </div>
     </div>
 </div>
+
+
+
+
 
 <div class="col-lg-5 main-btns">
     <%= link_to "Add new Offer", new_system_offer_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>

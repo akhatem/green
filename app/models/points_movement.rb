@@ -50,7 +50,7 @@ class PointsMovement < ApplicationRecord
   def self.search_by(search_term)
     where(id: search_term.to_i)
     .or(where("receipt_id = ?", Receipt.find_by(id: search_term.to_i)))
-    # .or(where("DATE(date_time) ILIKE ?", "%" + search_term + "%"))
+    .or(where(date_time: "%" + search_term + "%"))
   end
 
   private

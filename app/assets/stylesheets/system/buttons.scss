@@ -1,46 +1,39 @@
-.btn{
-    max-width: 50%;
-    height: 40px;
-}
-
-// .btn-outline-success {
-//     padding-top: 1px;
-//     text-align: center;
-//     white-space: normal;
-//     border-color: #00AB47;
-//     height: 36px;
-//     font-size: 11px;
-// }
-
-.btn-outline-success {
+a.btn{
     font-size: 16px;
-    border-color: #00AB47;
-    padding-top: 1px;
     text-align: center;
-    white-space: normal;
-    // max-width: 30%;
-    // height: 36px;
+    min-width: 25%;
+    height: 36px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 7px;
+    background-color: #00AB47;
+    color: white;
 }
 
-.btn-outline-secondary {
-    padding-top: 1px;
-    text-align: center;
+a.btn:hover {
+    background-color: #ffffff;
+    color: #006B2D;
+    border: 1px solid #006B2D;
+}
+
+a.btn-outline-success {
+    
+    border-color: #00AB47;
+    padding-top: 7px;
+    white-space: normal;
+}
+
+a.btn-outline-secondary {
     white-space: normal;
     border: 1px solid #ced4da;
-    // width: 30%;
-    height: 36px;
-    font-size: 16px;
 }
 
-.main-btns {
-    padding-left: 150px;
+a.main-btns {
     padding-top: 2px;
 }
 
-.save-btn {
+a.save-btn {
     background-color: #00AB47;
-    width: 100px;
-    height: 36px;
     border: none;
 }
 
@@ -49,27 +42,34 @@
     padding-left: 5px;
 }
 
-.btn-primary {
+a.btn-primary {
     background-color: #00AB47;
     border: none;
-    width: 100px;
-    height: 36px;
 }
 
-
-.btn-primary {
-    background-color: #00AB47;
+a.back-btn{
+    float: left;
+    margin-top: 5px;
+    margin-left: 30px;
     border: none;
-    width: 40%;
-    height: 36px;
 }
 
-.btn-primary:hover {
-    background-color: #ffffff;
-    color: #006B2D;
-}
-
-.edit-btn {
+a.edit-btn {
     float: right;
     margin-bottom: 30px;
+}
+
+a.submit-btn{
+    float: right;
+    margin-top: 100px;
+    margin-right: 150px;
+    border: none;
+    background-color: #00AB47;
+    color: white;
+}
+
+button.copy-link{
+    float: right;
+    margin-left: 490px;
+    width: 30%;
 }

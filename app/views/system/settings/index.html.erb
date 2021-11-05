@@ -11,12 +11,12 @@
         <% @settings.each do |setting| %>
             <tr>
                 <th scope="row">
-                    <%= setting.id %>
+                    <%= link_to setting.id, system_setting_path(setting), style: "color: green" %>
                 </th>
-                <td><%= setting.name %></td>
+                <td><%= link_to setting.name, system_setting_path(setting), style: "color: green" %></td>
                 <td><%= setting.created_at.strftime("%I:%M %p %a, %d %b %Y") %></td>
                 <td class="table-action">
-                    <%= link_to '', system_setting_path(setting), class: "fa fa-eye" %>
+                    <%= link_to '', system_setting_path(setting), class: "fa fa-eye", style: "color: green" %>
                     <%= link_to '', edit_system_setting_path(setting), class: "fa fa-edit" %>
                 </td>
             </tr>

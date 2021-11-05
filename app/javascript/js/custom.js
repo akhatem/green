@@ -37,3 +37,40 @@ $(document).on('turbolinks:load', function(){
 });
 // ###### Handle message disapearance ######
 
+
+//  ###### accordion ######
+
+
+
+// class accordionMove {
+//   // This executes when the function is instantiated.
+//   constructor() {
+//     this.iterateLinks()
+//   }
+
+//   iterateLinks() {
+//     console.log(top.location.pathname)
+//     if (top.location.pathname == "/system/daily_points_movements"){
+//       console.log("=========== inside");
+//       var acc = document.getElementsByClassName("accordion");
+//       console.log(acc)
+//     // var acc = document.getElementById("accordion-id");
+//     for (var i = 0; i < acc.length; i++) {
+//       acc[i].addEventListener("click", function() {
+//         this.classList.toggle("active");
+//         var panel = this.nextElementSibling;
+//         if (panel.style.display === "block") {
+//           panel.style.display = "none";
+//         } else {
+//           panel.style.display = "block";
+//         }
+//       });
+//     }
+//   }
+
+//   }
+// }
+
+// // Wait for turbolinks to load, otherwise `document.querySelectorAll()` won't work
+// window.addEventListener('turbolinks:load', () => new accordionMove())
+// //  ###### accordion ######

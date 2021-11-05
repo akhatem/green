@@ -1,95 +1,94 @@
-<div class="d-flex flex-column p-3">
-    <hr>
+<div class="d-flex flex-column p-1" id="side-bar">
     <ul class="nav nav-pills flex-column mb-auto">
 
         <li>
-            <a href="<%= system_root_path %>" class="nav-link link-dark <%= is_active?(system_root_path) %>">
-                <i class="fas fa-home"></i> Home</a>
+            <a href="<%= system_root_path %>" class="nav-link <%= is_active?(system_root_path) %>">
+                <i class="fas fa-home"></i>&nbsp;Home</a>
         </li>
 
         <li>
-            <a href="<%= system_branches_path %>" class="nav-link link-dark <%= is_active?(system_branches_path) %>">
-                <i class="fas fa-tag"></i> Branches</a>
+            <a href="<%= system_branches_path %>" class="nav-link <%= is_active?(system_branches_path) %>">
+                <i class="fas fa-tag"></i>&nbsp;Branches</a>
         </li>
 
         <li>
-            <a href="<%= system_brands_path %>" class="nav-link link-dark <%= is_active?(system_brands_path) %>">
-                <i class="fas fa-tag"></i> Brands</a>
+            <a href="<%= system_brands_path %>" class="nav-link <%= is_active?(system_brands_path) %>">
+                <i class="fas fa-tag"></i>&nbsp;Brands</a>
         </li>
 
         <li>
-            <a href="<%= system_categories_path %>" class="nav-link link-dark <%= is_active?(system_categories_path) %>">
-                <i class="fas fa-th-large"></i> Categories</a>
+            <a href="<%= system_categories_path %>" class="nav-link <%= is_active?(system_categories_path) %>">
+                <i class="fas fa-th-large"></i>&nbsp;Categories</a>
         </li>
 
         <li>
-            <a href="<%= system_customers_path %>" class="nav-link link-dark <%= is_active?(system_customers_path) %>">
-                <i class="fas fa-user"></i> Customers</a>
+            <a href="<%= system_customers_path %>" class="nav-link <%= is_active?(system_customers_path) %>">
+                <i class="fas fa-user"></i>&nbsp;Customers</a>
         </li>
 
         <li>
-            <a href="<%= system_cities_path%>" class="nav-link link-dark <%= is_active?(system_cities_path) %>">
-                <i class="fas fa-city"></i> Cities</a>
+            <a href="<%= system_cities_path%>" class="nav-link <%= is_active?(system_cities_path) %>">
+                <i class="fas fa-city"></i>&nbsp;Cities</a>
         </li>
 
         <li>
-            <a href="<%= system_daily_points_movements_path%>" class="nav-link link-dark <%= is_active?(system_daily_points_movements_path) %>">
-                <i class="fas fa-city"></i> Daily Points Movements</a>
+            <a href="<%= system_daily_points_movements_path%>" class="nav-link <%= is_active?(system_daily_points_movements_path) %>">
+                <i class="fas fa-city"></i>&nbsp;Daily Points Movements</a>
         </li>
 
         <li>
-            <a href="<%= system_items_path %>" class="nav-link link-dark <%= is_active?(system_items_path) %>">
-                <i class="fas fa-list-ul"></i> Items</a>
+            <a href="<%= system_items_path %>" class="nav-link <%= is_active?(system_items_path) %>">
+                <i class="fas fa-list-ul"></i>&nbsp;Items</a>
         </li>
 
         <li>
-            <a href="<%= system_notifications_path %>" class="nav-link link-dark <%= is_active?(system_notifications_path) %>">
-                <i class="fas fa-bell"></i> Notifications</a>
+            <a href="<%= system_notifications_path %>" class="nav-link <%= is_active?(system_notifications_path) %>">
+                <i class="fas fa-bell"></i>&nbsp;Notifications</a>
         </li>
 
         <li>
-            <a href="<%= system_offers_path %>" class="nav-link link-dark <%= is_active?(system_offers_path) %>">
-                <i class="fas fa-percent"></i> Offers</a>
+            <a href="<%= system_offers_path %>" class="nav-link <%= is_active?(system_offers_path) %>">
+                <i class="fas fa-percent"></i>&nbsp;Offers</a>
         </li>
 
          <li>
-            <a href="<%= system_offer_carosel_images_path %>" class="nav-link link-dark <%= is_active?(system_offer_carosel_images_path) %>">
-                <i class="fas fa-list-ol"></i> Offer Carosel Images</a>
+            <a href="<%= system_offer_carosel_images_path %>" class="nav-link <%= is_active?(system_offer_carosel_images_path) %>">
+                <i class="fas fa-list-ol"></i>&nbsp;Offer Carosel Images</a>
         </li>
 
         <li>
-            <a href="<%= system_points_movements_path %>" class="nav-link link-dark <%= is_active?(system_points_movements_path)%>">
-                <i class="fas fa-sync"></i> Points Movements</a>
+            <a href="<%= system_points_movements_path %>" class="nav-link <%= is_active?(system_points_movements_path)%>">
+                <i class="fas fa-sync"></i>&nbsp;Points Movements</a>
         </li>
 
         <li>
-            <a href="<%= system_receipts_path %>" class="nav-link link-dark <%= is_active?(system_receipts_path)%>">
-                <i class="fas fa-receipt"></i> Receipts</a>
+            <a href="<%= system_receipts_path %>" class="nav-link <%= is_active?(system_receipts_path)%>">
+                <i class="fas fa-receipt"></i>&nbsp;Receipts</a>
         </li>
         
         <li>
-            <a href="<%= system_settings_path %>" class="nav-link link-dark <%= is_active?(system_settings_path) %>">
-                <i class="fas fa-info-circle"></i> Settings</a>
+            <a href="<%= system_settings_path %>" class="nav-link <%= is_active?(system_settings_path) %>">
+                <i class="fas fa-info-circle"></i>&nbsp;Settings</a>
         </li>
 
         <li>
-            <a href="<%= system_sizes_path %>" class="nav-link link-dark <%= is_active?(system_sizes_path) %>">
-                <i class="fas fa-list-ol"></i> Sizes</a>
+            <a href="<%= system_sizes_path %>" class="nav-link <%= is_active?(system_sizes_path) %>">
+                <i class="fas fa-list-ol"></i>&nbsp;Sizes</a>
         </li>
 
         <li>
-            <a href="<%= system_sms_messages_path %>" class="nav-link link-dark <%= is_active?(system_sms_messages_path) %>">
-                <i class="fas fa-envelope"></i> SMS</a>
+            <a href="<%= system_sms_messages_path %>" class="nav-link <%= is_active?(system_sms_messages_path) %>">
+                <i class="fas fa-envelope"></i>&nbsp;SMS</a>
         </li>
 
         <li>
-            <a href="<%= users_index_path %>" class="nav-link link-dark <%= is_active?(users_index_path) %>">
-                <i class="fas fa-user-tie"></i> System Users</a>
+            <a href="<%= users_index_path %>" class="nav-link <%= is_active?(users_index_path) %>">
+                <i class="fas fa-user-tie"></i>&nbsp;System Users</a>
         </li>
 
         <li>
-            <a href="<%= system_roles_path %>" class="nav-link link-dark <%= is_active?(system_roles_path)%>">
-                <i class="fas fa-receipt"></i> System User Roles</a>
+            <a href="<%= system_roles_path %>" class="nav-link <%= is_active?(system_roles_path)%>">
+                <i class="fas fa-receipt"></i>&nbsp;System User Roles</a>
         </li>
     </ul>
 </div>
