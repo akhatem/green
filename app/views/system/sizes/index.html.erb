@@ -1,7 +1,7 @@
 <div class="col-lg-7">
     <div class="row">
         <div class="col-md-3 main-btns">
-            <%= link_to "Clear Search", system_sizes_path, class: "btn btn-outline-success btn-sm", type: "button" %>
+            <%= link_to "Clear Search", system_sizes_path, class: "btn btn-outline-success ", type: "button" %>
         </div>
         <div class="col-md-4">
             <%= form_for "", url: system_sizes_path, role: "search", method: :get do %>
@@ -11,8 +11,8 @@
     </div>
 </div>
 <div class="col-lg-5 main-btns">
-    <%= link_to "Add new Size", new_system_size_path, class: "btn btn-outline-success btn-sm", style: "padding-top: 7px;" %>
-    <%= link_to "View PDF", system_sizes_path(format: :pdf, page: params[:page]), class: "btn btn-outline-success btn-sm", type: "button"  %>
+    <%= link_to "Add new Size", new_system_size_path, class: "btn btn-outline-success ", style: "padding-top: 7px;" %>
+    <%= link_to "View PDF", system_sizes_path(format: :pdf, page: params[:page]), class: "btn btn-outline-success ", type: "button"  %>
 </div>
 
 <table class="table mt-2">

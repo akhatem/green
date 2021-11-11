@@ -1,0 +1,52 @@
+.d-flex-customer-info{
+    width: 60%;
+    height: 400px;
+    border: 1px solid #ced4da;
+    border-radius: 7px;
+    box-shadow: 5px 5px #00AB47;
+    margin-top: 10px;
+    margin-left: 30%;
+    margin-bottom: 5px;
+
+}
+
+.details-title{
+    width: 50%;
+    margin: 3px 100px 20px 150px!important;
+}
+
+div.card-cashier{
+    width: 60%;
+    height: 400px;
+    border: 1px solid #ced4da;
+    border-radius: 7px;
+    box-shadow: 5px 5px #00AB47;
+    margin-top: 10px;
+    margin-left: 30%;
+    margin-bottom: 5px;
+}
+
+.col>.cashier-screen-text{
+    padding: 5px 10px;
+    width: 40vw;
+    margin: auto;
+    margin-top: 50px;
+    text-align: center;
+    background-color: #f2f2f290;
+    color: rgb(19, 177, 58);
+}
+
+input[type=text].barcode-search{
+    margin-top: 10%;
+    border: 1px solid rgb(19, 177, 58);
+}
+
+.cashier-form-label{
+    float: left;
+    margin-left: 1px;
+}
+
+input[type=text].cashier-form-control{
+    max-width: 50%;
+    text-align: center;
+}

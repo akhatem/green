@@ -34,15 +34,13 @@ class System::ItemsController < System::SystemApplicationController
   def create
     @item = Item.new(item_params)
     authorize @item
-    respond_to do |format|
-        if @item.save
-            format.html { redirect_to system_item_path(@item), notice: "Item #{@item.name} was successfully created." }
-            format.json { render :show, status: :created, location: @item }
-        else
-            format.html { render :new, status: :unprocessable_entity }
-            format.json { render json: @item.errors, status: :unprocessable_entity }
-            
-        end
+    if @item.save
+        redirect_to system_item_path(@item)
+        flash[:notice] = "Item #{@item.name} was successfully created."
+    else
+      flash.now[:alert] = @item.errors.full_messages
+      render :new
+        
     end
   end
 
@@ -50,24 +48,21 @@ class System::ItemsController < System::SystemApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @item.update(item_params)
-        format.html { redirect_to system_item_path(@item), notice: "Item was successfully updated." }
-        format.json { render :show, status: :ok, location: @item }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
+    if @item.update(item_params)
+      redirect_to system_item_path(@item)
+      flash[:notice] = "Item was successfully updated."
+    else
+      flash.now[:alert] = @item.errors.full_messages
+      render :edit
     end
   end
 
   def destroy
-    respond_to do |format|
-      if @item.destroy
-        format.html { redirect_to system_items_path, notice: "Item was successfully destroyed." }
-        format.json { head :no_content }
-      end
+    if @item.destroy
+      redirect_to system_items_path
+      flash[:notice] = "Item was successfully destroyed."
     end
+  
   end
 
 

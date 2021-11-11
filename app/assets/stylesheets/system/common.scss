@@ -72,13 +72,10 @@ div.show-card{
 }
 
 a.form-control {
-    width: 29%;
+    margin-right: 6vw;
+    width: 48.5%;
     text-align: center;
 
-}
-
-a.form-link-to{
-    margin-right: 215px;
 }
 
 .col-form-label{
@@ -102,7 +99,7 @@ div.form-group.row {
 h2.details-tab{
     padding: 10px 0;
     font-size: 19px;
-    color: #006B2D;
+    color: #00AB47;
     margin-left: 150px;
     text-align: center;
     border: 1px solid #ced4da;
@@ -110,17 +107,19 @@ h2.details-tab{
 }
 
 button.accordion{
-    background-color: #006B2D;
+    background-color: #00AB47;
     color: #ffffff;
     cursor: pointer;
     margin: 10px 10px 10px 10px;
-    padding: 18px;
+    padding: 10px;
     width: 98%;
     border: none;
     text-align: left;
     outline: none;
-    font-size: 18px;
-    transition: 0.4s;
+    font-size: 17px;
+    transition: 0.4s ease-in-out;
+    text-align: center;
+    border-radius: 5px;
 }
 
 button[class=accordion][class=ac]:hover{
@@ -129,7 +128,7 @@ button[class=accordion][class=ac]:hover{
   
 button.accordion:after {
     content: '\002B';
-    color: #777;
+    color: #ffffff;
     font-weight: bold;
     float: right;
     margin-left: 5px;
@@ -148,16 +147,30 @@ button.ac:after {
 }
 
 input[type=text][id=search]::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #006B2D;
+    color: #00AB47;
 }
 
 img.image-tag{
     margin-top: 16px;
     margin-bottom: 16px;
-    margin-right: 290px;
+    margin-right: 16.6vw;
     float: left;
-    max-width: 280px;
-    max-height: 257px;
+    max-width: 200px;
+    max-height: 200px;
+}
+
+textarea[type=text]{
+    margin-right: 6vw;
+    height: 130px;
+    width: 48.5%;
+}
+
+div.alert.col{
+    font-size: 1.2vw;
+    padding: 0.001rem!important;
+    margin-bottom: 0.001rem!important;
+    color:red;
+    
 }
 
 // ========================================================

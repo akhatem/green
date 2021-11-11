@@ -1,15 +1,3 @@
-<% if @item.errors.any? %>
-    <div id="error_explanation">
-        <h2 style= "color:red;"><%= pluralize(@item.errors.count, "error") %> found:</h2>
-        <ul>
-            <% @item.errors.each do |error| %>
-            <li style= "color:red;"><%= error.full_message %></li>
-            <% end %>
-        </ul>
-    </div>
-<% end %>
-
-
 <div class="row">
     <div class="col-md-4">
         <h2 class="details-tab">Add new item</h2>
@@ -19,12 +7,12 @@
 <%= form_with(model: @item, url: system_items_path) do |f| %>
 
     <div class="form-group row">
-        <%= f.label :name, class: "col-md-3 col-form-label" %>
+        <%= f.label :name, class: "col-md-3 col-form-label required" %>
         <%= f.text_field :name, class: "form-control"  %>
     </div>
 
     <div class="form-group row">
-        <%= f.label :image, class: "col-md-3 col-form-label" %>
+        <%= f.label :image, class: "col-md-3 col-form-label required" %>
         <%= image_tag f.object.image_url, style: "max-width: 280px;"  if f.object.image_was %>
         <%= f.hidden_field :image, value: f.object.image_was %>
         <%= f.file_field :image, { class: "form-control", style: "max-width: 30%" } %>
@@ -40,20 +28,20 @@
     </div>
 
     <div class="form-group row">
-        <%= f.label :brand, class: "col-md-3 col-form-label" %>
+        <%= f.label :brand, class: "col-md-3 col-form-label required" %>
         <%= f.collection_select :brand_id, Brand.order(:name), :id, :name, { inlcude_blank: true }, 
-        { class: "btn btn-outline-secondary dropdown-toggle", style: "padding-top: 7px; font-size: 16px; max-width: 30%" } %>
+        { class: "dropdown-toggle", style: "padding-top: 7px; font-size: 16px; max-width: 30%;color:green;" } %>
     </div>
 
     <div class="form-group row">
-        <%= f.label :category, class: "col-md-3 col-form-label" %>
+        <%= f.label :category, class: "col-md-3 col-form-label required" %>
         <%= f.grouped_collection_select :category_id, Brand.order(:name), :categories, :name, :id, :name, 
-        { inlcude_blank: true }, { class: "btn btn-outline-secondary dropdown-toggle", 
-        style: "padding-top: 7px; font-size: 16px; max-width: 30%" } %>
+        { inlcude_blank: true }, { class: "dropdown-toggle", 
+        style: "padding-top: 7px; font-size: 16px; max-width: 30%;color:green;" } %>
     </div>
 
     <div class="form-group row">
-        <%= f.label :description, class: "col-md-3 col-form-label" %>
+        <%= f.label :description, class: "col-md-3 col-form-label required" %>
         <%= f.text_area :description, { class: "form-control", style: "max-width: 30%" }  %>
     </div>
     

@@ -2,13 +2,11 @@
 
 .side-nav-col {
     inline-size: min-content;
-    // padding-right: 1px;
     height: 100%;
     margin-bottom:15px!important;
-    max-width: 90%;
 }
 
-.d-flex {
+.d-flex-side-nav {
     border: 1px solid #ced4da;
     box-shadow: 5px 5px #00AB47;
 }
@@ -16,29 +14,22 @@
 .nav-pills .nav-link.ac,
 .nav-pills >.nav-link {
     text-align: center;
-    background-color: #1ab359;
+    background-color: #00AB47;
     color: #fff;
     height: 40px;
 }
 
 .nav-pills .nav-link:hover{
     color: #2b2b2b;
-    text-align: center;
-    border: 1px solid #006B2D;
-    margin-top: 3px;
-    margin-bottom: 3px;
+    border: 1px solid #00AB47;
 }
 
 .nav-flush .nav-link {
     border-radius: 0;
 }
 
-.nav-pills .nav-link.ac {
-    background-color: #00AB47;
-    color: #ffffff;
-}
-
 .nav-pills .nav-link{
+    margin-bottom: 5px;
     color: #2b2b2b;
 }
 
@@ -64,7 +55,6 @@
 #side-bar{
     font-size: 1rem;
     margin-bottom:3px!important;
-    width: 260px;
 }
 /* end side nav icons */
 

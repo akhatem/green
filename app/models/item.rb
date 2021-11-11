@@ -25,9 +25,10 @@ class Item < ApplicationRecord
     mount_uploader :image, ItemImageUploader
     
     validates_presence_of :name, uniqueness: true, blank: false, null: false, if: -> { !name.present? }
-    validates :brand, presence: false, if: -> { !brand.exists? }
-    validates :category, presence: false, if: -> { !category.exists? }
-    validates :description, presence: false, if: -> { !description.present? }
+    validates :image, presence: true
+    validates :brand, presence: true
+    validates :category, presence: true
+    validates :description, presence: true
 
     def brandName
         Brand.find(self.brand_id).name

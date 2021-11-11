@@ -11,8 +11,8 @@ class Api::V1::BranchesController < ApplicationController
                 name: branch.name,
                 link: branch.link,
                 address: branch.address,
-                long: branch.long.to_f,
-                lat: branch.lat.to_f
+                longitude: branch.longitude.to_f,
+                latitude: branch.latitude.to_f
               }
             }
           }
@@ -29,8 +29,8 @@ class Api::V1::BranchesController < ApplicationController
           city: branch.cityName,
           link: branch.link,
           address: branch.address,
-          long: branch.long.to_f,
-          lat: branch.lat.to_f
+          longitude: branch.longitude.to_f,
+          latitude: branch.latitude.to_f
         }
       }, status: :ok
       end

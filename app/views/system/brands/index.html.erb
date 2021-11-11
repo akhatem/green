@@ -14,7 +14,7 @@
             </th>
             <td><%= link_to brand.name, system_brand_path(brand), style: "color: green" %></td>
             <td class="table-action">
-                <%= link_to '', system_brand_path(brand), class: "fa fa-eye", style: "color: green" %>
+                <%= link_to '', system_brand_path(brand), class: "fa fa-eye" %>
                 <%= link_to '', edit_system_brand_path(brand), class: "fa fa-edit" %>
                 <%= link_to '', system_brand_path(brand), class: "fa fa-trash", method: :delete, data: {confirm: "Are you sure?"} %>
             </td>

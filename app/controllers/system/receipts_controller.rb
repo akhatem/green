@@ -1,5 +1,4 @@
 class System::ReceiptsController < System::SystemApplicationController
-    
     skip_after_action :verify_authorized
     before_action :set_receipt, only: [:show]
     before_action :set_points_movement, only: [:show]
@@ -24,6 +23,8 @@ class System::ReceiptsController < System::SystemApplicationController
     end
 
     def show
+        # authorize @receipt
+        
         respond_to do |format|
             format.html
             format.pdf do
@@ -36,24 +37,18 @@ class System::ReceiptsController < System::SystemApplicationController
 
     def new
         @receipt = Receipt.new
-        # authorize @receipt
     end
 
     def create
-        @receipt = Receipt.new(receipt_params)
-        # authorize @receipt
-        respond_to do |format|
-            if @receipt.save
-                format.html { redirect_to cashier_redeem_points_path(@receipt.number), 
-                    notice: "Receipt #{@receipt.number} was successfully created." }
-                format.json { render :redeem_points, status: :created }
-            else
-                @customer = Customer.find_by(decoded_barcode: @receipt.customer.decoded_barcode)
-                format.html { redirect_to cashier_customer_info_path(@receipt.customer.decoded_barcode), 
-                    alert: @receipt.errors.full_messages, status: :unprocessable_entity }
-                format.json { render json: @receipt.errors.full_messages, status: :unprocessable_entity }
-                
-            end
+        @receipt = Receipt.new(create_params)
+        
+        if @receipt.save
+            redirect_to cashier_redeem_points_path(@receipt.number)
+            flash[:notice] = "Receipt # #{@receipt.number} saved successfully."
+        else
+            @customer = Customer.find_by(decoded_barcode: @receipt.customer.decoded_barcode)
+            redirect_to cashier_customer_info_path(@receipt.customer.decoded_barcode)
+            flash[:alert] = ["Receipt number already exists!"]
         end
     end
 
@@ -61,15 +56,14 @@ class System::ReceiptsController < System::SystemApplicationController
 
     def set_receipt       
         @receipt = Receipt.find(params[:id])
-        # authorize @receipt
+        authorize @receipt
     end
 
     def set_points_movement
         @points_movement = PointsMovement.where(earned: 0).find_by(receipt_id: @receipt.id)
-
     end
 
-    def receipt_params
-        params.require(:receipt).permit(:branch_id, :customer_id, :user_id, :number, :total_price)
+    def create_params
+        params.require(:receipt).permit(:customer_id, :branch_id, :user_id, :number, :total_price)
     end
 end

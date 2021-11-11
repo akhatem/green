@@ -1,15 +1,15 @@
 /*logo */
 .main-logo {
-    margin-top: 30px;
-    margin-left: 200px;
-    width: 500px;
-    height: 500px;
+    margin-top: 2%;
+    margin-left: 35%;
+    width: 35vw;
+    height: 35vw;
 }
 
 .logo-img {
     width: 70px;
     display: inline-block;
-    margin-left: 5rem;
+    margin-left: 5px;
 }
 
 /* end of logo */
@@ -31,9 +31,13 @@ img {
 
 .main-screen-text{
     padding: 5px 10px;
-    width: 100%;
+    // width: 100%;
+    width: 40vw;
     margin-top: 2px!important;
+    margin-left: 35%;
     text-align: center;
     background-color: #f2f2f290;
     color: rgb(19, 177, 58);
+    border: 1px solid rgb(19, 177, 58);
+    border-radius: 5px;
 }

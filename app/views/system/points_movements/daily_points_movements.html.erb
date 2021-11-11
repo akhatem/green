@@ -14,17 +14,17 @@
 </div> -->
 
 <div class="col-lg-5 main-btns">
-    <%= link_to "View PDF", system_points_movements_path(format: :pdf, page: params[:page]), 
+    <%= link_to "View PDF", system_daily_points_movements_path(format: :pdf, page: params[:page]), 
         class: "btn btn-outline-success", type: "button"  %>
 </div>
 
 <% @branches.each do |branch| %>
-    <% @daily_points_movements = PointsMovement.where(branch_id: branch.id)
+    <%# @daily_points_movements = PointsMovement.where(branch_id: branch.id)
     .group("DATE(date_time)")
     .order("DATE(date_time) ASC")
-    .pluck("DATE(date_time)", "SUM(earned)" , "SUM(redeemed)" , "SUM(total)" ) %>
+    .pluck("DATE(date_time)", "SUM(earned)" , "SUM(redeemed)" , "SUM(total)") %>
 
-    <button class="accordion" id="accordion-id"><%= branch.name %></button>
+    <button class="accordion"><%= branch.name %></button>
     <div class="panel">
         <table class="table mt-2">
             <thead>
@@ -38,23 +38,26 @@
             </thead>
             <tbody>
                 <% @daily_points_movements.each do |dpm| %>
-                    <tr>
-                        <td>
-                            <%= dpm[0].strftime("%A, %d %b %Y") %>
-                        </td>
-                        <td>
-                            <%= dpm[1] %>
-                        </td>
-                        <td>
-                            <%= dpm[2] %>
-                        </td>
-                        <td>
-                            <%= dpm[2] * Setting.find_by(key: :points_to_cash).description.to_f %>
-                        </td>
-                        <td>
-                            <%= dpm[3] %>
-                        </td>
-                    </tr>
+                    <% if dpm[0] == branch.id %>
+                        <tr>
+                            <td>
+                                <%= dpm[1].strftime("%A, %d %b %Y") %>
+                                
+                            </td>
+                            <td>
+                                <%= dpm[2] %>
+                            </td>
+                            <td>
+                                <%= dpm[3] %>
+                            </td>
+                            <td>
+                                <%= dpm[3] * Setting.find_by(key: :points_to_cash).description.to_f %>
+                            </td>
+                            <td>
+                                <%= dpm[4] %>
+                            </td>
+                        </tr>
+                    <% end %>
                 <% end %>
             </tbody>
         </table>

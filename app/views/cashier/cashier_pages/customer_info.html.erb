@@ -20,12 +20,12 @@
         <%= f.hidden_field :branch_id, value: current_user.branch_id %>
         
         <div class="form-group row">
-            <%= f.label :receipt_number, class: "col-md-3 col-form-label" %>
+            <%= f.label 'receipt #', class: "col-md-3 col-form-label required" %>
             <%= f.text_field :number, class: "form-control" %>
         </div>
 
         <div class="form-group row">
-            <%= f.label :total_price, class: "col-md-3 col-form-label" %>
+            <%= f.label :total_price, class: "col-md-3 col-form-label required" %>
             <%= f.number_field :total_price, step: :any, class: "form-control"  %>
         </div>
 

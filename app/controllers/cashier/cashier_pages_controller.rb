@@ -7,14 +7,12 @@ class Cashier::CashierPagesController < System::SystemApplicationController
   def barcode_search
     @customer = Customer.find_by(decoded_barcode: params[:decoded_barcode])
     if params[:decoded_barcode]
-      respond_to do |format|
-        if @customer
-          format.html {redirect_to cashier_customer_info_path(@customer.decoded_barcode), notice: "Customer #{@customer.name} found." }
-          format.json { render :customer_info, status: :ok }
-        else
-          format.html { render :barcode_search, alert: "Customer not found!", status: :not_found }
-          format.json { render json: @customer.errors.full_messages, status: :not_found }
-        end
+      if @customer
+        redirect_to cashier_customer_info_path(@customer.decoded_barcode)
+        flash[:notice] = ["Customer #{@customer.name} found."]
+      else
+        flash.now[:alert] = ["Customer not found!"]
+        render :barcode_search
       end
     else
       render :barcode_search
@@ -24,7 +22,7 @@ class Cashier::CashierPagesController < System::SystemApplicationController
   def customer_info
   end
 
-  def redeem_points    
+  def redeem_points
   end
 
   private

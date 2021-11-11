@@ -7,23 +7,23 @@
 
     <form>
         <div class="form-group row">
-            <label class="col-md-2 col-form-label">Name</label>
-            <input class="form-control" type="text" value="<%= @customer.name %>" disabled>
+            <label class="col-md-4 cashier-form-label">Name</label>
+            <input class="cashier-form-control" type="text" value="<%= @customer.name %>" disabled>
         </div>
 
         <div class="form-group row">
-            <label class="col-md-2 col-form-label">Collected Points</label>
-            <input class="form-control" type="text" value="<%= @points_movement.earned %>" disabled>
+            <label class="col-md-4 cashier-form-label">Collected Points</label>
+            <input class="cashier-form-control" type="text" value="<%= @points_movement.earned %>" disabled>
         </div>
 
         <div class="form-group row">
-            <label class="col-md-2 col-form-label">Total Points</label>
-            <input class="form-control" type="text" value="<%= @points_movement.total %>" disabled>
+            <label class="col-md-4 cashier-form-label">Total Points</label>
+            <input class="cashier-form-control" type="text" value="<%= @points_movement.total %>" disabled>
         </div>
 
         <div class="form-group row">
-            <label class="col-md-2 col-form-label">Total points as cash</label>
-            <input class="form-control" type="text" value="<%= @points_movement.convert_points_to_cash %> L.E" disabled>
+            <label class="col-md-4 cashier-form-label">Total points as cash</label>
+            <input class="cashier-form-control" type="text" value="<%= @points_movement.convert_points_to_cash %> L.E" disabled>
         </div>
     </form>
 

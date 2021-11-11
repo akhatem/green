@@ -33,15 +33,13 @@ class System::BrandsController < System::SystemApplicationController
   end
 
   def update
-    respond_to do |format|
       if @brand.update(brand_params)
-        format.html { redirect_to system_brands_path, notice: "Brand was successfully updated." }
-        format.json { render :show, status: :ok, location: @brand }
+        redirect_to system_brands_path
+        flash[:notice] = "Brand was successfully updated."
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @brand.errors, status: :unprocessable_entity }
+        flash.now[:alert] = @brand.errors.full_messages
+        render :edit
       end
-    end
   end
 
   def destroy

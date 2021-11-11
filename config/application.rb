@@ -26,4 +26,10 @@ module Green
     end
 
   end
+  ActionView::Base.field_error_proc = proc do |html_tag, instance|
+    puts "====> html_tag: #{html_tag}"
+    puts "====> instance: #{instance}"
+    html_tag.gsub("form-control", "form-control is-invalid").html_safe
+    # html_tag.insert(html_tag.index('>'), "hint='#{instance.errors.full_messages}'").html_safe
+  end
 end

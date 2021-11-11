@@ -8,7 +8,7 @@ module ApplicationHelper
         # res = path[cnt - 2]
         # res.eql?(params[:controller].split('/').second) ? 'ac' : ''
     end
-
+    
     # This method creates a link with `data-id` `data-fields` attributes. These attributes are used to create new instances of the nested fields through Javascript.
     def link_to_add_fields(name, f, association, html_class)
 
@@ -50,7 +50,7 @@ module ApplicationHelper
         text-align: center;
         padding: 7px;
         color: #FFFFFF;
-        background-color: #006B2D;
+        background-color: #00AB47;
         border-radius: 5px;
         "
         link_to(name, '#', data: {id: id, fields: fields.gsub("\n", "")}, class: "add_fields #{html_class} mt-3", style: style)

@@ -7,7 +7,7 @@
 
 .nav-bg {
     background-color: #fff!important;
-    box-shadow: 0px 1px 7px #f2eeee;
+    box-shadow: 0px 1px 7px #00AB47;
     height: 80px;
     margin-bottom: 10px;
 }
@@ -21,14 +21,6 @@
     left: 50%;
 }
 
-.user-icon {
-    color: #818181;
-    font-size: 28px;
-    position: absolute;
-    right: 97%;
-    top: 27%;
-}
-
 .user-link{
     color: #00AB47;
 }
@@ -37,11 +29,6 @@
 .user-link a:focus,
 .user-link:hover {
     background-color: none !important;
-}
-
-.far {
-    font-size: 36px;
-    color: #7E84A3
 }
 
 .dropdown-toggle {
@@ -53,16 +40,11 @@
     margin-top: 0; // remove the gap so it doesn't close
 }
 
-.d-flex {
-    padding-left: 0;
-}
-
 /*logo */
 
-.logo-img {
-    width: 70px;
+img.logo-img {
     display: block;
-    margin-left: 5rem;
+    margin-left: 4px;
 }
 
 hr {

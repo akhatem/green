@@ -10,11 +10,18 @@
     <img src="<%= '/assets/main_logo.png' %>" alt="logo" class="logo">
   </div>
 
-  <div class="login-error-row">
-    <p class="notice" style="color:#00AB47;"><%= notice %></p>
-    <p class="alert" style="color: red;"><%= alert %></p>
+
+  <div class="row login-error-row">
+    <div class="col-12">
+      <% flash.each do |type, msg| %>
+        <% if type.eql?("notice") %>
+          <p class="notice" style="color:#00AB47;"><%= msg %></p>
+        <% else %>
+          <p class="alert" style="color: red;"><%= msg %></p>
+        <% end %>  
+      <% end %>
+    </div>
   </div>
-  
 
   <div class="login-form">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>

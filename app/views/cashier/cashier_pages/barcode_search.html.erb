@@ -1,9 +1,13 @@
-<h3 class="main-screen-text">Please click below and scan customer barcode!</h3>
-<div class="row">
-    <div class="col-md-12">
-        <%= form_tag cashier_barcode_search_path, method: :get do |f| %>
-            <%= text_field_tag 'decoded_barcode', nil, style: "border: 1px solid rgb(19, 177, 58); margin-top:50px;" %>
-        <% end %>
+<div class="card-cashier">
+    <div class="row">
+        <div class="col">
+            <h3 class="cashier-screen-text">Please click below and scan customer barcode!</h3>
+        </div>
+        <div class="col">
+            <%= form_tag cashier_barcode_search_path, method: :get do |f| %>
+                <%= text_field_tag 'decoded_barcode', nil, class: "barcode-search", autocomplete: 'off' %>
+            <% end %>
+        </div>
     </div>
 </div>
 

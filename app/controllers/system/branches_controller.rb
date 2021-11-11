@@ -34,15 +34,13 @@ class System::BranchesController < System::SystemApplicationController
         @branch = Branch.new(branch_params)
         authorize @branch
 
-        respond_to do |format|
-            if @branch.save
-                format.html { redirect_to system_branches_path, notice: "Branch #{@branch.name} was successfully created." }
-                format.json { render :show, status: :created, location: @branch }
-            else
-                format.html { render :new, status: :unprocessable_entity }
-                format.json { render json: @branch.errors, status: :unprocessable_entity }
-                
-            end
+        if @branch.save
+            redirect_to system_branches_path
+            flash[:notice] = "Branch #{@branch.name} was successfully created."
+        else
+            flash.now[:alert] =  @branch.errors.full_messages
+            render :new
+            
         end
     end
 
@@ -50,22 +48,19 @@ class System::BranchesController < System::SystemApplicationController
     end
 
     def update
-        respond_to do |format|
-          if @branch.update(branch_params)
-            format.html { redirect_to system_branches_path, notice: "Branch was successfully updated." }
-            format.json { render :show, status: :ok, location: @branch }
-          else
-            format.html { render :edit, status: :unprocessable_entity }
-            format.json { render json: @branch.errors, status: :unprocessable_entity }
-          end
+        if @branch.update(branch_params)
+            redirect_to system_branches_path
+            flash[:notice] = "Branch was successfully updated."
+        else
+            flash.now[:alert] = @branch.errors.full_messages
+            render :edit
         end
     end
 
     def destroy
-        @branch.destroy
-        respond_to do |format|
-            format.html { redirect_to system_branches_path, notice: "Branch was successfully destroyed." }
-            format.json { head :no_content }
+        if @branch.destroy
+            redirect_to system_branches_path
+            flash[:notice] = "Branch was successfully destroyed."
         end
     end
 
@@ -77,6 +72,6 @@ class System::BranchesController < System::SystemApplicationController
     end
 
     def branch_params
-        params.require(:branch).permit(:name, :long, :lat, :link, :city_id, :address)
+        params.require(:branch).permit(:name, :longitude, :latitude, :link, :city_id, :address)
     end
 end

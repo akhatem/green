@@ -20,11 +20,6 @@
             <input class="form-control" id="form-label" type="text" value="<%= @item.name %>" disabled>
         </div>
 
-        <div class="form-group row">
-            <label class="col-2 col-form-label">Image</label>
-            <%= image_tag @item.image.url, class: "form-control image-tag" if @item.image.url %>
-        </div>
-
         <% @item.item_sizes.all.each do |item_size| %>
             <div class="form-group row">
                 <label class="col-2 col-form-label">Size and price</label>
@@ -34,22 +29,24 @@
 
         <div class="form-group row">
             <label class="col-2 col-form-label">Brand</label>
-            <%= link_to @item.brandName, system_brand_path(@item.brand), style: "color: green;", class: "form-control form-link-to" %>
+            <%= link_to @item.brandName, system_brand_path(@item.brand), style: "color: green;", class: "form-control" %>
         </div>
 
         <div class="form-group row">
             <label class="col-2 col-form-label">Category</label>
-            <%= link_to @item.categoryName, system_category_path(@item.category), style: "color: green;", class: "form-control form-link-to" %>
+            <%= link_to @item.categoryName, system_category_path(@item.category), style: "color: green;", class: "form-control" %>
         </div>
 
         <div class="form-group row">
-            <label class="col-2 col-form-label">Description</label>
-            <input class="form-control" id="form-label" type="text" value="<%= @item.description %>" disabled>
+            <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Description</label>
+            <textarea class= "form-control" id= "form-label" type= "text" disabled>
+                <%= @item.description.html_safe.gsub('<p>', '').gsub('</p>', '').html_safe %>
+            </textarea>
         </div>
 
         <div class="form-group row">
             <label class="col-md-2 col-form-label">Created at</label>
-        <input class="form-control" type="text" value="<%= @item.created_at.strftime("%I:%M %p %a, %d %b %Y") %>items" disabled>
+            <input class="form-control" type="text" value="<%= @item.created_at.strftime("%I:%M %p %a, %d %b %Y") %>items" disabled>
         </div>
 
         <div class="form-group row">
@@ -57,7 +54,10 @@
             <input class="form-control" type="text" value="<%= @item.updated_at.strftime("%I:%M %p %a, %d %b %Y") %>" disabled>
         </div>
 
-        <hr>
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Image</label>
+            <%= image_tag @item.image.url, class: "form-control image-tag" %>
+        </div>
 
         <div class="form-group row mb-5">
             <div class="col-9">

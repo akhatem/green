@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-9">
+        <div class="row">
+            <% flash.each do |type, msg| %>
+                <% if type.eql?("notice") %>
+                        <div class="col">
+                            <p class="notice" style="color:#00AB47;"><%= msg.to_s.gsub(/\[/, '').gsub(/\"/, '').gsub(/\]/, '').html_safe %></p>
+                        </div>
+                <% else %>
+                    <% if flash.count > 1 %>
+                        <% msg.each do |m| %>
+                            <div class="alert col">
+                                <p class="alert" style="color:red;"><%= m.to_s.gsub(/\[/, '').gsub(/\"/, '').gsub(/\]/, '').html_safe %></p>
+                            </div>
+                        <% end %>
+                    <% else %>
+                        <div class="alert col">
+                            <p  style="color:red;"><%= msg.to_s.gsub(/\[/, '').gsub(/\"/, '').gsub(/\]/, '').html_safe %></p>
+                        </div>
+                    <% end %>
+                <% end %>  
+            <% end %>            
+        </div>
+    </div>
+</div>

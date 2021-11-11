@@ -1,0 +1,16 @@
+<% Class errorMessages %>
+
+    <div class="row">
+        <% if @brand.errors.any? %>
+            <div id="error_explanation">
+                <h2><%= pluralize(@brand.errors.count, "error") %> found:</h2>
+                <ul>
+                    <% @brand.errors.each do |error| %>
+                        <li><%= error.full_message %></li>
+                    <% end %>
+                </ul>
+            </div>
+        <% end %>
+    </div>
+
+<% end %>

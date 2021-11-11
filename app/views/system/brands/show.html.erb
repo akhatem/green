@@ -1,7 +1,7 @@
 <div class="show-card">
     <div class="row">
         <div class="col-md-5">
-            <h2 class="details-tab"><%= @brand.name %>'s details</h2>
+            <h2 class="details-tab card-title"><%= @brand.name %>'s details</h2>
         </div>
         <div class="col-md-4">
             <%= link_to "Edit", edit_system_brand_path(@brand), class: "btn btn-primary edit-btn" %>
@@ -20,11 +20,6 @@
         </div>
 
         <div class="form-group row">
-            <label class="col-2 col-form-label">Image</label>
-            <%= image_tag @brand.image.url, class: "form-control image-tag" if @brand.image.url %>
-        </div>
-
-        <div class="form-group row">
             <label class="col-2 col-form-label">Created at</label>
             <input class="form-control" type="text" value="<%= @brand.created_at.strftime("%I:%M %p %A, %d %b %Y") %>" disabled>
         </div>
@@ -32,6 +27,11 @@
         <div class="form-group row">
             <label class="col-2 col-form-label">Updated at</label>
             <input class="form-control" type="text" value="<%= @brand.updated_at.strftime("%I:%M % %A, %d %b %Y") %>" disabled>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Image</label>
+            <%= image_tag @brand.image.url, class: "form-control image-tag" if @brand.image.url %>
         </div>
     </form>
 

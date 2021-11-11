@@ -3,7 +3,7 @@
 }
 
 .logo-container {
-    padding-bottom: 40px;
+    padding-bottom: 10px;
     margin-top: 15px;
 }
 
@@ -18,16 +18,17 @@
 .login-form {
     background-color: white;
     width: 400px;
-    border: 15px white;
-    padding-top: 40px;
-    padding-bottom: 20px;
+    border: 1px solid #e2e2e2;
+    padding-top: 5px;
+    padding-bottom: 10px;
     margin: auto;
-    box-shadow: 0.5px 0.5px 3px #dadada;
+    // box-shadow: 2px 2px 3px #00AB47;
+    box-shadow: 5px 5px #00AB47;
 }
 
 .login-form h2 {
     text-align: center;
-    color: #006B2D;
+    color: #00AB47;
     font-weight: 500;
     font-size: 20px;
 }
@@ -86,6 +87,6 @@ label {
 }
 
 .login-error-row {
-    padding-top: 10px;
+    // padding-top: 10px;
     text-align: center;
 }

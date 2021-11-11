@@ -5,8 +5,8 @@
 #  id         :bigint           not null, primary key
 #  name       :string
 #  link       :string
-#  long       :decimal(, )
-#  lat        :decimal(, )
+#  longitude  :decimal(, )
+#  latitude   :decimal(, )
 #  address    :string
 #  city_id    :bigint
 #  created_at :datetime         not null

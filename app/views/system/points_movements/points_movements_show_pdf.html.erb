@@ -21,7 +21,7 @@
 
     <tr scope="row">
         <th>Receipt #</th>
-        <td><%= @points_movement.receiptNumber %></td>
+        <td><%= @points_movement.receipt_id ? @points_movement.receiptNumber : "-"  %></td>
     </tr>
 
     <tr scope="row">

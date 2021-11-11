@@ -16,6 +16,7 @@ class Api::V1::CustomersController < ApplicationController
       @customer = Customer.new(create_params)
       @customer.update(verification_code: generated_code)
       if @customer.valid?
+        @customer.save
         SmsmisrOtpClient.new(@customer.mobile, generated_code)
         render json: {
           message: JSON.parse("Account Created Successfully.".to_json),
@@ -197,7 +198,6 @@ class Api::V1::CustomersController < ApplicationController
 
   # Update
   def update
-    # puts "========> In customers controller : #{params}"
     begin
       update_params.empty?
     rescue
@@ -210,24 +210,6 @@ class Api::V1::CustomersController < ApplicationController
           error: JSON.parse("Unauthorized request!".to_json),
         }, status: :unauthorized   
       else
-        # if update_params[:name]
-        #   @customer.write_attribute(:name, update_params[:name])
-        # end
-        
-        # if update_params[:mobile] && (update_params[:mobile] != @customer.mobile)
-        #     new_token = @customer.encode_token(update_params[:mobile])
-        #     @customer.write_attribute(:token, new_token)
-        #     @customer.write_attribute(:mobile, update_params[:mobile]) 
-        # end
-        
-        # if update_params[:email]
-        #   @customer.write_attribute(:email, update_params[:email])
-        # end
-        
-        # if update_params[:password]
-        #   @customer.write_attribute(:password, update_params[:password])
-        # end
-
         if @customer.update(update_params)
           render json: {
             message: JSON.parse("Profile updated successfully.".to_json),
@@ -263,10 +245,8 @@ class Api::V1::CustomersController < ApplicationController
 
   def set_customer
     if header_token
-      # puts "==========> header token #{header_token}"
       @customer = Customer.find_by(token: header_token)
     elsif params[:mobile]
-      # puts "==========> params[:mobile] #{params[:mobile]}"
       @customer = Customer.find_by(mobile: params[:mobile])
     end
   end

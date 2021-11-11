@@ -1,64 +1,64 @@
-<div class="row">
-    <div class="col-md-6">
-        <h2 style="text-align: center;">Basic Info</h2>
+<div class="show-card">
+    <div class="row">
+        <div class="col-5">
+            <h2 class="details-tab card-title">Basic Info</h2>
+        </div>
+        <div class="col-4">
+            <%= link_to "Edit", edit_system_notification_path(@notification), class: "btn btn-primary edit-btn" %>
+        </div>
     </div>
-    <div class="col-md-6">
-        <%= link_to "Edit", edit_system_notification_path(@notification), class: "btn btn-primary edit-btn" %>
-    </div>
-</div>
-<div class="form-group row" style="text-align:center;">
-    <label for="notification_id" class="col-md-2 col-form-label">Id</label>
-    <input type="number" class="form-control" id="notification_id" value="<%= @notification.id %>" disabled>
-</div>
-
-<div class="form-group row">
-    <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Title</label>
-    <input class="form-control" id="form-label" type="text" value="<%= @notification.title %>" disabled>
-</div>
-
-<% if @notification.offer_id %>
     <div class="form-group row" style="text-align:center;">
-        <label for="notification_id" class="col-md-2 col-form-label">Offer Id</label>
-        <input type="number" class="form-control" id="notification_id" value="<%= @notification.offer_id %>" disabled>
+        <label for="notification_id" class="col-md-2 col-form-label">Id</label>
+        <input type="number" class="form-control" id="notification_id" value="<%= @notification.id %>" disabled>
     </div>
-<% end %>
 
- <% #TODO: fix image placeholders in notifications and offers %>
+    <div class="form-group row">
+        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Title</label>
+        <input class="form-control" id="form-label" type="text" value="<%= @notification.title %>" disabled>
+    </div>
 
-<div class="form-group row">
-        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Image</label>
-        <%= image_tag @notification.image.url, style: "max-width: 280px;max-height: 257px;", id: "form-label" if @notification.image.url %>
-</div>
+    <% if @notification.offer_id %>
+        <div class="form-group row" style="text-align:center;">
+            <label for="notification_id" class="col-md-2 col-form-label">Offer Id</label>
+            <input type="number" class="form-control" id="notification_id" value="<%= @notification.offer_id %>" disabled>
+        </div>
+    <% end %>
 
-<div class="form-group row">
-    <label class="col-md-2 col-form-label">Create date</label>
-    <input class="form-control" type="text" value="<%= @notification.created_at.strftime("%I:%M %p %a, %d %b %Y") %>" disabled>
-</div>
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label">Create date</label>
+        <input class="form-control" type="text" value="<%= @notification.created_at.strftime("%I:%M %p %a, %d %b %Y") %>" disabled>
+    </div>
 
-<div class="form-group row">
-    <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Description</label>
-    <textarea class= "form-control" id= "form-label" type= "text" disabled>
-        <%= @notification.description.gsub('<p>', '').gsub('</p>', '').html_safe %>
-    </textarea>
-</div>
+    <div class="form-group row">
+        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Description</label>
+        <textarea class= "form-control" id= "form-label" type= "text" disabled>
+            <%= @notification.description.gsub('<p>', '').gsub('</p>', '').html_safe %>
+        </textarea>
+    </div>
 
-<div class="form-group row">
-    <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Is new?</label>
-    <input type="text" class="form-control" id="notification_id" value="<%= @notification.is_new_attr %>" disabled>
-</div>
+    <div class="form-group row">
+        <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Is new?</label>
+        <input type="text" class="form-control" id="notification_id" value="<%= @notification.is_new_attr %>" disabled>
+    </div>
 
-<div class="form-group row">
-    <label class="col-md-2 col-form-label">Created at</label>
-    <input class="form-control" type="text" value="<%= @notification.created_at.strftime("%I:%M %p %a, %d %b %Y") %>" disabled>
-</div>
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label">Created at</label>
+        <input class="form-control" type="text" value="<%= @notification.created_at.strftime("%I:%M %p %a, %d %b %Y") %>" disabled>
+    </div>
 
-<div class="form-group row">
-    <label class="col-md-2 col-form-label">Updated at</label>
-    <input class="form-control" type="text" value="<%= @notification.updated_at.strftime("%I:%M %p %a, %d %b %Y") %>" disabled>
-</div>
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label">Updated at</label>
+        <input class="form-control" type="text" value="<%= @notification.updated_at.strftime("%I:%M %p %a, %d %b %Y") %>" disabled>
+    </div>
 
-<div class="form-group row mb-5 pb-5">
-    <div class="col-lg-12">
-        <%= link_to "Back", system_notifications_path, class: "btn btn-outline-success back-btn" %>
+    <div class="form-group row">
+            <label for="formGroupExampleInput2" class="col-md-2 col-form-label">Image</label>
+            <%= image_tag @notification.image.url, class:"image-tag", id: "form-label" if @notification.image.url %>
+    </div>
+
+    <div class="form-group row mb-5 pb-5">
+        <div class="col-lg-12">
+            <%= link_to "Back", system_notifications_path, class: "btn btn-outline-success back-btn" %>
+        </div>
     </div>
 </div>
