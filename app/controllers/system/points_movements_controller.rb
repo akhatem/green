@@ -54,7 +54,6 @@ class System::PointsMovementsController < System::SystemApplicationController
     daily_points_movements = []
     @branches.each do |branch|
       daily_points_movements |= PointsMovement.where(branch_id: branch.id)
-      .group(branch.id)
       .group("DATE(date_time)")
       .order("DATE(date_time) ASC")
       .pluck(branch.id, "DATE(date_time)", "SUM(earned)" , "SUM(redeemed)" , "SUM(total)")
