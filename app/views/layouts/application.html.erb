@@ -43,11 +43,12 @@
             <div class="col-9">
               <%= render "system/shared/navbar" %>
               <div class="row">
-                <!-- <h3 style="color:red;"><%#= controller_name %></h3> -->
+                <!-- <h3 style="color:red;">controller: <%#= controller_name %></h3>
+                <h3 style="color:red;">action: <%#= action_name %></h3> -->
                 <%= render "system/shared/messages" %>
                 <%= yield %>
               </div>
-              <% if !controller_name.eql?('static_pages') and (action_name.eql?('index') or 
+              <% if !controller_name.eql?('static_pages') and (action_name.eql?('index') and 
                 action_name.eql?('daily_points_movements')) %>
                 <%= render 'system/shared/pagination', locals: {pagy: @pagy} %>
               <% end %>
