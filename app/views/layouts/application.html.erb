@@ -48,8 +48,7 @@
                 <%= render "system/shared/messages" %>
                 <%= yield %>
               </div>
-              <% if !controller_name.eql?('static_pages') and (action_name.eql?('index') and 
-                action_name.eql?('daily_points_movements')) %>
+              <% if !controller_name.eql?('static_pages') and (action_name.eql?('index') or !action_name.eql?('daily_points_movements')) %>
                 <%= render 'system/shared/pagination', locals: {pagy: @pagy} %>
               <% end %>
             </div>
