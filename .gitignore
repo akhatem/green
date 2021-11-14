@@ -40,5 +40,6 @@ yarn-debug.log*
 /config/credentials/production.key
 
 public/uploads
+public/tmp
 
 .vscode

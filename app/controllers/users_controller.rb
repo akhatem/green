@@ -40,7 +40,7 @@ class UsersController < Devise::SessionsController
         redirect_to users_index_path
         flash[:notice] =  "#{@user.name} was updated successfully."
       else
-        flash[:alert] = @user.errors, status: :unprocessable_entity
+        flash.now[:alert] = @user.errors.full_messages
         render :edit
       end
     end
