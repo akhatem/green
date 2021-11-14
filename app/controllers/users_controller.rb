@@ -36,13 +36,12 @@ class UsersController < Devise::SessionsController
   end
 
   def update
-      if @user.update(user_params)
-        redirect_to users_index_path
-        flash[:notice] =  "#{@user.name} was updated successfully."
-      else
-        flash.now[:alert] = @user.errors.full_messages
-        render :edit
-      end
+    if @user.update(user_params)
+      redirect_to users_index_path
+      flash[:notice] =  "#{@user.name} was updated successfully."
+    else
+      flash.now[:alert] = @user.errors.full_messages
+      render :edit
     end
   end
 
@@ -65,11 +64,9 @@ class UsersController < Devise::SessionsController
   end
 
   def destroy_user
-    respond_to do |format|
-      if @user.destroy
-        format.html { redirect_to users_index_path, notice: "User was removed successfully." }
-        format.json { head :no_content }
-      end
+    if @user.destroy
+      redirect_to users_index_path
+      flash[:notice] = "User was removed successfully."
     end
   end # Custom user methods
 
