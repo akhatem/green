@@ -18,6 +18,7 @@
     <thead>
         <tr>
             <th scope="col">Id</th>
+            <th scope="col">Image</th>
             <th scope="col">File Name</th>
             <th scope="col">Created At</th>
             <th scope="col">Actions</th>
@@ -29,6 +30,7 @@
             <th scope="row">
                 <%= offer_carosel_image.id %>
             </th>
+            <td><%= image_tag offer_carosel_image.image.url %></td>
             <td><%= offer_carosel_image.image.identifier %></td>
             <td><%= offer_carosel_image.created_at.strftime("%I:%M %p %a, %d %b %Y") %></td>
             

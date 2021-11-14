@@ -15,6 +15,10 @@ class OfferCaroselImageUploader < CarrierWave::Uploader::Base
         "/assets/defaults/#{model.class.to_s.underscore}"
     end
   end
+
+  def content_type_allowlist
+    /image\//
+  end
   
   def extension_allowlist
     %w(jpg jpeg gif png)

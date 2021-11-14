@@ -14,43 +14,38 @@ class System::OfferCaroselImagesController < System::SystemApplicationController
     @offer_carosel_image = OfferCaroselImage.new
     authorize @offer_carosel_image
   end
-  
-  def edit
-  end
 
   def create
     @offer_carosel_image = OfferCaroselImage.new(offer_carosel_image_params)
     authorize @offer_carosel_image
-    respond_to do |format|
-        if @offer_carosel_image.save
-            format.html { redirect_to system_offer_carosel_images_path, notice: "Offer Carosel Image was created successfully." }
-            format.json { render :index, status: :created, location: @offer_carosel_image }
-        else
-            format.html { render :new, status: :unprocessable_entity }
-            format.json { render json: @offer_carosel_image.errors, status: :unprocessable_entity }
-            
-        end
+    
+    if @offer_carosel_image.save
+        redirect_to system_offer_carosel_images_path
+        flash[:notice] =  "Offer Carosel Image was created successfully.";
+    else
+      flash[:alert] = @offer_carosel_image.errors
+      render :new
+        
     end
+  end
+  
+  def edit
   end
 
   def update
-    respond_to do |format|
-      if @offer_carosel_image.update(offer_carosel_image_params)
-        format.html { redirect_to system_offer_carosel_images_path, notice: "Offer Carosel Image was updated successfully." }
-        format.json { render :index, status: :ok, location: @offer_carosel_image }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @offer_carosel_image.errors, status: :unprocessable_entity }
-      end
+    if @offer_carosel_image.update(offer_carosel_image_params)
+      redirect_to system_offer_carosel_images_path
+      flash[:notice] = "Offer Carosel Image was updated successfully.";
+    else
+      flash[:alert] = @offer_carosel_image.errors
+      render :edit
     end
   end
 
   def destroy
-    respond_to do |format|
-      if @offer_carosel_image.destroy
-        format.html { redirect_to system_offer_carosel_images_path, notice: "Offer Carosel Image was destroyed successfully." }
-        format.json { head :no_content }
-      end
+    if @offer_carosel_image.destroy
+      redirect_to system_offer_carosel_images_path
+      flash[:notice] =  "Offer Carosel Image was destroyed successfully."
     end
   end
 

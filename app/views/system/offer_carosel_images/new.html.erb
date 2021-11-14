@@ -5,7 +5,7 @@
     </div>
 </div>
 
-<%= form_with(model: @offer_carosel_image, url: system_offer_carosel_images_path) do |f| %>
+<%= form_with(model: OfferCaroselImage.new, url: system_offer_carosel_images_path) do |f| %>
 
     <div class="form-group row">
         <%= f.label :image, class: "col-md-3 col-form-label required" %>

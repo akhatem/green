@@ -36,13 +36,12 @@ class UsersController < Devise::SessionsController
   end
 
   def update
-    respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to users_index_path, notice: "#{@user.name} was updated successfully." }
-        format.json { render :index, status: :ok }
+        redirect_to users_index_path
+        flash[:notice] =  "#{@user.name} was updated successfully."
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        flash[:alert] = @user.errors, status: :unprocessable_entity
+        render :edit
       end
     end
   end

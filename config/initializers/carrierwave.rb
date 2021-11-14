@@ -1,3 +1,4 @@
+
 include CarrierWave::MiniMagick
 
 # if Rails.env.development?
