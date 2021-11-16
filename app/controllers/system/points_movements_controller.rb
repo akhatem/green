@@ -64,14 +64,15 @@ class System::PointsMovementsController < System::SystemApplicationController
 
     daily_points_movements = []
     @branches.each do |branch|
-      daily_points_movements  |= PointsMovement.order(branch_id: :asc)
+      daily_points_movements  |= PointsMovement.where(branch_id: branch.id)
+      .order(branch_id: :asc)
       .group(:branch_id)
       .group("DATE(date_time)")
       .order("DATE(date_time) ASC")
       .pluck(:branch_id, "DATE(date_time)", "SUM(earned)" , "SUM(redeemed)" , "SUM(total)")
     end
 
-    @pagy_a, @daily_points_movements = pagy_array(daily_points_movements)
+    @pagy_a, @daily_points_movements = pagy_array(daily_points_movements, per_page: 31)
 
     respond_to do |format|
       format.html

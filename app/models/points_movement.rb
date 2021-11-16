@@ -43,7 +43,6 @@ class PointsMovement < ApplicationRecord
   end
 
   def convert_points_to_cash
-    # self.total * 0.5
     self.total * Setting.find_by(key: :points_to_cash).description.to_f
   end
 

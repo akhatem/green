@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light align-items-lg-start nav-bg">
+<nav class="navbar navbar-expand-lg navbar-light bg-light align-items-lg-start nav-bg">
     <div class="col-lg-4">
-        <a href="<%= system_root_path %>" class="mb-3">
+        <a href="<%= system_root_path %>" class="navbar-brand mb-3">
             <img src="<%= '/assets/main_logo.png' %>" alt="" class="logo-img">
         </a>
     </div>
@@ -11,14 +11,12 @@
             </h2>
         </div>
     <% end %>
-    <div class="col-lg-5">
+    <div class="col-lg-5 ms-5">
         <ul class="nav justify-content-end px-5">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle user-link" style="color: #00AB47;" data-bs-toggle="dropdown" 
                     href="#" role="button" aria-expanded="false"><%= current_user.name %>
                 </a>
-                
-                <div class="user-type"><%= current_user.role.name %></div>
                 
                 <ul class="dropdown-menu">
                     <li>
@@ -26,6 +24,7 @@
                             class: "xdropdown dropdown-item" %>
                     </li>
                 </ul>
+                <div class="user-type"><%= current_user.role.name %></div>
             </li>
         </ul>
     </div>

@@ -6,10 +6,10 @@
 }
 
 .nav-bg {
-    background-color: #fff!important;
-    box-shadow: 0px 1px 7px #00AB47;
     height: 80px;
     margin-bottom: 10px;
+    background-color: #fff!important;
+    box-shadow: 0px 1px 7px #00AB47;
 }
 
 .user-type {
@@ -43,8 +43,11 @@
 /*logo */
 
 img.logo-img {
-    display: block;
-    margin-left: 4px;
+
+    display: inline-block;
+    position: absolute;
+    top: 6%;
+    left: 7%;
 }
 
 hr {

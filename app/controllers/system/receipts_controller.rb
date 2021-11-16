@@ -41,7 +41,6 @@ class System::ReceiptsController < System::SystemApplicationController
 
     def create
         @receipt = Receipt.new(create_params)
-        
         if @receipt.save
             redirect_to cashier_redeem_points_path(@receipt.number)
             flash[:notice] = "Receipt # #{@receipt.number} saved successfully."
