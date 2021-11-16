@@ -19,10 +19,6 @@
 </div>
 
 <% @branches.each do |branch| %>
-    <%# @daily_points_movements = PointsMovement.where(branch_id: branch.id)
-    .group("DATE(date_time)")
-    .order("DATE(date_time) ASC")
-    .pluck("DATE(date_time)", "SUM(earned)" , "SUM(redeemed)" , "SUM(total)") %>
 
     <button class="accordion"><%= branch.name %></button>
     <div class="panel">

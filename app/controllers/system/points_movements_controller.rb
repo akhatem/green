@@ -50,7 +50,7 @@ class System::PointsMovementsController < System::SystemApplicationController
   end
 
   def daily_points_movements
-    @pagy, @branches = pagy(Branch.all, per_page: 8)
+    @pagy, @branches = pagy(Branch.all.order(id: :asc), per_page: 8)
     # daily_points_movements = []
     # @branches.each do |branch|
     #   daily_points_movements  |= PointsMovement.where(branch_id: branch.id)

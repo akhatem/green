@@ -1,10 +1,6 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  
-  namespace :system do
-    get 'roles/index'
-  end
   devise_for :users, path: '/users',
   controllers: {registrations: 'users/new_user', sessions: :users} 
 
@@ -74,16 +70,12 @@ Rails.application.routes.draw do
 
     resources :roles, only: [:index, :show]
     
-    # mount Ckeditor::Engine => '/ckeditor'
-    
     # Sidekiq
     mount Sidekiq::Web => "/sidekiq"
     
   end # namespace system
 
   namespace :cashier do
-
-    # root to: 'cashier_pages#barcode_search'
 
     # Cashier Pages
     get "/", to: redirect("cashier/barcode_search")
@@ -107,8 +99,6 @@ Rails.application.routes.draw do
         post '/forgot_password_verification_code', to: 'customers#forgot_password_verification_code'
         post '/password_reset', to: 'customers#password_reset'
         get '/resend_verification_code', to: 'customers#resend_verification_code'
-        
-        # get '/auto_login', to: 'customers#auto_login'
 
         # Customers show and edit
         get '/customer', to: 'customers#show'
