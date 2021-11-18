@@ -35,6 +35,7 @@
             </thead>
             <tbody>
                 <% @daily_points_movements.each do |dpm| %>
+                    <h4>dpm: <%= dpm %></h4>
                     <h4>COMP: <%= dpm[0] == branch.id %></h4>
                     
                     <% if dpm[0] == branch.id %>
