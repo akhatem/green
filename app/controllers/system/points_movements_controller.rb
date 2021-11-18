@@ -50,35 +50,31 @@ class System::PointsMovementsController < System::SystemApplicationController
   end
 
   def daily_points_movements
-    @pagy, @branches = pagy(Branch.all.order(id: :asc), per_page: 8)
+    @pagy, @branches = pagy(Branch.all.order(id: :asc))
+
+    if params[:search]
+      @search_term = params[:search]
+      @branches = @branches.find_branch(@search_term)
+    end
+
     daily_points_movements = []
     @branches.each do |branch|
-      daily_points_movements  |= PointsMovement.where(branch_id: branch.id)
-      .order(branch_id: :asc)
+      daily_points_movements  |= PointsMovement.all.order(branch_id: :asc)
+      # .where(branch_id: branch.id)
       .group(:branch_id)
       .group("DATE(date_time)")
       .order("DATE(date_time) ASC")
-      .pluck("DATE(date_time)", "SUM(earned)" , "SUM(redeemed)" , "SUM(total)")
+      .pluck(:branch_id, "DATE(date_time)", "SUM(earned)" , "SUM(redeemed)" , "SUM(total)")
     end
 
     @pagy_a, @daily_points_movements = pagy_array(daily_points_movements)
-
-    # daily_points_movements = []
-    # daily_points_movements |= PointsMovement.all
-    # .order(branch_id: :asc)
-    # .group(:branch_id)
-    # .order("DATE(date_time) ASC")
-    # .group("DATE(date_time)")
-    # .pluck(:branch_id, "DATE(date_time)", "SUM(earned)" , "SUM(redeemed)" , "SUM(total)")
-
-    # @pagy_a, @daily_points_movements = pagy_array(daily_points_movements, per_page: 31)
 
     respond_to do |format|
       format.html
       format.pdf do
         render pdf: "#{params[:action]}_#{DateTime.now.strftime('%d/%m/%Y')}", 
           template: "system/#{params[:controller].split('/').second}/#{params[:action]}_index_pdf.html.erb",
-          header: { right: "#{@pagy.page} of #{@pagy.last}" }
+          header: { right: "#{@pagy_a.page} of #{@pagy_a.last}" }
       end
     end
   end

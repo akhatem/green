@@ -32,7 +32,7 @@
 
     <div class="form-group row">
         <%= f.label :city, class: "col-md-3 col-form-label" %>
-        <%= f.collection_select :city_id, City.order(:name), :id, :name,{ include_blank: true }, { class: "btn btn-outline-secondary dropdown-toggle" } %>
+        <%= f.collection_select :city_id, City.order(:name), :id, :name,{ include_blank: false }, { class: "btn btn-outline-secondary dropdown-toggle" } %>
     </div>
     
     <div class="row mt-5 actions">

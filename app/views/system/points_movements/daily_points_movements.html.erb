@@ -5,8 +5,9 @@
         </div>
         <div class="col-md-3">
             <div class="row mb-1">
-                <%#= form_for "", url: system_daily_points_movements_path, role: "search", method: :get do %>
-                    <%#= text_field_tag :search, @search_term, placeholder: "Search by date", style: "text-align: center;" %>
+                <%#= form_with(model: Branch, url: system_branches_path) do |f| %>
+                        <%#= f.collection_select :branch_id, Branch.order(:name), :id, :name,{ include_blank: "Select a branch" }, 
+                        { class: "dropdown-toggle", style: "font-size: 18px; min-width: 30%;color:green;" } %>
                 <%# end %>
             </div>
         </div>
@@ -19,13 +20,9 @@
 </div>
 
 <% @branches.each do |branch| %>
-    <% @daily_points_movements = PointsMovement.where(branch_id: branch.id)
-    .group("DATE(date_time)")
-    .order("DATE(date_time) ASC")
-    .pluck("DATE(date_time)", "SUM(earned)" , "SUM(redeemed)" , "SUM(total)") %>
 
-    <button class="accordion"><%= branch.name %></button>
-    <div class="panel">
+    <button class="accordion" id="branch_<%= branch.id %>"><%= branch.name %></button>
+    <div class="panel" id="panel-branch_<%= branch.id %>">
         <table class="table mt-2">
             <thead>
                 <tr>
@@ -38,60 +35,30 @@
             </thead>
             <tbody>
                 <% @daily_points_movements.each do |dpm| %>
-                    <%# if dpm[0] == branch.id %>
+                    <% if dpm[0] == branch.id %>
                         <tr>
                             <td>
-                                <%= dpm[0].strftime("%A, %d %b %Y") %>
+                                <%= dpm[1].strftime("%A, %d %b %Y") %>
                                 
-                            </td>
-                            <td>
-                                <%= dpm[1] %>
                             </td>
                             <td>
                                 <%= dpm[2] %>
                             </td>
                             <td>
-                                <%= dpm[2] * Setting.find_by(key: :points_to_cash).description.to_f %>
-                            </td>
-                            <td>
                                 <%= dpm[3] %>
                             </td>
+                            <td>
+                                <%= dpm[3] * Setting.find_by(key: :points_to_cash).description.to_f %>
+                            </td>
+                            <td>
+                                <%= dpm[4] %>
+                            </td>
                         </tr>
-                    <%# end %>
+                    <% end %>
                 <% end %>
             </tbody>
         </table>
     </div>
-<% end %>
-
-<% if Rails.env.development? %>
-    <div class="panel-heading">
-        <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">test</a>
-        </h4>
-    </div>
-
-    <div id="collapseTwo" class="panel-collapse collapse">
-        <div class="panel-body">
-            // Value inserted here after passing to ajax
-        </div>
-    </div>
-
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/> -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-    <script>
-        $('a[data-toggle="collapse"]').click(function(){
-        console.log($(this).attr('href')); // Here you will get the targeted ID
-        var targetID = $(this).attr('href');
-  
-        // $.ajax({
-        //     url: url,
-        //     method: 'POST',
-        //     data: {id:targetID}
-        // });
-    });
-    </script>
 <% end %>
 
 <script>
@@ -108,4 +75,26 @@
         } 
     });
     }
+
+    var dropdown = document.getElementById("branch_branch_id");
+    dropdown.addEventListener("change", function(){
+        var dropdown_option = dropdown.options.selectedIndex;
+        var accordion_selected = document.getElementById(`branch_${dropdown_option}`);
+        var panel_selected = document.getElementById(`panel-branch_${dropdown_option}`);
+        console.log("accordion_selected = ", accordion_selected);
+        console.log("panel_selected = ", panel_selected);
+        var accordion = document.getElementsByClassName("accordion");
+        var panel = document.getElementsByClassName("panel");
+        for (var i=0; i < accordion.length; i++){
+            if (accordion[i].id != accordion_selected.id){
+                accordion[i].style.display = "none";
+                panel[i].style.display = "none";
+            }
+            else{
+                accordion[i].style.display = "block";
+                panel[i].style.display = "block";
+            }
+        }
+    });
+
 </script>
