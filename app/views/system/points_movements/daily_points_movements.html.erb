@@ -20,7 +20,7 @@
 </div>
 
 <% @branches.each do |branch| %>
-
+    <h4>branch_id: <%= branch.id %></h4>
     <button class="accordion" id="branch_<%= branch.id %>"><%= branch.name %></button>
     <div class="panel" id="panel-branch_<%= branch.id %>">
         <table class="table mt-2">
@@ -35,28 +35,28 @@
             </thead>
             <tbody>
                 <% @daily_points_movements.each do |dpm| %>
-                    <%= byebug %>
-                    <% if dpm[0] == branch.id %>
+                    <h4>dpm[:branch_id]: <%= dpm[:branch_id] %></h4>
+                    <h4>COMP: <%= dpm[:branch_id] == branch.id %></h4>
+                    
+                    <% if dpm[:branch_id] == branch.id %>
                         <tr>
                             <td>
-                                <%= dpm[1].strftime("%A, %d %b %Y") %>
+                                <%= dpm[:date_time].strftime("%A, %d %b %Y") %>
                                 
                             </td>
                             <td>
-                                <%= dpm[2] %>
+                                <%= dpm[:earned] %>
                             </td>
                             <td>
-                                <%= dpm[3] %>
+                                <%= dpm[:redeemed] %>
                             </td>
                             <td>
-                                <%= dpm[3] * Setting.find_by(key: :points_to_cash).description.to_f %>
+                                <%= dpm[:redeemed] * Setting.find_by(key: :points_to_cash).description.to_f %>
                             </td>
                             <td>
-                                <%= dpm[4] %>
+                                <%= dpm[:total] %>
                             </td>
                         </tr>
-                    <% else %>
-                        <% break %>
                     <% end %>
                 <% end %>
             </tbody>
