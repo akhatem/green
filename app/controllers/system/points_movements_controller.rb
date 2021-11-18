@@ -51,16 +51,17 @@ class System::PointsMovementsController < System::SystemApplicationController
 
   def daily_points_movements
     @pagy, @branches = pagy(Branch.all.order(id: :asc), per_page: 8)
-    # daily_points_movements = []
-    # @branches.each do |branch|
-    #   daily_points_movements  |= PointsMovement.where(branch_id: branch.id)
-    #   # .group(:branch_id)
-    #   .group("DATE(date_time)")
-    #   .order("DATE(date_time) ASC")
-    #   .pluck("DATE(date_time)", "SUM(earned)" , "SUM(redeemed)" , "SUM(total)")
-    # end
+    daily_points_movements = []
+    @branches.each do |branch|
+      daily_points_movements  |= PointsMovement.where(branch_id: branch.id)
+      .order(branch_id: :asc)
+      .group(:branch_id)
+      .group("DATE(date_time)")
+      .order("DATE(date_time) ASC")
+      .pluck("DATE(date_time)", "SUM(earned)" , "SUM(redeemed)" , "SUM(total)")
+    end
 
-    # @pagy_a, @daily_points_movements = pagy_array(daily_points_movements)
+    @pagy_a, @daily_points_movements = pagy_array(daily_points_movements)
 
     # daily_points_movements = []
     # daily_points_movements |= PointsMovement.all

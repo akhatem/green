@@ -7,7 +7,7 @@
     <% if current_user.roleKey.eql?("cashier") %>
         <div class="col-3 mt-2">
             <h2 class="details-tab card-title" style="color: #00AB47;">
-                Branch: <%= current_user.branchName %>
+                Branch: <%= current_user.branchName if current_user.branch_id.present? %>
             </h2>
         </div>
     <% end %>
