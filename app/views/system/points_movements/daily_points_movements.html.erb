@@ -19,7 +19,7 @@
         class: "btn btn-outline-success", type: "button"  %>
 </div>
 
-<% @branches.each do |branch| %>
+<% @branches.order(id: :asc).each do |branch| %>
 
     <button class="accordion" id="branch_<%= branch.id %>"><%= branch.name %></button>
     <div class="panel" id="panel-branch_<%= branch.id %>">

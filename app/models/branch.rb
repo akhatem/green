@@ -33,7 +33,7 @@ class Branch < ApplicationRecord
         .or(where(city_id: City.where("name ILIKE ?", "%" + search_term + "%")))
     end
 
-    def self.find_branch(search_term)
-        where("name ILIKE ?", "%" + search_term + "%")
-      end
+    # def self.find_branch(search_term)
+    #     where("name ILIKE ?", "%" + search_term + "%")
+    # end
 end

@@ -1,4 +1,4 @@
-<% @branches.each do |branch| %>
+<% @branches.order(id: :asc).each do |branch| %>
 
 <div class="accordion mt-3 mb-3" id="accordionExample">
     <div class="accordion-item">

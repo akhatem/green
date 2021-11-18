@@ -52,10 +52,10 @@ class System::PointsMovementsController < System::SystemApplicationController
   def daily_points_movements
     @pagy, @branches = pagy(Branch.all.order(id: :asc))
 
-    if params[:search]
-      @search_term = params[:search]
-      @branches = @branches.find_branch(@search_term)
-    end
+    # if params[:search]
+    #   @search_term = params[:search]
+    #   @branches = @branches.find_branch(@search_term)
+    # end
 
     daily_points_movements = []
     @branches.each do |branch|
