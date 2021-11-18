@@ -50,7 +50,7 @@ class System::PointsMovementsController < System::SystemApplicationController
   end
 
   def daily_points_movements
-    @pagy, @branches = pagy(Branch.all.order(id: :asc))
+    @pagy, @branches = pagy(Branch.all)
 
     # if params[:search]
     #   @search_term = params[:search]
@@ -58,14 +58,12 @@ class System::PointsMovementsController < System::SystemApplicationController
     # end
 
     daily_points_movements = []
-    @branches.each do |branch|
-      daily_points_movements  |= PointsMovement.all.order(branch_id: :asc)
-      # .where(branch_id: branch.id)
-      .group(:branch_id)
-      .group("DATE(date_time)")
-      .order("DATE(date_time) ASC")
-      .pluck(:branch_id, "DATE(date_time)", "SUM(earned)" , "SUM(redeemed)" , "SUM(total)")
-    end
+    daily_points_movements |= PointsMovement.all.group(:branch_id)
+    .order(branch_id: :asc)
+    .group("DATE(date_time)")
+    .order("DATE(date_time) ASC")
+    .pluck(:branch_id, "DATE(date_time)", "SUM(earned)" , "SUM(redeemed)" , "SUM(total)")
+    
 
     @pagy_a, @daily_points_movements = pagy_array(daily_points_movements)
 
