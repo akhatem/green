@@ -4,10 +4,10 @@
             <img src="<%= '/assets/main_logo.png' %>" alt="" class="logo-img">
         </a>
     </div>
-    <% if current_user.roleKey.eql?("cashier") %>
+    <% if current_user.roleKey.eql?("cashier") and current_user.branch_id.present? %>
         <div class="col-3 mt-2">
             <h2 class="details-tab card-title" style="color: #00AB47;">
-                Branch: <%= current_user.branchName if current_user.branch_id.present? %>
+                Branch: <%= current_user.branchName %>
             </h2>
         </div>
     <% end %>
