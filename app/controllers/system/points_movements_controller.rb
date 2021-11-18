@@ -50,7 +50,7 @@ class System::PointsMovementsController < System::SystemApplicationController
   end
 
   def daily_points_movements
-    @pagy, @branches = pagy(Branch.all)
+    @pagy, @branches = pagy(Branch.all.order(id: :asc))
 
     # if params[:search]
     #   @search_term = params[:search]

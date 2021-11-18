@@ -19,7 +19,7 @@
         class: "btn btn-outline-success", type: "button"  %>
 </div>
 
-<% @branches.order(id: :asc).each do |branch| %>
+<% @branches.each do |branch| %>
 
     <button class="accordion" id="branch_<%= branch.id %>"><%= branch.name %></button>
     <div class="panel" id="panel-branch_<%= branch.id %>">
@@ -35,10 +35,7 @@
             </thead>
             <tbody>
                 <% @daily_points_movements.each do |dpm| %>
-                    <h4>branch_id: <%= branch.id %></h4>
-                    <h4>dpm[0]: <%= dpm[0] %></h4>
-                    <h4>COMP: <%= dpm[0] == branch.id %></h4>
-                    
+                    <%= byebug %>
                     <% if dpm[0] == branch.id %>
                         <tr>
                             <td>
