@@ -64,21 +64,35 @@
     </div>
 <% end %>
 
-<div class="panel-heading">
-    <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">test</a>
-    </h4>
-</div>
-
-<div id="collapseTwo" class="panel-collapse collapse">
-    <div class="panel-body">
-        // Value inserted here after passing to ajax
+<% if Rails.env.development? %>
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">test</a>
+        </h4>
     </div>
-</div>
 
-<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/> -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <div id="collapseTwo" class="panel-collapse collapse">
+        <div class="panel-body">
+            // Value inserted here after passing to ajax
+        </div>
+    </div>
+
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/> -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <script>
+        $('a[data-toggle="collapse"]').click(function(){
+        console.log($(this).attr('href')); // Here you will get the targeted ID
+        var targetID = $(this).attr('href');
+  
+        // $.ajax({
+        //     url: url,
+        //     method: 'POST',
+        //     data: {id:targetID}
+        // });
+    });
+    </script>
+<% end %>
 
 <script>
     var acc = document.getElementsByClassName("accordion");
@@ -94,15 +108,4 @@
         } 
     });
     }
-
-    $('a[data-toggle="collapse"]').click(function(){
-        console.log($(this).attr('href')); // Here you will get the targeted ID
-        var targetID = $(this).attr('href');
-  
-        // $.ajax({
-        //     url: url,
-        //     method: 'POST',
-        //     data: {id:targetID}
-        // });
-    });
 </script>
