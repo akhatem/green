@@ -37,7 +37,7 @@
                 <% daily_points_movements = @daily_points_movements.filter { |dpm| dpm[:branch_id] == branch.id } %>
                 <!-- before: <%#= daily_points_movements %> -->
                 <% daily_points_movements.each do |dpm| %>
-                    <% if dpm[:branch_id] == branch.id %>
+                    <%# if dpm[:branch_id] == branch.id %>
                         <!-- <h4>branch_id: <%#= branch.id %></h4> -->
                         <!-- <h4>dpm[:branch_id]: <%#= dpm[:branch_id] %></h4> -->
                         <tr>
@@ -60,7 +60,7 @@
                         </tr>
                         <% daily_points_movements.drop(1) %>
                         <!-- after: <%#= daily_points_movements %> -->
-                    <% end %>
+                    <%# end %>
                 <% end %>
             </tbody>
         </table>
