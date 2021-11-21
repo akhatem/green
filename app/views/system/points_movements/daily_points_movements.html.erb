@@ -34,11 +34,11 @@
                 </tr>
             </thead>
             <tbody>
-                <%= daily_points_movements = @daily_points_movements.filter { |dpm| dpm[0] == branch.id } %>
+                <% daily_points_movements = @daily_points_movements.filter { |dpm| dpm[0] == branch.id } %>
                 <% daily_points_movements.each do |dpm| %>
                     <%# if dpm[:branch_id] == branch.id %>
-                        <h4>branch_id: <%= branch.id %></h4>
-                        <h4>dpm[0]: <%= dpm[0] %></h4>
+                        <!-- <h4>branch_id: <%#= branch.id %></h4> -->
+                        <!-- <h4>dpm[0]: <%#= dpm[0] %></h4> -->
                         <tr>
                             <td>
                                 <%= dpm[1].strftime("%A, %d %b %Y") %>
