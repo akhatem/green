@@ -37,8 +37,8 @@
                 <%#= @daily_points_movements %>
                 <h4>branch_id: <%= branch.id %></h4>
                 <% @daily_points_movements.each do |dpm| %>
+                    <h4>dpm[:branch_id]: <%= dpm[:branch_id] %></h4>
                     <% if dpm[:branch_id] == branch.id %>
-                        <h4>dpm[:branch_id]: <%= dpm[:branch_id] %></h4>
                         <tr>
                             <td>
                                 <%= dpm[:date_time].strftime("%A, %d %b %Y") %>
