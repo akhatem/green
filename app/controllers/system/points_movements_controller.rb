@@ -64,15 +64,15 @@ class System::PointsMovementsController < System::SystemApplicationController
       .group("DATE(date_time)")
       .order("DATE(date_time) ASC")
       .pluck(:branch_id, "DATE(date_time)", "SUM(earned)" , "SUM(redeemed)" , "SUM(total)")
-      .map { |branch_id, date_time, earned, redeemed, total| 
-        { 
-          branch_id: branch_id,
-          date_time: date_time,
-          earned: earned,
-          redeemed: redeemed,
-          total: total 
-        }
-      }
+      # .map { |branch_id, date_time, earned, redeemed, total| 
+      #   { 
+      #     branch_id: branch_id,
+      #     date_time: date_time,
+      #     earned: earned,
+      #     redeemed: redeemed,
+      #     total: total 
+      #   }
+      # }
     end
     @pagy_a, @daily_points_movements = pagy_array(daily_points_movements)
 

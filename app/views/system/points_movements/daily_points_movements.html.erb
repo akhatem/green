@@ -34,31 +34,31 @@
                 </tr>
             </thead>
             <tbody>
-                before: <%= daily_points_movements = @daily_points_movements %>
+                <%= daily_points_movements = @daily_points_movements.filter { |dpm| dpm[0] == branch.id } %>
                 <% daily_points_movements.each do |dpm| %>
                     <%# if dpm[:branch_id] == branch.id %>
                         <h4>branch_id: <%= branch.id %></h4>
-                        <h4>dpm[:branch_id]: <%= dpm[:branch_id] %></h4>
+                        <h4>dpm[0]: <%= dpm[0] %></h4>
                         <tr>
                             <td>
-                                <%= dpm[:date_time].strftime("%A, %d %b %Y") %>
+                                <%= dpm[1].strftime("%A, %d %b %Y") %>
                                 
                             </td>
                             <td>
-                                <%= dpm[:earned] %>
+                                <%= dpm[2] %>
                             </td>
                             <td>
-                                <%= dpm[:redeemed] %>
+                                <%= dpm[3] %>
                             </td>
                             <td>
-                                <%= dpm[:redeemed] * Setting.find_by(key: :points_to_cash).description.to_f %>
+                                <%= dpm[3] * Setting.find_by(key: :points_to_cash).description.to_f %>
                             </td>
                             <td>
-                                <%= dpm[:total] %>
+                                <%= dpm[4] %>
                             </td>
                         </tr>
-                        <% daily_points_movements.shift %>
-                        after: <%= daily_points_movements %>
+                        <%# daily_points_movements.shift %>
+                        <!-- after: <%#= daily_points_movements %> -->
                     <%# end %>
                 <% end %>
             </tbody>
