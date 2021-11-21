@@ -57,22 +57,24 @@ class System::PointsMovementsController < System::SystemApplicationController
     #   @branches = @branches.find_branch(@search_term)
     # end
 
-    daily_points_movements = Hash.new
-    # daily_points_movements |= PointsMovement.all.group(:branch_id)
-    # .order(branch_id: :asc)
-    # .group("DATE(date_time)")
-    # .order("DATE(date_time) ASC")
-    # .pluck(:branch_id, "DATE(date_time)", "SUM(earned)" , "SUM(redeemed)" , "SUM(total)")
-
-    daily_points_movements = PointsMovement.all
-    .group(:branch_id)
-    .order(branch_id: :asc)
-    .group("DATE(date_time)")
-    .order("DATE(date_time) ASC")
-    .pluck(:branch_id, "DATE(date_time)", "SUM(earned)" , "SUM(redeemed)" , "SUM(total)")
-    .map { |branch_id, date_time, earned, redeemed, total| { branch_id: branch_id, date_time: date_time, 
-    earned: earned, redeemed: redeemed, total: total } }
-    
+    daily_points_movements = []
+    @branches.each do |branch|
+      daily_points_movements |= PointsMovement.where(branch_id: branch.id)
+      # .order(branch_id: :asc)
+      .group(:branch_id)
+      .group("DATE(date_time)")
+      .order("DATE(date_time) ASC")
+      .pluck(:branch_id, "DATE(date_time)", "SUM(earned)" , "SUM(redeemed)" , "SUM(total)")
+      .map { |branch_id, date_time, earned, redeemed, total| 
+        { 
+          branch_id: branch_id,
+          date_time: date_time,
+          earned: earned,
+          redeemed: redeemed,
+          total: total 
+        }
+      }
+    end
 
     @pagy_a, @daily_points_movements = pagy_array(daily_points_movements)
 

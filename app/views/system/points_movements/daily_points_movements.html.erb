@@ -1,18 +1,19 @@
-<!-- <div class="col-lg-5" style="margin-left:140px;">
+<div class="col-lg-5" style="margin-left:140px;">
     <div class="row">
         <div class="col-md-5 main-btns">
             <%#= link_to "Clear Search", system_daily_points_movements_path, class: "btn btn-outline-success", type: "button" %>
         </div>
         <div class="col-md-3">
             <div class="row mb-1">
-                <%#= form_with(model: Branch, url: system_branches_path) do |f| %>
-                        <%#= f.collection_select :branch_id, Branch.order(:name), :id, :name,{ include_blank: "Select a branch" }, 
+                <%= form_with(model: Branch, url: system_branches_path) do |f| %>
+                        <%= f.collection_select :branch_id, Branch.order(:name), :id, :name,{ include_blank: "Select a branch" }, 
                         { class: "dropdown-toggle", style: "font-size: 18px; min-width: 30%;color:green;" } %>
-                <%# end %>
+                <% end %>
             </div>
         </div>
     </div>
-</div> -->
+</div>
+
 
 <div class="col-lg-5 main-btns">
     <%= link_to "View PDF", system_daily_points_movements_path(format: :pdf, page: params[:page]), 
@@ -20,7 +21,6 @@
 </div>
 
 <% @branches.each do |branch| %>
-    <h4>branch_id: <%= branch.id %></h4>
     <button class="accordion" id="branch_<%= branch.id %>"><%= branch.name %></button>
     <div class="panel" id="panel-branch_<%= branch.id %>">
         <table class="table mt-2">
@@ -34,11 +34,11 @@
                 </tr>
             </thead>
             <tbody>
+                <%#= @daily_points_movements %>
+                <h4>branch_id: <%= branch.id %></h4>
                 <% @daily_points_movements.each do |dpm| %>
-                    <h4>dpm[:branch_id]: <%= dpm[:branch_id] %></h4>
-                    <h4>COMP: <%= dpm[:branch_id] == branch.id %></h4>
-                    
                     <% if dpm[:branch_id] == branch.id %>
+                        <h4>dpm[:branch_id]: <%= dpm[:branch_id] %></h4>
                         <tr>
                             <td>
                                 <%= dpm[:date_time].strftime("%A, %d %b %Y") %>
@@ -57,8 +57,7 @@
                                 <%= dpm[:total] %>
                             </td>
                         </tr>
-                    <% else %>
-                        <% dpm[:branch_id] = branch.id %>
+                    
                     <% end %>
                 <% end %>
             </tbody>
@@ -82,6 +81,7 @@
     }
 
     var dropdown = document.getElementById("branch_branch_id");
+    
     dropdown.addEventListener("change", function(){
         var dropdown_option = dropdown.options.selectedIndex;
         var accordion_selected = document.getElementById(`branch_${dropdown_option}`);
@@ -101,5 +101,21 @@
             }
         }
     });
+
+    // $(document).ready( function () {
+    //     $('#table_id').DataTable();
+    // } );
+
+    // This file is required by the index.html file and will
+    // be executed in the renderer process for that window.
+    // All of the Node.js APIs are available in this process.
+    // window.$ = window.jquery = require('./node_modules/jquery');
+    // window.dt = require('./node_modules/datatables.net')();
+    // window.$('#table_id').DataTable();
+
+    // $.extend( $.fn.dataTable.defaults, {
+    // searching: true,
+    // ordering:  false
+    // } );
 
 </script>
