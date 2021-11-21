@@ -34,7 +34,7 @@
                 </tr>
             </thead>
             <tbody>
-                before: <%= daily_points_movements %>
+                before: <%= daily_points_movements = @daily_points_movements %>
                 <% daily_points_movements.each do |dpm| %>
                     <%# if dpm[:branch_id] == branch.id %>
                         <h4>branch_id: <%= branch.id %></h4>
@@ -57,7 +57,7 @@
                                 <%= dpm[:total] %>
                             </td>
                         </tr>
-                        <% daily_points_movements.drop(1) %>
+                        <% daily_points_movements.shift %>
                         after: <%= daily_points_movements %>
                     <%# end %>
                 <% end %>
