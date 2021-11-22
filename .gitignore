@@ -25,7 +25,7 @@
 /public/assets
 .byebug_history
 
-/tmp/storage/*
+tmp/
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
@@ -41,7 +41,7 @@ yarn-debug.log*
 
 /config/credentials/production.key
 
-public/uploads
-public/tmp
+public/uploads/
+public/tmp/
 
 .vscode
