@@ -29,7 +29,7 @@
                     <th scope="col">Earned</th>
                     <th scope="col">Redeemed</th>
                     <th scope="col">Redeemed To Cash</th>
-                    <th scope="col">Total Points</th>
+                    <!-- <th scope="col">Total Points</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -50,9 +50,6 @@
                             </td>
                             <td>
                                 <%= dpm[3] * Setting.find_by(key: :points_to_cash).description.to_f %>
-                            </td>
-                            <td>
-                                <%= dpm[4] %>
                             </td>
                         </tr>
                     <% end %>
