@@ -1,19 +1,18 @@
-<div class="col-lg-5" style="margin-left:140px;">
+<!-- <div class="col-lg-5" style="margin-left:140px;">
     <div class="row">
         <div class="col-md-5 main-btns">
             <%#= link_to "Clear Search", system_daily_points_movements_path, class: "btn btn-outline-success", type: "button" %>
         </div>
         <div class="col-md-3">
             <div class="row mb-1">
-                <%= form_with(model: Branch, url: system_branches_path) do |f| %>
-                        <%= f.collection_select :branch_id, Branch.order(:name), :id, :name,{ include_blank: "Select a branch" }, 
+                <%#= form_with(model: Branch, url: system_branches_path) do |f| %>
+                        <%#= f.collection_select :branch_id, Branch.order(:name), :id, :name,{ include_blank: "Select a branch" }, 
                         { class: "dropdown-toggle", style: "font-size: 18px; min-width: 30%;color:green;" } %>
-                <% end %>
+                <%# end %>
             </div>
         </div>
     </div>
-</div>
-
+</div> -->
 
 <div class="col-lg-5 main-btns">
     <%= link_to "View PDF", system_daily_points_movements_path(format: :pdf, page: params[:page]), 
@@ -34,10 +33,10 @@
                 </tr>
             </thead>
             <tbody>
-                <h4>branch_id: <%= branch.id %></h4>
+                <!-- <h4>branch_id: <%#= branch.id %></h4> -->
                 <% @daily_points_movements.each do |dpm| %>
                     <% if dpm[0] == branch.id %>
-                        <h4>dpm[0]: <%= dpm[0] %></h4>
+                        <!-- <h4>dpm[0]: <%#= dpm[0] %></h4> -->
                         <tr>
                             <td>
                                 <%= dpm[1].strftime("%A, %d %b %Y") %>

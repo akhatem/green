@@ -83,16 +83,20 @@ if Rails.env.development?
     puts "Create ItemSizes finished #{DateTime.now.strftime("%H:%M:%S")}"
   end
 
+  if Receipt.count.zero?
+    Receipt.find_or_create_by!(customer_id: 1, branch_id: 1, user_id: 2, number: "1", total_price: 200)
+    Receipt.find_or_create_by!(customer_id: 1, branch_id: 1, user_id: 2, number: "2", total_price: 150)
+    Receipt.find_or_create_by!(customer_id: 1, branch_id: 2, user_id: 2, number: "1", total_price: 100)
+    Receipt.find_or_create_by!(customer_id: 1, branch_id: 2, user_id: 2, number: "2", total_price: 90)
+  end
+
   # if PointsMovement.count.zero?
     # puts "Create PointsMovements started #{DateTime.now.strftime("%H:%M:%S")}"
-      PointsMovement.create(customer_id: 43, branch_id: 1, earned: 150, date_time: DateTime.now, user_id: 1)
-      PointsMovement.create(customer_id: 43, branch_id: 2, redeemed: 100, date_time: DateTime.now, user_id: 1)
+      PointsMovement.create(customer_id: 1, branch_id: 1, earned: 20, date_time: DateTime.now, user_id: 2, receipt_id: 1)
+      PointsMovement.create(customer_id: 1, branch_id: 2, redeemed: 20, date_time: DateTime.now, user_id: 2, receipt_id: 1)
       
-      PointsMovement.create(customer_id: 23, branch_id: 1, earned: 150, date_time: DateTime.now, user_id: 1)
-      PointsMovement.create(customer_id: 23, branch_id: 2, redeemed: 100, date_time: DateTime.now, user_id: 1)
-
-      PointsMovement.create(customer_id: 19, branch_id: 1, earned: 150, date_time: DateTime.now, user_id: 1)
-      PointsMovement.create(customer_id: 19, branch_id: 2, redeemed: 50, date_time: DateTime.now, user_id: 1)
+      PointsMovement.create(customer_id: 1, branch_id: 1, earned: 15, date_time: DateTime.now, user_id: 2, receipt_id: 2)
+      PointsMovement.create(customer_id: 1, branch_id: 2, redeemed: 15, date_time: DateTime.now, user_id: 2, receipt_id: 2)
       
   #     PointsMovement.create(customer_id: 2, branch_id: 2, earned: 500, date_time: DateTime.now)
   #     PointsMovement.create(customer_id: 2, branch_id: 2, redeemed: 200, date_time: DateTime.now)
