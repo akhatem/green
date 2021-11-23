@@ -1,18 +1,18 @@
-<!-- <div class="col-lg-5" style="margin-left:140px;">
+<div class="col-lg-5" style="margin-left:140px;">
     <div class="row">
         <div class="col-md-5 main-btns">
             <%#= link_to "Clear Search", system_daily_points_movements_path, class: "btn btn-outline-success", type: "button" %>
         </div>
         <div class="col-md-3">
             <div class="row mb-1">
-                <%#= form_with(model: Branch, url: system_branches_path) do |f| %>
-                        <%#= f.collection_select :branch_id, Branch.order(:name), :id, :name,{ include_blank: "Select a branch" }, 
+                <%= form_with(model: Branch, url: system_branches_path) do |f| %>
+                        <%= f.collection_select :branch_id, Branch.order(:name), :id, :name,{ include_blank: "Select a branch" }, 
                         { class: "dropdown-toggle", style: "font-size: 18px; min-width: 30%;color:green;" } %>
-                <%# end %>
+                <% end %>
             </div>
         </div>
     </div>
-</div> -->
+</div>
 
 
 <div class="col-lg-5 main-btns">
@@ -20,27 +20,7 @@
         class: "btn btn-outline-success", type: "button"  %>
 </div>
 
-<% daily_points_movements = @daily_points_movements %>
 <% @branches.each do |branch| %>
-    <h4>branch_id: <%= branch.id %></h4>
-    <ul>
-        <% for i in 0..daily_points_movements do %>
-            <% dpms.each do |dpm| %>
-                <% if dpm[0] == branch.id %>
-                        <%# dpms.each do |dpm| %>
-                            <!-- dpm[0]: <%#= dpm[0] %><br>
-                            dpm[1]: <%#= dpm[1] %><br>
-                            dpm[2]: <%#= dpm[2] %><br>
-                            dpm[3]: <%#= dpm[3] %><br>
-                            dpm[4]: <%#= dpm[4] %><br> -->
-                <% end %>
-            <% end %>
-        <% end %>
-=========================================================== <br>
-    </ul>
-<% end %>
-
-<!-- <% @branches.each do |branch| %>
     <button class="accordion" id="branch_<%= branch.id %>"><%= branch.name %></button>
     <div class="panel" id="panel-branch_<%= branch.id %>">
         <table class="table mt-2">
@@ -54,34 +34,30 @@
                 </tr>
             </thead>
             <tbody>
-                <%# dpms.each do |dpm| %>
-                    <%# for i in 0..dpm.size do %>
-                        branch_id: <%= branch.id %> <br>
-                        branch_id == dpm[0]: <%#= branch.id == dpm[0] %><br>
-                        <%# if dpm[0] == branch.id %>
-                            <tr>
-                                <td>
-                                    <%#= dpm[1].strftime("%A, %d %b %Y") %>
-                                    
-                                </td>
-                                <td>
-                                    <%#= dpm[2] %>
-                                </td>
-                                <td>
-                                    <%#= dpm[3] %>
-                                </td>
-                                <td>
-                                    <%#= dpm[3] * Setting.find_by(key: :points_to_cash).description.to_f %>
-                                </td>
-                                <td>
-                                    <%#= dpm[4] %>
-                                </td>
-                            </tr>
-                            <%# dpms.shift %>
-                        <%# end %>
-                        after: <%#= dpms %><br>
-                    <%# end %>
-                <%# end %>
+                <h4>branch_id: <%= branch.id %></h4>
+                <% @daily_points_movements.each do |dpm| %>
+                    <% if dpm[0] == branch.id %>
+                        <h4>dpm[0]: <%= dpm[0] %></h4>
+                        <tr>
+                            <td>
+                                <%= dpm[1].strftime("%A, %d %b %Y") %>
+                                
+                            </td>
+                            <td>
+                                <%= dpm[2] %>
+                            </td>
+                            <td>
+                                <%= dpm[3] %>
+                            </td>
+                            <td>
+                                <%= dpm[3] * Setting.find_by(key: :points_to_cash).description.to_f %>
+                            </td>
+                            <td>
+                                <%= dpm[4] %>
+                            </td>
+                        </tr>
+                    <% end %>
+                <% end %>
             </tbody>
         </table>
     </div>
@@ -140,4 +116,4 @@
     // ordering:  false
     // } );
 
-</script> -->
+</script>

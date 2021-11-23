@@ -115,13 +115,13 @@ if Rails.env.development?
     puts "Create Offers started #{DateTime.now.strftime("%H:%M:%S")}"
     for i in 1..3 do
       Offer.create(title: FFaker::Lorem::words, description: FFaker::Lorem::sentences, state: 1, 
-      start_at: Date.today, end_at: Date.today+1.day, image: File.open(File.join(Rails.root, 'app/assets/images/offers/offer1.png')))
+      start_at: Date.today, end_at: Date.today+1.day, image: File.open(File.join(Rails.root, 'app/assets/images/placeholder.png')))
       sleep(2)
     end
 
     for i in 1..3 do
       Offer.create(title: FFaker::Lorem::words, description: FFaker::Lorem::sentences, state: 0, 
-      start_at: 3.days.ago, end_at: Date.yesterday, image: File.open(File.join(Rails.root, 'app/assets/images/offers/offer1.png')))
+      start_at: 3.days.ago, end_at: Date.yesterday, image: File.open(File.join(Rails.root, 'app/assets/images/placeholder.png')))
       sleep(2)
     end
     puts "Create Offers finished #{DateTime.now.strftime("%H:%M:%S")}"
