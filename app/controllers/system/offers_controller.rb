@@ -35,16 +35,13 @@ class System::OffersController < System::SystemApplicationController
   def create   
     @offer = Offer.new(offer_params)
     authorize @offer
-      respond_to do |format|
-        if @offer.save
-            format.html { redirect_to system_offer_path(@offer), notice: "Offer was successfully created." }
-            format.json { render :show, status: :created, location: @offer }
-        else
-            format.html { render :new, status: :unprocessable_entity }
-            format.json { render json: @offer.errors, status: :unprocessable_entity }
-            
-        end
-      end
+    if @offer.save
+        redirect_to system_offer_path(@offer)
+        flash[:notice] = "Offer was successfully created."
+    else
+        flash[:alert] = @offer.errors.full_messages
+        
+    end
   end
 
   def destroy
