@@ -4,13 +4,8 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "jquery"
 
-
-import 'bootstrap/dist/js/bootstrap'
-import 'bootstrap/dist/css/bootstrap'
 import "bootstrap";
 
-
-import "../stylesheets/application";
 import "@fortawesome/fontawesome-free/css/all"
 
 import "../js/custom"

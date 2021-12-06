@@ -1,3 +1,5 @@
+'use strict'
+
 $(document).on('turbolinks:load', function(){
     // if (document.body.classList[0] != "static_pages" && document.body.classList[1] === "index"){ }
     // if (top.location.pathname != "//sign_in"){ }

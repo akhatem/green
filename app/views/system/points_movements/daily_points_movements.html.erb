@@ -66,7 +66,7 @@
 <% end %>
 
 <script>
-    var acc = document.getElementsByClassName("accordion");
+        var acc = document.getElementsByClassName("accordion");
 
     for (var i = 0; i < acc.length; i++) {
     acc[i].addEventListener("click", function() {
@@ -81,8 +81,8 @@
     }
 
     var dropdown = document.getElementById("branch_branch_id");
-    
-    dropdown.addEventListener("change", function(){
+    if (dropdown){
+        dropdown.addEventListener("change", function(){
         var dropdown_option = dropdown.options.selectedIndex;
         var accordion_selected = document.getElementById(`branch_${dropdown_option}`);
         var panel_selected = document.getElementById(`panel-branch_${dropdown_option}`);
@@ -101,6 +101,7 @@
             }
         }
     });
+    }
 
     // $(document).ready( function () {
     //     $('#table_id').DataTable();
