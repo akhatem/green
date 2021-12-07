@@ -1,5 +1,10 @@
 <% @branches.order(id: :asc).each do |branch| %>
-
+<% @daily_points_movements = PointsMovement.where(branch_id: branch.id)
+      .group(:branch_id)
+      .order(branch_id: :asc)
+      .group("DATE(date_time)")
+      .order("DATE(date_time) ASC")
+      .pluck(:branch_id, "DATE(date_time)", "SUM(earned)" , "SUM(redeemed)" , "SUM(total)") %>
 <div class="accordion mt-3 mb-3" id="accordionExample">
     <div class="accordion-item">
         <h2 class="accordion-header" id="heading<%= branch.id.humanize.capitalize %>">
