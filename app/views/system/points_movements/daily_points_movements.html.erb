@@ -15,93 +15,92 @@
 </div> -->
 
 <div class="col-lg-5 main-btns">
-    <%= link_to "View PDF", system_daily_points_movements_path(format: :pdf, page: params[:page]), 
-        class: "btn btn-outline-success", type: "button"  %>
+    <%= link_to "View PDF" , system_daily_points_movements_path(format: :pdf, page: params[:page]),
+        class: "btn btn-outline-success" , type: "button" %>
 </div>
 
 <% @branches.each do |branch| %>
-<% @daily_points_movements = PointsMovement.where(branch_id: branch.id)
-      .group(:branch_id)
-      .order(branch_id: :asc)
-      .group("DATE(date_time)")
-      .order("DATE(date_time) ASC")
-      .pluck(:branch_id, "DATE(date_time)", "SUM(earned)" , "SUM(redeemed)" , "SUM(total)") %>
-    <button class="accordion" id="branch_<%= branch.id %>"><%= branch.name %></button>
-    <div class="panel" id="panel-branch_<%= branch.id %>">
-        <table class="table mt-2">
-            <thead>
-                <tr>
-                    <th scope="col">Date</th>
-                    <th scope="col">Earned</th>
-                    <th scope="col">Redeemed</th>
-                    <th scope="col">Redeemed To Cash</th>
-                    <!-- <th scope="col">Total Points</th> -->
-                </tr>
-            </thead>
-            <tbody>
-                <!-- <h4>branch_id: <%#= branch.id %></h4> -->
-                <% @daily_points_movements.each do |dpm| %>
-                    <% if dpm[0] == branch.id %>
-                        <!-- <h4>dpm[0]: <%#= dpm[0] %></h4> -->
-                        <tr>
-                            <td>
-                                <%= dpm[1].strftime("%A, %d %b %Y") %>
-                                
-                            </td>
-                            <td>
-                                <%= dpm[2] %>
-                            </td>
-                            <td>
-                                <%= dpm[3] %>
-                            </td>
-                            <td>
-                                <%= dpm[3] * Setting.find_by(key: :points_to_cash).description.to_f %>
-                            </td>
-                        </tr>
-                    <% end %>
-                <% end %>
-            </tbody>
-        </table>
-    </div>
-<% end %>
+    <% @daily_points_movements=PointsMovement.where(branch_id: branch.id) .group(:branch_id) .order(branch_id: :asc)
+        .group("DATE(date_time)") .order("DATE(date_time) ASC") .pluck(:branch_id, "DATE(date_time)" , "SUM(earned)"
+        , "SUM(redeemed)" , "SUM(total)" ) %>
+        <button class="accordion" id="branch_<%= branch.id %>">
+            <%= branch.name %>
+        </button>
+        <div class="panel" id="panel-branch_<%= branch.id %>">
+            <table class="table mt-2">
+                <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Earned</th>
+                        <th scope="col">Redeemed</th>
+                        <th scope="col">Redeemed To Cash</th>
+                        <!-- <th scope="col">Total Points</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <h4>branch_id: <%#= branch.id %></h4> -->
+                    <% @daily_points_movements.each do |dpm| %>
+                        <% if dpm[0]==branch.id %>
+                            <!-- <h4>dpm[0]: <%#= dpm[0] %></h4> -->
+                            <tr>
+                                <td>
+                                    <%= dpm[1].strftime("%A, %d %b %Y") %>
 
-<script>
-        var acc = document.getElementsByClassName("accordion");
+                                </td>
+                                <td>
+                                    <%= dpm[2] %>
+                                </td>
+                                <td>
+                                    <%= dpm[3] %>
+                                </td>
+                                <td>
+                                    <%= dpm[3] * Setting.find_by(key: :points_to_cash).description.to_f %>
+                                </td>
+                            </tr>
+                            <% end %>
+                                <% end %>
+                </tbody>
+            </table>
+        </div>
+        <% end %>
 
-    for (var i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function() {
-        this.classList.toggle("ac");
-        var panel = this.nextElementSibling;
-        if (panel.style.maxHeight) {
-        panel.style.maxHeight = null;
-        } else {
-        panel.style.maxHeight = panel.scrollHeight + "px";
-        } 
-    });
-    }
+            <script>
+                var acc = document.getElementsByClassName("accordion");
 
-    var dropdown = document.getElementById("branch_branch_id");
-    if (dropdown){
-        dropdown.addEventListener("change", function(){
-        var dropdown_option = dropdown.options.selectedIndex;
-        var accordion_selected = document.getElementById(`branch_${dropdown_option}`);
-        var panel_selected = document.getElementById(`panel-branch_${dropdown_option}`);
-        console.log("accordion_selected = ", accordion_selected);
-        console.log("panel_selected = ", panel_selected);
-        var accordion = document.getElementsByClassName("accordion");
-        var panel = document.getElementsByClassName("panel");
-        for (var i=0; i < accordion.length; i++){
-            if (accordion[i].id != accordion_selected.id){
-                accordion[i].style.display = "none";
-                panel[i].style.display = "none";
-            }
-            else{
-                accordion[i].style.display = "block";
-                panel[i].style.display = "block";
-            }
-        }
-    });
-    }
+                for (var i = 0; i < acc.length; i++) {
+                    acc[i].addEventListener("click", function () {
+                        this.classList.toggle("ac");
+                        var panel = this.nextElementSibling;
+                        if (panel.style.maxHeight) {
+                            panel.style.maxHeight = null;
+                        } else {
+                            panel.style.maxHeight = panel.scrollHeight + "px";
+                        }
+                    });
+                }
+
+                var dropdown = document.getElementById("branch_branch_id");
+                if (dropdown) {
+                    dropdown.addEventListener("change", function () {
+                        var dropdown_option = dropdown.options.selectedIndex;
+                        var accordion_selected = document.getElementById(`branch_${dropdown_option}`);
+                        var panel_selected = document.getElementById(`panel-branch_${dropdown_option}`);
+                        console.log("accordion_selected = ", accordion_selected);
+                        console.log("panel_selected = ", panel_selected);
+                        var accordion = document.getElementsByClassName("accordion");
+                        var panel = document.getElementsByClassName("panel");
+                        for (var i = 0; i < accordion.length; i++) {
+                            if (accordion[i].id != accordion_selected.id) {
+                                accordion[i].style.display = "none";
+                                panel[i].style.display = "none";
+                            }
+                            else {
+                                accordion[i].style.display = "block";
+                                panel[i].style.display = "block";
+                            }
+                        }
+                    });
+                }
 
     // $(document).ready( function () {
     //     $('#table_id').DataTable();
@@ -119,4 +118,4 @@
     // ordering:  false
     // } );
 
-</script>
+            </script>

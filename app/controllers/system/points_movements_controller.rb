@@ -74,7 +74,7 @@ class System::PointsMovementsController < System::SystemApplicationController
       format.pdf do
         render pdf: "#{params[:action]}_#{DateTime.now.strftime('%d/%m/%Y')}", 
           template: "system/#{params[:controller].split('/').second}/#{params[:action]}_index_pdf.html.erb",
-          header: { right: "#{@pagy_a.page} of #{@pagy_a.last}" }
+          header: { right: "#{@pagy.page} of #{@pagy.last}" }
       end
     end
   end
